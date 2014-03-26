@@ -3,6 +3,7 @@
 #include <stdlib.h>
 
 #include "f2c.h"
+
 #include "ddaskr_types.h"
 
 #define min(a,b) ((a) <= (b) ? (a) : (b))
