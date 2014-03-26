@@ -1,8 +1,7 @@
 C-DASKR
 =======
 
-Translation of the DASKR Package to pure C
+Translation of the DASKR Package to ANSI C
 
-Initially started with a translation by f2c and
-only double version is used.
+Initially started with a translation by f2c. 
 
