@@ -1,36 +1,26 @@
-/* daux.f -- translated by f2c (version 20100827).
-   You must link the resulting object file with libf2c:
-	on Microsoft Windows system, link with libf2c.lib;
-	on Linux or Unix systems, link with .../path/to/libf2c.a -lm
-	or, if you install libf2c.a in a standard place, with -lf2c -lm
-	-- in that order, at the end of the command line, as in
-		cc *.o -lf2c -lm
-	Source for libf2c is in /netlib/f2c/libf2c.zip, e.g.,
 
-		http://www.netlib.org/f2c/libf2c.zip
-*/
+#include <stdio.h>
+#include <stdlib.h>
 
-#include "f2c.h"
+#include "ddaskr_types.h"
 
 /* Table of constant values */
 
-static doublereal c_b3 = 1.;
+#define c_b3 1.
 static integer c__1 = 1;
 static integer c__0 = 0;
-static logical c_false = FALSE_;
+static integer c_false = _FALSE_;
 static integer c__2 = 2;
-static logical c_true = TRUE_;
+static integer c_true = _TRUE_;
 
 /* DECK D1MACH */
-doublereal d1mach_(integer *idummy)
+real_number d1mach_(integer *idummy)
 {
     /* System generated locals */
-    doublereal ret_val;
+    real_number ret_val;
 
     /* Local variables */
-    static doublereal u, comp;
-    extern /* Subroutine */ int dumsum_(doublereal *, doublereal *, 
-	    doublereal *);
+    static real_number u, comp;
 
 /* ***BEGIN PROLOGUE  D1MACH */
 /* ***PURPOSE  Compute the unit roundoff of the machine. */
@@ -63,7 +53,7 @@ doublereal d1mach_(integer *idummy)
     u = 1.;
 L10:
     u *= .5;
-    dumsum_(&c_b3, &u, &comp);
+    comp = c_b3 + u;
     if (comp != 1.) {
 	goto L10;
     }
@@ -72,41 +62,21 @@ L10:
 /* ----------------------- End of Function D1MACH ------------------------ */
 } /* d1mach_ */
 
-/* Subroutine */ int dumsum_(doublereal *a, doublereal *b, doublereal *c__)
-{
-/*     Routine to force normal storing of A + B, for D1MACH. */
-    *c__ = *a + *b;
-    return 0;
-} /* dumsum_ */
-
 /* DECK XERRWD */
-/* Subroutine */ int xerrwd_(char *msg, integer *nmes, integer *nerr, integer 
-	*level, integer *ni, integer *i1, integer *i2, integer *nr, 
-	doublereal *r1, doublereal *r2, ftnlen msg_len)
+/* Subroutine */ int xerrwd_(char *msg, integer *nmes, integer *nerr, integer
+	*level, integer *ni, integer *i1, integer *i2, integer *nr,
+	real_number *r1, real_number *r2, integer msg_len)
 {
     /* Format strings */
-    static char fmt_10[] = "(1x,a)";
-    static char fmt_20[] = "(6x,\002In above message,  I1 =\002,i10)";
-    static char fmt_30[] = "(6x,\002In above message,  I1 =\002,i10,3x,\002I"
-	    "2 =\002,i10)";
-    static char fmt_40[] = "(6x,\002In above message,  R1 =\002,d21.13)";
-    static char fmt_50[] = "(6x,\002In above,  R1 =\002,d21.13,3x,\002R2 "
-	    "=\002,d21.13)";
-
-    /* Builtin functions */
-    integer s_wsfe(cilist *), do_fio(integer *, char *, ftnlen), e_wsfe(void);
-    /* Subroutine */ int s_stop(char *, ftnlen);
-
+    static char fmt_20[] = "      In above message,  I1 = %d\n";
+    static char fmt_30[] = "      In above message,  I1 = %d   I2 = %d\n";
+    static char fmt_40[] = "      In above message,  R1 = %21.13E\n";
+    static char fmt_50[] = "      In above,  R1 = %21.13E   R2 = %21.13E\n";
     /* Local variables */
-    extern integer ixsav_(integer *, integer *, logical *);
+    extern integer ixsav_(integer *, integer *, integer *);
     static integer lunit, mesflg;
 
-    /* Fortran I/O blocks */
-    static cilist io___5 = { 0, 0, 0, fmt_10, 0 };
-    static cilist io___6 = { 0, 0, 0, fmt_20, 0 };
-    static cilist io___7 = { 0, 0, 0, fmt_30, 0 };
-    static cilist io___8 = { 0, 0, 0, fmt_40, 0 };
-    static cilist io___9 = { 0, 0, 0, fmt_50, 0 };
+    char* ptr_msg;
 
 
 /* ***BEGIN PROLOGUE  XERRWD */
@@ -179,49 +149,37 @@ L10:
     lunit = ixsav_(&c__1, &c__0, &c_false);
     mesflg = ixsav_(&c__2, &c__0, &c_false);
     if (mesflg == 0) {
-	goto L100;
+  goto L100;
     }
 
 /*  Write the message. */
 
-    io___5.ciunit = lunit;
-    s_wsfe(&io___5);
-    do_fio(&c__1, msg, msg_len);
-    e_wsfe();
+    ptr_msg = (char*) malloc(msg_len*sizeof(char));
+    snprintf(ptr_msg, msg_len, "%s", msg);
+    puts(ptr_msg);
+    free(ptr_msg);
+
     if (*ni == 1) {
-	io___6.ciunit = lunit;
-	s_wsfe(&io___6);
-	do_fio(&c__1, (char *)&(*i1), (ftnlen)sizeof(integer));
-	e_wsfe();
+      printf(fmt_20, &(*i1));
     }
     if (*ni == 2) {
-	io___7.ciunit = lunit;
-	s_wsfe(&io___7);
-	do_fio(&c__1, (char *)&(*i1), (ftnlen)sizeof(integer));
-	do_fio(&c__1, (char *)&(*i2), (ftnlen)sizeof(integer));
-	e_wsfe();
+      printf(fmt_30, &(*i1), &(*i2));
     }
     if (*nr == 1) {
-	io___8.ciunit = lunit;
-	s_wsfe(&io___8);
-	do_fio(&c__1, (char *)&(*r1), (ftnlen)sizeof(doublereal));
-	e_wsfe();
+      printf(fmt_40, &(*r1));
     }
     if (*nr == 2) {
-	io___9.ciunit = lunit;
-	s_wsfe(&io___9);
-	do_fio(&c__1, (char *)&(*r1), (ftnlen)sizeof(doublereal));
-	do_fio(&c__1, (char *)&(*r2), (ftnlen)sizeof(doublereal));
-	e_wsfe();
+	    printf(fmt_50, *r1, *r2);
     }
 
 /*  Abort the run if LEVEL = 2. */
 
 L100:
     if (*level != 2) {
-	return 0;
+      return 0;
     }
-    s_stop("", (ftnlen)0);
+    exit(0);
+
 /* ----------------------- End of Subroutine XERRWD ---------------------- */
     return 0;
 } /* xerrwd_ */
@@ -230,7 +188,7 @@ L100:
 /* Subroutine */ int xsetf_(integer *mflag)
 {
     static integer junk;
-    extern integer ixsav_(integer *, integer *, logical *);
+    extern integer ixsav_(integer *, integer *, integer *);
 
 /* ***BEGIN PROLOGUE  XSETF */
 /* ***PURPOSE  Reset the error print control flag. */
@@ -272,7 +230,7 @@ L100:
 /* Subroutine */ int xsetun_(integer *lun)
 {
     static integer junk;
-    extern integer ixsav_(integer *, integer *, logical *);
+    extern integer ixsav_(integer *, integer *, integer *);
 
 /* ***BEGIN PROLOGUE  XSETUN */
 /* ***PURPOSE  Reset the logical unit number for error messages. */
@@ -309,7 +267,7 @@ L100:
 } /* xsetun_ */
 
 /* DECK IXSAV */
-integer ixsav_(integer *ipar, integer *ivalue, logical *iset)
+integer ixsav_(integer *ipar, integer *ivalue, integer *iset)
 {
     /* Initialized data */
 

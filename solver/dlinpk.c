@@ -1,22 +1,20 @@
-/* dlinpk.f -- translated by f2c (version 20100827).
-   You must link the resulting object file with libf2c:
-	on Microsoft Windows system, link with libf2c.lib;
-	on Linux or Unix systems, link with .../path/to/libf2c.a -lm
-	or, if you install libf2c.a in a standard place, with -lf2c -lm
-	-- in that order, at the end of the command line, as in
-		cc *.o -lf2c -lm
-	Source for libf2c is in /netlib/f2c/libf2c.zip, e.g.,
 
-		http://www.netlib.org/f2c/libf2c.zip
-*/
+#include <stdio.h>
+#include <stdlib.h>
 
 #include "f2c.h"
+#include "ddaskr_types.h"
+
+#define min(a,b) ((a) <= (b) ? (a) : (b))
+#define max(a,b) ((a) >= (b) ? (a) : (b))
+#define dmin(a,b) (doublereal)min(a,b)
+#define dmax(a,b) (doublereal)max(a,b)
 
 /* Table of constant values */
 
 static integer c__1 = 1;
 
-/* Subroutine */ int dgefa_(doublereal *a, integer *lda, integer *n, integer *
+/* Subroutine */ int dgefa_(real_number *a, integer *lda, integer *n, integer *
 	ipvt, integer *info)
 {
     /* System generated locals */
@@ -24,12 +22,12 @@ static integer c__1 = 1;
 
     /* Local variables */
     static integer j, k, l;
-    static doublereal t;
+    static real_number t;
     static integer kp1, nm1;
-    extern /* Subroutine */ int dscal_(integer *, doublereal *, doublereal *, 
-	    integer *), daxpy_(integer *, doublereal *, doublereal *, integer 
-	    *, doublereal *, integer *);
-    extern integer idamax_(integer *, doublereal *, integer *);
+    extern /* Subroutine */ int dscal_(integer *, real_number *, real_number *,
+	    integer *), daxpy_(integer *, real_number *, real_number *, integer
+	    *, real_number *, integer *);
+    extern integer idamax_(integer *, real_number *, integer *);
 
 
 /*     dgefa factors a double precision matrix by gaussian elimination. */
@@ -156,20 +154,20 @@ L70:
     return 0;
 } /* dgefa_ */
 
-/* Subroutine */ int dgesl_(doublereal *a, integer *lda, integer *n, integer *
-	ipvt, doublereal *b, integer *job)
+/* Subroutine */ int dgesl_(real_number *a, integer *lda, integer *n, integer *
+	ipvt, real_number *b, integer *job)
 {
     /* System generated locals */
     integer a_dim1, a_offset, i__1, i__2;
 
     /* Local variables */
     static integer k, l;
-    static doublereal t;
+    static real_number t;
     static integer kb, nm1;
-    extern doublereal ddot_(integer *, doublereal *, integer *, doublereal *, 
+    extern real_number ddot_(integer *, real_number *, integer *, real_number *,
 	    integer *);
-    extern /* Subroutine */ int daxpy_(integer *, doublereal *, doublereal *, 
-	    integer *, doublereal *, integer *);
+    extern /* Subroutine */ int daxpy_(integer *, real_number *, real_number *,
+	    integer *, real_number *, integer *);
 
 
 /*     dgesl solves the double precision system */
@@ -315,7 +313,7 @@ L100:
     return 0;
 } /* dgesl_ */
 
-/* Subroutine */ int dgbfa_(doublereal *abd, integer *lda, integer *n, 
+/* Subroutine */ int dgbfa_(real_number *abd, integer *lda, integer *n,
 	integer *ml, integer *mu, integer *ipvt, integer *info)
 {
     /* System generated locals */
@@ -323,12 +321,12 @@ L100:
 
     /* Local variables */
     static integer i__, j, k, l, m;
-    static doublereal t;
+    static real_number t;
     static integer i0, j0, j1, lm, mm, ju, jz, kp1, nm1;
-    extern /* Subroutine */ int dscal_(integer *, doublereal *, doublereal *, 
-	    integer *), daxpy_(integer *, doublereal *, doublereal *, integer 
-	    *, doublereal *, integer *);
-    extern integer idamax_(integer *, doublereal *, integer *);
+    extern /* Subroutine */ int dscal_(integer *, real_number *, real_number *,
+	    integer *), daxpy_(integer *, real_number *, real_number *, integer
+	    *, real_number *, integer *);
+    extern integer idamax_(integer *, real_number *, integer *);
 
 
 /*     dgbfa factors a double precision band matrix by elimination. */
@@ -544,20 +542,20 @@ L130:
     return 0;
 } /* dgbfa_ */
 
-/* Subroutine */ int dgbsl_(doublereal *abd, integer *lda, integer *n, 
-	integer *ml, integer *mu, integer *ipvt, doublereal *b, integer *job)
+/* Subroutine */ int dgbsl_(real_number *abd, integer *lda, integer *n,
+	integer *ml, integer *mu, integer *ipvt, real_number *b, integer *job)
 {
     /* System generated locals */
     integer abd_dim1, abd_offset, i__1, i__2, i__3;
 
     /* Local variables */
     static integer k, l, m;
-    static doublereal t;
+    static real_number t;
     static integer kb, la, lb, lm, nm1;
-    extern doublereal ddot_(integer *, doublereal *, integer *, doublereal *, 
+    extern real_number ddot_(integer *, real_number *, integer *, real_number *,
 	    integer *);
-    extern /* Subroutine */ int daxpy_(integer *, doublereal *, doublereal *, 
-	    integer *, doublereal *, integer *);
+    extern /* Subroutine */ int daxpy_(integer *, real_number *, real_number *,
+	    integer *, real_number *, integer *);
 
 
 /*     dgbsl solves the double precision band system */
@@ -726,8 +724,8 @@ L100:
     return 0;
 } /* dgbsl_ */
 
-/* Subroutine */ int daxpy_(integer *n, doublereal *da, doublereal *dx, 
-	integer *incx, doublereal *dy, integer *incy)
+/* Subroutine */ int daxpy_(integer *n, real_number *da, real_number *dx,
+	integer *incx, real_number *dy, integer *incy)
 {
     /* System generated locals */
     integer i__1;
@@ -807,8 +805,8 @@ L40:
     return 0;
 } /* daxpy_ */
 
-/* Subroutine */ int dcopy_(integer *n, doublereal *sx, integer *incx, 
-	doublereal *sy, integer *incy)
+/* Subroutine */ int dcopy_(integer *n, real_number *sx, integer *incx,
+	real_number *sy, integer *incy)
 {
     /* System generated locals */
     integer i__1;
@@ -888,7 +886,7 @@ L40:
     return 0;
 } /* dcopy_ */
 
-/* Subroutine */ int dscal_(integer *n, doublereal *da, doublereal *dx, 
+/* Subroutine */ int dscal_(integer *n, real_number *da, real_number *dx,
 	integer *incx)
 {
     /* System generated locals */
@@ -957,16 +955,16 @@ L40:
     return 0;
 } /* dscal_ */
 
-doublereal ddot_(integer *n, doublereal *dx, integer *incx, doublereal *dy, 
+real_number ddot_(integer *n, real_number *dx, integer *incx, real_number *dy,
 	integer *incy)
 {
     /* System generated locals */
     integer i__1;
-    doublereal ret_val;
+    real_number ret_val;
 
     /* Local variables */
     static integer i__, m, ix, iy, mp1;
-    static doublereal dtemp;
+    static real_number dtemp;
 
 
 /*     forms the dot product of two vectors. */
@@ -1041,14 +1039,14 @@ L60:
     return ret_val;
 } /* ddot_ */
 
-doublereal dnrm2_(integer *n, doublereal *dx, integer *incx)
+real_number dnrm2_(integer *n, real_number *dx, integer *incx)
 {
     /* Initialized data */
 
-    static doublereal zero = 0.;
-    static doublereal one = 1.;
-    static doublereal cutlo = 8.232e-11;
-    static doublereal cuthi = 1.304e19;
+    static real_number zero = 0.;
+    static real_number one = 1.;
+    static real_number cutlo = 8.232e-11;
+    static real_number cuthi = 1.304e19;
 
     /* Format strings */
     static char fmt_30[] = "";
@@ -1058,16 +1056,16 @@ doublereal dnrm2_(integer *n, doublereal *dx, integer *incx)
 
     /* System generated locals */
     integer i__1, i__2;
-    doublereal ret_val, d__1;
+    real_number ret_val, d__1;
 
     /* Builtin functions */
-    double sqrt(doublereal);
+    double sqrt(real_number);
 
     /* Local variables */
     static integer i__, j, nn;
-    static doublereal sum, xmax;
+    static real_number sum, xmax;
     static integer next;
-    static doublereal hitest;
+    static real_number hitest;
 
     /* Assigned format variables */
     static char *next_fmt;
@@ -1207,7 +1205,7 @@ L75:
 /*     for complex      set hitest = cuthi/(2*n) */
 
 L85:
-    hitest = cuthi / (real) (*n);
+    hitest = cuthi / (real_number) (*n);
 
 /*                   phase 3.  sum is mid-range.  no scaling. */
 
@@ -1240,15 +1238,15 @@ L300:
     return ret_val;
 } /* dnrm2_ */
 
-integer idamax_(integer *n, doublereal *dx, integer *incx)
+integer idamax_(integer *n, real_number *dx, integer *incx)
 {
     /* System generated locals */
     integer ret_val, i__1;
-    doublereal d__1;
+    real_number d__1;
 
     /* Local variables */
     static integer i__, ix;
-    static doublereal dmax__;
+    static real_number dmax__;
 
 
 /*     finds the index of element having max. absolute value. */
