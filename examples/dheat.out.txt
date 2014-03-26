@@ -26,13 +26,13 @@
      .12800E+01   .1304E-10    5      .162E-01    947     1013    1190
 DASKR-- Warning. Poor iterative algorithm performance                          
       at T = R1. Average no. of linear iterations = R2                         
-      In above,  R1 =   1.7784646973984E+00   R2 =   7.1333332061768E+00
+      In above,  R1 =   1.7784646973984E+00   R2 =   7.1333333333333E+00
 DASKR-- Warning. Poor iterative algorithm performance                          
       at T = R1. Average no. of linear iterations = R2                         
-      In above,  R1 =   2.0372804998027E+00   R2 =   6.5294117927551E+00
+      In above,  R1 =   2.0372804998027E+00   R2 =   6.5294117647059E+00
 DASKR-- Warning. Poor iterative algorithm performance                          
       at T = R1. Average no. of linear iterations = R2                         
-      In above,  R1 =   2.5549121046113E+00   R2 =   6.1052632331848E+00
+      In above,  R1 =   2.5549121046113E+00   R2 =   6.1052631578947E+00
      .25600E+01   .7883E-13    1      .104E+01    960     1034    1310
      .51200E+01   .4507E-13    1      .207E+01    961     1036    1315
      .10240E+02   .5295E-13    1      .828E+01    963     1038    1320

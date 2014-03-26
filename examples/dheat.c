@@ -5,12 +5,16 @@
 	or, if you install libf2c.a in a standard place, with -lf2c -lm
 	-- in that order, at the end of the command line, as in
 		cc *.o -lf2c -lm
-	Source for libf2c is in /netlib/f2c/libf2c.zip, e.g.,
+	Source for libf2c is in \netlib/f2c/libf2c.zip, e.g.,
 
 		http://www.netlib.org/f2c/libf2c.zip
 */
+#include <stdio.h>
+#include <stdlib.h>
 
 #include "f2c.h"
+
+#include "../solver/ddaskr_types.h"
 
 /* Table of constant values */
 
@@ -77,17 +81,17 @@ static integer c__1 = 1;
 /* Main program */ int MAIN__(void)
 {
     /* Format strings */
-    static char fmt_30[] = "(\002 DHEAT: Heat Equation Example Program for D"
-	    "DASKR\002//\002    M+2 by M+2 mesh, M =\002,i3,\002,  System siz"
-	    "e NEQ =\002,i4//\002    Root functions are: R1 = max(u) - 0.1"
-	    "\002,\002 and R2 = max(u) - 0.01\002//\002    Linear solver meth"
-	    "od flag INFO(12) =\002,i3,\002    (0 = direct, 1 = Krylov)\002"
-	    "/\002    Preconditioner is a banded approximation with ML =\002,"
-	    "i3,\002  MU =\002,i3//\002    Tolerances are RTOL =\002,e10.1"
-	    ",\002   ATOL =\002,e10.1//)";
-    static char fmt_40[] = "(5x,\002t\002,12x,\002UMAX\002,8x,\002NQ\002,8x"
-	    ",\002H\002,8x,\002STEPS\002,5x,\002NNI\002,5x,\002NLI\002/)";
+    static char fmt_30[] = "\002 DHEAT: Heat Equation Example Program for D"
+	    "DASKR\002\n\n\002    M+2 by M+2 mesh, M =\002%d\002,  System siz"
+	    "e NEQ =\002%d\n\n\002    Root functions are: R1 = max(u) - 0.1"
+	    "\002,\002 and R2 = max(u) - 0.01\002\n\n\002    Linear solver meth"
+	    "od flag INFO(12) =  %d\002    (0 = direct, 1 = Krylov)\002"
+	    "\n    Preconditioner is a banded approximation with ML =  "
+	    "%d\002  MU =  %d\n\n\002    Tolerances are RTOL =\002%10.1E"
+	    "\002   ATOL =\002%10.1E\n\n";
+    static char fmt_40[] = "     t\t\t  UMAX\t      NQ\tH\t STEPS\t   NNI\t   NLI\n";
     static char fmt_60[] = "(e15.5,e12.4,i5,e14.3,i7,i9,i8)";
+    static char fmt_60_new[] = "     %8.4E\t  %8.3E    %d\t%4.2E\t  %d\t   %d\t  %d\n";
     static char fmt_61[] = "(20x,\002*****   Root found, JROOT =\002,2i3)";
     static char fmt_65[] = "(//\002 Final time reached =\002,e12.4//)";
     static char fmt_90[] = "(//\002 Final statistics for this run..\002/\002"
@@ -103,7 +107,7 @@ static integer c__1 = 1;
 
     /* System generated locals */
     integer i__1, i__2;
-    doublereal d__1, d__2, d__3;
+    real_number d__1, d__2, d__3;
 
     /* Builtin functions */
     integer s_wsfe(cilist *), do_fio(integer *, char *, ftnlen), e_wsfe(void);
@@ -111,39 +115,37 @@ static integer c__1 = 1;
 
     /* Local variables */
     static integer i__, m;
-    static doublereal t, u[144];
+    static real_number t, u[144];
     static integer ml;
-    static doublereal dx, hu;
+    static real_number dx, hu;
     static integer mu, nli, neq, nni, npe, nre, liw, nps, lwp, nrt, lrw, nqu, 
 	    nst, idid, ncfl, ncfn, info[20], ipar[4];
-    static doublereal atol;
+    static real_number atol;
     extern /* Subroutine */ int resh_();
-    static doublereal rpar[2];
+    static real_number rpar[2];
     static integer nrte;
-    static doublereal umax;
+    static real_number umax;
     static integer liwp;
-    static doublereal rtol;
+    static real_number rtol;
     static integer iout, lout, nout;
-    static doublereal tout;
+    static real_number tout;
     static integer mband;
-    static doublereal coeff, avdim;
+    static real_number coeff, avdim;
     static integer lenpd, msave;
-    extern /* Subroutine */ int uinit_(doublereal *, doublereal *, doublereal 
+    extern /* Subroutine */ int uinit_(real_number *, real_number *, real_number
 	    *, integer *);
     static integer iwork[184], jroot[2];
-    static doublereal rwork[3373];
+    static real_number rwork[3373];
     extern /* Subroutine */ int dbanja_(), dbanps_();
-    extern /* Subroutine */ int ddaskr_(U_fp, integer *, doublereal *, 
-	    doublereal *, doublereal *, doublereal *, integer *, doublereal *,
-	     doublereal *, integer *, doublereal *, integer *, integer *, 
-	    integer *, doublereal *, integer *, U_fp, U_fp, U_fp, integer *, 
+    extern /* Subroutine */ int ddaskr_(U_fp, integer *, real_number *,
+	    real_number *, real_number *, real_number *, integer *, real_number *,
+	     real_number *, integer *, real_number *, integer *, integer *,
+	    integer *, real_number *, integer *, U_fp, U_fp, U_fp, integer *,
 	    integer *);
     extern /* Subroutine */ int rtheat_();
-    static doublereal uprime[144];
+    static real_number uprime[144];
 
     /* Fortran I/O blocks */
-    static cilist io___25 = { 0, 0, 0, fmt_30, 0 };
-    static cilist io___26 = { 0, 0, 0, fmt_40, 0 };
     static cilist io___40 = { 0, 0, 0, fmt_60, 0 };
     static cilist io___41 = { 0, 6, 0, fmt_61, 0 };
     static cilist io___42 = { 0, 0, 0, fmt_65, 0 };
@@ -227,20 +229,8 @@ static integer c__1 = 1;
 
 /* Here we generate a heading with important parameter values. */
 /* LOUT is the unit number of the output device. */
-    lout = 6;
-    io___25.ciunit = lout;
-    s_wsfe(&io___25);
-    do_fio(&c__1, (char *)&m, (ftnlen)sizeof(integer));
-    do_fio(&c__1, (char *)&neq, (ftnlen)sizeof(integer));
-    do_fio(&c__1, (char *)&info[11], (ftnlen)sizeof(integer));
-    do_fio(&c__1, (char *)&ml, (ftnlen)sizeof(integer));
-    do_fio(&c__1, (char *)&mu, (ftnlen)sizeof(integer));
-    do_fio(&c__1, (char *)&rtol, (ftnlen)sizeof(doublereal));
-    do_fio(&c__1, (char *)&atol, (ftnlen)sizeof(doublereal));
-    e_wsfe();
-    io___26.ciunit = lout;
-    s_wsfe(&io___26);
-    e_wsfe();
+    printf(fmt_30, m, neq, info[11], ml, mu, rtol, atol);
+    printf("%s", fmt_40);
 
 /* ----------------------------------------------------------------------- */
 /* Now we solve the problem. */
@@ -289,14 +279,15 @@ L45:
 	nli = iwork[19];
 	io___40.ciunit = lout;
 	s_wsfe(&io___40);
-	do_fio(&c__1, (char *)&t, (ftnlen)sizeof(doublereal));
-	do_fio(&c__1, (char *)&umax, (ftnlen)sizeof(doublereal));
+	do_fio(&c__1, (char *)&t, (ftnlen)sizeof(real_number));
+	do_fio(&c__1, (char *)&umax, (ftnlen)sizeof(real_number));
 	do_fio(&c__1, (char *)&nqu, (ftnlen)sizeof(integer));
-	do_fio(&c__1, (char *)&hu, (ftnlen)sizeof(doublereal));
+	do_fio(&c__1, (char *)&hu, (ftnlen)sizeof(real_number));
 	do_fio(&c__1, (char *)&nst, (ftnlen)sizeof(integer));
 	do_fio(&c__1, (char *)&nni, (ftnlen)sizeof(integer));
 	do_fio(&c__1, (char *)&nli, (ftnlen)sizeof(integer));
 	e_wsfe();
+	printf(fmt_60_new, t, umax, nqu, hu, nst, nni, nli);
 
 	if (idid == 5) {
 	    s_wsfe(&io___41);
@@ -309,7 +300,7 @@ L45:
 	if (idid < 0) {
 	    io___42.ciunit = lout;
 	    s_wsfe(&io___42);
-	    do_fio(&c__1, (char *)&t, (ftnlen)sizeof(doublereal));
+	    do_fio(&c__1, (char *)&t, (ftnlen)sizeof(real_number));
 	    e_wsfe();
 	    goto L80;
 	}
@@ -331,11 +322,13 @@ L80:
     nli = iwork[19];
     nps = iwork[20];
     if (nni != 0) {
-	avdim = (real) nli / (real) nni;
+	avdim = (real_number) nli / (real_number) nni;
     }
     ncfn = iwork[14];
     ncfl = iwork[15];
     nrte = iwork[35];
+    /* printf(fmt_30, &(*i1), &(*i2));*/
+
     io___50.ciunit = lout;
     s_wsfe(&io___50);
     do_fio(&c__1, (char *)&lrw, (ftnlen)sizeof(integer));
@@ -347,17 +340,18 @@ L80:
     do_fio(&c__1, (char *)&nps, (ftnlen)sizeof(integer));
     do_fio(&c__1, (char *)&nni, (ftnlen)sizeof(integer));
     do_fio(&c__1, (char *)&nli, (ftnlen)sizeof(integer));
-    do_fio(&c__1, (char *)&avdim, (ftnlen)sizeof(doublereal));
+    do_fio(&c__1, (char *)&avdim, (ftnlen)sizeof(real_number));
     do_fio(&c__1, (char *)&ncfn, (ftnlen)sizeof(integer));
     do_fio(&c__1, (char *)&ncfl, (ftnlen)sizeof(integer));
     e_wsfe();
 
+
 /* ------  End of main program for DHEAT example program ----------------- */
-    s_stop("", (ftnlen)0);
+    exit(0);
     return 0;
 } /* MAIN__ */
 
-/* Subroutine */ int uinit_(doublereal *u, doublereal *uprime, doublereal *
+/* Subroutine */ int uinit_(real_number *u, real_number *uprime, real_number *
 	rpar, integer *ipar)
 {
     /* System generated locals */
@@ -365,7 +359,7 @@ L80:
 
     /* Local variables */
     static integer i__, j, k, m;
-    static doublereal dx, xj, yk;
+    static real_number dx, xj, yk;
     static integer neq, ioff;
 
 
@@ -408,8 +402,8 @@ L80:
 /* ------------  End of Subroutine UINIT  -------------------------------- */
 } /* uinit_ */
 
-/* Subroutine */ int resh_(doublereal *t, doublereal *u, doublereal *uprime, 
-	doublereal *cj, doublereal *delta, integer *ires, doublereal *rpar, 
+/* Subroutine */ int resh_(real_number *t, real_number *u, real_number *uprime,
+	real_number *cj, real_number *delta, integer *ires, real_number *rpar,
 	integer *ipar)
 {
     /* System generated locals */
@@ -417,7 +411,7 @@ L80:
 
     /* Local variables */
     static integer i__, j, k, m, m2, neq, ioff;
-    static doublereal temx, temy, coeff;
+    static real_number temx, temy, coeff;
 
 
 /* This is the user-supplied RES subroutine for this example. */
@@ -465,17 +459,17 @@ L80:
 /* ------------  End of Subroutine RESH  --------------------------------- */
 } /* resh_ */
 
-/* Subroutine */ int rtheat_(integer *neq, doublereal *t, doublereal *u, 
-	doublereal *up, integer *nrt, doublereal *rval, doublereal *rpar, 
+/* Subroutine */ int rtheat_(integer *neq, real_number *t, real_number *u,
+	real_number *up, integer *nrt, real_number *rval, real_number *rpar,
 	integer *ipar)
 {
     /* System generated locals */
     integer i__1;
-    doublereal d__1, d__2;
+    real_number d__1, d__2;
 
     /* Local variables */
     static integer i__;
-    static doublereal umax;
+    static real_number umax;
 
 
 /* This routine finds the max of U, and sets RVAL(1) = max(u) - 0.1, */

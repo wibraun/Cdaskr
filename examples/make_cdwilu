@@ -16,7 +16,7 @@ OBJS = $(SOLVR)/ddaskr.o $(SOLVR)/daux.o $(SOLVR)/dlinpk.o \
 WEBILU = dwebilu.o $(OBJS)
 
 WEBILU : $(WEBILU)
-	$(CC) $(CFLAGS) -o webilu $(WEBILU) -lm -lf2c
+	$(CC) $(CFLAGS) -o webilu $(WEBILU) -lm
 
 dwebilu.o: dwebilu.c
 	$(CC) $(CFLAGS) -c dwebilu.c

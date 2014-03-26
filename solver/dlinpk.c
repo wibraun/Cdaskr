@@ -1,15 +1,9 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-
-#include "f2c.h"
+#include <math.h>
 
 #include "ddaskr_types.h"
-
-#define min(a,b) ((a) <= (b) ? (a) : (b))
-#define max(a,b) ((a) >= (b) ? (a) : (b))
-#define dmin(a,b) (doublereal)min(a,b)
-#define dmax(a,b) (doublereal)max(a,b)
 
 /* Table of constant values */
 
@@ -427,7 +421,7 @@ L100:
 /*     zero initial fill-in columns */
 
     j0 = *mu + 2;
-    j1 = min(*n,m) - 1;
+    j1 = MIN(*n,m) - 1;
     if (j1 < j0) {
 	goto L30;
     }
@@ -475,7 +469,7 @@ L50:
 
 /* Computing MIN */
 	i__2 = *ml, i__3 = *n - k;
-	lm = min(i__2,i__3);
+	lm = MIN(i__2,i__3);
 	i__2 = lm + 1;
 	l = idamax_(&i__2, &abd[m + k * abd_dim1], &c__1) + m - 1;
 	ipvt[k] = l + k - m;
@@ -506,8 +500,8 @@ L60:
 /* Computing MIN */
 /* Computing MAX */
 	i__3 = ju, i__4 = *mu + ipvt[k];
-	i__2 = max(i__3,i__4);
-	ju = min(i__2,*n);
+	i__2 = MAX(i__3,i__4);
+	ju = MIN(i__2,*n);
 	mm = m;
 	if (ju < kp1) {
 	    goto L90;
@@ -650,7 +644,7 @@ L130:
     for (k = 1; k <= i__1; ++k) {
 /* Computing MIN */
 	i__2 = *ml, i__3 = *n - k;
-	lm = min(i__2,i__3);
+	lm = MIN(i__2,i__3);
 	l = ipvt[k];
 	t = b[l];
 	if (l == k) {
@@ -670,7 +664,7 @@ L30:
     for (kb = 1; kb <= i__1; ++kb) {
 	k = *n + 1 - kb;
 	b[k] /= abd[m + k * abd_dim1];
-	lm = min(k,m) - 1;
+	lm = MIN(k,m) - 1;
 	la = m - lm;
 	lb = k - lm;
 	t = -b[k];
@@ -685,7 +679,7 @@ L50:
 
     i__1 = *n;
     for (k = 1; k <= i__1; ++k) {
-	lm = min(k,m) - 1;
+	lm = MIN(k,m) - 1;
 	la = m - lm;
 	lb = k - lm;
 	t = ddot_(&lm, &abd[la + k * abd_dim1], &c__1, &b[lb], &c__1);
@@ -706,7 +700,7 @@ L50:
 	k = *n - kb;
 /* Computing MIN */
 	i__2 = *ml, i__3 = *n - k;
-	lm = min(i__2,i__3);
+	lm = MIN(i__2,i__3);
 	b[k] += ddot_(&lm, &abd[m + 1 + k * abd_dim1], &c__1, &b[k + 1], &
 		c__1);
 	l = ipvt[k];
@@ -1135,7 +1129,7 @@ L20:
 	case 3: goto L110;
     }
 L30:
-    if ((d__1 = dx[i__], abs(d__1)) > cutlo) {
+    if ((d__1 = dx[i__], fabs(d__1)) > cutlo) {
 	goto L85;
     }
     next = 1;
@@ -1148,7 +1142,7 @@ L50:
     if (dx[i__] == zero) {
 	goto L200;
     }
-    if ((d__1 = dx[i__], abs(d__1)) > cutlo) {
+    if ((d__1 = dx[i__], fabs(d__1)) > cutlo) {
 	goto L85;
     }
 
@@ -1165,14 +1159,14 @@ L100:
     next_fmt = fmt_110;
     sum = sum / dx[i__] / dx[i__];
 L105:
-    xmax = (d__1 = dx[i__], abs(d__1));
+    xmax = (d__1 = dx[i__], fabs(d__1));
     goto L115;
 
 /*                   phase 2.  sum is small. */
 /*                             scale to avoid destructive underflow. */
 
 L70:
-    if ((d__1 = dx[i__], abs(d__1)) > cutlo) {
+    if ((d__1 = dx[i__], fabs(d__1)) > cutlo) {
 	goto L75;
     }
 
@@ -1180,13 +1174,13 @@ L70:
 /*                     in phase 4 sum is large.  scale to avoid overflow. */
 
 L110:
-    if ((d__1 = dx[i__], abs(d__1)) <= xmax) {
+    if ((d__1 = dx[i__], fabs(d__1)) <= xmax) {
 	goto L115;
     }
 /* Computing 2nd power */
     d__1 = xmax / dx[i__];
     sum = one + sum * (d__1 * d__1);
-    xmax = (d__1 = dx[i__], abs(d__1));
+    xmax = (d__1 = dx[i__], fabs(d__1));
     goto L200;
 
 L115:
@@ -1213,7 +1207,7 @@ L85:
     i__1 = nn;
     i__2 = *incx;
     for (j = i__; i__2 < 0 ? j >= i__1 : j <= i__1; j += i__2) {
-	if ((d__1 = dx[j], abs(d__1)) >= hitest) {
+	if ((d__1 = dx[j], fabs(d__1)) >= hitest) {
 	    goto L100;
 	}
 /* L95: */
@@ -1273,15 +1267,15 @@ integer idamax_(integer *n, real_number *dx, integer *incx)
 /*        code for increment not equal to 1 */
 
     ix = 1;
-    dmax__ = abs(dx[1]);
+    dmax__ = fabs(dx[1]);
     ix += *incx;
     i__1 = *n;
     for (i__ = 2; i__ <= i__1; ++i__) {
-	if ((d__1 = dx[ix], abs(d__1)) <= dmax__) {
+	if ((d__1 = dx[ix], fabs(d__1)) <= dmax__) {
 	    goto L5;
 	}
 	ret_val = i__;
-	dmax__ = (d__1 = dx[ix], abs(d__1));
+	dmax__ = (d__1 = dx[ix], fabs(d__1));
 L5:
 	ix += *incx;
 /* L10: */
@@ -1291,14 +1285,14 @@ L5:
 /*        code for increment equal to 1 */
 
 L20:
-    dmax__ = abs(dx[1]);
+    dmax__ = fabs(dx[1]);
     i__1 = *n;
     for (i__ = 2; i__ <= i__1; ++i__) {
-	if ((d__1 = dx[i__], abs(d__1)) <= dmax__) {
+	if ((d__1 = dx[i__], fabs(d__1)) <= dmax__) {
 	    goto L30;
 	}
 	ret_val = i__;
-	dmax__ = (d__1 = dx[i__], abs(d__1));
+	dmax__ = (d__1 = dx[i__], fabs(d__1));
 L30:
 	;
     }

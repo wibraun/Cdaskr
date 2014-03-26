@@ -160,16 +160,16 @@ L10:
     free(ptr_msg);
 
     if (*ni == 1) {
-      printf(fmt_20, &(*i1));
+      printf(fmt_20, *i1);
     }
     if (*ni == 2) {
-      printf(fmt_30, &(*i1), &(*i2));
+      printf(fmt_30, *i1, *i2);
     }
     if (*nr == 1) {
-      printf(fmt_40, &(*r1));
+      printf(fmt_40, *r1);
     }
     if (*nr == 2) {
-	    printf(fmt_50, *r1, *r2);
+	  printf(fmt_50, *r1, *r2);
     }
 
 /*  Abort the run if LEVEL = 2. */
@@ -348,3 +348,39 @@ integer ixsav_(integer *ipar, integer *ivalue, integer *iset)
 /* ----------------------- End of Function IXSAV ------------------------- */
 } /* ixsav_ */
 
+/* DECK S_COPY */
+void str_copy(char *a, char *b, integer la, integer lb)
+{
+	char *aend, *bend;
+
+	aend = a + la;
+
+	if(la <= lb){
+		if (a <= b || a >= b + la){
+			while(a < aend){
+				*a++ = *b++;
+			}
+		} else{
+			for(b += la; a < aend; ){
+				*--aend = *--b;
+			}
+		}
+	} else {
+		bend = b + lb;
+		if (a <= b || a >= bend){
+			while(b < bend){
+				*a++ = *b++;
+			}
+		} else {
+			a += lb;
+			while(b < bend){
+				*--a = *--bend;
+			}
+			a += lb;
+		}
+		while(a < aend){
+			*a++ = ' ';
+		}
+	}
+/* ----------------------- End of Function s_copy ------------------------- */
+} /* s_copy */

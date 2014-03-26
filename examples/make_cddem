@@ -10,13 +10,13 @@ SOLVR = ../solver
 
 PRECON = ../preconds
 
-OBJS = $(SOLVR)/ddaskr.o $(SOLVR)/daux.o $(SOLVR)/dlinpk.o \
+OBJS = $(SOLVR)/ddaskr.o $(SOLVR)/daux.o $(SOLVR)/dlinpk.o\
         $(PRECON)/dbanpre.o
 
 DEMO = dkrdem.o $(OBJS)
 
 DEMO : $(DEMO)
-	$(CC) $(CFLAGS) -o demo $(DEMO) -lm -lf2c
+	$(CC) $(CFLAGS) -o demo $(DEMO) -lm
 
 dkrdem.o: dkrdem.c
 	$(CC) $(CFLAGS) -c dkrdem.c

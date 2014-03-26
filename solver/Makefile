@@ -1,8 +1,7 @@
 #!/usr/bin/make  
 
-CLAGS=-O3 -Wall
-CC=gcc
-# uncomment the following for FORTRAN MINPACK 
+CLAGS=-O3 -Wall -std=c90
+CC=gcc 
 
 OBJS = \
 	daux.o ddaskr.o dlinpk.o
@@ -29,4 +28,4 @@ clean:
 	  rm -f *.o libcdaskr.a *~ #*#
 
 remove: libcdaskr.a
-	rm -f ${DESTDIR}/lib/libcdaskrk.a
+	rm -f ${DESTDIR}/lib/libcdaskr.a

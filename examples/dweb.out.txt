@@ -1,9 +1,9 @@
 DASKR-- Warning. Poor iterative algorithm performance                          
       at T = R1. Average no. of linear iterations = R2                         
-      In above,  R1 =   7.9968050786080E-01   R2 =   5.0399999618530E+00
+      In above,  R1 =   7.9968050786080E-01   R2 =   5.0400000000000E+00
 DASKR-- Warning. Poor iterative algorithm performance                          
       at T = R1. Average no. of linear iterations = R2                         
-      In above,  R1 =   8.9782738179451E-01   R2 =   5.0657896995544E+00
+      In above,  R1 =   8.9782738179451E-01   R2 =   5.0657894736842E+00
  DWEB: Example program for DDASKR package
 
  Food web problem with NS species, NS =   2
