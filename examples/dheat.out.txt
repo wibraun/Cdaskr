@@ -1,0 +1,51 @@
+ DHEAT: Heat Equation Example Program for DDASKR
+
+    M+2 by M+2 mesh, M = 10,  System size NEQ = 144
+
+    Root functions are: R1 = max(u) - 0.1 and R2 = max(u) - 0.01
+
+    Linear solver method flag INFO(12) =  1    (0 = direct, 1 = Krylov)
+    Preconditioner is a banded approximation with ML =  1  MU =  1
+
+    Tolerances are RTOL =    .1E-11   ATOL =    .1E-11
+
+
+     t            UMAX        NQ        H        STEPS     NNI     NLI
+
+     .10000E-01   .8314E+00    5      .880E-04    166      212     175
+     .20000E-01   .6943E+00    5      .158E-03    232      280     242
+     .40000E-01   .4746E+00    5      .285E-03    315      365     326
+     .80000E-01   .2174E+00    5      .513E-03    418      470     429
+     .11962E+00   .1000E+00    5      .513E-03    495      547     506
+                    *****   Root found, JROOT = -1  0
+     .16000E+00   .4531E-01    5      .924E-03    539      593     555
+     .23706E+00   .1000E-01    5      .924E-03    623      677     658
+                    *****   Root found, JROOT =  0 -1
+     .32000E+00   .1967E-02    5      .166E-02    710      766     748
+     .64000E+00   .3709E-05    5      .449E-02    858      919     979
+     .12800E+01   .1304E-10    5      .162E-01    947     1013    1190
+DASKR-- Warning. Poor iterative algorithm performance                          
+      at T = R1. Average no. of linear iterations = R2                         
+      In above,  R1 =   1.7784646973984E+00   R2 =   7.1333332061768E+00
+DASKR-- Warning. Poor iterative algorithm performance                          
+      at T = R1. Average no. of linear iterations = R2                         
+      In above,  R1 =   2.0372804998027E+00   R2 =   6.5294117927551E+00
+DASKR-- Warning. Poor iterative algorithm performance                          
+      at T = R1. Average no. of linear iterations = R2                         
+      In above,  R1 =   2.5549121046113E+00   R2 =   6.1052632331848E+00
+     .25600E+01   .7883E-13    1      .104E+01    960     1034    1310
+     .51200E+01   .4507E-13    1      .207E+01    961     1036    1315
+     .10240E+02   .5295E-13    1      .828E+01    963     1038    1320
+
+
+ Final statistics for this run..
+   RWORK size = 3373   IWORK size = 184
+   Number of time steps ................ =  963
+   Number of residual evaluations ...... = 2532
+   Number of root function evaluations . = 1009
+   Number of preconditioner evaluations  =   58
+   Number of preconditioner solves ..... = 2358
+   Number of nonlinear iterations ...... = 1038
+   Number of linear iterations ......... = 1320
+   Average Krylov subspace dimension =  1.2717
+    0 nonlinear conv. failures,    0 linear conv. failures
