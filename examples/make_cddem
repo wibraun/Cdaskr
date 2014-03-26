@@ -4,7 +4,7 @@
 # compiler to be used.
 
 CC = gcc
-CFLAGS = -O3 -Wall
+CFLAGS = -O3 -Wall -std=c90
 
 SOLVR = ../solver
 
@@ -21,10 +21,9 @@ DEMO : $(DEMO)
 dkrdem.o: dkrdem.c
 	$(CC) $(CFLAGS) -c dkrdem.c
 
-
 # Rule for compiling a Fortran source file:
 %.o: %.c
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 clean: 
-	rm -f $(DEMO)  
+	rm -f $(DEMO) demo

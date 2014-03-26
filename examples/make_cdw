@@ -11,15 +11,15 @@ SOLVR = ../solver
 PRECON = ../preconds
 
 OBJS = $(SOLVR)/ddaskr.o $(SOLVR)/daux.o $(SOLVR)/dlinpk.o \
-        $(PRECON)/dbanpre.o
+        $(PRECON)/drbdpre.o $(PRECON)/drbgpre.o
 
-HEAT = dheat.o $(OBJS)
+WEB = dweb.o $(OBJS)
 
-HEAT : $(HEAT)
-	$(CC) $(CFLAGS) -o heat $(HEAT) -lm -lf2c
+WEB : $(WEB)
+	$(CC) $(CFLAGS) -o web $(WEB) -lm -lf2c
 
-dheat.o: dheat.c
-	$(CC) $(CFLAGS) -c dheat.c
+dweb.o: dweb.c
+	$(CC) $(CFLAGS) -c dweb.c
 
 
 # Rule for compiling a Fortran source file:
@@ -27,4 +27,5 @@ dheat.o: dheat.c
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 clean: 
-	rm -f $(HEAT) heat
+	rm -f $(WEB) web
+
