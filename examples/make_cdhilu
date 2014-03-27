@@ -16,7 +16,7 @@ OBJS = $(SOLVR)/ddaskr.o $(SOLVR)/daux.o $(SOLVR)/dlinpk.o \
 HEATILU = dheatilu.o $(OBJS)
 
 HEATILU: $(HEATILU)
-	$(CC) $(CFLAGS) -o heatilu $(HEATILU) -lm -lf2c
+	$(CC) $(CFLAGS) -o heatilu $(HEATILU) -lm
 
 dheatilu.o: dheatilu.c
 	$(CC) $(CFLAGS) -c dheatilu.c

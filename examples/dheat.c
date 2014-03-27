@@ -1,24 +1,10 @@
 /* dheat.f -- translated by f2c (version 20100827).
-   You must link the resulting object file with libf2c:
-	on Microsoft Windows system, link with libf2c.lib;
-	on Linux or Unix systems, link with .../path/to/libf2c.a -lm
-	or, if you install libf2c.a in a standard place, with -lf2c -lm
-	-- in that order, at the end of the command line, as in
-		cc *.o -lf2c -lm
-	Source for libf2c is in \netlib/f2c/libf2c.zip, e.g.,
-
-		http://www.netlib.org/f2c/libf2c.zip
 */
 #include <stdio.h>
 #include <stdlib.h>
-
-#include "f2c.h"
+#include <math.h>
 
 #include "../solver/ddaskr_types.h"
-
-/* Table of constant values */
-
-static integer c__1 = 1;
 
 /* ***BEGIN PROLOGUE  DHEAT */
 /* ***REFER TO  DDASKR */
@@ -78,40 +64,35 @@ static integer c__1 = 1;
 /* Here are necessary declarations.  The dimension statements use a */
 /* maximum value for the mesh parameter M, and assume ML = MU = 1. */
 
-/* Main program */ int MAIN__(void)
+/* Main program */ int main(void)
 {
     /* Format strings */
-    static char fmt_30[] = "\002 DHEAT: Heat Equation Example Program for D"
-	    "DASKR\002\n\n\002    M+2 by M+2 mesh, M =\002%d\002,  System siz"
-	    "e NEQ =\002%d\n\n\002    Root functions are: R1 = max(u) - 0.1"
-	    "\002,\002 and R2 = max(u) - 0.01\002\n\n\002    Linear solver meth"
-	    "od flag INFO(12) =  %d\002    (0 = direct, 1 = Krylov)\002"
-	    "\n    Preconditioner is a banded approximation with ML =  "
-	    "%d\002  MU =  %d\n\n\002    Tolerances are RTOL =\002%10.1E"
-	    "\002   ATOL =\002%10.1E\n\n";
-    static char fmt_40[] = "     t\t\t  UMAX\t      NQ\tH\t STEPS\t   NNI\t   NLI\n";
-    static char fmt_60[] = "(e15.5,e12.4,i5,e14.3,i7,i9,i8)";
-    static char fmt_60_new[] = "     %8.4E\t  %8.3E    %d\t%4.2E\t  %d\t   %d\t  %d\n";
-    static char fmt_61[] = "(20x,\002*****   Root found, JROOT =\002,2i3)";
-    static char fmt_65[] = "(//\002 Final time reached =\002,e12.4//)";
-    static char fmt_90[] = "(//\002 Final statistics for this run..\002/\002"
-	    "   RWORK size =\002,i5,\002   IWORK size =\002,i4/\002   Number "
-	    "of time steps ................ =\002,i5/\002   Number of residua"
-	    "l evaluations ...... =\002,i5/\002   Number of root function eva"
-	    "luations . =\002,i5/\002   Number of preconditioner evaluations "
-	    " =\002,i5/\002   Number of preconditioner solves ..... =\002,i5"
-	    "/\002   Number of nonlinear iterations ...... =\002,i5/\002   Nu"
-	    "mber of linear iterations ......... =\002,i5/\002   Average Kryl"
-	    "ov subspace dimension =\002,f8.4/i5,\002 nonlinear conv. failure"
-	    "s,\002,i5,\002 linear conv. failures\002)";
+    static char fmt_30[] = " DHEAT: Heat Equation Example Program for DDASKR\n\n"
+    	"    M+2 by M+2 mesh, M =%3d,  System size NEQ =%3d\n\n"
+    	"    Root functions are: R1 = max(u) - 0.1, and R2 = max(u) - 0.01\n\n"
+    	"    Linear solver method flag INFO(12) =%3d    (0 = direct, 1 = Krylov)\n"
+	    "    Preconditioner is a banded approximation with ML =%3d  MU =%3d\n\n"
+    	"    Tolerances are RTOL =%10.1E   ATOL =%10.1E\n\n";
+    static char fmt_40[] = "     t           UMAX\t        NQ      H        "
+    		"  STEPS   NNI     NLI\n";
+    static char fmt_60[] = "    %10.4E\t%10.3E     %d    %10.2E\t%5d\t %5d\t %5d\n";
+    static char fmt_61[] = "\t\t    *****   Root found, JROOT = %d  %d\n";
+    static char fmt_65[] = "\n   Final time reached =  %12.4E\n";
+    static char fmt_90[] = "\n Final statistics for this run..\n"
+	    "   RWORK size =%6d\tIWORK size =%6d\n"
+        "   Number of time steps ................ =%8d\n"
+        "   Number of residual evaluations ...... =%8d\n"
+    	"   Number of root function evaluations . =%8d\n"
+    	"   Number of preconditioner evaluations  =%8d\n"
+    	"   Number of preconditioner solves ..... =%8d\n"
+	    "   Number of nonlinear iterations ...... =%8d\n"
+    	"   Number of linear iterations ......... =%8d\n"
+    	"   Average Krylov subspace dimension ... =%8.4f\n"
+    	"  %4d nonlinear conv. failures,  %4d linear conv. failures\n";
 
     /* System generated locals */
     integer i__1, i__2;
     real_number d__1, d__2, d__3;
-
-    /* Builtin functions */
-    integer s_wsfe(cilist *), do_fio(integer *, char *, ftnlen), e_wsfe(void);
-    /* Subroutine */ int s_stop(char *, ftnlen);
 
     /* Local variables */
     static integer i__, m;
@@ -127,7 +108,7 @@ static integer c__1 = 1;
     static real_number umax;
     static integer liwp;
     static real_number rtol;
-    static integer iout, lout, nout;
+    static integer iout, nout;
     static real_number tout;
     static integer mband;
     static real_number coeff, avdim;
@@ -137,20 +118,13 @@ static integer c__1 = 1;
     static integer iwork[184], jroot[2];
     static real_number rwork[3373];
     extern /* Subroutine */ int dbanja_(), dbanps_();
-    extern /* Subroutine */ int ddaskr_(U_fp, integer *, real_number *,
+    extern /* Subroutine */ int ddaskr_(Unknown_fp, integer *, real_number *,
 	    real_number *, real_number *, real_number *, integer *, real_number *,
 	     real_number *, integer *, real_number *, integer *, integer *,
-	    integer *, real_number *, integer *, U_fp, U_fp, U_fp, integer *,
+	    integer *, real_number *, integer *, Unknown_fp, Unknown_fp, Unknown_fp, integer *,
 	    integer *);
     extern /* Subroutine */ int rtheat_();
     static real_number uprime[144];
-
-    /* Fortran I/O blocks */
-    static cilist io___40 = { 0, 0, 0, fmt_60, 0 };
-    static cilist io___41 = { 0, 6, 0, fmt_61, 0 };
-    static cilist io___42 = { 0, 0, 0, fmt_65, 0 };
-    static cilist io___50 = { 0, 0, 0, fmt_90, 0 };
-
 
 
 /* Here set parameters for the problem being solved.  Use RPAR and IPAR */
@@ -224,6 +198,7 @@ static integer c__1 = 1;
 /* we want in the solution, in the sense of local error control. */
 /* For this example, we ask for pure absolute error control with a */
 /* tolerance of 1.0D-5. */
+/* Set high tolerance to provoke a error message */
     rtol = 1e-12;
     atol = 1e-12;
 
@@ -259,17 +234,17 @@ static integer c__1 = 1;
     i__1 = nout;
     for (iout = 1; iout <= i__1; ++iout) {
 L45:
-	ddaskr_((U_fp)resh_, &neq, &t, u, uprime, &tout, info, &rtol, &atol, &
-		idid, rwork, &lrw, iwork, &liw, rpar, ipar, (U_fp)dbanja_, (
-		U_fp)dbanps_, (U_fp)rtheat_, &nrt, jroot);
+	ddaskr_((Unknown_fp)resh_, &neq, &t, u, uprime, &tout, info, &rtol, &atol, &
+		idid, rwork, &lrw, iwork, &liw, rpar, ipar, (Unknown_fp)dbanja_,
+		    (Unknown_fp)dbanps_, (Unknown_fp)rtheat_, &nrt, jroot);
 
 	umax = 0.;
 	i__2 = neq;
 	for (i__ = 1; i__ <= i__2; ++i__) {
 /* L50: */
 /* Computing MAX */
-	    d__2 = umax, d__3 = (d__1 = u[i__ - 1], abs(d__1));
-	    umax = max(d__2,d__3);
+	    d__2 = umax, d__3 = (d__1 = u[i__ - 1], fabs(d__1));
+	    umax = MAX(d__2,d__3);
 	}
 
 	hu = rwork[6];
@@ -277,31 +252,15 @@ L45:
 	nst = iwork[10];
 	nni = iwork[18];
 	nli = iwork[19];
-	io___40.ciunit = lout;
-	s_wsfe(&io___40);
-	do_fio(&c__1, (char *)&t, (ftnlen)sizeof(real_number));
-	do_fio(&c__1, (char *)&umax, (ftnlen)sizeof(real_number));
-	do_fio(&c__1, (char *)&nqu, (ftnlen)sizeof(integer));
-	do_fio(&c__1, (char *)&hu, (ftnlen)sizeof(real_number));
-	do_fio(&c__1, (char *)&nst, (ftnlen)sizeof(integer));
-	do_fio(&c__1, (char *)&nni, (ftnlen)sizeof(integer));
-	do_fio(&c__1, (char *)&nli, (ftnlen)sizeof(integer));
-	e_wsfe();
-	printf(fmt_60_new, t, umax, nqu, hu, nst, nni, nli);
+	printf(fmt_60, t, umax, nqu, hu, nst, nni, nli);
 
 	if (idid == 5) {
-	    s_wsfe(&io___41);
-	    do_fio(&c__1, (char *)&jroot[0], (ftnlen)sizeof(integer));
-	    do_fio(&c__1, (char *)&jroot[1], (ftnlen)sizeof(integer));
-	    e_wsfe();
+	    printf(fmt_61, jroot[0],jroot[1]);
 	    goto L45;
 	}
 
 	if (idid < 0) {
-	    io___42.ciunit = lout;
-	    s_wsfe(&io___42);
-	    do_fio(&c__1, (char *)&t, (ftnlen)sizeof(real_number));
-	    e_wsfe();
+	    printf(fmt_65, t);
 	    goto L80;
 	}
 
@@ -327,24 +286,8 @@ L80:
     ncfn = iwork[14];
     ncfl = iwork[15];
     nrte = iwork[35];
-    /* printf(fmt_30, &(*i1), &(*i2));*/
 
-    io___50.ciunit = lout;
-    s_wsfe(&io___50);
-    do_fio(&c__1, (char *)&lrw, (ftnlen)sizeof(integer));
-    do_fio(&c__1, (char *)&liw, (ftnlen)sizeof(integer));
-    do_fio(&c__1, (char *)&nst, (ftnlen)sizeof(integer));
-    do_fio(&c__1, (char *)&nre, (ftnlen)sizeof(integer));
-    do_fio(&c__1, (char *)&nrte, (ftnlen)sizeof(integer));
-    do_fio(&c__1, (char *)&npe, (ftnlen)sizeof(integer));
-    do_fio(&c__1, (char *)&nps, (ftnlen)sizeof(integer));
-    do_fio(&c__1, (char *)&nni, (ftnlen)sizeof(integer));
-    do_fio(&c__1, (char *)&nli, (ftnlen)sizeof(integer));
-    do_fio(&c__1, (char *)&avdim, (ftnlen)sizeof(real_number));
-    do_fio(&c__1, (char *)&ncfn, (ftnlen)sizeof(integer));
-    do_fio(&c__1, (char *)&ncfl, (ftnlen)sizeof(integer));
-    e_wsfe();
-
+    printf(fmt_90, lrw, liw, nst, nre, nrte, npe, nps, nni, nli, avdim, ncfn, ncfl);
 
 /* ------  End of main program for DHEAT example program ----------------- */
     exit(0);
@@ -487,7 +430,7 @@ L80:
 /* L10: */
 /* Computing MAX */
 	d__1 = umax, d__2 = u[i__];
-	umax = max(d__1,d__2);
+	umax = MAX(d__1,d__2);
     }
     rval[1] = umax - .1;
     rval[2] = umax - .01;

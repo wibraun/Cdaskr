@@ -16,7 +16,7 @@ OBJS = $(SOLVR)/ddaskr.o $(SOLVR)/daux.o $(SOLVR)/dlinpk.o \
 HEAT = dheat.o $(OBJS)
 
 HEAT : $(HEAT)
-	$(CC) $(CFLAGS) -o heat $(HEAT) -lm -lf2c
+	$(CC) $(CFLAGS) -o heat $(HEAT) -lm
 
 dheat.o: dheat.c
 	$(CC) $(CFLAGS) -c dheat.c

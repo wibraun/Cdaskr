@@ -1,21 +1,12 @@
 /* dsparsk.f -- translated by f2c (version 20100827).
-   You must link the resulting object file with libf2c:
-	on Microsoft Windows system, link with libf2c.lib;
-	on Linux or Unix systems, link with .../path/to/libf2c.a -lm
-	or, if you install libf2c.a in a standard place, with -lf2c -lm
-	-- in that order, at the end of the command line, as in
-		cc *.o -lf2c -lm
-	Source for libf2c is in /netlib/f2c/libf2c.zip, e.g.,
-
-		http://www.netlib.org/f2c/libf2c.zip
 */
 
-#include "f2c.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
 
-/* Table of constant values */
+#include "../solver/ddaskr_types.h"
 
-static integer c__1 = 1;
-static integer c__2 = 2;
 
 /* ----------------------------------------------------------------------c */
 /*                          S P A R S K I T                             c */
@@ -30,8 +21,8 @@ static integer c__2 = 2;
 /* aplsca :   Computes     A:= A + s I    (s = scalar)                  c */
 /* ----------------------------------------------------------------------c */
 /* Subroutine */ int aplb_(integer *nrow, integer *ncol, integer *job, 
-	doublereal *a, integer *ja, integer *ia, doublereal *b, integer *jb, 
-	integer *ib, doublereal *c__, integer *jc, integer *ic, integer *
+	real_number *a, integer *ja, integer *ia, real_number *b, integer *jb,
+	integer *ib, real_number *c__, integer *jc, integer *ic, integer *
 	nzmax, integer *iw, integer *ierr)
 {
     /* System generated locals */
@@ -39,7 +30,7 @@ static integer c__2 = 2;
 
     /* Local variables */
     static integer j, k, ka, kb, ii, len, jcol, jpos;
-    static logical values;
+    static integer values;
 
 /* ----------------------------------------------------------------------- */
 /* performs the matrix sum  C = A+B. */
@@ -161,8 +152,8 @@ L999:
 } /* aplb_ */
 
 /* Subroutine */ int aplb1_(integer *nrow, integer *ncol, integer *job, 
-	doublereal *a, integer *ja, integer *ia, doublereal *b, integer *jb, 
-	integer *ib, doublereal *c__, integer *jc, integer *ic, integer *
+	real_number *a, integer *ja, integer *ia, real_number *b, integer *jb,
+	integer *ib, real_number *c__, integer *jc, integer *ic, integer *
 	nzmax, integer *ierr)
 {
     /* System generated locals */
@@ -170,7 +161,7 @@ L999:
 
     /* Local variables */
     static integer i__, j1, j2, kc, ka, kb, kamax, kbmax;
-    static logical values;
+    static integer values;
 
 /* ----------------------------------------------------------------------- */
 /* performs the matrix sum  C = A+B for matrices in sorted CSR format. */
@@ -293,9 +284,9 @@ L999:
 /* ----------------------------------------------------------------------- */
 } /* aplb1_ */
 
-/* Subroutine */ int aplsb_(integer *nrow, integer *ncol, doublereal *a, 
-	integer *ja, integer *ia, doublereal *s, doublereal *b, integer *jb, 
-	integer *ib, doublereal *c__, integer *jc, integer *ic, integer *
+/* Subroutine */ int aplsb_(integer *nrow, integer *ncol, real_number *a,
+	integer *ja, integer *ia, real_number *s, real_number *b, integer *jb,
+	integer *ib, real_number *c__, integer *jc, integer *ic, integer *
 	nzmax, integer *ierr)
 {
     /* System generated locals */
@@ -428,8 +419,8 @@ L999:
 /* ----------------------------------------------------------------------- */
 } /* aplsb_ */
 
-/* Subroutine */ int diamua_(integer *nrow, integer *job, doublereal *a, 
-	integer *ja, integer *ia, doublereal *diag, doublereal *b, integer *
+/* Subroutine */ int diamua_(integer *nrow, integer *job, real_number *a,
+	integer *ja, integer *ia, real_number *diag, real_number *b, integer *
 	jb, integer *ib)
 {
     /* System generated locals */
@@ -437,7 +428,7 @@ L999:
 
     /* Local variables */
     static integer k, k1, k2, ii;
-    static doublereal scal;
+    static real_number scal;
 
 /* ----------------------------------------------------------------------- */
 /* performs the matrix by matrix product B = Diag * A  (in place) */
@@ -513,8 +504,8 @@ L999:
 /* ----------------------------------------------------------------------- */
 } /* diamua_ */
 
-/* Subroutine */ int amudia_(integer *nrow, integer *job, doublereal *a, 
-	integer *ja, integer *ia, doublereal *diag, doublereal *b, integer *
+/* Subroutine */ int amudia_(integer *nrow, integer *job, real_number *a,
+	integer *ja, integer *ia, real_number *diag, real_number *b, integer *
 	jb, integer *ib)
 {
     /* System generated locals */
@@ -595,15 +586,15 @@ L999:
 /* -----------end-of-amudiag---------------------------------------------- */
 } /* amudia_ */
 
-/* Subroutine */ int aplsca_(integer *nrow, doublereal *a, integer *ja, 
-	integer *ia, doublereal *scal, integer *iw)
+/* Subroutine */ int aplsca_(integer *nrow, real_number *a, integer *ja,
+	integer *ia, real_number *scal, integer *iw)
 {
     /* System generated locals */
     integer i__1;
 
     /* Local variables */
     static integer j, k, k1, k2, ii, ko;
-    static logical test;
+    static integer test;
     extern /* Subroutine */ int diapos_(integer *, integer *, integer *, 
 	    integer *);
     static integer icount;
@@ -689,7 +680,7 @@ L999:
 	for (k = k2; k >= i__1; --k) {
 	    j = ja[k];
 	    if (test && j < ii) {
-		test = FALSE_;
+		test = _FALSE_;
 		--ko;
 		a[ko] = *scal;
 		ja[ko] = ii;
@@ -722,15 +713,15 @@ L999:
 /* ----------------------------------------------------------------------c */
 /* amux  : A times a vector. Compressed Sparse Row (CSR) format.        c */
 /* ----------------------------------------------------------------------c */
-/* Subroutine */ int amux_(integer *n, doublereal *x, doublereal *y, 
-	doublereal *a, integer *ja, integer *ia)
+/* Subroutine */ int amux_(integer *n, real_number *x, real_number *y,
+	real_number *a, integer *ja, integer *ia)
 {
     /* System generated locals */
     integer i__1, i__2;
 
     /* Local variables */
     static integer i__, k;
-    static doublereal t;
+    static real_number t;
 
 /* ----------------------------------------------------------------------- */
 /*         A times a vector */
@@ -792,14 +783,19 @@ L999:
 /* ----------------------------------------------------------------------c */
 /*  prtmt  : prints matrices in the Boeing/Harwell format.              c */
 /* ----------------------------------------------------------------------c */
-/* Subroutine */ int prtmt_(integer *nrow, integer *ncol, doublereal *a, 
-	integer *ja, integer *ia, doublereal *rhs, char *guesol, char *title, 
+
+/* Feature writing Jacobian Matrix to file is deactivated 				  */
+
+/* Subroutine */ int prtmt_(integer *nrow, integer *ncol, real_number *a,
+	integer *ja, integer *ia, real_number *rhs, char *guesol, char *title,
 	char *key, char *type__, integer *ifmt, integer *job, integer *iounit,
-	 ftnlen guesol_len, ftnlen title_len, ftnlen key_len, ftnlen type_len)
+	 integer guesol_len, integer title_len, integer key_len, integer type_len)
 {
     /* Format strings */
     static char fmt_101[] = "(\002(\002,i2,\002I\002,i2,\002)\002)";
     static char fmt_100[] = "(\002(\002,i2,\002I\002,i1,\002)\002)";
+    static char fmt_100_new[] = "  (%2d I %1d)";
+    static char fmt_101_new[] = "  (%2d I %2d)";
     static char fmt_102[] = "(\002(\002,i2,\002F\002,i1,\002.\002,i1,\002"
 	    ")\002)";
     static char fmt_103[] = "(\002(\002,i2,\002F\002,i2,\002.\002,i1,\002"
@@ -822,17 +818,19 @@ L999:
     static char fmt_11[] = "(a3,11x,i14,i14)";
 
     /* System generated locals */
-    address a__1[2];
+    char a__1[2];
     integer i__1, i__2[2];
-    real r__1;
-    icilist ici__1;
+    real_number r__1;
+    /* deactivate printing */
+    /* icilist ici__1; */
 
-    /* Builtin functions */
+    /* Builtin functions
     double r_lg10(real *);
-    integer s_wsfi(icilist *), do_fio(integer *, char *, ftnlen), e_wsfi(void)
+    integer s_wsfi(icilist *), do_fio(integer *, char *, integer), e_wsfi(void)
 	    ;
-    /* Subroutine */ int s_cat(char *, char **, integer *, integer *, ftnlen);
-    integer s_wsfe(cilist *), e_wsfe(void);
+	*/
+    /* Subroutine  int s_cat(char *, char **, integer *, integer *, integer);
+    integer s_wsfe(cilist *), e_wsfe(void); */
 
     /* Local variables */
     static integer i__, ix, len, nnz, iend, nrhs, next, ihead, indcrd, valcrd;
@@ -843,7 +841,9 @@ L999:
     static char ptrfmt[16], rhstyp[3];
     static integer nrwindx;
 
+
     /* Fortran I/O blocks */
+    /*
     static icilist io___55 = { 0, indfmt, 0, fmt_100, 16, 1 };
     static cilist io___64 = { 0, 0, 0, fmt_10, 0 };
     static cilist io___66 = { 0, 0, 0, fmt_11, 0 };
@@ -853,6 +853,7 @@ L999:
     static cilist io___72 = { 0, 0, 0, valfmt, 0 };
     static cilist io___73 = { 0, 0, 0, valfmt, 0 };
     static cilist io___74 = { 0, 0, 0, valfmt, 0 };
+    */
 
 
     /* Assigned format variables */
@@ -951,8 +952,8 @@ L999:
 
     /* Function Body */
     nnz = ia[*ncol + 1] - 1;
-    r__1 = (real) (nnz + 1) + .1f;
-    len = (integer) r_lg10(&r__1) + 1;
+    r__1 = (real_number) (nnz + 1) + .1f;
+    len = (integer) log10(r__1) + 1;
     nperli = 80 / len;
     ptrcrd = *ncol / nperli + 1;
     if (len > 9) {
@@ -962,30 +963,34 @@ L999:
 	ix = 1;
 	ix_fmt = fmt_100;
     }
+    /*
     ici__1.icierr = 0;
     ici__1.icirnum = 1;
     ici__1.icirlen = 16;
     ici__1.iciunit = ptrfmt;
     ici__1.icifmt = ix_fmt;
     s_wsfi(&ici__1);
-    do_fio(&c__1, (char *)&nperli, (ftnlen)sizeof(integer));
-    do_fio(&c__1, (char *)&len, (ftnlen)sizeof(integer));
+    do_fio(&c__1, (char *)&nperli, (integer)sizeof(integer));
+    do_fio(&c__1, (char *)&len, (integer)sizeof(integer));
     e_wsfi();
+    */
 L100:
 L101:
 /* ---------------------------- */
 /* compute ROW index format */
 /* ---------------------------- */
-    r__1 = (real) (*nrow) + .1f;
-    len = (integer) r_lg10(&r__1) + 1;
+    r__1 = (real_number) (*nrow) + .1f;
+    len = (integer) log10(r__1) + 1;
 /* Computing MIN */
     i__1 = 80 / len;
-    nperli = min(i__1,nnz);
+    nperli = MIN(i__1,nnz);
     indcrd = (nnz - 1) / nperli + 1;
+    /*
     s_wsfi(&io___55);
-    do_fio(&c__1, (char *)&nperli, (ftnlen)sizeof(integer));
-    do_fio(&c__1, (char *)&len, (ftnlen)sizeof(integer));
+    do_fio(&c__1, (char *)&nperli, (integer)sizeof(integer));
+    do_fio(&c__1, (char *)&len, (integer)sizeof(integer));
     e_wsfi();
+    */
 /* --------------- */
 /* compute values and rhs format (using the same for both) */
 /* --------------- */
@@ -1012,17 +1017,18 @@ L101:
 	    ix = 4;
 	    ix_fmt = fmt_104;
 	}
-
+	/*
 	ici__1.icierr = 0;
 	ici__1.icirnum = 1;
 	ici__1.icirlen = 20;
 	ici__1.iciunit = valfmt;
 	ici__1.icifmt = ix_fmt;
 	s_wsfi(&ici__1);
-	do_fio(&c__1, (char *)&nperli, (ftnlen)sizeof(integer));
-	do_fio(&c__1, (char *)&len, (ftnlen)sizeof(integer));
-	do_fio(&c__1, (char *)&(*ifmt), (ftnlen)sizeof(integer));
+	do_fio(&c__1, (char *)&nperli, (integer)sizeof(integer));
+	do_fio(&c__1, (char *)&len, (integer)sizeof(integer));
+	do_fio(&c__1, (char *)&(*ifmt), (integer)sizeof(integer));
 	e_wsfi();
+	*/
 L102:
 L103:
 L104:
@@ -1056,16 +1062,18 @@ L104:
 	    }
 	}
 /* ----------- */
+	/*
 	ici__1.icierr = 0;
 	ici__1.icirnum = 1;
 	ici__1.icirlen = 20;
 	ici__1.iciunit = valfmt;
 	ici__1.icifmt = ix_fmt;
 	s_wsfi(&ici__1);
-	do_fio(&c__1, (char *)&nperli, (ftnlen)sizeof(integer));
-	do_fio(&c__1, (char *)&len, (ftnlen)sizeof(integer));
-	do_fio(&c__1, (char *)&(*ifmt), (ftnlen)sizeof(integer));
+	do_fio(&c__1, (char *)&nperli, (integer)sizeof(integer));
+	do_fio(&c__1, (char *)&len, (integer)sizeof(integer));
+	do_fio(&c__1, (char *)&(*ifmt), (integer)sizeof(integer));
 	e_wsfi();
+	*/
 L105:
 L106:
 L107:
@@ -1091,39 +1099,42 @@ L110:
 /* Writing concatenation */
 	i__2[0] = 1, a__1[0] = "F";
 	i__2[1] = 2, a__1[1] = guesol;
-	s_cat(rhstyp, a__1, i__2, &c__2, (ftnlen)3);
+	/* s_cat(rhstyp, a__1, i__2, &c__2, (integer)3); */
     }
 L20:
 
     totcrd = ptrcrd + indcrd + valcrd + rhscrd;
 /*     write 4-line or five line header */
+    /*
     io___64.ciunit = *iounit;
     s_wsfe(&io___64);
-    do_fio(&c__1, title, (ftnlen)72);
-    do_fio(&c__1, key, (ftnlen)8);
-    do_fio(&c__1, (char *)&totcrd, (ftnlen)sizeof(integer));
-    do_fio(&c__1, (char *)&ptrcrd, (ftnlen)sizeof(integer));
-    do_fio(&c__1, (char *)&indcrd, (ftnlen)sizeof(integer));
-    do_fio(&c__1, (char *)&valcrd, (ftnlen)sizeof(integer));
-    do_fio(&c__1, (char *)&rhscrd, (ftnlen)sizeof(integer));
-    do_fio(&c__1, type__, (ftnlen)3);
-    do_fio(&c__1, (char *)&(*nrow), (ftnlen)sizeof(integer));
-    do_fio(&c__1, (char *)&(*ncol), (ftnlen)sizeof(integer));
-    do_fio(&c__1, (char *)&nnz, (ftnlen)sizeof(integer));
-    do_fio(&c__1, (char *)&nrhs, (ftnlen)sizeof(integer));
-    do_fio(&c__1, ptrfmt, (ftnlen)16);
-    do_fio(&c__1, indfmt, (ftnlen)16);
-    do_fio(&c__1, valfmt, (ftnlen)20);
-    do_fio(&c__1, valfmt, (ftnlen)20);
+    do_fio(&c__1, title, (integer)72);
+    do_fio(&c__1, key, (integer)8);
+    do_fio(&c__1, (char *)&totcrd, (integer)sizeof(integer));
+    do_fio(&c__1, (char *)&ptrcrd, (integer)sizeof(integer));
+    do_fio(&c__1, (char *)&indcrd, (integer)sizeof(integer));
+    do_fio(&c__1, (char *)&valcrd, (integer)sizeof(integer));
+    do_fio(&c__1, (char *)&rhscrd, (integer)sizeof(integer));
+    do_fio(&c__1, type__, (integer)3);
+    do_fio(&c__1, (char *)&(*nrow), (integer)sizeof(integer));
+    do_fio(&c__1, (char *)&(*ncol), (integer)sizeof(integer));
+    do_fio(&c__1, (char *)&nnz, (integer)sizeof(integer));
+    do_fio(&c__1, (char *)&nrhs, (integer)sizeof(integer));
+    do_fio(&c__1, ptrfmt, (integer)16);
+    do_fio(&c__1, indfmt, (integer)16);
+    do_fio(&c__1, valfmt, (integer)20);
+    do_fio(&c__1, valfmt, (integer)20);
     e_wsfe();
+    */
 /* ----------------------------------------------------------------------- */
+    /*
     nrwindx = 0;
     if (nrhs >= 1) {
 	io___66.ciunit = *iounit;
 	s_wsfe(&io___66);
-	do_fio(&c__1, rhstyp, (ftnlen)3);
-	do_fio(&c__1, (char *)&nrhs, (ftnlen)sizeof(integer));
-	do_fio(&c__1, (char *)&nrwindx, (ftnlen)sizeof(integer));
+	do_fio(&c__1, rhstyp, (integer)3);
+	do_fio(&c__1, (char *)&nrhs, (integer)sizeof(integer));
+	do_fio(&c__1, (char *)&nrwindx, (integer)sizeof(integer));
 	e_wsfe();
     }
 
@@ -1131,14 +1142,14 @@ L20:
     s_wsfe(&io___67);
     i__1 = *ncol + 1;
     for (i__ = 1; i__ <= i__1; ++i__) {
-	do_fio(&c__1, (char *)&ia[i__], (ftnlen)sizeof(integer));
+	do_fio(&c__1, (char *)&ia[i__], (integer)sizeof(integer));
     }
     e_wsfe();
     io___68.ciunit = *iounit;
     s_wsfe(&io___68);
     i__1 = nnz;
     for (i__ = 1; i__ <= i__1; ++i__) {
-	do_fio(&c__1, (char *)&ja[i__], (ftnlen)sizeof(integer));
+	do_fio(&c__1, (char *)&ja[i__], (integer)sizeof(integer));
     }
     e_wsfe();
     if (*job <= 1) {
@@ -1148,7 +1159,7 @@ L20:
     s_wsfe(&io___69);
     i__1 = nnz;
     for (i__ = 1; i__ <= i__1; ++i__) {
-	do_fio(&c__1, (char *)&a[i__], (ftnlen)sizeof(doublereal));
+	do_fio(&c__1, (char *)&a[i__], (integer)sizeof(real_number));
     }
     e_wsfe();
     if (*job <= 2) {
@@ -1161,12 +1172,13 @@ L20:
     s_wsfe(&io___72);
     i__1 = iend;
     for (i__ = next; i__ <= i__1; ++i__) {
-	do_fio(&c__1, (char *)&rhs[i__], (ftnlen)sizeof(doublereal));
+	do_fio(&c__1, (char *)&rhs[i__], (integer)sizeof(real_number));
     }
     e_wsfe();
+    */
 
 /*     write initial guesses if available */
-
+    /*
     if (*(unsigned char *)guesol == 'G' || *(unsigned char *)guesol == 'g') {
 	next += len;
 	iend += len;
@@ -1174,13 +1186,14 @@ L20:
 	s_wsfe(&io___73);
 	i__1 = iend;
 	for (i__ = next; i__ <= i__1; ++i__) {
-	    do_fio(&c__1, (char *)&rhs[i__], (ftnlen)sizeof(doublereal));
+	    do_fio(&c__1, (char *)&rhs[i__], (integer)sizeof(real_number));
 	}
 	e_wsfe();
     }
+    */
 
 /*     write exact solutions if available */
-
+    /*
     if (*(unsigned char *)&guesol[1] == 'X' || *(unsigned char *)&guesol[1] ==
 	     'x') {
 	next += len;
@@ -1189,10 +1202,11 @@ L20:
 	s_wsfe(&io___74);
 	i__1 = iend;
 	for (i__ = next; i__ <= i__1; ++i__) {
-	    do_fio(&c__1, (char *)&rhs[i__], (ftnlen)sizeof(doublereal));
+	    do_fio(&c__1, (char *)&rhs[i__], (integer)sizeof(real_number));
 	}
 	e_wsfe();
     }
+    */
 
     return 0;
 /* ----------end of prtmt ------------------------------------------------ */
@@ -1216,8 +1230,8 @@ L20:
 /* csrbnd  : converts a compressed sparse row format into a banded      c */
 /*           format (linpack style).                                    c */
 /* ----------------------------------------------------------------------c */
-/* Subroutine */ int csrdns_(integer *nrow, integer *ncol, doublereal *a, 
-	integer *ja, integer *ia, doublereal *dns, integer *ndns, integer *
+/* Subroutine */ int csrdns_(integer *nrow, integer *ncol, real_number *a,
+	integer *ja, integer *ia, real_number *dns, integer *ndns, integer *
 	ierr)
 {
     /* System generated locals */
@@ -1293,15 +1307,15 @@ L20:
 /* ----------------------------------------------------------------------- */
 } /* csrdns_ */
 
-/* Subroutine */ int coocsr_(integer *nrow, integer *nnz, doublereal *a, 
-	integer *ir, integer *jc, doublereal *ao, integer *jao, integer *iao)
+/* Subroutine */ int coocsr_(integer *nrow, integer *nnz, real_number *a,
+	integer *ir, integer *jc, real_number *ao, integer *jao, integer *iao)
 {
     /* System generated locals */
     integer i__1;
 
     /* Local variables */
     static integer i__, j, k;
-    static doublereal x;
+    static real_number x;
     static integer k0, iad;
 
 /* ----------------------------------------------------------------------- */
@@ -1388,17 +1402,17 @@ L20:
 } /* coocsr_ */
 
 /* Subroutine */ int coicsr_(integer *n, integer *nnz, integer *job, 
-	doublereal *a, integer *ja, integer *ia, integer *iwk)
+	real_number *a, integer *ja, integer *ia, integer *iwk)
 {
     /* System generated locals */
     integer i__1;
 
     /* Local variables */
     static integer i__, j, k;
-    static doublereal t;
+    static real_number t;
     static integer init, ipos, inext, jnext;
-    static doublereal tnext;
-    static logical values;
+    static real_number tnext;
+    static integer values;
 
 /* ------------------------------------------------------------------------ */
 /* IN-PLACE coo-csr conversion routine. */
@@ -1528,7 +1542,7 @@ L70:
 } /* coicsr_ */
 
 /* Subroutine */ int csrcoo_(integer *nrow, integer *job, integer *nzmax, 
-	doublereal *a, integer *ja, integer *ia, integer *nnz, doublereal *ao,
+	real_number *a, integer *ja, integer *ia, integer *nnz, real_number *ao,
 	 integer *ir, integer *jc, integer *ierr)
 {
     /* System generated locals */
@@ -1635,11 +1649,11 @@ L3:
 } /* csrcoo_ */
 
 /* Subroutine */ int csrcsc_(integer *n, integer *job, integer *ipos, 
-	doublereal *a, integer *ja, integer *ia, doublereal *ao, integer *jao,
+	real_number *a, integer *ja, integer *ia, real_number *ao, integer *jao,
 	 integer *iao)
 {
     extern /* Subroutine */ int csrcsc2_(integer *, integer *, integer *, 
-	    integer *, doublereal *, integer *, integer *, doublereal *, 
+	    integer *, real_number *, integer *, integer *, real_number *,
 	    integer *, integer *);
 
 /* ----------------------------------------------------------------------- */
@@ -1693,7 +1707,7 @@ L3:
 } /* csrcsc_ */
 
 /* Subroutine */ int csrcsc2_(integer *n, integer *n2, integer *job, integer *
-	ipos, doublereal *a, integer *ja, integer *ia, doublereal *ao, 
+	ipos, real_number *a, integer *ja, integer *ia, real_number *ao,
 	integer *jao, integer *iao)
 {
     /* System generated locals */
@@ -1802,8 +1816,8 @@ L3:
 } /* csrcsc2_ */
 
 /* Subroutine */ int csrdia_(integer *n, integer *idiag, integer *job, 
-	doublereal *a, integer *ja, integer *ia, integer *ndiag, doublereal *
-	diag, integer *ioff, doublereal *ao, integer *jao, integer *iao, 
+	real_number *a, integer *ja, integer *ia, integer *ndiag, real_number *
+	diag, integer *ioff, real_number *ao, integer *jao, integer *iao,
 	integer *ind)
 {
     /* System generated locals */
@@ -1998,8 +2012,8 @@ L51:
 /* ----------------------------------------------------------------------- */
 } /* csrdia_ */
 
-/* Subroutine */ int csrbnd_(integer *n, doublereal *a, integer *ja, integer *
-	ia, integer *job, doublereal *abd, integer *nabd, integer *lowd, 
+/* Subroutine */ int csrbnd_(integer *n, real_number *a, integer *ja, integer *
+	ia, integer *job, real_number *abd, integer *nabd, integer *lowd,
 	integer *ml, integer *mu, integer *ierr)
 {
     /* System generated locals */
@@ -2007,7 +2021,7 @@ L51:
 
     /* Local variables */
     static integer i__, j, k, m, ii, mdiag;
-    extern /* Subroutine */ int getbwd_(integer *, doublereal *, integer *, 
+    extern /* Subroutine */ int getbwd_(integer *, real_number *, integer *,
 	    integer *, integer *, integer *);
 
 /* ----------------------------------------------------------------------- */
@@ -2190,8 +2204,8 @@ L51:
 /* rnrms  : computes the norms of the rows of A                         c */
 /* roscal : scales the rows of a matrix by their norms.                 c */
 /* ----------------------------------------------------------------------c */
-/* Subroutine */ int rperm_(integer *nrow, doublereal *a, integer *ja, 
-	integer *ia, doublereal *ao, integer *jao, integer *iao, integer *
+/* Subroutine */ int rperm_(integer *nrow, real_number *a, integer *ja,
+	integer *ia, real_number *ao, integer *jao, integer *iao, integer *
 	perm, integer *job)
 {
     /* System generated locals */
@@ -2199,7 +2213,7 @@ L51:
 
     /* Local variables */
     static integer i__, j, k, ii, ko;
-    static logical values;
+    static integer values;
 
 /* ----------------------------------------------------------------------- */
 /* this subroutine permutes the rows of a matrix in CSR format. */
@@ -2290,8 +2304,8 @@ L51:
 /* ----------------------------------------------------------------------- */
 } /* rperm_ */
 
-/* Subroutine */ int cperm_(integer *nrow, doublereal *a, integer *ja, 
-	integer *ia, doublereal *ao, integer *jao, integer *iao, integer *
+/* Subroutine */ int cperm_(integer *nrow, real_number *a, integer *ja,
+	integer *ia, real_number *ao, integer *jao, integer *iao, integer *
 	perm, integer *job)
 {
     /* System generated locals */
@@ -2382,14 +2396,14 @@ L51:
 /* ----------------------------------------------------------------------- */
 } /* cperm_ */
 
-/* Subroutine */ int dperm_(integer *nrow, doublereal *a, integer *ja, 
-	integer *ia, doublereal *ao, integer *jao, integer *iao, integer *
+/* Subroutine */ int dperm_(integer *nrow, real_number *a, integer *ja,
+	integer *ia, real_number *ao, integer *jao, integer *iao, integer *
 	perm, integer *qperm, integer *job)
 {
-    extern /* Subroutine */ int cperm_(integer *, doublereal *, integer *, 
-	    integer *, doublereal *, integer *, integer *, integer *, integer 
-	    *), rperm_(integer *, doublereal *, integer *, integer *, 
-	    doublereal *, integer *, integer *, integer *, integer *);
+    extern /* Subroutine */ int cperm_(integer *, real_number *, integer *,
+	    integer *, real_number *, integer *, integer *, integer *, integer
+	    *), rperm_(integer *, real_number *, integer *, integer *,
+	    real_number *, integer *, integer *, integer *, integer *);
     static integer locjob;
 
 /* ----------------------------------------------------------------------- */
@@ -2477,14 +2491,14 @@ L51:
 /* ----------------------------------------------------------------------- */
 } /* dperm_ */
 
-/* Subroutine */ int dvperm_(integer *n, doublereal *x, integer *perm)
+/* Subroutine */ int dvperm_(integer *n, real_number *x, integer *perm)
 {
     /* System generated locals */
     integer i__1;
 
     /* Local variables */
     static integer j, k, ii;
-    static doublereal tmp, tmp1;
+    static real_number tmp, tmp1;
     static integer init, next;
 
 /* ----------------------------------------------------------------------- */
@@ -2730,7 +2744,7 @@ L101:
     return 0;
 } /* diapos_ */
 
-/* Subroutine */ int getbwd_(integer *n, doublereal *a, integer *ja, integer *
+/* Subroutine */ int getbwd_(integer *n, real_number *a, integer *ja, integer *
 	ia, integer *ml, integer *mu)
 {
     /* System generated locals */
@@ -2778,10 +2792,10 @@ L101:
 	i__2 = ia[i__ + 1] - 1;
 	for (k = ia[i__]; k <= i__2; ++k) {
 	    ldist = i__ - ja[k];
-	    *ml = max(*ml,ldist);
+	    *ml = MAX(*ml,ldist);
 /* Computing MAX */
 	    i__3 = *mu, i__4 = -ldist;
-	    *mu = max(i__3,i__4);
+	    *mu = MAX(i__3,i__4);
 /* L31: */
 	}
 /* L3: */
@@ -2864,19 +2878,19 @@ L101:
 /* ----------------------------------------------------------------------- */
 } /* infdia_ */
 
-/* Subroutine */ int rnrms_(integer *nrow, integer *nrm, doublereal *a, 
-	integer *ja, integer *ia, doublereal *diag)
+/* Subroutine */ int rnrms_(integer *nrow, integer *nrm, real_number *a,
+	integer *ja, integer *ia, real_number *diag)
 {
     /* System generated locals */
     integer i__1, i__2;
-    doublereal d__1, d__2, d__3;
+    real_number d__1, d__2, d__3;
 
     /* Builtin functions */
-    double sqrt(doublereal);
+    double sqrt(real_number);
 
     /* Local variables */
     static integer k, k1, k2, ii;
-    static doublereal scal;
+    static real_number scal;
 
 /* ----------------------------------------------------------------------- */
 /* gets the norms of each row of A. (choice of three norms) */
@@ -2917,14 +2931,14 @@ L101:
 	    i__2 = k2;
 	    for (k = k1; k <= i__2; ++k) {
 /* Computing MAX */
-		d__2 = scal, d__3 = (d__1 = a[k], abs(d__1));
-		scal = max(d__2,d__3);
+		d__2 = scal, d__3 = (d__1 = a[k], fabs(d__1));
+		scal = MAX(d__2,d__3);
 /* L2: */
 	    }
 	} else if (*nrm == 1) {
 	    i__2 = k2;
 	    for (k = k1; k <= i__2; ++k) {
-		scal += (d__1 = a[k], abs(d__1));
+		scal += (d__1 = a[k], fabs(d__1));
 /* L3: */
 	    }
 	} else {
@@ -2948,7 +2962,7 @@ L101:
 } /* rnrms_ */
 
 /* Subroutine */ int roscal_(integer *nrow, integer *job, integer *nrm, 
-	doublereal *a, integer *ja, integer *ia, doublereal *diag, doublereal 
+	real_number *a, integer *ja, integer *ia, real_number *diag, real_number
 	*b, integer *jb, integer *ib, integer *ierr)
 {
     /* System generated locals */
@@ -2956,9 +2970,9 @@ L101:
 
     /* Local variables */
     static integer j;
-    extern /* Subroutine */ int rnrms_(integer *, integer *, doublereal *, 
-	    integer *, integer *, doublereal *), diamua_(integer *, integer *,
-	     doublereal *, integer *, integer *, doublereal *, doublereal *, 
+    extern /* Subroutine */ int rnrms_(integer *, integer *, real_number *,
+	    integer *, integer *, real_number *), diamua_(integer *, integer *,
+	     real_number *, integer *, integer *, real_number *, real_number *,
 	    integer *, integer *);
 
 /* ----------------------------------------------------------------------- */
@@ -3037,22 +3051,22 @@ L101:
 /* QSPLIT  : quick split routine used by ilut to sort out the k largest c */
 /*           elements in absolute value                                 c */
 /* ----------------------------------------------------------------------c */
-/* Subroutine */ int ilut_(integer *n, doublereal *a, integer *ja, integer *
-	ia, integer *lfil, doublereal *droptol, doublereal *alu, integer *jlu,
-	 integer *ju, integer *iwk, doublereal *w, integer *jw, integer *ierr)
+/* Subroutine */ int ilut_(integer *n, real_number *a, integer *ja, integer *
+	ia, integer *lfil, real_number *droptol, real_number *alu, integer *jlu,
+	 integer *ju, integer *iwk, real_number *w, integer *jw, integer *ierr)
 {
     /* System generated locals */
     integer i__1, i__2;
-    doublereal d__1;
+    real_number d__1;
 
     /* Local variables */
     static integer i__, j, k;
-    static doublereal s, t;
+    static real_number s, t;
     static integer j1, j2, ii, jj, ju0, len;
-    static doublereal fact;
+    static real_number fact;
     static integer lenl, lenu, jpos, jrow;
-    static doublereal tnorm;
-    extern /* Subroutine */ int qsplit_(doublereal *, integer *, integer *, 
+    static real_number tnorm;
+    extern /* Subroutine */ int qsplit_(real_number *, integer *, integer *,
 	    integer *);
 
 /* ----------------------------------------------------------------------- */
@@ -3177,13 +3191,13 @@ L101:
 	tnorm = 0.;
 	i__2 = j2;
 	for (k = j1; k <= i__2; ++k) {
-	    tnorm += (d__1 = a[k], abs(d__1));
+	    tnorm += (d__1 = a[k], fabs(d__1));
 /* L501: */
 	}
 	if (tnorm == 0.) {
 	    goto L999;
 	}
-	tnorm /= (real) (j2 - j1 + 1);
+	tnorm /= (real_number) (j2 - j1 + 1);
 
 /*     unpack L-part and U-part of row of A in arrays w */
 
@@ -3262,7 +3276,7 @@ L150:
 /*     get the multiplier for row to be eliminated (jrow). */
 
 	fact = w[jj] * alu[jrow];
-	if (abs(fact) <= *droptol) {
+	if (fabs(fact) <= *droptol) {
 	    goto L150;
 	}
 
@@ -3340,7 +3354,7 @@ L160:
 /*     update L-matrix */
 
 	lenl = len;
-	len = min(lenl,*lfil);
+	len = MIN(lenl,*lfil);
 
 /*     sort by quick-split */
 
@@ -3368,14 +3382,14 @@ L160:
 	len = 0;
 	i__2 = lenu - 1;
 	for (k = 1; k <= i__2; ++k) {
-	    if ((d__1 = w[ii + k], abs(d__1)) > *droptol * tnorm) {
+	    if ((d__1 = w[ii + k], fabs(d__1)) > *droptol * tnorm) {
 		++len;
 		w[ii + len] = w[ii + k];
 		jw[ii + len] = jw[ii + k];
 	    }
 	}
 	lenu = len + 1;
-	len = min(lenu,*lfil);
+	len = MIN(lenu,*lfil);
 
 	if (lenu > 1) {
 	    i__2 = lenu - 1;
@@ -3384,7 +3398,7 @@ L160:
 
 /*     copy */
 
-	t = (d__1 = w[ii], abs(d__1));
+	t = (d__1 = w[ii], fabs(d__1));
 	if (len + ju0 > *iwk) {
 	    goto L997;
 	}
@@ -3392,7 +3406,7 @@ L160:
 	for (k = ii + 1; k <= i__2; ++k) {
 	    jlu[ju0] = jw[k];
 	    alu[ju0] = w[k];
-	    t += (d__1 = w[k], abs(d__1));
+	    t += (d__1 = w[k], fabs(d__1));
 	    ++ju0;
 /* L302: */
 	}
@@ -3449,25 +3463,25 @@ L999:
 /* ----------------------------------------------------------------------- */
 } /* ilut_ */
 
-/* Subroutine */ int ilutp_(integer *n, doublereal *a, integer *ja, integer *
-	ia, integer *lfil, doublereal *droptol, doublereal *permtol, integer *
-	mbloc, doublereal *alu, integer *jlu, integer *ju, integer *iwk, 
-	doublereal *w, integer *jw, integer *iperm, integer *ierr)
+/* Subroutine */ int ilutp_(integer *n, real_number *a, integer *ja, integer *
+	ia, integer *lfil, real_number *droptol, real_number *permtol, integer *
+	mbloc, real_number *alu, integer *jlu, integer *ju, integer *iwk,
+	real_number *w, integer *jw, integer *iperm, integer *ierr)
 {
     /* System generated locals */
     integer i__1, i__2;
-    doublereal d__1;
+    real_number d__1;
 
     /* Local variables */
     static integer i__, j, k;
-    static doublereal s, t;
+    static real_number s, t;
     static integer j1, j2, ii, jj, ju0, len;
-    static doublereal tmp, fact;
+    static real_number tmp, fact;
     static integer lenl, imax, lenu, icut, jpos;
-    static doublereal xmax;
+    static real_number xmax;
     static integer jrow;
-    static doublereal xmax0, tnorm;
-    extern /* Subroutine */ int qsplit_(doublereal *, integer *, integer *, 
+    static real_number xmax0, tnorm;
+    extern /* Subroutine */ int qsplit_(real_number *, integer *, integer *,
 	    integer *);
 
 /* ----------------------------------------------------------------------- */
@@ -3605,7 +3619,7 @@ L999:
 	tnorm = 0.;
 	i__2 = j2;
 	for (k = j1; k <= i__2; ++k) {
-	    tnorm += (d__1 = a[k], abs(d__1));
+	    tnorm += (d__1 = a[k], fabs(d__1));
 /* L501: */
 	}
 	if (tnorm == 0.) {
@@ -3693,7 +3707,7 @@ L150:
 
 /*     drop term if small */
 
-	if (abs(fact) <= *droptol) {
+	if (fabs(fact) <= *droptol) {
 	    goto L150;
 	}
 
@@ -3770,7 +3784,7 @@ L160:
 /*     update L-matrix */
 
 	lenl = len;
-	len = min(lenl,*lfil);
+	len = MIN(lenl,*lfil);
 
 /*     sort by quick-split */
 
@@ -3798,14 +3812,14 @@ L160:
 	len = 0;
 	i__2 = lenu - 1;
 	for (k = 1; k <= i__2; ++k) {
-	    if ((d__1 = w[ii + k], abs(d__1)) > *droptol * tnorm) {
+	    if ((d__1 = w[ii + k], fabs(d__1)) > *droptol * tnorm) {
 		++len;
 		w[ii + len] = w[ii + k];
 		jw[ii + len] = jw[ii + k];
 	    }
 	}
 	lenu = len + 1;
-	len = min(lenu,*lfil);
+	len = MIN(lenu,*lfil);
 	if (lenu > 1) {
 	    i__2 = lenu - 1;
 	    qsplit_(&w[ii + 1], &jw[ii + 1], &i__2, &len);
@@ -3814,12 +3828,12 @@ L160:
 /*     determine next pivot -- */
 
 	imax = ii;
-	xmax = (d__1 = w[imax], abs(d__1));
+	xmax = (d__1 = w[imax], fabs(d__1));
 	xmax0 = xmax;
 	icut = ii - 1 + *mbloc - (ii - 1) % *mbloc;
 	i__2 = ii + len - 1;
 	for (k = ii + 1; k <= i__2; ++k) {
-	    t = (d__1 = w[k], abs(d__1));
+	    t = (d__1 = w[k], fabs(d__1));
 	    if (t > xmax && t * *permtol > xmax0 && jw[k] <= icut) {
 		imax = k;
 		xmax = t;
@@ -3925,18 +3939,18 @@ L999:
 /* ----------------------------------------------------------------------- */
 } /* ilutp_ */
 
-/* Subroutine */ int qsplit_(doublereal *a, integer *ind, integer *n, integer 
+/* Subroutine */ int qsplit_(real_number *a, integer *ind, integer *n, integer
 	*ncut)
 {
     /* System generated locals */
     integer i__1;
-    doublereal d__1;
+    real_number d__1;
 
     /* Local variables */
     static integer j, mid;
-    static doublereal tmp;
+    static real_number tmp;
     static integer last, itmp, first;
-    static doublereal abskey;
+    static real_number abskey;
 
 /* ----------------------------------------------------------------------- */
 /*     does a quick-sort split of a real array. */
@@ -3964,10 +3978,10 @@ L999:
 
 L1:
     mid = first;
-    abskey = (d__1 = a[mid], abs(d__1));
+    abskey = (d__1 = a[mid], fabs(d__1));
     i__1 = last;
     for (j = first + 1; j <= i__1; ++j) {
-	if ((d__1 = a[j], abs(d__1)) > abskey) {
+	if ((d__1 = a[j], fabs(d__1)) > abskey) {
 	    ++mid;
 /*     interchange */
 	    tmp = a[mid];
@@ -4002,11 +4016,12 @@ L1:
     }
     goto L1;
 /* ----------------end-of-qsplit------------------------------------------ */
+    return 0;
 /* ----------------------------------------------------------------------- */
 } /* qsplit_ */
 
-/* Subroutine */ int lusol_(integer *n, doublereal *y, doublereal *x, 
-	doublereal *alu, integer *jlu, integer *ju)
+/* Subroutine */ int lusol_(integer *n, real_number *y, real_number *x,
+	real_number *alu, integer *jlu, integer *ju)
 {
     /* System generated locals */
     integer i__1, i__2;
@@ -4247,7 +4262,7 @@ L1:
     extern /* Subroutine */ int add_lvst__(integer *, integer *, integer *, 
 	    integer *, integer *, integer *, integer *, integer *);
     static integer j, ii, nod, iend, istart;
-    static logical permut;
+    static integer permut;
 
 /* ----------------------------------------------------------------------- */
 /* finds the level-structure (breadth-first-search or CMK) ordering for a */
@@ -4453,7 +4468,7 @@ L2:
     nsiz = levels[*nlev + 1] - levels[1];
 /* Computing MAX */
     i__1 = 1, i__2 = *ip - *ndom + 1;
-    psiz = (nsiz - ib) / max(i__1,i__2) + 1;
+    psiz = (nsiz - ib) / MAX(i__1,i__2) + 1;
     mapptr[*ndom] = ib;
     ktr = 0;
     i__1 = *nlev;
@@ -4471,7 +4486,7 @@ L2:
 		mapptr[*ndom] = ib;
 /* Computing MAX */
 		i__3 = 1, i__4 = *ip - *ndom + 1;
-		psiz = (nsiz - ib) / max(i__3,i__4) + 1;
+		psiz = (nsiz - ib) / MAX(i__3,i__4) + 1;
 		ktr = 0;
 	    }
 
@@ -4608,8 +4623,8 @@ L1:
 /* ----------------------------------------------------------------------c */
 /*     Non-SPARSKIT utility routine */
 /* ----------------------------------------------------------------------c */
-/* Subroutine */ int atob_(integer *n, doublereal *a, integer *ja, integer *
-	ia, doublereal *b, integer *jb, integer *ib)
+/* Subroutine */ int atob_(integer *n, real_number *a, integer *ja, integer *
+	ia, real_number *b, integer *jb, integer *ib)
 {
     /* System generated locals */
     integer i__1;

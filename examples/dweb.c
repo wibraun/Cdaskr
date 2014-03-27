@@ -1,28 +1,22 @@
 /* dweb.f -- translated by f2c (version 20090411).
-   You must link the resulting object file with libf2c:
-	on Microsoft Windows system, link with libf2c.lib;
-	on Linux or Unix systems, link with .../path/to/libf2c.a -lm
-	or, if you install libf2c.a in a standard place, with -lf2c -lm
-	-- in that order, at the end of the command line, as in
-		cc *.o -lf2c -lm
-	Source for libf2c is in /netlib/f2c/libf2c.zip, e.g.,
-
-		http://www.netlib.org/f2c/libf2c.zip
 */
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
 
-#include "f2c.h"
+#include "../solver/ddaskr_types.h"
 
 /* Common Block Declarations */
 
 struct {
-    doublereal aa, ee, gg, bb, dprey, dpred;
+    real_number aa, ee, gg, bb, dprey, dpred;
 } ppar1_;
 
 #define ppar1_1 ppar1_
 
 struct {
     integer np, ns;
-    doublereal ax, ay, acoef[4]	/* was [2][2] */, bcoef[2], dx, dy, alph, 
+    real_number ax, ay, acoef[4]	/* was [2][2] */, bcoef[2], dx, dy, alph,
 	    beta, fpi, diff[2], cox[2], coy[2];
     integer mx, my, mxns;
 } ppar2_;
@@ -146,126 +140,104 @@ static integer c__1640 = 1640;
 
 /* ***END PROLOGUE  DWEB */
 
-/* Main program */ int MAIN__(void)
+/* Main program */ int main(void)
 {
     /* Initialized data */
 
-    static integer lout = 9;
     static integer lcout = 10;
 
     /* Format strings */
-    static char fmt_20[] = "(\002 DWEB: Example program for DDASKR packag"
-	    "e\002//\002 Food web problem with NS species, NS =\002,i4/\002 P"
-	    "redator-prey interaction and diffusion on a 2-D square\002/)";
-    static char fmt_25[] = "(\002 Matrix parameters..  a =\002,e12.4,\002   "
-	    "e =\002,e12.4,\002   g =\002,e12.4/21x,\002 b parameter =\002,e1"
-	    "2.4//\002 Diffusion coefficients.. dprey =\002,e12.4,\002   dpre"
-	    "d =\002,e12.4//\002 Rate parameters alpha =\002,e12.4,\002 and b"
-	    "eta =\002,e12.4/)";
-    static char fmt_30[] = "(\002 Mesh dimensions (MX,MY) =\002,2i4,5x,\002 "
-	    "Total system size is NEQ =\002,i7/)";
-    static char fmt_35[] = "(\002 Root function is R(Y) = average(c1) - 2"
-	    "0\002/)";
-    static char fmt_70[] = "(\002 Tolerance parameters.. RTOL =\002,e10.2"
-	    ",\002   ATOL =\002,e10.2//\002 Internal I.C. calculation flag IN"
-	    "FO(11) =\002,i2,\002   (0 = off, 1 = on)\002/\002 Predator I.C. "
-	    "guess =\002,e10.2//\002 Alternate error test flag INFO(16) =\002"
-	    ",i2,\002  (0 = off, 1 = on)\002)";
-    static char fmt_80[] = "(//80(\002.\002)//\002 Linear solver method flag"
-	    " INFO(12) =\002,i2,\002   (0 = direct, 1 = Krylov)\002/)";
-    static char fmt_90[] = "(\002 Difference-quotient banded Jacobian,\002"
-	    ",\002 half-bandwidths =\002,i4)";
-    static char fmt_100[] = "(\002 Preconditioner flag is JPRE =\002,i3/\002"
-	    "  (1 = reaction factor A_R, 2 = spatial factor A_S,\002,\002 3 ="
-	    " A_S*A_R, 4 = A_R*A_S )\002/)";
-    static char fmt_110[] = "(\002 No block-grouping in reaction factor\002)";
-    static char fmt_120[] = "(\002 Block-grouping in reaction factor\002/"
-	    "\002 Number of groups =\002,i5,\002   (NGX by NGY, NGX =\002,i3"
-	    ",\002,  NGY =\002,i3,\002)\002)";
-    static char fmt_140[] = "(//\002   t\002,12x,\002Ave.c1  NSTEP  NRE  NNI"
-	    "  NLI  NPE  NQ\002,4x,\002H\002,10x,\002AVLIN\002)";
-    static char fmt_160[] = "(e13.5,f10.5,i5,i6,3i5,i4,e11.2,f9.4)";
-    static char fmt_165[] = "(15x,\002*****   Root found, JROOT =\002,i3)";
-    static char fmt_170[] = "(//\002 Final time reached =\002,e12.4//)";
-    static char fmt_220[] = "(//\002 Final statistics for this run..\002/"
-	    "\002 RWORK size =\002,i8,\002   IWORK size =\002,i6/\002 Number "
-	    "of time steps            =\002,i5/\002 Number of residual evalua"
-	    "tions  =\002,i5/\002 Number of root fn. evaluations  =\002,i5"
-	    "/\002 Number of Jac. or prec. evals.  =\002,i5/\002 Number of pr"
-	    "econditioner solves =\002,i5/\002 Number of nonlinear iterations"
-	    "  =\002,i5/\002 Number of linear iterations     =\002,i5/\002 Av"
-	    "erage Krylov subspace dimension =\002,f8.4/i3,\002 nonlinear con"
-	    "v. failures,\002,i5,\002 linear conv. failures\002)";
+    static char fmt_20[] = " DWEB: Example program for DDASKR package\n\n"
+    	" Food web problem with NS species, NS =%4d\n"
+    	" Predator-prey interaction and diffusion on a 2-D square\n";
+    static char fmt_25[] =
+    	" Matrix parameters..  a =%e12.4E   e =%e12.4E   g =%e12.4E\n"
+    	" 					   b parameter =%12.4E\n"
+	    " Diffusion coefficients.. dprey =%e12.4E   dpred =%e12.4E\n"
+    	" Rate parameters alpha =%e12.4E  and beta =%e12.4E\n";
+    static char fmt_30[] = " Mesh dimensions (MX,MY) =%4d %4d     "
+    		"Total system size is NEQ =%7d\n";
+    static char fmt_35[] = " Root function is R(Y) = average(c1) - 20\n";
+    static char fmt_70[] =
+    	" Tolerance parameters.. RTOL =%10.2E   ATOL =%10.2E\n"
+    	" Internal I.C. calculation flag INFO(11) =%2d  (0 = off, 1 = on)\n"
+    	" Predator I.C. guess =%10.2E\n"
+    	" Alternate error test flag INFO(16) =%2d  (0 = off, 1 = on)\n";
+    static char fmt_80[] =
+    	"\n--------------------------------------------------------------------------------\n"
+    	" Linear solver method flag INFO(12) =%2d   (0 = direct, 1 = Krylov)\n";
+    static char fmt_90[] = " Difference-quotient banded Jacobian, half-bandwidths =%4d\n";
+    static char fmt_100[] = " Preconditioner flag is JPRE =%3d\n"
+    	"  (1 = reaction factor A_R, 2 = spatial factor A_S, 3 ="
+	    " A_S*A_R, 4 = A_R*A_S )\n";
+    static char fmt_110[] = " No block-grouping in reaction factor\n";
+    static char fmt_120[] = " Block-grouping in reaction factor\n"
+	    " Number of groups =%5d   (NGX by NGY, NGX =%3d,  NGY =%3d)\n";
+    static char fmt_140[] = "\n   t             Ave.c1   NSTEP   NRE   NNI   NLI "
+    		"  NPE   NQ     H          AVLIN\n";
+    static char fmt_160[] = "%13.5E %10.5f %5d %6d %5d %5d %5d %4d %11.2E %9.4f\n";
+    static char fmt_165[] = "\t\t*****   Root found, JROOT =%3d\n";
+    static char fmt_170[] = "\n\n Final time reached =%12.4E\n\n";
+    static char fmt_220[] = "\n\n Final statistics for this run..\n"
+	    "\tRWORK size =%8d   IWORK size =%6d\n"
+    	"\tNumber of time steps              =%5d\n"
+    	"\tNumber of residual evaluations    =%5d\n"
+    	"\tNumber of root fn. evaluations    =%5d\n"
+    	"\tNumber of Jac. or prec. evals.    =%5d\n"
+    	"\tNumber of preconditioner solves   =%5d\n"
+    	"\tNumber of nonlinear iterations    =%5d\n"
+    	"\tNumber of linear iterations       =%5d\n"
+    	"\tAverage Krylov subspace dimension =%8.4F\n"
+    	"\t%3d nonlinear conv. failures, %5d linear conv. failures\n";
+
 
     /* System generated locals */
     integer i__1;
-    doublereal d__1;
-    olist o__1;
-
-    /* Builtin functions */
-    integer f_open(olist *), s_wsfe(cilist *), do_fio(integer *, char *, 
-	    ftnlen), e_wsfe(void);
-    /* Subroutine */ int s_stop(char *, ftnlen);
+    real_number d__1;
 
     /* Local variables */
     static integer i__;
-    static doublereal t, cc[800];
+    static real_number t, cc[800];
     static integer ng;
-    static doublereal hu;
+    static real_number hu;
     static integer jbg, nli, neq, nni, nre, npe, nxg, nyg, nps, nrt, nst, nqu;
-    extern /* Subroutine */ int avc1_(doublereal *, doublereal *);
+    extern /* Subroutine */ int avc1_(real_number *, real_number *);
     static integer idid, ncfl, ncfn, info[20], ipar[2], meth;
-    static doublereal atol;
+    static real_number atol;
     static integer jpre;
-    static doublereal rpar[800];
+    static real_number rpar[800];
     static integer nrte;
-    static doublereal rtol;
+    static real_number rtol;
     static integer iout, nout;
-    static doublereal tout, c1ave;
+    static real_number tout, c1ave;
     static integer imod3;
     extern /* Subroutine */ int jacrs_();
-    extern /* Subroutine */ int cinit_(doublereal *, doublereal *, doublereal 
-	    *, doublereal *), setid_(integer *, integer *, integer *, integer 
+    extern /* Subroutine */ int cinit_(real_number *, real_number *, real_number
+	    *, real_number *), setid_(integer *, integer *, integer *, integer
 	    *, integer *, integer *);
-    static doublereal avlin;
+    static real_number avlin;
     static integer leniw;
     extern /* Subroutine */ int rtweb_();
     static integer lenrw, iwork[1640], jroot;
-    static doublereal rwork[104883];
+    static real_number rwork[104883];
     extern /* Subroutine */ int dgset2_(integer *, integer *, integer *, 
 	    integer *, integer *, integer *, integer *, integer *), dmset2_(
 	    integer *, integer *, integer *, integer *, integer *, integer *);
     static integer nlidif;
-    static doublereal predic;
+    static real_number predic;
     static integer nnidif;
-    extern /* Subroutine */ int ddaskr_(U_fp, integer *, doublereal *, 
-	    doublereal *, doublereal *, doublereal *, integer *, doublereal *,
-	     doublereal *, integer *, doublereal *, integer *, integer *, 
-	    integer *, doublereal *, integer *, U_fp, U_fp, U_fp, integer *, 
+    extern /* Subroutine */ int ddaskr_(Unknown_fp, integer *, real_number *,
+	    real_number *, real_number *, real_number *, integer *, real_number *,
+	     real_number *, integer *, real_number *, integer *, integer *,
+	    integer *, real_number *, integer *, Unknown_fp, Unknown_fp, Unknown_fp, integer *,
 	    integer *);
     extern /* Subroutine */ int resweb_();
-    extern /* Subroutine */ int setpar_(void), outweb_(doublereal *, 
-	    doublereal *, integer *, integer *, integer *, integer *);
+    extern /* Subroutine */ int setpar_(void), outweb_(real_number *,
+	    real_number *, integer *, integer *, integer *, integer *, FILE*);
     extern /* Subroutine */ int psolrs_();
-    static doublereal ccprime[800];
+    static real_number ccprime[800];
 
-    /* Fortran I/O blocks */
-    static cilist io___6 = { 0, 0, 0, fmt_20, 0 };
-    static cilist io___7 = { 0, 0, 0, fmt_25, 0 };
-    static cilist io___8 = { 0, 0, 0, fmt_30, 0 };
-    static cilist io___9 = { 0, 0, 0, fmt_35, 0 };
-    static cilist io___14 = { 0, 0, 0, fmt_70, 0 };
-    static cilist io___19 = { 0, 0, 0, fmt_80, 0 };
-    static cilist io___21 = { 0, 0, 0, fmt_90, 0 };
-    static cilist io___23 = { 0, 0, 0, fmt_100, 0 };
-    static cilist io___24 = { 0, 0, 0, fmt_110, 0 };
-    static cilist io___28 = { 0, 0, 0, fmt_120, 0 };
-    static cilist io___36 = { 0, 0, 0, fmt_140, 0 };
-    static cilist io___51 = { 0, 0, 0, fmt_160, 0 };
-    static cilist io___52 = { 0, 0, 0, fmt_165, 0 };
-    static cilist io___53 = { 0, 0, 0, fmt_170, 0 };
-    static cilist io___60 = { 0, 0, 0, fmt_220, 0 };
-
+    FILE* outFilewc, *outFilewd;
 
 
 /* Dimension solution arrays and work arrays. */
@@ -296,26 +268,8 @@ static integer c__1640 = 1640;
 /* Set output unit numbers for main output and tabulated solution. */
 
 /* Open output files. */
-    o__1.oerr = 0;
-    o__1.ounit = lout;
-    o__1.ofnmlen = 5;
-    o__1.ofnm = "wdout";
-    o__1.orl = 0;
-    o__1.osta = "unknown";
-    o__1.oacc = 0;
-    o__1.ofm = 0;
-    o__1.oblnk = 0;
-    f_open(&o__1);
-    o__1.oerr = 0;
-    o__1.ounit = lcout;
-    o__1.ofnmlen = 6;
-    o__1.ofnm = "wccout";
-    o__1.orl = 0;
-    o__1.osta = "unknown";
-    o__1.oacc = 0;
-    o__1.ofm = 0;
-    o__1.oblnk = 0;
-    f_open(&o__1);
+	outFilewc = fopen("wccout", "w");
+	outFilewd = fopen("wdout", "w");
 
 /* Call SETPAR to set basic problem parameters. */
     setpar_();
@@ -323,8 +277,8 @@ static integer c__1640 = 1640;
 /* Set remaining problem parameters. */
     neq = ppar2_1.ns * ppar2_1.mx * ppar2_1.my;
     ppar2_1.mxns = ppar2_1.mx * ppar2_1.ns;
-    ppar2_1.dx = ppar2_1.ax / (real) (ppar2_1.mx - 1);
-    ppar2_1.dy = ppar2_1.ay / (real) (ppar2_1.my - 1);
+    ppar2_1.dx = ppar2_1.ax / (real_number) (ppar2_1.mx - 1);
+    ppar2_1.dy = ppar2_1.ay / (real_number) (ppar2_1.my - 1);
     i__1 = ppar2_1.ns;
     for (i__ = 1; i__ <= i__1; ++i__) {
 /* Computing 2nd power */
@@ -339,30 +293,14 @@ static integer c__1640 = 1640;
 /* Set NRT = number of root functions. */
     nrt = 1;
 
-    io___6.ciunit = lout;
-    s_wsfe(&io___6);
-    do_fio(&c__1, (char *)&ppar2_1.ns, (ftnlen)sizeof(integer));
-    e_wsfe();
-    io___7.ciunit = lout;
-    s_wsfe(&io___7);
-    do_fio(&c__1, (char *)&ppar1_1.aa, (ftnlen)sizeof(doublereal));
-    do_fio(&c__1, (char *)&ppar1_1.ee, (ftnlen)sizeof(doublereal));
-    do_fio(&c__1, (char *)&ppar1_1.gg, (ftnlen)sizeof(doublereal));
-    do_fio(&c__1, (char *)&ppar1_1.bb, (ftnlen)sizeof(doublereal));
-    do_fio(&c__1, (char *)&ppar1_1.dprey, (ftnlen)sizeof(doublereal));
-    do_fio(&c__1, (char *)&ppar1_1.dpred, (ftnlen)sizeof(doublereal));
-    do_fio(&c__1, (char *)&ppar2_1.alph, (ftnlen)sizeof(doublereal));
-    do_fio(&c__1, (char *)&ppar2_1.beta, (ftnlen)sizeof(doublereal));
-    e_wsfe();
-    io___8.ciunit = lout;
-    s_wsfe(&io___8);
-    do_fio(&c__1, (char *)&ppar2_1.mx, (ftnlen)sizeof(integer));
-    do_fio(&c__1, (char *)&ppar2_1.my, (ftnlen)sizeof(integer));
-    do_fio(&c__1, (char *)&neq, (ftnlen)sizeof(integer));
-    e_wsfe();
-    io___9.ciunit = lout;
-    s_wsfe(&io___9);
-    e_wsfe();
+    fprintf(outFilewd, fmt_20, ppar2_1.ns);
+
+    fprintf(outFilewd, fmt_25, ppar1_1.aa, ppar1_1.ee, ppar1_1.gg, ppar1_1.bb, ppar1_1.dprey,
+    		ppar1_1.dpred, ppar2_1.alph, ppar2_1.beta);
+
+    fprintf(outFilewd, fmt_30, ppar2_1.mx, ppar2_1.my, neq);
+
+    fputs(fmt_35, outFilewd);
 
 /* Here set the flat initial guess for the predators. */
     predic = 1e5;
@@ -393,14 +331,7 @@ static integer c__1640 = 1640;
     rtol = 1e-5;
     atol = rtol;
 
-    io___14.ciunit = lout;
-    s_wsfe(&io___14);
-    do_fio(&c__1, (char *)&rtol, (ftnlen)sizeof(doublereal));
-    do_fio(&c__1, (char *)&atol, (ftnlen)sizeof(doublereal));
-    do_fio(&c__1, (char *)&info[10], (ftnlen)sizeof(integer));
-    do_fio(&c__1, (char *)&predic, (ftnlen)sizeof(doublereal));
-    do_fio(&c__1, (char *)&info[15], (ftnlen)sizeof(integer));
-    e_wsfe();
+    fprintf(outFilewd, fmt_70, rtol, atol, info[10], predic, info[15]);
 
 /* Set NOUT = number of output times. */
     nout = 18;
@@ -416,84 +347,67 @@ static integer c__1640 = 1640;
 /* Reset INFO(1) = 0 and INFO(11) = 1. */
 
     for (meth = 0; meth <= 2; ++meth) {
-	info[11] = min(meth,1);
-	info[0] = 0;
-	info[10] = 1;
-	jbg = meth - 1;
-	ipar[1] = jbg;
+		info[11] = MIN(meth,1);
+		info[0] = 0;
+		info[10] = 1;
+		jbg = meth - 1;
+		ipar[1] = jbg;
 
-	io___19.ciunit = lout;
-	s_wsfe(&io___19);
-	do_fio(&c__1, (char *)&info[11], (ftnlen)sizeof(integer));
-	e_wsfe();
+		fprintf(outFilewd, fmt_80, info[11]);
 
 /* In the case of the direct method, set INFO(6) = 1 to signal a banded */
 /* Jacobian, set IWORK(1) = IWORK(2) = MX*NS, the half-bandwidth, and */
 /* call SETID to set the IWORK segment ID indicating the differential */
 /* and algebraic components. */
-	if (info[11] == 0) {
-	    info[5] = 1;
-	    iwork[0] = ppar2_1.mxns;
-	    iwork[1] = ppar2_1.mxns;
-	    setid_(&ppar2_1.mx, &ppar2_1.my, &ppar2_1.ns, &ppar2_1.np, &c__40,
-		     iwork);
-	    io___21.ciunit = lout;
-	    s_wsfe(&io___21);
-	    do_fio(&c__1, (char *)&ppar2_1.mxns, (ftnlen)sizeof(integer));
-	    e_wsfe();
-	}
+		if (info[11] == 0) {
+			info[5] = 1;
+			iwork[0] = ppar2_1.mxns;
+			iwork[1] = ppar2_1.mxns;
+			setid_(&ppar2_1.mx, &ppar2_1.my, &ppar2_1.ns, &ppar2_1.np, &c__40,
+				 iwork);
+			fprintf(outFilewd, fmt_90, ppar2_1.mxns);
+		}
 
 /* In the case of the Krylov method, set and print various */
 /* preconditioner parameters. */
-	if (info[11] == 1) {
+		if (info[11] == 1) {
 /* First set the preconditioner choice JPRE. */
 /*  JPRE = 1 means reaction-only (block-diagonal) factor A_R */
 /*  JPRE = 2 means spatial factor (Gauss-Seidel) A_S */
 /*  JPRE = 3 means A_S * A_R */
 /*  JPRE = 4 means A_R * A_S */
 /* Use IPAR to communicate JPRE to the preconditioner solve routine. */
-	    jpre = 3;
-	    ipar[0] = jpre;
-	    io___23.ciunit = lout;
-	    s_wsfe(&io___23);
-	    do_fio(&c__1, (char *)&jpre, (ftnlen)sizeof(integer));
-	    e_wsfe();
+			jpre = 3;
+			ipar[0] = jpre;
+			fprintf(outFilewd, fmt_100, jpre);
+
 /* Here call DMSET2 if JBG = 0, or DGSET2 if JBG = 1, to set the 2-D */
 /* mesh parameters and block-grouping data, and the IWORK segment ID */
 /* indicating the differential and algebraic components. */
-	    if (jbg == 0) {
-		dmset2_(&ppar2_1.mx, &ppar2_1.my, &ppar2_1.ns, &ppar2_1.np, &
-			c__40, iwork);
-		io___24.ciunit = lout;
-		s_wsfe(&io___24);
-		e_wsfe();
-	    }
-	    if (jbg == 1) {
-		nxg = 5;
-		nyg = 5;
-		ng = nxg * nyg;
-		dgset2_(&ppar2_1.mx, &ppar2_1.my, &ppar2_1.ns, &ppar2_1.np, &
-			nxg, &nyg, &c__40, iwork);
-		io___28.ciunit = lout;
-		s_wsfe(&io___28);
-		do_fio(&c__1, (char *)&ng, (ftnlen)sizeof(integer));
-		do_fio(&c__1, (char *)&nxg, (ftnlen)sizeof(integer));
-		do_fio(&c__1, (char *)&nyg, (ftnlen)sizeof(integer));
-		e_wsfe();
-	    }
-	}
+			if (jbg == 0) {
+				dmset2_(&ppar2_1.mx, &ppar2_1.my, &ppar2_1.ns, &ppar2_1.np, &
+						c__40, iwork);
+				fputs(fmt_110, outFilewd);
+			}
+			if (jbg == 1) {
+				nxg = 5;
+				nyg = 5;
+				ng = nxg * nyg;
+				dgset2_(&ppar2_1.mx, &ppar2_1.my, &ppar2_1.ns, &ppar2_1.np, &
+					nxg, &nyg, &c__40, iwork);
+				fprintf(outFilewd, fmt_120, ng, nxg, nyg);
+			}
+		}
 
 /* Set the initial T and TOUT, and call CINIT to set initial values. */
-	t = 0.;
-	tout = 1e-8;
-	cinit_(cc, ccprime, &predic, rpar);
+		t = 0.;
+		tout = 1e-8;
+		cinit_(cc, ccprime, &predic, rpar);
 
-	nli = 0;
-	nni = 0;
+		nli = 0;
+		nni = 0;
 
-	io___36.ciunit = lout;
-	s_wsfe(&io___36);
-	e_wsfe();
+		fprintf(outFilewd, fmt_140);
 
 /* Loop over output times and call DDASKR.  At each output time, */
 /* print average c1 value and performance data. */
@@ -501,115 +415,83 @@ static integer c__1640 = 1640;
 /* After the first call, reset INFO(11) = 0 and the initial TOUT. */
 /* If a root was found, we flag this, and return to the DDASKR call. */
 
-	i__1 = nout;
-	for (iout = 0; iout <= i__1; ++iout) {
+		i__1 = nout;
+		for (iout = 0; iout <= i__1; ++iout) {
 
-L150:
-	    ddaskr_((U_fp)resweb_, &neq, &t, cc, ccprime, &tout, info, &rtol, 
-		    &atol, &idid, rwork, &c_b58, iwork, &c__1640, rpar, ipar, 
-		    (U_fp)jacrs_, (U_fp)psolrs_, (U_fp)rtweb_, &nrt, &jroot);
+	L150:
+			ddaskr_((Unknown_fp)resweb_, &neq, &t, cc, ccprime, &tout, info, &rtol,
+				&atol, &idid, rwork, &c_b58, iwork, &c__1640, rpar, ipar,
+				(Unknown_fp)jacrs_, (Unknown_fp)psolrs_, (Unknown_fp)rtweb_, &nrt, &jroot);
 
-	    nst = iwork[10];
-	    nre = iwork[11];
-	    npe = iwork[12];
-	    nnidif = iwork[18] - nni;
-	    nni = iwork[18];
-	    nlidif = iwork[19] - nli;
-	    nli = iwork[19];
-	    nqu = iwork[7];
-	    hu = rwork[6];
-	    avlin = 0.;
-	    if (nnidif > 0) {
-		avlin = (real) nlidif / (real) nnidif;
-	    }
+			nst = iwork[10];
+			nre = iwork[11];
+			npe = iwork[12];
+			nnidif = iwork[18] - nni;
+			nni = iwork[18];
+			nlidif = iwork[19] - nli;
+			nli = iwork[19];
+			nqu = iwork[7];
+			hu = rwork[6];
+			avlin = 0.;
+			if (nnidif > 0) {
+			avlin = (real_number) nlidif / (real_number) nnidif;
+			}
 
-	    if (meth == 0) {
-		imod3 = iout - iout / 3 * 3;
-		if (imod3 == 0) {
-		    outweb_(&t, cc, &ppar2_1.ns, &ppar2_1.mx, &ppar2_1.my, &
-			    lcout);
-		}
-	    }
+			if (meth == 0) {
+			imod3 = iout - iout / 3 * 3;
+			if (imod3 == 0) {
+				outweb_(&t, cc, &ppar2_1.ns, &ppar2_1.mx, &ppar2_1.my, &
+					lcout, outFilewc);
+			}
+			}
 
-	    avc1_(cc, &c1ave);
-	    io___51.ciunit = lout;
-	    s_wsfe(&io___51);
-	    do_fio(&c__1, (char *)&t, (ftnlen)sizeof(doublereal));
-	    do_fio(&c__1, (char *)&c1ave, (ftnlen)sizeof(doublereal));
-	    do_fio(&c__1, (char *)&nst, (ftnlen)sizeof(integer));
-	    do_fio(&c__1, (char *)&nre, (ftnlen)sizeof(integer));
-	    do_fio(&c__1, (char *)&nni, (ftnlen)sizeof(integer));
-	    do_fio(&c__1, (char *)&nli, (ftnlen)sizeof(integer));
-	    do_fio(&c__1, (char *)&npe, (ftnlen)sizeof(integer));
-	    do_fio(&c__1, (char *)&nqu, (ftnlen)sizeof(integer));
-	    do_fio(&c__1, (char *)&hu, (ftnlen)sizeof(doublereal));
-	    do_fio(&c__1, (char *)&avlin, (ftnlen)sizeof(doublereal));
-	    e_wsfe();
+			avc1_(cc, &c1ave);
+			fprintf(outFilewd, fmt_160, t, c1ave, nst, nre, nni, nli, npe, nqu, hu, avlin);
 
-	    if (idid == 5) {
-		io___52.ciunit = lout;
-		s_wsfe(&io___52);
-		do_fio(&c__1, (char *)&jroot, (ftnlen)sizeof(integer));
-		e_wsfe();
-		goto L150;
-	    }
-	    if (idid < 0) {
-		io___53.ciunit = lout;
-		s_wsfe(&io___53);
-		do_fio(&c__1, (char *)&t, (ftnlen)sizeof(doublereal));
-		e_wsfe();
-		goto L210;
-	    }
+			if (idid == 5) {
+				fprintf(outFilewd, fmt_165, jroot);
+			goto L150;
+			}
+			if (idid < 0) {
+				fprintf(outFilewd, fmt_170, t);
+			goto L210;
+			}
 
-	    if (tout > .9) {
-		tout += 1.;
-	    }
-	    if (tout < .9) {
-		tout *= 10.;
-	    }
-	    if (iout == 0) {
-		info[10] = 0;
-		tout = 1e-8;
-		nli = 0;
-		nni = 0;
-	    }
+			if (tout > .9) {
+				tout += 1.;
+			}
+			if (tout < .9) {
+				tout *= 10.;
+			}
+			if (iout == 0) {
+				info[10] = 0;
+				tout = 1e-8;
+				nli = 0;
+				nni = 0;
+			}
 /* L200: */
-	}
+		}
 
 L210:
-	lenrw = iwork[17];
-	leniw = iwork[16];
-	nst = iwork[10];
-	nre = iwork[11];
-	npe = iwork[12];
-	nni = iwork[18];
-	nli = iwork[19];
-	nps = iwork[20];
-	if (nni > 0) {
-	    avlin = (real) nli / (real) nni;
-	}
-	ncfn = iwork[14];
-	ncfl = iwork[15];
-	nrte = iwork[35];
-	io___60.ciunit = lout;
-	s_wsfe(&io___60);
-	do_fio(&c__1, (char *)&lenrw, (ftnlen)sizeof(integer));
-	do_fio(&c__1, (char *)&leniw, (ftnlen)sizeof(integer));
-	do_fio(&c__1, (char *)&nst, (ftnlen)sizeof(integer));
-	do_fio(&c__1, (char *)&nre, (ftnlen)sizeof(integer));
-	do_fio(&c__1, (char *)&nrte, (ftnlen)sizeof(integer));
-	do_fio(&c__1, (char *)&npe, (ftnlen)sizeof(integer));
-	do_fio(&c__1, (char *)&nps, (ftnlen)sizeof(integer));
-	do_fio(&c__1, (char *)&nni, (ftnlen)sizeof(integer));
-	do_fio(&c__1, (char *)&nli, (ftnlen)sizeof(integer));
-	do_fio(&c__1, (char *)&avlin, (ftnlen)sizeof(doublereal));
-	do_fio(&c__1, (char *)&ncfn, (ftnlen)sizeof(integer));
-	do_fio(&c__1, (char *)&ncfl, (ftnlen)sizeof(integer));
-	e_wsfe();
+		lenrw = iwork[17];
+		leniw = iwork[16];
+		nst = iwork[10];
+		nre = iwork[11];
+		npe = iwork[12];
+		nni = iwork[18];
+		nli = iwork[19];
+		nps = iwork[20];
+		if (nni > 0) {
+			avlin = (real_number) nli / (real_number) nni;
+		}
+		ncfn = iwork[14];
+		ncfl = iwork[15];
+		nrte = iwork[35];
+		fprintf(outFilewd, fmt_220, lenrw, leniw, nst, nre, nrte, npe, nps, nni, nli, avlin, ncfn, ncfl);
 
 /* L300: */
     }
-    s_stop("", (ftnlen)0);
+    exit(0);
 /* ------  End of main program for DWEB example program ------------------ */
     return 0;
 } /* MAIN__ */
@@ -621,7 +503,7 @@ L210:
 
     /* Local variables */
     static integer i__, j;
-    static doublereal pi;
+    static real_number pi;
 
 /* ----------------------------------------------------------------------- */
 /* This routine sets the basic problem parameters, namely */
@@ -711,24 +593,21 @@ L210:
 /* ------------  End of Subroutine SETID  -------------------------------- */
 } /* setid_ */
 
-/* Subroutine */ int cinit_(doublereal *cc, doublereal *ccprime, doublereal *
-	predic, doublereal *rpar)
+/* Subroutine */ int cinit_(real_number *cc, real_number *ccprime, real_number *
+	predic, real_number *rpar)
 {
     /* System generated locals */
     integer i__1, i__2, i__3;
 
-    /* Builtin functions */
-    double sin(doublereal);
-
     /* Local variables */
     static integer i__;
-    static doublereal t, x, y;
+    static real_number t, x, y;
     static integer jx, jy;
-    static doublereal fac;
+    static real_number fac;
     static integer npp1, ioff;
-    extern /* Subroutine */ int fweb_(doublereal *, doublereal *, doublereal *
-	    , doublereal *);
-    static doublereal argx, argy;
+    extern /* Subroutine */ int fweb_(real_number *, real_number *, real_number *
+	    , real_number *);
+    static real_number argx, argy;
     static integer iyoff;
 
 /* ----------------------------------------------------------------------- */
@@ -745,12 +624,12 @@ L210:
     npp1 = ppar2_1.np + 1;
     i__1 = ppar2_1.my;
     for (jy = 1; jy <= i__1; ++jy) {
-	y = (real) (jy - 1) * ppar2_1.dy;
+	y = (real_number) (jy - 1) * ppar2_1.dy;
 	argy = y * 16. * y * (ppar2_1.ay - y) * (ppar2_1.ay - y);
 	iyoff = ppar2_1.mxns * (jy - 1);
 	i__2 = ppar2_1.mx;
 	for (jx = 1; jx <= i__2; ++jx) {
-	    x = (real) (jx - 1) * ppar2_1.dx;
+	    x = (real_number) (jx - 1) * ppar2_1.dx;
 	    argx = x * 16. * x * (ppar2_1.ax - x) * (ppar2_1.ax - x);
 	    ioff = iyoff + ppar2_1.ns * (jx - 1);
 	    fac = ppar2_1.alph * x * y + 1. + ppar2_1.beta * sin(ppar2_1.fpi *
@@ -758,7 +637,7 @@ L210:
 	    i__3 = ppar2_1.np;
 	    for (i__ = 1; i__ <= i__3; ++i__) {
 /* L10: */
-		cc[ioff + i__] = (real) i__ * argx * argy + 10.;
+		cc[ioff + i__] = (real_number) i__ * argx * argy + 10.;
 	    }
 	    i__3 = ppar2_1.ns;
 	    for (i__ = npp1; i__ <= i__3; ++i__) {
@@ -793,31 +672,24 @@ L210:
 /* ------------  End of Subroutine CINIT  -------------------------------- */
 } /* cinit_ */
 
-/* Subroutine */ int outweb_(doublereal *t, doublereal *c__, integer *ns, 
-	integer *mx, integer *my, integer *lun)
+/* Subroutine */ int outweb_(real_number *t, real_number *c__, integer *ns,
+	integer *mx, integer *my, integer *lun, FILE* outFile)
 {
     /* Format strings */
-    static char fmt_10[] = "(/1x,79(\002-\002)/30x,\002At time t = \002,e16."
-	    "8/1x,79(\002-\002))";
-    static char fmt_20[] = "(\002 the species c(\002,i2,\002) values are "
-	    "\002)";
-    static char fmt_25[] = "(6(1x,g12.6))";
-    static char fmt_35[] = "(1x,79(\002-\002),/)";
+    static char fmt_10[] =
+    	" -------------------------------------------------------------------------------\n"
+    	"                        At time t = %16.E\n"
+    	" -------------------------------------------------------------------------------\n";
+    static char fmt_20[] = " the species c(%2d) values are \n";
+    static char fmt_25[] = " %12.6g ";
+    static char fmt_35[] =
+    	" -------------------------------------------------------------------------------\n";
 
     /* System generated locals */
     integer c_dim1, c_dim2, c_offset, i__1, i__2;
 
-    /* Builtin functions */
-    integer s_wsfe(cilist *), do_fio(integer *, char *, ftnlen), e_wsfe(void);
-
     /* Local variables */
     static integer i__, jx, jy;
-
-    /* Fortran I/O blocks */
-    static cilist io___82 = { 0, 0, 0, fmt_10, 0 };
-    static cilist io___84 = { 0, 0, 0, fmt_20, 0 };
-    static cilist io___86 = { 0, 0, 0, fmt_25, 0 };
-    static cilist io___88 = { 0, 0, 0, fmt_35, 0 };
 
 
 /* ----------------------------------------------------------------------- */
@@ -832,31 +704,23 @@ L210:
     c__ -= c_offset;
 
     /* Function Body */
-    io___82.ciunit = *lun;
-    s_wsfe(&io___82);
-    do_fio(&c__1, (char *)&(*t), (ftnlen)sizeof(doublereal));
-    e_wsfe();
+    fprintf(outFile, fmt_10, *t);
 
     i__1 = *ns;
     for (i__ = 1; i__ <= i__1; ++i__) {
-	io___84.ciunit = *lun;
-	s_wsfe(&io___84);
-	do_fio(&c__1, (char *)&i__, (ftnlen)sizeof(integer));
-	e_wsfe();
-	for (jy = *my; jy >= 1; --jy) {
-	    io___86.ciunit = *lun;
-	    s_wsfe(&io___86);
-	    i__2 = *mx;
-	    for (jx = 1; jx <= i__2; ++jx) {
-		do_fio(&c__1, (char *)&c__[i__ + (jx + jy * c_dim2) * c_dim1],
-			 (ftnlen)sizeof(doublereal));
-	    }
-	    e_wsfe();
+    	fprintf(outFile, fmt_20, i__);
+		for (jy = *my; jy >= 1; --jy) {
+			i__2 = *mx;
+			for (jx = 1; jx <= i__2; ++jx) {
+				fprintf(outFile, fmt_25, c__[i__ + (jx + jy * c_dim2) * c_dim1]);
+				if (jx % 6 == 0){
+					fprintf(outFile, "\n");
+				}
+			}
+			fprintf(outFile, "\n");
 /* L30: */
-	}
-	io___88.ciunit = *lun;
-	s_wsfe(&io___88);
-	e_wsfe();
+		}
+		fputs(fmt_35, outFile);
 /* L40: */
     }
 
@@ -864,8 +728,8 @@ L210:
 /* ------------  End of Subroutine OUTWEB  ------------------------------- */
 } /* outweb_ */
 
-/* Subroutine */ int resweb_(doublereal *t, doublereal *u, doublereal *uprime,
-	 doublereal *cj, doublereal *delta, integer *ires, doublereal *rpar, 
+/* Subroutine */ int resweb_(real_number *t, real_number *u, real_number *uprime,
+	 real_number *cj, real_number *delta, integer *ires, real_number *rpar,
 	integer *ipar)
 {
     /* System generated locals */
@@ -873,8 +737,8 @@ L210:
 
     /* Local variables */
     static integer i__, jx, jy, ic0, ici;
-    extern /* Subroutine */ int fweb_(doublereal *, doublereal *, doublereal *
-	    , doublereal *);
+    extern /* Subroutine */ int fweb_(real_number *, real_number *, real_number *
+	    , real_number *);
     static integer iyoff;
 
 /* ----------------------------------------------------------------------- */
@@ -918,20 +782,20 @@ L210:
 /* ------------  End of Subroutine RESWEB  ------------------------------- */
 } /* resweb_ */
 
-/* Subroutine */ int fweb_(doublereal *t, doublereal *cc, doublereal *crate, 
-	doublereal *rpar)
+/* Subroutine */ int fweb_(real_number *t, real_number *cc, real_number *crate,
+	real_number *rpar)
 {
     /* System generated locals */
     integer i__1, i__2, i__3;
 
     /* Local variables */
     static integer i__, ic, jx, jy, ici;
-    extern /* Subroutine */ int webr_(doublereal *, integer *, integer *, 
-	    doublereal *, doublereal *);
+    extern /* Subroutine */ int webr_(real_number *, integer *, integer *,
+	    real_number *, real_number *);
     static integer idxl, idyl, idxu, idyu;
-    static doublereal dcxli, dcyli;
+    static real_number dcxli, dcyli;
     static integer iyoff;
-    static doublereal dcyui, dcxui;
+    static real_number dcyui, dcxui;
 
 /* ----------------------------------------------------------------------- */
 /* This routine computes the right-hand sides of all the equations */
@@ -992,20 +856,20 @@ L210:
 /* ------------  End of Subroutine FWEB  --------------------------------- */
 } /* fweb_ */
 
-/* Subroutine */ int webr_(doublereal *t, integer *jx, integer *jy, 
-	doublereal *c__, doublereal *crate)
+/* Subroutine */ int webr_(real_number *t, integer *jx, integer *jy,
+	real_number *c__, real_number *crate)
 {
     /* System generated locals */
     integer i__1;
 
     /* Builtin functions */
-    double sin(doublereal);
+    double sin(real_number);
 
     /* Local variables */
     static integer i__, j;
-    static doublereal x, y, fac;
-    extern /* Subroutine */ int daxpy_(integer *, doublereal *, doublereal *, 
-	    integer *, doublereal *, integer *);
+    static real_number x, y, fac;
+    extern /* Subroutine */ int daxpy_(integer *, real_number *, real_number *,
+	    integer *, real_number *, integer *);
 
 /* ----------------------------------------------------------------------- */
 /* This routine computes one block of the interaction term R of the */
@@ -1017,8 +881,8 @@ L210:
     --c__;
 
     /* Function Body */
-    y = (real) (*jy - 1) * ppar2_1.dy;
-    x = (real) (*jx - 1) * ppar2_1.dx;
+    y = (real_number) (*jy - 1) * ppar2_1.dy;
+    x = (real_number) (*jx - 1) * ppar2_1.dx;
     i__1 = ppar2_1.ns;
     for (i__ = 1; i__ <= i__1; ++i__) {
 /* L10: */
@@ -1041,19 +905,19 @@ L210:
 /* ------------  End of Subroutine WEBR  --------------------------------- */
 } /* webr_ */
 
-/* Subroutine */ int jacrs_(doublereal *res, integer *ires, integer *neq, 
-	doublereal *t, doublereal *cc, doublereal *ccprime, doublereal *rewt, 
-	doublereal *savr, doublereal *wk, doublereal *h__, doublereal *cj, 
-	doublereal *wp, integer *iwp, integer *ier, doublereal *rpar, integer 
+/* Subroutine */ int jacrs_(real_number *res, integer *ires, integer *neq,
+	real_number *t, real_number *cc, real_number *ccprime, real_number *rewt,
+	real_number *savr, real_number *wk, real_number *h__, real_number *cj,
+	real_number *wp, integer *iwp, integer *ier, real_number *rpar, integer
 	*ipar)
 {
     static integer jbg;
-    extern /* Subroutine */ int webr_(doublereal *, integer *, integer *, 
-	    doublereal *, doublereal *), drbdja_(doublereal *, doublereal *, 
-	    doublereal *, S_fp, doublereal *, doublereal *, doublereal *, 
-	    doublereal *, integer *, integer *), drbgja_(doublereal *, 
-	    doublereal *, doublereal *, S_fp, doublereal *, doublereal *, 
-	    doublereal *, doublereal *, integer *, integer *);
+    extern /* Subroutine */ int webr_(real_number *, integer *, integer *,
+	    real_number *, real_number *), drbdja_(real_number *, real_number *,
+	    real_number *, Unknown_fp, real_number *, real_number *, real_number *,
+	    real_number *, integer *, integer *), drbgja_(real_number *,
+	    real_number *, real_number *, Unknown_fp, real_number *, real_number *,
+	    real_number *, real_number *, integer *, integer *);
 
 /* ----------------------------------------------------------------------- */
 /* This routine interfaces to Subroutine DRBDJA or Subroutine DRBGJA, */
@@ -1081,10 +945,10 @@ L210:
     /* Function Body */
     jbg = ipar[2];
     if (jbg == 0) {
-	drbdja_(t, &cc[1], &rpar[1], (S_fp)webr_, &wk[1], &rewt[1], cj, &wp[1]
+	drbdja_(t, &cc[1], &rpar[1], (Unknown_fp)webr_, &wk[1], &rewt[1], cj, &wp[1]
 		, &iwp[1], ier);
     } else {
-	drbgja_(t, &cc[1], &rpar[1], (S_fp)webr_, &wk[1], &rewt[1], cj, &wp[1]
+	drbgja_(t, &cc[1], &rpar[1], (Unknown_fp)webr_, &wk[1], &rewt[1], cj, &wp[1]
 		, &iwp[1], ier);
     }
 
@@ -1092,17 +956,17 @@ L210:
 /* ------------  End of Subroutine JACRS  -------------------------------- */
 } /* jacrs_ */
 
-/* Subroutine */ int psolrs_(integer *neq, doublereal *t, doublereal *cc, 
-	doublereal *ccprime, doublereal *savr, doublereal *wk, doublereal *cj,
-	 doublereal *wt, doublereal *wp, integer *iwp, doublereal *b, 
-	doublereal *eplin, integer *ier, doublereal *rpar, integer *ipar)
+/* Subroutine */ int psolrs_(integer *neq, real_number *t, real_number *cc,
+	real_number *ccprime, real_number *savr, real_number *wk, real_number *cj,
+	 real_number *wt, real_number *wp, integer *iwp, real_number *b,
+	real_number *eplin, integer *ier, real_number *rpar, integer *ipar)
 {
-    extern /* Subroutine */ int gs_(integer *, doublereal *, doublereal *, 
-	    doublereal *);
-    static doublereal hl0;
+    extern /* Subroutine */ int gs_(integer *, real_number *, real_number *,
+	    real_number *);
+    static real_number hl0;
     static integer jbg, jpre;
-    extern /* Subroutine */ int drbdps_(doublereal *, doublereal *, integer *)
-	    , drbgps_(doublereal *, doublereal *, integer *);
+    extern /* Subroutine */ int drbdps_(real_number *, real_number *, integer *)
+	    , drbgps_(real_number *, real_number *, integer *);
 
 /* ----------------------------------------------------------------------- */
 /* This routine applies the inverse of a product preconditioner matrix */
@@ -1154,8 +1018,8 @@ L210:
 /* ------------  End of Subroutine PSOLRS  ------------------------------- */
 } /* psolrs_ */
 
-/* Subroutine */ int gs_(integer *n, doublereal *hl0, doublereal *z__, 
-	doublereal *x)
+/* Subroutine */ int gs_(integer *n, real_number *hl0, real_number *z__,
+	real_number *x)
 {
     /* Initialized data */
 
@@ -1166,11 +1030,11 @@ L210:
 
     /* Local variables */
     static integer i__, ic, ii, jx, jy, ici;
-    static doublereal dinv[2];
+    static real_number dinv[2];
     static integer iter;
-    static doublereal beta1[2], beta2[2];
+    static real_number beta1[2], beta2[2];
     static integer iyoff;
-    static doublereal gamma1[2], gamma2[2], elamda;
+    static real_number gamma1[2], gamma2[2], elamda;
 
 /* ----------------------------------------------------------------------- */
 /* This routine provides the inverse of the spatial factor for a */
@@ -1435,14 +1299,14 @@ L160:
 /* ------------  End of Subroutine GS  ----------------------------------- */
 } /* gs_ */
 
-/* Subroutine */ int avc1_(doublereal *cc, doublereal *c1ave)
+/* Subroutine */ int avc1_(real_number *cc, real_number *c1ave)
 {
     /* System generated locals */
     integer i__1, i__2;
 
     /* Local variables */
     static integer jx, jy;
-    static doublereal sum;
+    static real_number sum;
     static integer npp1, ioff, iyoff;
 
 /* ----------------------------------------------------------------------- */
@@ -1473,12 +1337,12 @@ L160:
 /* ------------  End of Subroutine AVC1  --------------------------------- */
 } /* avc1_ */
 
-/* Subroutine */ int rtweb_(integer *neq, doublereal *t, doublereal *cc, 
-	doublereal *cp, integer *nrt, doublereal *rval, doublereal *rpar, 
+/* Subroutine */ int rtweb_(integer *neq, real_number *t, real_number *cc,
+	real_number *cp, integer *nrt, real_number *rval, real_number *rpar,
 	integer *ipar)
 {
-    extern /* Subroutine */ int avc1_(doublereal *, doublereal *);
-    static doublereal c1ave;
+    extern /* Subroutine */ int avc1_(real_number *, real_number *);
+    static real_number c1ave;
 
 
 /* This routine sets RVAL = average(c1) - 20.0. */

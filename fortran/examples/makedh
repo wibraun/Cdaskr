@@ -3,7 +3,7 @@
 # If necessary, change the constants COMP and FFLAGS below for the
 # compiler to be used.
 
-COMP = f77
+COMP = gfortran
 FFLAGS = -O
 
 SOLVR = ../solver

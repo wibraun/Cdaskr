@@ -1,6 +1,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 #include "ddaskr_types.h"
 
@@ -75,8 +76,6 @@ L10:
     /* Local variables */
     extern integer ixsav_(integer *, integer *, integer *);
     static integer lunit, mesflg;
-
-    char* ptr_msg;
 
 
 /* ***BEGIN PROLOGUE  XERRWD */
@@ -154,11 +153,7 @@ L10:
 
 /*  Write the message. */
 
-    ptr_msg = (char*) malloc(msg_len*sizeof(char));
-    snprintf(ptr_msg, msg_len, "%s", msg);
-    puts(ptr_msg);
-    free(ptr_msg);
-
+    printf("%s\n", msg);
     if (*ni == 1) {
       printf(fmt_20, *i1);
     }
@@ -348,7 +343,12 @@ integer ixsav_(integer *ipar, integer *ivalue, integer *iset)
 /* ----------------------- End of Function IXSAV ------------------------- */
 } /* ixsav_ */
 
-/* DECK S_COPY */
+/*
+ * Copyright 1990 - 1997 by AT&T, Lucent Technologies and Bellcore.
+ *
+ * Following function are taken from libf2c implementation
+ */
+
 void str_copy(char *a, char *b, integer la, integer lb)
 {
 	char *aend, *bend;
@@ -382,5 +382,76 @@ void str_copy(char *a, char *b, integer la, integer lb)
 			*a++ = ' ';
 		}
 	}
-/* ----------------------- End of Function s_copy ------------------------- */
-} /* s_copy */
+/* ----------------------- End of Function str_copy ------------------------- */
+} /* str_copy */
+
+integer str_cmp(char *a0, char *b0, integer la, integer lb)
+{
+	unsigned char *a, *aend, *b, *bend;
+	a = (unsigned char *)a0;
+	b = (unsigned char *)b0;
+	aend = a + la;
+	bend = b + lb;
+
+	if(la <= lb)
+	{
+		while(a < aend){
+			if(*a != *b)
+			{
+				return ( *a - *b );
+			}
+			else{
+				++a; ++b;
+			}
+		}
+		while(b < bend){
+			if(*b != ' ')
+			{
+				return ( ' ' - *b );
+			}
+			else
+			{
+				++b;
+			}
+		}
+	}
+	else
+	{
+		while(b < bend){
+			if(*a == *b)
+			{
+				++a; ++b;
+			}
+			else{
+				return ( *a - *b );
+			}
+
+		}
+		while(a < aend){
+			if(*a != ' ')
+			{
+				return (*a - ' ');
+			}
+			else
+			{
+				++a;
+			}
+		}
+	}
+	return 0;
+/* ----------------------- End of Function str_cmp ------------------------- */
+} /* str_cmp */
+
+real_number real_sign(real_number *a, real_number *b)
+{
+	real_number x;
+	x = (*a >= 0 ? *a : - *a);
+	return( *b >= 0 ? x : -x);
+/* ----------------------- End of Function real_sign ------------------------- */
+}
+
+real_number real_pow(real_number *a, real_number *b)
+{
+	return pow(*a, *b);
+/* ----------------------- End of Function real_sign ------------------------- */
+}

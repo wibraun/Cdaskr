@@ -1,21 +1,16 @@
 /* drbgpre.f -- translated by f2c (version 20100827).
-   You must link the resulting object file with libf2c:
-	on Microsoft Windows system, link with libf2c.lib;
-	on Linux or Unix systems, link with .../path/to/libf2c.a -lm
-	or, if you install libf2c.a in a standard place, with -lf2c -lm
-	-- in that order, at the end of the command line, as in
-		cc *.o -lf2c -lm
-	Source for libf2c is in /netlib/f2c/libf2c.zip, e.g.,
-
-		http://www.netlib.org/f2c/libf2c.zip
 */
 
-#include "f2c.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+#include "../solver/ddaskr_types.h"
 
 /* Common Block Declarations */
 
 struct {
-    doublereal srur;
+    real_number srur;
     integer mp, mpd, mpsq, meshx, meshy, mxmp;
 } drpre1_;
 
@@ -209,15 +204,12 @@ static integer c__0 = 0;
     /* System generated locals */
     integer i__1, i__2, i__3;
 
-    /* Builtin functions */
-    double sqrt(doublereal);
-
     /* Local variables */
     static integer i__, i0, jx, jy;
     extern /* Subroutine */ int gset1_(integer *, integer *, integer *, 
 	    integer *, integer *);
-    extern doublereal d1mach_(integer *);
-    static doublereal uround;
+    extern real_number d1mach_(integer *);
+    static real_number uround;
 
 /* ***BEGIN PROLOGUE  DGSET2 */
 /* ***DATE WRITTEN   950828   (YYMMDD) */
@@ -389,32 +381,32 @@ static integer c__0 = 0;
     i__1 = ngm1;
     for (ig = 1; ig <= i__1; ++ig) {
 /* L30: */
-	jr[ig] = (integer) (((real) ig - .5) * (real) mper + .5);
+	jr[ig] = (integer) (((real_number) ig - .5) * (real_number) mper + .5);
     }
-    jr[*ng] = (integer) ((real) (ngm1 * mper + 1 + *m) * .5);
+    jr[*ng] = (integer) ((real_number) (ngm1 * mper + 1 + *m) * .5);
 
     return 0;
 /* ------------  End of Subroutine GSET1  -------------------------------- */
 } /* gset1_ */
 
-/* Subroutine */ int drbgja_(doublereal *t, doublereal *u, doublereal *r0, 
-	S_fp rblock, doublereal *r1, doublereal *rewt, doublereal *cj, 
-	doublereal *bd, integer *ipbd, integer *ier)
+/* Subroutine */ int drbgja_(real_number *t, real_number *u, real_number *r0,
+	Unknown_fp rblock, real_number *r1, real_number *rewt, real_number *cj,
+	real_number *bd, integer *ipbd, integer *ier)
 {
     /* System generated locals */
     integer i__1, i__2, i__3, i__4;
-    doublereal d__1, d__2;
+    real_number d__1, d__2;
 
     /* Local variables */
     static integer i__, j, j0, j00, ig, js;
-    static doublereal uj;
+    static real_number uj;
     static integer jx, jy;
-    static doublereal fac;
+    static real_number fac;
     static integer ibd;
-    static doublereal del;
+    static real_number del;
     static integer iip, igx, igy;
-    static doublereal dfac;
-    extern /* Subroutine */ int dgefa_(doublereal *, integer *, integer *, 
+    static real_number dfac;
+    extern /* Subroutine */ int dgefa_(real_number *, integer *, integer *,
 	    integer *, integer *);
     static integer idiag;
 
@@ -498,8 +490,8 @@ static integer c__0 = 0;
 		j = j0 + js;
 		uj = u[j];
 /* Computing MAX */
-		d__1 = drpre1_1.srur * abs(uj), d__2 = dfac / rewt[j];
-		del = max(d__1,d__2);
+		d__1 = drpre1_1.srur * fabs(uj), d__2 = dfac / rewt[j];
+		del = MAX(d__1,d__2);
 		u[j] += del;
 		fac = -1. / del;
 		(*rblock)(t, &jx, &jy, &u[j0 + 1], &r1[1]);
@@ -544,15 +536,15 @@ L90:
 /* ------------  End of Subroutine DRBGJA  ------------------------------- */
 } /* drbgja_ */
 
-/* Subroutine */ int drbgps_(doublereal *b, doublereal *bd, integer *ipbd)
+/* Subroutine */ int drbgps_(real_number *b, real_number *bd, integer *ipbd)
 {
     /* System generated locals */
     integer i__1, i__2;
 
     /* Local variables */
     static integer ib, jx, jy, ig0, ibd, ier, iip, igx, igy, igm1;
-    extern /* Subroutine */ int dgesl_(doublereal *, integer *, integer *, 
-	    integer *, doublereal *, integer *);
+    extern /* Subroutine */ int dgesl_(real_number *, integer *, integer *,
+	    integer *, real_number *, integer *);
 
 /* ***BEGIN PROLOGUE  DRBGPS */
 /* ***DATE WRITTEN   950914   (YYMMDD) */

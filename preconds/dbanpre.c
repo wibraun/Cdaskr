@@ -1,21 +1,10 @@
 /* dbanpre.f -- translated by f2c (version 20100827).
-   You must link the resulting object file with libf2c:
-	on Microsoft Windows system, link with libf2c.lib;
-	on Linux or Unix systems, link with .../path/to/libf2c.a -lm
-	or, if you install libf2c.a in a standard place, with -lf2c -lm
-	-- in that order, at the end of the command line, as in
-		cc *.o -lf2c -lm
-	Source for libf2c is in /netlib/f2c/libf2c.zip, e.g.,
-
-		http://www.netlib.org/f2c/libf2c.zip
 */
 
-#include "f2c.h"
+#include <stdio.h>
+#include <stdlib.h>
 
-/* Table of constant values */
-
-static integer c__4 = 4;
-static integer c__0 = 0;
+#include "../solver/ddaskr_types.h"
 
 /* ----------------------------------------------------------------------- */
 
@@ -81,32 +70,35 @@ static integer c__0 = 0;
 /* periodically during the integration, and the factors are used to */
 /* solve systems Px = b as needed. */
 /* ----------------------------------------------------------------------- */
-/* Subroutine */ int dbanja_(S_fp res, integer *ires, integer *neq, 
-	doublereal *t, doublereal *y, doublereal *yprime, doublereal *rewt, 
-	doublereal *savr, doublereal *wk, doublereal *h__, doublereal *cj, 
-	doublereal *wp, integer *iwp, integer *ier, doublereal *rpar, integer 
+/* Subroutine */ int dbanja_(Unknown_fp res, integer *ires, integer *neq,
+	real_number *t, real_number *y, real_number *yprime, real_number *rewt,
+	real_number *savr, real_number *wk, real_number *h__, real_number *cj,
+	real_number *wp, integer *iwp, integer *ier, real_number *rpar, integer
 	*ipar)
 {
     /* System generated locals */
     integer i__1, i__2, i__3, i__4, i__5;
-    doublereal d__1, d__2, d__3, d__4, d__5;
+    real_number d__1, d__2, d__3, d__4, d__5;
 
     /* Builtin functions */
-    double sqrt(doublereal), d_sign(doublereal *, doublereal *);
+    real_number real_sign(real_number *, real_number *);
 
     /* Local variables */
     static integer i__, j, k, n, i1, i2, ii, ml, mu, mba;
-    static doublereal del;
+    static real_number del;
     static integer meb1, lenp;
-    static doublereal squr;
-    extern /* Subroutine */ int dgbfa_(doublereal *, integer *, integer *, 
+    static real_number squr;
+    extern /* Subroutine */ int dgbfa_(real_number *, integer *, integer *,
 	    integer *, integer *, integer *, integer *);
     static integer mband, isave, msave;
-    extern doublereal d1mach_(integer *);
+    extern real_number d1mach_(integer *);
     static integer meband;
-    static doublereal delinv;
+    static real_number delinv;
     static integer ipsave;
-    static doublereal uround;
+    static real_number uround;
+
+    /* Table of constant values */
+    static integer c__4 = 4;
 
 
 /* ***BEGIN PROLOGUE  DBANJA */
@@ -176,7 +168,7 @@ static integer c__0 = 0;
     ml = ipar[1];
     mu = ipar[2];
     mband = ml + mu + 1;
-    mba = min(mband,*neq);
+    mba = MIN(mband,*neq);
     meband = mband + ml;
     meb1 = meband - 1;
 
@@ -209,12 +201,12 @@ static integer c__0 = 0;
 	    wp[isave + k] = y[n];
 	    wp[ipsave + k] = yprime[n];
 /* Computing MAX */
-	    d__4 = (d__1 = y[n], abs(d__1)), d__5 = (d__2 = *h__ * yprime[n], 
-		    abs(d__2)), d__4 = max(d__4,d__5), d__5 = (d__3 = 1. / 
-		    rewt[n], abs(d__3));
-	    del = squr * max(d__4,d__5);
+	    d__4 = (d__1 = y[n], fabs(d__1)), d__5 = (d__2 = *h__ * yprime[n],
+		    fabs(d__2)), d__4 = MAX(d__4,d__5), d__5 = (d__3 = 1. /
+		    rewt[n], fabs(d__3));
+	    del = squr * MAX(d__4,d__5);
 	    d__1 = *h__ * yprime[n];
-	    del = d_sign(&del, &d__1);
+	    del = real_sign(&del, &d__1);
 	    del = y[n] + del - y[n];
 	    y[n] += del;
 	    yprime[n] += *cj * del;
@@ -231,20 +223,20 @@ static integer c__0 = 0;
 	    y[n] = wp[isave + k];
 	    yprime[n] = wp[ipsave + k];
 /* Computing MAX */
-	    d__4 = (d__1 = y[n], abs(d__1)), d__5 = (d__2 = *h__ * yprime[n], 
-		    abs(d__2)), d__4 = max(d__4,d__5), d__5 = (d__3 = 1. / 
-		    rewt[n], abs(d__3));
-	    del = squr * max(d__4,d__5);
+	    d__4 = (d__1 = y[n], fabs(d__1)), d__5 = (d__2 = *h__ * yprime[n],
+		    fabs(d__2)), d__4 = MAX(d__4,d__5), d__5 = (d__3 = 1. /
+		    rewt[n], fabs(d__3));
+	    del = squr * MAX(d__4,d__5);
 	    d__1 = *h__ * yprime[n];
-	    del = d_sign(&del, &d__1);
+	    del = real_sign(&del, &d__1);
 	    del = y[n] + del - y[n];
 	    delinv = 1. / del;
 /* Computing MAX */
 	    i__4 = 1, i__5 = n - mu;
-	    i1 = max(i__4,i__5);
+	    i1 = MAX(i__4,i__5);
 /* Computing MIN */
 	    i__4 = *neq, i__5 = n + ml;
-	    i2 = min(i__4,i__5);
+	    i2 = MIN(i__4,i__5);
 	    ii = n * meb1 - ml;
 	    i__4 = i2;
 	    for (i__ = i1; i__ <= i__4; ++i__) {
@@ -264,15 +256,18 @@ static integer c__0 = 0;
 /* ------------  End of Subroutine DBANJA  ------------------------------- */
 } /* dbanja_ */
 
-/* Subroutine */ int dbanps_(integer *neq, doublereal *t, doublereal *y, 
-	doublereal *yprime, doublereal *savr, doublereal *wk, doublereal *cj, 
-	doublereal *wght, doublereal *wp, integer *iwp, doublereal *b, 
-	doublereal *eplin, integer *ier, doublereal *rpar, integer *ipar)
+/* Subroutine */ int dbanps_(integer *neq, real_number *t, real_number *y,
+	real_number *yprime, real_number *savr, real_number *wk, real_number *cj,
+	real_number *wght, real_number *wp, integer *iwp, real_number *b,
+	real_number *eplin, integer *ier, real_number *rpar, integer *ipar)
 {
     static integer ml, mu;
-    extern /* Subroutine */ int dgbsl_(doublereal *, integer *, integer *, 
-	    integer *, integer *, integer *, doublereal *, integer *);
+    extern /* Subroutine */ int dgbsl_(real_number *, integer *, integer *,
+	    integer *, integer *, integer *, real_number *, integer *);
     static integer meband;
+
+    /* Table of constant values */
+    static integer c__0 = 0;
 
 
 /* ***BEGIN PROLOGUE  DBANPS */

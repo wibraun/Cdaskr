@@ -1,28 +1,12 @@
 /* dkrdem.f -- translated by f2c (version 20100827).
-   You must link the resulting object file with libf2c:
-	on Microsoft Windows system, link with libf2c.lib;
-	on Linux or Unix systems, link with .../path/to/libf2c.a -lm
-	or, if you install libf2c.a in a standard place, with -lf2c -lm
-	-- in that order, at the end of the command line, as in
-		cc *.o -lf2c -lm
-	Source for libf2c is in /netlib/f2c/libf2c.zip, e.g.,
-
-		http://www.netlib.org/f2c/libf2c.zip
 */
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
 
-#include "f2c.h"
+#include "../solver/ddaskr_types.h"
 
-/* Common Block Declarations */
-
-struct {
-    integer neq;
-} local_;
-
-#define local_1 local_
-
-/* Table of constant values */
-
-static integer c__1 = 1;
+static integer global_neq;
 
 /* DKRDEM program: DDASKR demonstration program */
 /* ----------------------------------------------------------------------- */
@@ -52,102 +36,67 @@ static integer c__1 = 1;
 
 /* ----------------------------------------------------------------------- */
 
-/* Main program */ int MAIN__(void)
+/* Main program */ int main(void)
 {
     /* Format strings */
-    static char fmt_110[] = "(\002 DKRDEM: Demonstration Program for DDASK"
-	    "R\002///\002 Problem 1..\002//\002 Problem is  dY/dT = ((2*LOG(Y"
-	    ")+8)/T - 5)*Y,  Y(1) = 1\002/\002 Solution is  Y(T) = EXP(-T**2 "
-	    "+ 5*T - 4)\002/\002 Root functions are..\002/\002 R1 = dY/dT  (r"
-	    "oot at T = 2.5)\002/\002 R2 = LOG(Y) - 2.2491  (roots at T = 2.4"
-	    "7 and T = 2.53)\002/\002 RTOL =\002,e10.1,\002   ATOL =\002,e10."
-	    "1,\002   JTYPE =\002,i3/)";
-    static char fmt_130[] = "(\002 At t =\002,e15.7,5x,\002y =\002,e15.7,5x"
-	    ",\002error =\002,e12.4)";
-    static char fmt_135[] = "(//\002 WARNING.. Error exceeds 1000 * tolera"
-	    "nce\002//)";
-    static char fmt_150[] = "(/\002      Root found at t =\002,e15.7,5x,\002"
-	    "JROOT =\002,2i5)";
-    static char fmt_160[] = "(\002      Error in t location of root is\002,e"
-	    "12.4/)";
-    static char fmt_165[] = "(//\002 WARNING.. Root error exceeds 1.0D-3\002"
-	    "//)";
-    static char fmt_190[] = "(/\002 Final statistics for this run..\002/\002"
-	    " number of steps =\002,i5/\002 number of Gs    =\002,i5/\002 (ex"
-	    "cluding Js)  =\002,i5/\002 number of Js    =\002,i5/\002 number "
-	    "of Rs    =\002,i5/\002 error overrun   =\002,e10.2)";
-    static char fmt_200[] = "(/80(\002-\002)//\002 Problem 2.. Van Der Pol o"
-	    "scillator\002//\002 Problem is dY1/dT = Y2,  dY2/dT = 100*(1-Y1*"
-	    "*2)*Y2 - Y1\002/\002            Y1(0) = 2,  Y2(0) = 0\002/\002 R"
-	    "oot function is  R(T,Y,YP) = Y1\002/\002 RTOL =\002,e10.1,\002  "
-	    " ATOL =\002,2e10.1)";
-    static char fmt_210[] = "(/80(\002.\002)//\002 Solution with JTYPE =\002"
-	    ",i2/)";
-    static char fmt_230[] = "(\002 At t =\002,e15.7,5x,\002y1 =\002,e15.7,"
-	    "5x,\002y2 =\002,e15.7)";
-    static char fmt_240[] = "(/\002      Root found at t =\002,e15.7,\002  J"
-	    "ROOT =\002,i3)";
-    static char fmt_250[] = "(\002      Error in t location of root is\002,e"
-	    "12.4/)";
-    static char fmt_255[] = "(//\002 WARNING.. Root error exceeds 1.0\002//)";
-    static char fmt_280[] = "(/\002 Final statistics for this run..\002/\002"
-	    " number of steps =\002,i5/\002 number of Gs    =\002,i5/\002 (ex"
-	    "cluding Js)  =\002,i5/\002 number of Js    =\002,i5/\002 number "
-	    "of Rs    =\002,i5)";
-    static char fmt_300[] = "(/80(\002-\002)//\002 Number of errors encounte"
-	    "red =\002,i3)";
-    static char fmt_700[] = "(/,\002 **********DDASKR passed all tests******"
-	    "****\002)";
-    static char fmt_800[] = "(/,\002 **********DDASKR failed some tests*****"
-	    "****\002)";
-
-    /* Builtin functions */
-    integer s_wsfe(cilist *), do_fio(integer *, char *, ftnlen), e_wsfe(void);
-    double exp(doublereal);
-    /* Subroutine */ int s_stop(char *, ftnlen);
+    static char fmt_110[] = " DKRDEM: Demonstration Program for DDASKR\n\n\n"
+    	" Problem 1..\n\n"
+    	" Problem is  dY/dT = ((2*LOG(Y)+8)/T - 5)*Y,  Y(1) = 1\n"
+    	" Solution is  Y(T) = EXP(-T**2 + 5*T - 4)\n"
+    	" Root functions are..\n"
+    	" R1 = dY/dT  (root at T = 2.5)\n"
+    	" R2 = LOG(Y) - 2.2491  (roots at T = 2.47 and T = 2.53)\n"
+        " RTOL =%10.1E   ATOL =%10.1E    JTYPE =%4d\n\n";
+    static char fmt_130[] = " At t =%15.7E     y =%15.7E     error =%12.4E\n";
+    static char fmt_135[] = "\n\n WARNING.. Error exceeds 1000 * tolerance\n\n";
+    static char fmt_150[] = "\n      Root found at t =%15.7E      JROOT = %3d  %3d\n";
+    static char fmt_160[] = "      Error in t location of root is %12.4E\n";
+    static char fmt_165[] = "\n\n WARNING.. Root error exceeds 1.0D-3\n\n";
+    static char fmt_190[] = "\n Final statistics for this run..\n"
+	    " number of steps =%5d\n"
+	    " number of Gs    =%5d\n"
+    	" (excluding Js)  =%5d\n"
+    	" number of Js    =%5d\n"
+    	" number of Rs    =%5d\n";
+    static char fmt_195[] = " error overrun   =%10.2E\n";
+    static char fmt_200[] = "\n--------------------------------------------------------------------------------\n"
+    	" Problem 2.. Van Der Pol oscillator\n"
+    	" Problem is dY1/dT = Y2,  dY2/dT = 100*(1-Y1**2)*Y2 - Y1\n"
+    	"            Y1(0) = 2,  Y2(0) = 0\n"
+    	" Root function is R(T,Y,YP) = Y1\n"
+        " RTOL =%10.1E   ATOL =%10.1E%10.1E\n\n";
+    static char fmt_210[] = "\n--------------------------------------------------------------------------------\n"
+        " Solution with JTYPE =%4d\n";
+    static char fmt_230[] = " At t =%15.7E     y1 =%15.7E     y2 =%12.4E\n";
+    static char fmt_240[] = "\n      Root found at t =%15.7E      JROOT = %3d\n";
+    static char fmt_300[] = "\n--------------------------------------------------------------------------------\n"
+    	"\n Number of errors encountered =%4d";
+    static char fmt_700[] = "\n **********DDASKR passed all tests**********\n";
+    static char fmt_800[] = "\n **********DDASKR failed some tests**********\n";
 
     /* Local variables */
     static integer i__;
-    static doublereal t, y[2], er, yt;
+    static real_number t, y[2], er, yt;
     extern /* Subroutine */ int rt1_(), rt2_();
     static integer nje, nre;
-    static doublereal ero;
+    static real_number ero;
     static integer liw, lun, nrt, lrw, nst;
     extern /* Subroutine */ int jac2_(), res1_(), res2_();
     static integer idid, nrea, info[20], ipar;
-    static doublereal atol[2];
+    static real_number atol[2];
     static integer jdum;
-    static doublereal rpar;
+    static real_number rpar;
     static integer nerr, nrte;
-    static doublereal errt;
+    static real_number errt;
     static integer iout;
-    static doublereal rtol[2], tout;
+    static real_number rtol[2], tout;
     static integer leniw, ipass, lenrw;
-    static doublereal psdum;
+    static real_number psdum;
     static integer iwork[100], jtype, jroot[2], kroot;
-    static doublereal tzero, rwork[100];
+    static real_number tzero, rwork[100];
     extern /* Subroutine */ int ddaskr_();
-    static doublereal yprime[2];
+    static real_number yprime[2];
     static integer kprint;
-
-    /* Fortran I/O blocks */
-    static cilist io___18 = { 0, 0, 0, fmt_110, 0 };
-    static cilist io___30 = { 0, 0, 0, fmt_130, 0 };
-    static cilist io___31 = { 0, 0, 0, fmt_135, 0 };
-    static cilist io___32 = { 0, 0, 0, fmt_150, 0 };
-    static cilist io___34 = { 0, 0, 0, fmt_160, 0 };
-    static cilist io___35 = { 0, 0, 0, fmt_165, 0 };
-    static cilist io___43 = { 0, 0, 0, fmt_190, 0 };
-    static cilist io___44 = { 0, 0, 0, fmt_200, 0 };
-    static cilist io___45 = { 0, 0, 0, fmt_210, 0 };
-    static cilist io___46 = { 0, 0, 0, fmt_230, 0 };
-    static cilist io___47 = { 0, 0, 0, fmt_240, 0 };
-    static cilist io___50 = { 0, 0, 0, fmt_250, 0 };
-    static cilist io___51 = { 0, 0, 0, fmt_255, 0 };
-    static cilist io___52 = { 0, 0, 0, fmt_280, 0 };
-    static cilist io___53 = { 0, 0, 0, fmt_300, 0 };
-    static cilist io___54 = { 0, 0, 0, fmt_700, 0 };
-    static cilist io___55 = { 0, 0, 0, fmt_800, 0 };
 
 
 
@@ -169,7 +118,7 @@ static integer c__1 = 1;
 /* L10: */
 	info[i__ - 1] = 0;
     }
-    local_1.neq = 1;
+    global_neq = 1;
     t = 1.;
     y[0] = 1.;
     tout = 2.;
@@ -194,12 +143,7 @@ static integer c__1 = 1;
     info[4] = 2 - jtype;
     nrt = 2;
     if (kprint >= 2) {
-	io___18.ciunit = lun;
-	s_wsfe(&io___18);
-	do_fio(&c__1, (char *)&rtol[0], (ftnlen)sizeof(doublereal));
-	do_fio(&c__1, (char *)&atol[0], (ftnlen)sizeof(doublereal));
-	do_fio(&c__1, (char *)&jtype, (ftnlen)sizeof(integer));
-	e_wsfe();
+	  printf(fmt_110, rtol[0], atol[0], jtype);
     }
 
 /* Call DDASKR in loop over TOUT values = 2, 3, 4, 5, 6. */
@@ -207,34 +151,26 @@ static integer c__1 = 1;
     for (iout = 1; iout <= 5; ++iout) {
 
 L120:
-	ddaskr_((U_fp)res1_, &local_1.neq, &t, y, yprime, &tout, info, rtol, 
+	ddaskr_((Unknown_fp)res1_, &global_neq, &t, y, yprime, &tout, info, rtol,
 		atol, &idid, rwork, &lrw, iwork, &liw, &rpar, &ipar, &jdum, &
-		psdum, (U_fp)rt1_, &nrt, jroot);
+		psdum, (Unknown_fp)rt1_, &nrt, jroot);
 
 /* Print Y and error in Y, and print warning if error too large. */
 	yt = exp(-t * t + t * 5. - 4.);
 	er = y[0] - yt;
 	if (kprint > 2) {
-	    io___30.ciunit = lun;
-	    s_wsfe(&io___30);
-	    do_fio(&c__1, (char *)&t, (ftnlen)sizeof(doublereal));
-	    do_fio(&c__1, (char *)&y[0], (ftnlen)sizeof(doublereal));
-	    do_fio(&c__1, (char *)&er, (ftnlen)sizeof(doublereal));
-	    e_wsfe();
+	    printf(fmt_130, t, y[0], er);
 	}
 	if (idid < 0) {
 	    goto L185;
 	}
-	er = abs(er) / atol[0];
-	ero = max(ero,er);
+	er = fabs(er) / atol[0];
+	ero = MAX(ero,er);
 	if (er < 1e3) {
 	    goto L140;
 	}
 	if (kprint >= 2) {
-	    ipass = 0;
-	    io___31.ciunit = lun;
-	    s_wsfe(&io___31);
-	    e_wsfe();
+	    printf(fmt_135);
 	}
 	++nerr;
 L140:
@@ -245,12 +181,7 @@ L140:
 /* If a root was found, write results and check root location. */
 /* Then return to DDASKR to continue the integration. */
 	if (kprint > 2) {
-	    io___32.ciunit = lun;
-	    s_wsfe(&io___32);
-	    do_fio(&c__1, (char *)&t, (ftnlen)sizeof(doublereal));
-	    do_fio(&c__1, (char *)&jroot[0], (ftnlen)sizeof(integer));
-	    do_fio(&c__1, (char *)&jroot[1], (ftnlen)sizeof(integer));
-	    e_wsfe();
+	    printf(fmt_150, t, jroot[0], jroot[1]);
 	}
 	if (jroot[0] != 0) {
 	    errt = t - 2.5;
@@ -262,19 +193,14 @@ L140:
 	    errt = t - 2.53;
 	}
 	if (kprint > 2) {
-	    io___34.ciunit = lun;
-	    s_wsfe(&io___34);
-	    do_fio(&c__1, (char *)&errt, (ftnlen)sizeof(doublereal));
-	    e_wsfe();
+	    printf(fmt_160,  errt);
 	}
-	if (abs(errt) < .001) {
+	if (fabs(errt) < .001) {
 	    goto L170;
 	}
 	if (kprint >= 2) {
 	    ipass = 0;
-	    io___35.ciunit = lun;
-	    s_wsfe(&io___35);
-	    e_wsfe();
+	    printf(fmt_165);
 	}
 	++nerr;
 L170:
@@ -299,19 +225,12 @@ L185:
     leniw = 0;
     nrea = nre;
     if (jtype == 2) {
-	nre += local_1.neq * nje;
+	nre += global_neq * nje;
     }
 
     if (kprint > 2) {
-	io___43.ciunit = lun;
-	s_wsfe(&io___43);
-	do_fio(&c__1, (char *)&nst, (ftnlen)sizeof(integer));
-	do_fio(&c__1, (char *)&nre, (ftnlen)sizeof(integer));
-	do_fio(&c__1, (char *)&nrea, (ftnlen)sizeof(integer));
-	do_fio(&c__1, (char *)&nje, (ftnlen)sizeof(integer));
-	do_fio(&c__1, (char *)&nrte, (ftnlen)sizeof(integer));
-	do_fio(&c__1, (char *)&ero, (ftnlen)sizeof(doublereal));
-	e_wsfe();
+		printf(fmt_190, nst, nre, nrea, nje, nrte);
+		printf(fmt_195, ero);
     }
 
 /* ----------------------------------------------------------------------- */
@@ -342,12 +261,7 @@ L185:
     atol[0] = 1e-6;
     atol[1] = 1e-4;
     if (kprint >= 2) {
-	io___44.ciunit = lun;
-	s_wsfe(&io___44);
-	do_fio(&c__1, (char *)&rtol[0], (ftnlen)sizeof(doublereal));
-	do_fio(&c__1, (char *)&atol[0], (ftnlen)sizeof(doublereal));
-	do_fio(&c__1, (char *)&atol[1], (ftnlen)sizeof(doublereal));
-	e_wsfe();
+		printf(fmt_200, rtol[0], atol[0], atol[1]);
     }
 
 /* Note: JTYPE indicates the Jacobian type: */
@@ -362,7 +276,7 @@ L185:
 
 	info[0] = 0;
 	info[4] = 2 - jtype;
-	local_1.neq = 2;
+	global_neq = 2;
 	t = 0.;
 	y[0] = 2.;
 	y[1] = 0.;
@@ -371,28 +285,20 @@ L185:
 	tout = 20.;
 	nrt = 1;
 	if (kprint > 2) {
-	    io___45.ciunit = lun;
-	    s_wsfe(&io___45);
-	    do_fio(&c__1, (char *)&jtype, (ftnlen)sizeof(integer));
-	    e_wsfe();
+	    printf(fmt_210, jtype);
 	}
 
 /* Call DDASKR in loop over TOUT values = 20, 40, ..., 200. */
 	for (iout = 1; iout <= 10; ++iout) {
 
 L220:
-	    ddaskr_((U_fp)res2_, &local_1.neq, &t, y, yprime, &tout, info, 
+	    ddaskr_((Unknown_fp)res2_, &global_neq, &t, y, yprime, &tout, info,
 		    rtol, atol, &idid, rwork, &lrw, iwork, &liw, &rpar, &ipar,
-		     (U_fp)jac2_, &psdum, (U_fp)rt2_, &nrt, jroot);
+		     (Unknown_fp)jac2_, &psdum, (Unknown_fp)rt2_, &nrt, jroot);
 
 /* Print Y1 and Y2. */
 	    if (kprint > 2) {
-		io___46.ciunit = lun;
-		s_wsfe(&io___46);
-		do_fio(&c__1, (char *)&t, (ftnlen)sizeof(doublereal));
-		do_fio(&c__1, (char *)&y[0], (ftnlen)sizeof(doublereal));
-		do_fio(&c__1, (char *)&y[1], (ftnlen)sizeof(doublereal));
-		e_wsfe();
+			printf(fmt_230, t, y[0], y[1]);
 	    }
 	    if (idid < 0) {
 		goto L275;
@@ -404,30 +310,21 @@ L220:
 /* If a root was found, write results and check root location. */
 /* Then return to DDASKR to continue the integration. */
 	    if (kprint > 2) {
-		io___47.ciunit = lun;
-		s_wsfe(&io___47);
-		do_fio(&c__1, (char *)&t, (ftnlen)sizeof(doublereal));
-		do_fio(&c__1, (char *)&jroot[0], (ftnlen)sizeof(integer));
-		e_wsfe();
+			printf(fmt_240, t, jroot[0]);
 	    }
 	    kroot = (integer) (t / 81.2 + .5);
-	    tzero = (doublereal) (kroot - 1) * 81.41853556212 + 
+	    tzero = (real_number) (kroot - 1) * 81.41853556212 +
 		    81.17237787055;
 	    errt = t - tzero;
 	    if (kprint > 2) {
-		io___50.ciunit = lun;
-		s_wsfe(&io___50);
-		do_fio(&c__1, (char *)&errt, (ftnlen)sizeof(doublereal));
-		e_wsfe();
+			printf(fmt_160,  errt);
 	    }
 	    if (errt < 1.) {
 		goto L260;
 	    }
 	    if (kprint >= 2) {
-		ipass = 0;
-		io___51.ciunit = lun;
-		s_wsfe(&io___51);
-		e_wsfe();
+	    	ipass = 0;
+			printf(fmt_165);
 	    }
 	    ++nerr;
 L260:
@@ -452,49 +349,35 @@ L275:
 	leniw = 0;
 	nrea = nre;
 	if (jtype == 2) {
-	    nre += local_1.neq * nje;
+	    nre += global_neq * nje;
 	}
 	if (kprint >= 2) {
-	    io___52.ciunit = lun;
-	    s_wsfe(&io___52);
-	    do_fio(&c__1, (char *)&nst, (ftnlen)sizeof(integer));
-	    do_fio(&c__1, (char *)&nre, (ftnlen)sizeof(integer));
-	    do_fio(&c__1, (char *)&nrea, (ftnlen)sizeof(integer));
-	    do_fio(&c__1, (char *)&nje, (ftnlen)sizeof(integer));
-	    do_fio(&c__1, (char *)&nrte, (ftnlen)sizeof(integer));
-	    e_wsfe();
+	    printf(fmt_190, nst, nre, nrea, nje, nrte);
 	}
 /* L290: */
     }
 
 
     if (kprint >= 2) {
-	io___53.ciunit = lun;
-	s_wsfe(&io___53);
-	do_fio(&c__1, (char *)&nerr, (ftnlen)sizeof(integer));
-	e_wsfe();
+		printf(fmt_300, nerr);
     }
 
     if (nerr > 0) {
-	ipass = 0;
+    	ipass = 0;
     }
     if (ipass == 1 && kprint > 1) {
-	io___54.ciunit = lun;
-	s_wsfe(&io___54);
-	e_wsfe();
+		printf(fmt_700, nerr);
     }
     if (ipass == 0 && kprint != 0) {
-	io___55.ciunit = lun;
-	s_wsfe(&io___55);
-	e_wsfe();
+		printf(fmt_800, nerr);
     }
-    s_stop("", (ftnlen)0);
+    exit(0);
     return 0;
 } /* MAIN__ */
 
 
-/* Subroutine */ int res1_(doublereal *t, doublereal *y, doublereal *yprime, 
-	doublereal *cj, doublereal *delta, integer *ires, doublereal *rpar, 
+/* Subroutine */ int res1_(real_number *t, real_number *y, real_number *yprime,
+	real_number *cj, real_number *delta, integer *ires, real_number *rpar,
 	integer *ipar)
 {
     /* System generated locals */
@@ -502,8 +385,8 @@ L275:
 
     /* Local variables */
     static integer i__;
-    extern /* Subroutine */ int f1_(integer *, doublereal *, doublereal *, 
-	    doublereal *);
+    extern /* Subroutine */ int f1_(integer *, real_number *, real_number *,
+	    real_number *);
 
 
 /*     Check Y to make sure that it is valid input. */
@@ -522,11 +405,11 @@ L275:
 
 /*        Call F1 to obtain F(T,Y) */
 
-	f1_(&local_1.neq, t, &y[1], &delta[1]);
+	f1_(&global_neq, t, &y[1], &delta[1]);
 
 /*        Form G = Y' - F(T,Y) */
 
-	i__1 = local_1.neq;
+	i__1 = global_neq;
 	for (i__ = 1; i__ <= i__1; ++i__) {
 	    delta[i__] = yprime[i__] - delta[i__];
 /* L10: */
@@ -537,11 +420,11 @@ L275:
 } /* res1_ */
 
 
-/* Subroutine */ int f1_(integer *neq, doublereal *t, doublereal *y, 
-	doublereal *ydot)
+/* Subroutine */ int f1_(integer *global_neq, real_number *t, real_number *y,
+	real_number *ydot)
 {
     /* Builtin functions */
-    double log(doublereal);
+    double log(real_number);
 
     /* Parameter adjustments */
     --ydot;
@@ -553,12 +436,12 @@ L275:
 } /* f1_ */
 
 
-/* Subroutine */ int rt1_(integer *neq, doublereal *t, doublereal *y, 
-	doublereal *yp, integer *nrt, doublereal *rval, doublereal *rpar, 
+/* Subroutine */ int rt1_(integer *neq, real_number *t, real_number *y,
+	real_number *yp, integer *nrt, real_number *rval, real_number *rpar,
 	integer *ipar)
 {
     /* Builtin functions */
-    double log(doublereal);
+    double log(real_number);
 
     /* Parameter adjustments */
     --rval;
@@ -570,8 +453,8 @@ L275:
 } /* rt1_ */
 
 
-/* Subroutine */ int res2_(doublereal *t, doublereal *y, doublereal *yprime, 
-	doublereal *cj, doublereal *delta, integer *ires, doublereal *rpar, 
+/* Subroutine */ int res2_(real_number *t, real_number *y, real_number *yprime,
+	real_number *cj, real_number *delta, integer *ires, real_number *rpar,
 	integer *ipar)
 {
     /* System generated locals */
@@ -579,8 +462,8 @@ L275:
 
     /* Local variables */
     static integer i__;
-    extern /* Subroutine */ int f2_(integer *, doublereal *, doublereal *, 
-	    doublereal *);
+    extern /* Subroutine */ int f2_(integer *, real_number *, real_number *,
+	    real_number *);
 
 
 /*     CALL F2 TO OBTAIN F(T,Y) */
@@ -591,11 +474,11 @@ L275:
     --y;
 
     /* Function Body */
-    f2_(&local_1.neq, t, &y[1], &delta[1]);
+    f2_(&global_neq, t, &y[1], &delta[1]);
 
 /*     FORM G = Y' - F(T,Y) */
 
-    i__1 = local_1.neq;
+    i__1 = global_neq;
     for (i__ = 1; i__ <= i__1; ++i__) {
 /* L10: */
 	delta[i__] = yprime[i__] - delta[i__];
@@ -605,8 +488,8 @@ L275:
 } /* res2_ */
 
 
-/* Subroutine */ int f2_(integer *neq, doublereal *t, doublereal *y, 
-	doublereal *ydot)
+/* Subroutine */ int f2_(integer *global_neq, real_number *t, real_number *y,
+	real_number *ydot)
 {
     /* Parameter adjustments */
     --ydot;
@@ -619,8 +502,8 @@ L275:
 } /* f2_ */
 
 
-/* Subroutine */ int jac2_(doublereal *t, doublereal *y, doublereal *yprime, 
-	doublereal *pd, doublereal *cj, doublereal *rpar, integer *ipar)
+/* Subroutine */ int jac2_(real_number *t, real_number *y, real_number *yprime,
+	real_number *pd, real_number *cj, real_number *rpar, integer *ipar)
 {
 
 /* First define the Jacobian matrix for the right-hand side */
@@ -648,8 +531,8 @@ L275:
 } /* jac2_ */
 
 
-/* Subroutine */ int rt2_(integer *neq, doublereal *t, doublereal *y, 
-	doublereal *yp, integer *nrt, doublereal *rval, doublereal *rpar, 
+/* Subroutine */ int rt2_(integer *neq, real_number *t, real_number *y,
+	real_number *yp, integer *nrt, real_number *rval, real_number *rpar,
 	integer *ipar)
 {
     /* Parameter adjustments */

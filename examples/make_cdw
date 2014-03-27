@@ -16,7 +16,7 @@ OBJS = $(SOLVR)/ddaskr.o $(SOLVR)/daux.o $(SOLVR)/dlinpk.o \
 WEB = dweb.o $(OBJS)
 
 WEB : $(WEB)
-	$(CC) $(CFLAGS) -o web $(WEB) -lm -lf2c
+	$(CC) $(CFLAGS) -o web $(WEB) -lm
 
 dweb.o: dweb.c
 	$(CC) $(CFLAGS) -c dweb.c

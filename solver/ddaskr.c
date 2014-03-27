@@ -127,7 +127,7 @@ static integer c__926 = 926;
 
     /* Builtin functions */
     /* Subroutine */ int str_copy(char *, char *, integer, integer);
-    double pow_dd(real_number *, real_number *), d_sign(
+    real_number real_pow(real_number *, real_number *), real_sign(
 	    real_number *, real_number *);
 
     /* Local variables */
@@ -2084,7 +2084,7 @@ L200:
 
     if (info[11] != 0) {
 	if (info[17] == 0) {
-	    rwork[14] = pow_dd(&uround, &c_b68);
+	    rwork[14] = real_pow(&uround, &c_b68);
 	} else {
 	    if (rwork[14] <= 0.) {
 		goto L725;
@@ -2131,7 +2131,7 @@ L310:
 	h0 = .5 / ypnorm;
     }
     d__1 = *tout - *t;
-    h0 = d_sign(&h0, &d__1);
+    h0 = real_sign(&h0, &d__1);
 
 /*     Adjust H0 if necessary to meet HMAX bound. */
 
@@ -2268,7 +2268,7 @@ L355:
 	h0 = .5 / ypnorm;
     }
     d__1 = *tout - *t;
-    h0 = d_sign(&h0, &d__1);
+    h0 = real_sign(&h0, &d__1);
 
 L360:
     if (info[7] != 0) {
@@ -3176,7 +3176,7 @@ L760:
     real_number d__1;
 
     /* Builtin functions */
-    double d_sign(real_number *, real_number *);
+    real_number real_sign(real_number *, real_number *);
 
     /* Local variables */
     static real_number h__;
@@ -3349,7 +3349,7 @@ L200:
 	goto L260;
     }
 /* R has a zero at T0.  Look at R at T0+ = T0 + (small increment). ------ */
-    temp1 = d_sign(&hminr, &h__);
+    temp1 = real_sign(&hminr, &h__);
     rwork[51] += temp1;
     if ((rwork[51] - *tn) * h__ < zero) {
 	goto L230;
@@ -3378,7 +3378,7 @@ L240:
 	    return 0;
 	} else {
 /* If Ri has a zero at T0+, but not at T0, return valid root. ----------- */
-	    jroot[i__] = (integer) (-d_sign(&c_b758, &r0[i__]));
+	    jroot[i__] = (integer) (-real_sign(&c_b758, &r0[i__]));
 	    *irt = 1;
 	}
 L250:
@@ -3451,7 +3451,7 @@ L390:
     real_number d__1;
 
     /* Builtin functions */
-    double d_sign(real_number *, real_number *);
+    real_number real_sign(real_number *, real_number *);
 
     /* Local variables */
     static integer i__;
@@ -3574,7 +3574,7 @@ L390:
 	goto L120;
 /* At this point, R0(i) has been checked and cannot be zero. ------------ */
 L110:
-	if (d_sign(&c_b758, &r0[i__]) == d_sign(&c_b758, &r1[i__])) {
+	if (real_sign(&c_b758, &r0[i__]) == real_sign(&c_b758, &r1[i__])) {
 	    goto L120;
 	}
 	t2 = (d__1 = r1[i__] / (r1[i__] - r0[i__]), fabs(d__1));
@@ -3659,7 +3659,7 @@ L200:
 	goto L220;
 /* Neither R0(i) nor RX(i) can be zero at this point. ------------------- */
 L210:
-	if (d_sign(&c_b758, &r0[i__]) == d_sign(&c_b758, &rx[i__])) {
+	if (real_sign(&c_b758, &r0[i__]) == real_sign(&c_b758, &rx[i__])) {
 	    goto L220;
 	}
 	t2 = (d__1 = rx[i__] / (rx[i__] - r0[i__]), fabs(d__1));
@@ -3720,12 +3720,12 @@ L300:
     for (i__ = 1; i__ <= i__1; ++i__) {
 	jroot[i__] = 0;
 	if ((d__1 = r1[i__], fabs(d__1)) == zero) {
-	    jroot[i__] = (integer) (-d_sign(&c_b758, &r0[i__]));
+	    jroot[i__] = (integer) (-real_sign(&c_b758, &r0[i__]));
 	    goto L320;
 	}
-	if (d_sign(&c_b758, &r0[i__]) != d_sign(&c_b758, &r1[i__])) {
+	if (real_sign(&c_b758, &r0[i__]) != real_sign(&c_b758, &r1[i__])) {
 	    d__1 = r1[i__] - r0[i__];
-	    jroot[i__] = (integer) d_sign(&c_b758, &d__1);
+	    jroot[i__] = (integer) real_sign(&c_b758, &d__1);
 	}
 L320:
 	;
@@ -3745,7 +3745,7 @@ L400:
     for (i__ = 1; i__ <= i__1; ++i__) {
 	jroot[i__] = 0;
 	if ((d__1 = r1[i__], fabs(d__1)) == zero) {
-	    jroot[i__] = (integer) (-d_sign(&c_b758, &r0[i__]));
+	    jroot[i__] = (integer) (-real_sign(&c_b758, &r0[i__]));
 	}
 /* L410: */
     }
@@ -4067,7 +4067,7 @@ L350:
     real_number d__1, d__2;
 
     /* Builtin functions */
-    double pow_dd(real_number *, real_number *);
+    real_number real_pow(real_number *, real_number *);
 
     /* Local variables */
     static integer i__, j;
@@ -4479,7 +4479,7 @@ L550:
     temp2 = (real_number) (*k + 1);
     d__1 = est * 2. + 1e-4;
     d__2 = -1. / temp2;
-    r__ = pow_dd(&d__1, &d__2);
+    r__ = real_pow(&d__1, &d__2);
     if (r__ < 2.) {
 	goto L555;
     }
@@ -4616,7 +4616,7 @@ L660:
     temp2 = (real_number) (*k + 1);
     d__1 = est * 2. + 1e-4;
     d__2 = -1. / temp2;
-    r__ = pow_dd(&d__1, &d__2) * .9;
+    r__ = real_pow(&d__1, &d__2) * .9;
 /* Computing MAX */
     d__1 = .25, d__2 = MIN(.9,r__);
     r__ = MAX(d__1,d__2);
@@ -4691,6 +4691,8 @@ L690:
     }
     goto L200;
 
+/* final return to avoid warning should never used */
+	return 0;
 /* ------END OF SUBROUTINE DDSTP------------------------------------------ */
 } /* ddstp_ */
 
@@ -5816,6 +5818,8 @@ L200:
     rl /= two;
     goto L100;
 
+/* final return to avoid warning should never used */
+	return 0;
 /* ----------------------- END OF SUBROUTINE DLINSD ---------------------- */
 } /* dlinsd_ */
 
@@ -6264,7 +6268,7 @@ L390:
     real_number d__1, d__2;
 
     /* Builtin functions */
-    double pow_dd(real_number *, real_number *);
+    real_number real_pow(real_number *, real_number *);
 
     /* Local variables */
     static integer i__, m;
@@ -6419,7 +6423,7 @@ L300:
     } else {
 	d__1 = delnrm / oldnrm;
 	d__2 = 1. / m;
-	rate = pow_dd(&d__1, &d__2);
+	rate = real_pow(&d__1, &d__2);
 	if (rate > .9) {
 	    goto L380;
 	}
@@ -6479,7 +6483,7 @@ L380:
     real_number d__1, d__2, d__3, d__4, d__5, d__6;
 
     /* Builtin functions */
-    double sqrt(real_number), d_sign(real_number *, real_number *);
+    real_number real_sign(real_number *, real_number *);
 
     /* Local variables */
     static integer i__, j, k, l, n, i1, i2, ii, mba;
@@ -6608,7 +6612,7 @@ L200:
 	d__3 = squr * MAX(d__5,d__6), d__4 = 1. / ewt[i__];
 	del = MAX(d__3,d__4);
 	d__1 = *h__ * yprime[i__];
-	del = d_sign(&del, &d__1);
+	del = real_sign(&del, &d__1);
 	del = y[i__] + del - y[i__];
 	ysave = y[i__];
 	ypsave = yprime[i__];
@@ -6686,7 +6690,7 @@ L500:
 	    d__3 = squr * MAX(d__5,d__6), d__4 = 1. / ewt[n];
 	    del = MAX(d__3,d__4);
 	    d__1 = *h__ * yprime[n];
-	    del = d_sign(&del, &d__1);
+	    del = real_sign(&del, &d__1);
 	    del = y[n] + del - y[n];
 	    y[n] += del;
 /* L510: */
@@ -6710,7 +6714,7 @@ L500:
 	    d__3 = squr * MAX(d__5,d__6), d__4 = 1. / ewt[n];
 	    del = MAX(d__3,d__4);
 	    d__1 = *h__ * yprime[n];
-	    del = d_sign(&del, &d__1);
+	    del = real_sign(&del, &d__1);
 	    del = y[n] + del - y[n];
 	    delinv = 1. / del;
 /* Computing MAX */
@@ -7550,6 +7554,8 @@ L200:
     rl /= two;
     goto L100;
 
+/* final return to avoid warning should never used */
+    return 0;
 /* ----------------------- END OF SUBROUTINE DLINSK ---------------------- */
 } /* dlinsk_ */
 
@@ -8022,7 +8028,7 @@ L390:
     real_number d__1, d__2;
 
     /* Builtin functions */
-    double pow_dd(real_number *, real_number *);
+    real_number real_pow(real_number *, real_number *);
 
     /* Local variables */
     static integer i__, m;
@@ -8200,7 +8206,7 @@ L300:
     } else {
 	d__1 = delnrm / oldnrm;
 	d__2 = 1. / m;
-	rate = pow_dd(&d__1, &d__2);
+	rate = real_pow(&d__1, &d__2);
 	if (rate > .9) {
 	    goto L380;
 	}
@@ -9022,9 +9028,6 @@ L300:
     integer v_dim1, v_offset, hes_dim1, hes_offset, i__1, i__2;
     real_number d__1, d__2, d__3;
 
-    /* Builtin functions */
-    double sqrt(real_number);
-
     /* Local variables */
     static integer i__, i0;
     static real_number arg, tem;
@@ -9164,9 +9167,6 @@ L30:
 {
     /* System generated locals */
     integer a_dim1, a_offset, i__1, i__2;
-
-    /* Builtin functions */
-    double sqrt(real_number);
 
     /* Local variables */
     static real_number c__;
