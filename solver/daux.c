@@ -153,7 +153,8 @@ L10:
 
 /*  Write the message. */
 
-    printf("%s\n", msg);
+    fwrite(msg, msg_len, 1, stdout); /* do not use printf %s since fortran strings are not NULL-terminated */
+    putc('\n',stdout);
     if (*ni == 1) {
       printf(fmt_20, *i1);
     }
