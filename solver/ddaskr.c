@@ -970,7 +970,7 @@ static integer c__926 = 926;
 /*           the matrix A = dG/dY + CJ*dG/dYPRIME.  It must have */
 /*           the form */
 
-/*           SUBROUTINE JAC (T, Y, YPRIME, PD, CJ, RPAR, IPAR) */
+/*           SUBROUTINE JAC (T, Y, YPRIME, DELTA, PD, CJ, H, WT, RPAR, IPAR) */
 
 /*           The JAC routine must dimension Y, YPRIME, and PD (and RPAR */
 /*           and IPAR if used).  CJ is a scalar which is input to JAC. */
@@ -979,6 +979,9 @@ static integer c__926 = 926;
 /*           store these values in the array PD.  The elements of PD are */
 /*           set to zero before each call to JAC, so that only nonzero */
 /*           elements need to be defined. */
+/*			 Also DELTA contains the last evaluation delta of RES. */
+/*		     H is a scalar and contains current step size in integration. */
+/*		     EWT Vector of error weights for computing norms. */
 /*           The way you store the elements into the PD array depends */
 /*           on the structure of the matrix indicated by INFO(6). */
 /*           *** INFO(6) = 0 (full or dense matrix) *** */
@@ -6589,7 +6592,7 @@ L100:
 /* L110: */
 	wm[i__] = 0.;
     }
-    (*jacd)(x, &y[1], &yprime[1], &wm[1], cj, &rpar[1], &ipar[1]);
+    (*jacd)(x, &y[1], &yprime[1], &delta[1], &wm[1], cj, h__, &ewt[1], &rpar[1], &ipar[1]);
     goto L230;
 
 
@@ -6654,7 +6657,7 @@ L400:
 /* L410: */
 	wm[i__] = 0.;
     }
-    (*jacd)(x, &y[1], &yprime[1], &wm[1], cj, &rpar[1], &ipar[1]);
+    (*jacd)(x, &y[1], &yprime[1], &delta[1], &wm[1], cj, h__, &ewt[1], &rpar[1], &ipar[1]);
     meband = (iwm[1] << 1) + iwm[2] + 1;
     goto L550;
 
