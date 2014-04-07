@@ -9,7 +9,7 @@
 
 static integer c__1 = 1;
 
-/* Subroutine */ int dgefa_(real_number *a, integer *lda, integer *n, integer *
+/* Subroutine */ int _daskr_dgefa_(real_number *a, integer *lda, integer *n, integer *
 	ipvt, integer *info)
 {
     /* System generated locals */
@@ -19,10 +19,10 @@ static integer c__1 = 1;
     static integer j, k, l;
     static real_number t;
     static integer kp1, nm1;
-    extern /* Subroutine */ int dscal_(integer *, real_number *, real_number *,
-	    integer *), daxpy_(integer *, real_number *, real_number *, integer
+    extern /* Subroutine */ int _daskr_dscal_(integer *, real_number *, real_number *,
+	    integer *), _daskr_daxpy_(integer *, real_number *, real_number *, integer
 	    *, real_number *, integer *);
-    extern integer idamax_(integer *, real_number *, integer *);
+    extern integer _daskr_idamax_(integer *, real_number *, integer *);
 
 
 /*     dgefa factors a double precision matrix by gaussian elimination. */
@@ -93,7 +93,7 @@ static integer c__1 = 1;
 /*        find l = pivot index */
 
 	i__2 = *n - k + 1;
-	l = idamax_(&i__2, &a[k + k * a_dim1], &c__1) + k - 1;
+	l = _daskr_idamax_(&i__2, &a[k + k * a_dim1], &c__1) + k - 1;
 	ipvt[k] = l;
 
 /*        zero pivot implies this column already triangularized */
@@ -116,7 +116,7 @@ L10:
 
 	t = -1. / a[k + k * a_dim1];
 	i__2 = *n - k;
-	dscal_(&i__2, &t, &a[k + 1 + k * a_dim1], &c__1);
+	_daskr_dscal_(&i__2, &t, &a[k + 1 + k * a_dim1], &c__1);
 
 /*           row elimination with column indexing */
 
@@ -130,7 +130,7 @@ L10:
 	    a[k + j * a_dim1] = t;
 L20:
 	    i__3 = *n - k;
-	    daxpy_(&i__3, &t, &a[k + 1 + k * a_dim1], &c__1, &a[k + 1 + j * 
+	    _daskr_daxpy_(&i__3, &t, &a[k + 1 + k * a_dim1], &c__1, &a[k + 1 + j *
 		    a_dim1], &c__1);
 /* L30: */
 	}
@@ -149,7 +149,7 @@ L70:
     return 0;
 } /* dgefa_ */
 
-/* Subroutine */ int dgesl_(real_number *a, integer *lda, integer *n, integer *
+/* Subroutine */ int _daskr_dgesl_(real_number *a, integer *lda, integer *n, integer *
 	ipvt, real_number *b, integer *job)
 {
     /* System generated locals */
@@ -159,9 +159,9 @@ L70:
     static integer k, l;
     static real_number t;
     static integer kb, nm1;
-    extern real_number ddot_(integer *, real_number *, integer *, real_number *,
+    extern real_number _daskr_ddot_(integer *, real_number *, integer *, real_number *,
 	    integer *);
-    extern /* Subroutine */ int daxpy_(integer *, real_number *, real_number *,
+    extern /* Subroutine */ int _daskr_daxpy_(integer *, real_number *, real_number *,
 	    integer *, real_number *, integer *);
 
 
@@ -252,7 +252,7 @@ L70:
 	b[k] = t;
 L10:
 	i__2 = *n - k;
-	daxpy_(&i__2, &t, &a[k + 1 + k * a_dim1], &c__1, &b[k + 1], &c__1);
+	_daskr_daxpy_(&i__2, &t, &a[k + 1 + k * a_dim1], &c__1, &b[k + 1], &c__1);
 /* L20: */
     }
 L30:
@@ -265,7 +265,7 @@ L30:
 	b[k] /= a[k + k * a_dim1];
 	t = -b[k];
 	i__2 = k - 1;
-	daxpy_(&i__2, &t, &a[k * a_dim1 + 1], &c__1, &b[1], &c__1);
+	_daskr_daxpy_(&i__2, &t, &a[k * a_dim1 + 1], &c__1, &b[1], &c__1);
 /* L40: */
     }
     goto L100;
@@ -277,7 +277,7 @@ L50:
     i__1 = *n;
     for (k = 1; k <= i__1; ++k) {
 	i__2 = k - 1;
-	t = ddot_(&i__2, &a[k * a_dim1 + 1], &c__1, &b[1], &c__1);
+	t = _daskr_ddot_(&i__2, &a[k * a_dim1 + 1], &c__1, &b[1], &c__1);
 	b[k] = (b[k] - t) / a[k + k * a_dim1];
 /* L60: */
     }
@@ -291,7 +291,7 @@ L50:
     for (kb = 1; kb <= i__1; ++kb) {
 	k = *n - kb;
 	i__2 = *n - k;
-	b[k] += ddot_(&i__2, &a[k + 1 + k * a_dim1], &c__1, &b[k + 1], &c__1);
+	b[k] += _daskr_ddot_(&i__2, &a[k + 1 + k * a_dim1], &c__1, &b[k + 1], &c__1);
 	l = ipvt[k];
 	if (l == k) {
 	    goto L70;
@@ -308,7 +308,7 @@ L100:
     return 0;
 } /* dgesl_ */
 
-/* Subroutine */ int dgbfa_(real_number *abd, integer *lda, integer *n,
+/* Subroutine */ int _daskr_dgbfa_(real_number *abd, integer *lda, integer *n,
 	integer *ml, integer *mu, integer *ipvt, integer *info)
 {
     /* System generated locals */
@@ -318,10 +318,10 @@ L100:
     static integer i__, j, k, l, m;
     static real_number t;
     static integer i0, j0, j1, lm, mm, ju, jz, kp1, nm1;
-    extern /* Subroutine */ int dscal_(integer *, real_number *, real_number *,
-	    integer *), daxpy_(integer *, real_number *, real_number *, integer
+    extern /* Subroutine */ int _daskr_dscal_(integer *, real_number *, real_number *,
+	    integer *), _daskr_daxpy_(integer *, real_number *, real_number *, integer
 	    *, real_number *, integer *);
-    extern integer idamax_(integer *, real_number *, integer *);
+    extern integer _daskr_idamax_(integer *, real_number *, integer *);
 
 
 /*     dgbfa factors a double precision band matrix by elimination. */
@@ -471,7 +471,7 @@ L50:
 	i__2 = *ml, i__3 = *n - k;
 	lm = MIN(i__2,i__3);
 	i__2 = lm + 1;
-	l = idamax_(&i__2, &abd[m + k * abd_dim1], &c__1) + m - 1;
+	l = _daskr_idamax_(&i__2, &abd[m + k * abd_dim1], &c__1) + m - 1;
 	ipvt[k] = l + k - m;
 
 /*        zero pivot implies this column already triangularized */
@@ -493,7 +493,7 @@ L60:
 /*           compute multipliers */
 
 	t = -1. / abd[m + k * abd_dim1];
-	dscal_(&lm, &t, &abd[m + 1 + k * abd_dim1], &c__1);
+	_daskr_dscal_(&lm, &t, &abd[m + 1 + k * abd_dim1], &c__1);
 
 /*           row elimination with column indexing */
 
@@ -517,7 +517,7 @@ L60:
 	    abd[l + j * abd_dim1] = abd[mm + j * abd_dim1];
 	    abd[mm + j * abd_dim1] = t;
 L70:
-	    daxpy_(&lm, &t, &abd[m + 1 + k * abd_dim1], &c__1, &abd[mm + 1 + 
+	    _daskr_daxpy_(&lm, &t, &abd[m + 1 + k * abd_dim1], &c__1, &abd[mm + 1 +
 		    j * abd_dim1], &c__1);
 /* L80: */
 	}
@@ -537,7 +537,7 @@ L130:
     return 0;
 } /* dgbfa_ */
 
-/* Subroutine */ int dgbsl_(real_number *abd, integer *lda, integer *n,
+/* Subroutine */ int _daskr_dgbsl_(real_number *abd, integer *lda, integer *n,
 	integer *ml, integer *mu, integer *ipvt, real_number *b, integer *job)
 {
     /* System generated locals */
@@ -547,9 +547,9 @@ L130:
     static integer k, l, m;
     static real_number t;
     static integer kb, la, lb, lm, nm1;
-    extern real_number ddot_(integer *, real_number *, integer *, real_number *,
+    extern real_number _daskr_ddot_(integer *, real_number *, integer *, real_number *,
 	    integer *);
-    extern /* Subroutine */ int daxpy_(integer *, real_number *, real_number *,
+    extern /* Subroutine */ int _daskr_daxpy_(integer *, real_number *, real_number *,
 	    integer *, real_number *, integer *);
 
 
@@ -653,7 +653,7 @@ L130:
 	b[l] = b[k];
 	b[k] = t;
 L10:
-	daxpy_(&lm, &t, &abd[m + 1 + k * abd_dim1], &c__1, &b[k + 1], &c__1);
+	_daskr_daxpy_(&lm, &t, &abd[m + 1 + k * abd_dim1], &c__1, &b[k + 1], &c__1);
 /* L20: */
     }
 L30:
@@ -668,7 +668,7 @@ L30:
 	la = m - lm;
 	lb = k - lm;
 	t = -b[k];
-	daxpy_(&lm, &t, &abd[la + k * abd_dim1], &c__1, &b[lb], &c__1);
+	_daskr_daxpy_(&lm, &t, &abd[la + k * abd_dim1], &c__1, &b[lb], &c__1);
 /* L40: */
     }
     goto L100;
@@ -682,7 +682,7 @@ L50:
 	lm = MIN(k,m) - 1;
 	la = m - lm;
 	lb = k - lm;
-	t = ddot_(&lm, &abd[la + k * abd_dim1], &c__1, &b[lb], &c__1);
+	t = _daskr_ddot_(&lm, &abd[la + k * abd_dim1], &c__1, &b[lb], &c__1);
 	b[k] = (b[k] - t) / abd[m + k * abd_dim1];
 /* L60: */
     }
@@ -701,7 +701,7 @@ L50:
 /* Computing MIN */
 	i__2 = *ml, i__3 = *n - k;
 	lm = MIN(i__2,i__3);
-	b[k] += ddot_(&lm, &abd[m + 1 + k * abd_dim1], &c__1, &b[k + 1], &
+	b[k] += _daskr_ddot_(&lm, &abd[m + 1 + k * abd_dim1], &c__1, &b[k + 1], &
 		c__1);
 	l = ipvt[k];
 	if (l == k) {
@@ -719,7 +719,7 @@ L100:
     return 0;
 } /* dgbsl_ */
 
-/* Subroutine */ int daxpy_(integer *n, real_number *da, real_number *dx,
+/* Subroutine */ int _daskr_daxpy_(integer *n, real_number *da, real_number *dx,
 	integer *incx, real_number *dy, integer *incy)
 {
     /* System generated locals */
@@ -800,7 +800,7 @@ L40:
     return 0;
 } /* daxpy_ */
 
-/* Subroutine */ int dcopy_(integer *n, real_number *sx, integer *incx,
+/* Subroutine */ int _daskr_dcopy_(integer *n, real_number *sx, integer *incx,
 	real_number *sy, integer *incy)
 {
     /* System generated locals */
@@ -881,7 +881,7 @@ L40:
     return 0;
 } /* dcopy_ */
 
-/* Subroutine */ int dscal_(integer *n, real_number *da, real_number *dx,
+/* Subroutine */ int _daskr_dscal_(integer *n, real_number *da, real_number *dx,
 	integer *incx)
 {
     /* System generated locals */
@@ -950,7 +950,7 @@ L40:
     return 0;
 } /* dscal_ */
 
-real_number ddot_(integer *n, real_number *dx, integer *incx, real_number *dy,
+real_number _daskr_ddot_(integer *n, real_number *dx, integer *incx, real_number *dy,
 	integer *incy)
 {
     /* System generated locals */
@@ -1034,7 +1034,7 @@ L60:
     return ret_val;
 } /* ddot_ */
 
-real_number dnrm2_(integer *n, real_number *dx, integer *incx)
+real_number _daskr_dnrm2_(integer *n, real_number *dx, integer *incx)
 {
     /* Initialized data */
 
@@ -1233,7 +1233,7 @@ L300:
     return ret_val;
 } /* dnrm2_ */
 
-integer idamax_(integer *n, real_number *dx, integer *incx)
+integer _daskr_idamax_(integer *n, real_number *dx, integer *incx)
 {
     /* System generated locals */
     integer ret_val, i__1;

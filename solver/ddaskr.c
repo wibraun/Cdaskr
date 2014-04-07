@@ -115,7 +115,7 @@ static integer c__924 = 924;
 static integer c__925 = 925;
 static integer c__926 = 926;
 
-/* Subroutine */ int ddaskr_(Unknown_fp res, integer *neq, real_number *t,
+/* Subroutine */ int _daskr_ddaskr_(Unknown_fp res, integer *neq, real_number *t,
 	real_number *y, real_number *yprime, real_number *tout, integer *info,
 	real_number *rtol, real_number *atol, integer *idid, real_number *rwork,
 	integer *lrw, integer *iwork, integer *liw, real_number *rpar, integer
@@ -126,8 +126,8 @@ static integer c__926 = 926;
     real_number d__1, d__2;
 
     /* Builtin functions */
-    /* Subroutine */ int str_copy(char *, char *, integer, integer);
-    real_number real_pow(real_number *, real_number *), real_sign(
+    /* Subroutine */ int _daskr_str_copy(char *, char *, integer, integer);
+    double _daskr_real_pow(real_number *, real_number *), _daskr_real_sign(
 	    real_number *, real_number *);
 
     /* Local variables */
@@ -150,9 +150,9 @@ static integer c__926 = 926;
     static integer lyic, lpwk, nstd;
     static real_number rcfn;
     static integer ncfl0, ncfn0;
-    extern /* Subroutine */ int dnedd_();
+    extern /* Subroutine */ int _daskr_dnedd_();
     static integer mband;
-    extern /* Subroutine */ int dnedk_();
+    extern /* Subroutine */ int _daskr_dnedk_();
     static integer lenic, lenid, ncphi, lenpd, lsoff, msave, index, itemp, 
 	    leniw, nzflg;
     static real_number atoli;
@@ -161,9 +161,9 @@ static integer c__926 = 926;
     static integer lenwp, lenrw, mxord, nwarn;
     static real_number rtoli;
     static integer lsavr;
-    extern real_number d1mach_(integer *);
+    extern real_number _daskr_d1mach_(integer *);
     static real_number tdist, tnext, avlin, fmaxl, tstop;
-    extern /* Subroutine */ int ddstp_(real_number *, real_number *, real_number
+    extern /* Subroutine */ int _daskr_ddstp_(real_number *, real_number *, real_number
 	    *, integer *, Unknown_fp, Unknown_fp, Unknown_fp, real_number *, real_number *,
 	    real_number *, integer *, integer *, real_number *, integer *,
 	    real_number *, real_number *, real_number *, real_number *,
@@ -172,8 +172,8 @@ static integer c__926 = 926;
 	    real_number *, real_number *, real_number *, real_number *,
 	    real_number *, real_number *, real_number *, real_number *, integer *,
 	     integer *, integer *, integer *, integer *, integer *, integer *,
-	     integer *, Unknown_fp), dcnst0_(integer *, real_number *, integer *,
-	    integer *), ddasic_(real_number *, real_number *, real_number *,
+	     integer *, Unknown_fp), _daskr_dcnst0_(integer *, real_number *, integer *,
+	    integer *), _daskr_ddasic_(real_number *, real_number *, real_number *,
 	    integer *, integer *, integer *, Unknown_fp, Unknown_fp, Unknown_fp, real_number *,
 	    real_number *, real_number *, integer *, integer *, real_number *,
 	    integer *, real_number *, real_number *, real_number *, real_number *,
@@ -181,28 +181,28 @@ static integer c__926 = 926;
 	    , real_number *, real_number *, real_number *, real_number *,
 	    real_number *, real_number *, integer *, integer *, integer *, Unknown_fp)
 	    ;
-    extern /* Subroutine */ int ddasid_(), ddasik_();
-    extern /* Subroutine */ int drchek_(integer *, Unknown_fp, integer *, integer *,
+    extern /* Subroutine */ int _daskr_ddasid_(), _daskr_ddasik_();
+    extern /* Subroutine */ int _daskr_drchek_(integer *, Unknown_fp, integer *, integer *,
 	     real_number *, real_number *, real_number *, real_number *,
 	    real_number *, real_number *, integer *, real_number *, real_number *,
 	     real_number *, integer *, integer *, real_number *, integer *,
 	    real_number *, integer *, real_number *, integer *);
     static integer icnflg;
     static real_number tscale, epconi;
-    extern /* Subroutine */ int ddatrp_(real_number *, real_number *,
+    extern /* Subroutine */ int _daskr_ddatrp_(real_number *, real_number *,
 	    real_number *, real_number *, integer *, integer *, real_number *,
 	    real_number *);
     static real_number floatn;
     static integer nonneg;
-    extern /* Subroutine */ int ddawts_(integer *, integer *, real_number *,
+    extern /* Subroutine */ int _daskr_ddawts_(integer *, integer *, real_number *,
 	    real_number *, real_number *, real_number *, real_number *, integer *)
 	    ;
-    extern real_number ddwnrm_(integer *, real_number *, real_number *,
+    extern real_number _daskr_ddwnrm_(integer *, real_number *, real_number *,
 	    real_number *, integer *);
     static integer leniwp;
-    extern /* Subroutine */ int xerrwd_(char *, integer *, integer *, integer 
+    extern /* Subroutine */ int _daskr_xerrwd_(char *, integer *, integer *, integer
 	    *, integer *, integer *, integer *, integer *, real_number *,
-	    real_number *, integer), dinvwt_(integer *, real_number *, integer *)
+	    real_number *, integer), _daskr_dinvwt_(integer *, real_number *, integer *)
 	    ;
     static real_number uround, ypnorm;
 
@@ -1882,7 +1882,7 @@ L30:
 /*     Check Y for consistency with constraints. */
 
     if (lenic > 0) {
-	dcnst0_(neq, &y[1], &iwork[41], &iret);
+	_daskr_dcnst0_(neq, &y[1], &iwork[41], &iret);
 	if (iret != 0) {
 	    goto L727;
 	}
@@ -1959,17 +1959,17 @@ L100:
 /*     condition from DDSTP, and appropriate action was not taken. */
 /*     This is a fatal error. */
 
-    str_copy(msg, "DASKR--  THE LAST STEP TERMINATED WITH A NEGATIVE", (integer)
+    _daskr_str_copy(msg, "DASKR--  THE LAST STEP TERMINATED WITH A NEGATIVE", (integer)
 	    80, (integer)49);
-    xerrwd_(msg, &c__49, &c__201, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
+    _daskr_xerrwd_(msg, &c__49, &c__201, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
 	    c_b38, (integer)80);
-    str_copy(msg, "DASKR--  VALUE (=I1) OF IDID AND NO APPROPRIATE", (integer)80,
+    _daskr_str_copy(msg, "DASKR--  VALUE (=I1) OF IDID AND NO APPROPRIATE", (integer)80,
 	     (integer)47);
-    xerrwd_(msg, &c__47, &c__202, &c__0, &c__1, idid, &c__0, &c__0, &c_b38, &
+    _daskr_xerrwd_(msg, &c__47, &c__202, &c__0, &c__1, idid, &c__0, &c__0, &c_b38, &
 	    c_b38, (integer)80);
-    str_copy(msg, "DASKR--  ACTION WAS TAKEN. RUN TERMINATED", (integer)80, (
+    _daskr_str_copy(msg, "DASKR--  ACTION WAS TAKEN. RUN TERMINATED", (integer)80, (
 	    integer)41);
-    xerrwd_(msg, &c__41, &c__203, &c__1, &c__0, &c__0, &c__0, &c__0, &c_b38, &
+    _daskr_xerrwd_(msg, &c__41, &c__203, &c__1, &c__0, &c__0, &c__0, &c__0, &c_b38, &
 	    c_b38, (integer)80);
     return 0;
 L110:
@@ -2056,9 +2056,9 @@ L200:
 
 /*     Set error weight array WT and altered weight array VT. */
 
-    ddawts_(neq, &info[2], &rtol[1], &atol[1], &y[1], &rwork[lwt], &rpar[1], &
+    _daskr_ddawts_(neq, &info[2], &rtol[1], &atol[1], &y[1], &rwork[lwt], &rpar[1], &
 	    ipar[1]);
-    dinvwt_(neq, &rwork[lwt], &ier);
+    _daskr_dinvwt_(neq, &rwork[lwt], &ier);
     if (ier != 0) {
 	goto L713;
     }
@@ -2074,7 +2074,7 @@ L200:
 
 /*     Compute unit roundoff and HMIN. */
 
-    uround = d1mach_(&c__4);
+    uround = _daskr_d1mach_(&c__4);
     rwork[9] = uround;
 /* Computing MAX */
     d__1 = fabs(*t), d__2 = fabs(*tout);
@@ -2084,7 +2084,7 @@ L200:
 
     if (info[11] != 0) {
 	if (info[17] == 0) {
-	    rwork[14] = real_pow(&uround, &c_b68);
+	    rwork[14] = _daskr_real_pow(&uround, &c_b68);
 	} else {
 	    if (rwork[14] <= 0.) {
 		goto L725;
@@ -2126,12 +2126,12 @@ L310:
 /*     DDSTP or DDASIC, depending on INFO(11). */
 
     h0 = tdist * .001;
-    ypnorm = ddwnrm_(neq, &yprime[1], &rwork[lvt], &rpar[1], &ipar[1]);
+    ypnorm = _daskr_ddwnrm_(neq, &yprime[1], &rwork[lvt], &rpar[1], &ipar[1]);
     if (ypnorm > .5 / h0) {
 	h0 = .5 / ypnorm;
     }
     d__1 = *tout - *t;
-    h0 = real_sign(&h0, &d__1);
+    h0 = _daskr_real_sign(&h0, &d__1);
 
 /*     Adjust H0 if necessary to meet HMAX bound. */
 
@@ -2184,24 +2184,24 @@ L350:
 	lyic = lphi + (*neq << 1);
 	lypic = lyic + *neq;
 	lpwk = lypic;
-	ddasic_(&tn, &y[1], &yprime[1], neq, &info[11], &iwork[lid], (Unknown_fp)
+	_daskr_ddasic_(&tn, &y[1], &yprime[1], neq, &info[11], &iwork[lid], (Unknown_fp)
 		res, (Unknown_fp)jac, (Unknown_fp)psol, &h0, &tscale, &rwork[lwt], &nwt,
 		idid, &rpar[1], &ipar[1], &rwork[lphi], &rwork[lsavr], &rwork[
 		61], &rwork[le], &rwork[lyic], &rwork[lypic], &rwork[lpwk], &
 		rwork[lwm], &iwork[1], &rwork[9], &rwork[10], &rwork[11], &
 		rwork[12], &epconi, &rwork[14], &info[15], &icnflg, &iwork[41]
-		, (Unknown_fp)ddasid_);
+		, (Unknown_fp)_daskr_ddasid_);
     } else if (info[12] == 1) {
 	lyic = lwm;
 	lypic = lyic + *neq;
 	lpwk = lypic + *neq;
-	ddasic_(&tn, &y[1], &yprime[1], neq, &info[11], &iwork[lid], (Unknown_fp)
+	_daskr_ddasic_(&tn, &y[1], &yprime[1], neq, &info[11], &iwork[lid], (Unknown_fp)
 		res, (Unknown_fp)jac, (Unknown_fp)psol, &h0, &tscale, &rwork[lwt], &nwt,
 		idid, &rpar[1], &ipar[1], &rwork[lphi], &rwork[lsavr], &rwork[
 		61], &rwork[le], &rwork[lyic], &rwork[lypic], &rwork[lpwk], &
 		rwork[lwm], &iwork[1], &rwork[9], &rwork[10], &rwork[11], &
 		rwork[12], &epconi, &rwork[14], &info[15], &icnflg, &iwork[41]
-		, (Unknown_fp)ddasik_);
+		, (Unknown_fp)_daskr_ddasik_);
     }
 
     if (*idid < 0) {
@@ -2215,9 +2215,9 @@ L350:
 	goto L355;
     }
     nwt = 2;
-    ddawts_(neq, &info[2], &rtol[1], &atol[1], &y[1], &rwork[lwt], &rpar[1], &
+    _daskr_ddawts_(neq, &info[2], &rtol[1], &atol[1], &y[1], &rwork[lwt], &rpar[1], &
 	    ipar[1]);
-    dinvwt_(neq, &rwork[lwt], &ier);
+    _daskr_dinvwt_(neq, &rwork[lwt], &ier);
     if (ier != 0) {
 	goto L713;
     }
@@ -2237,9 +2237,9 @@ L355:
 
 /*     Update the WT and VT arrays one more time, with the new Y. */
 
-    ddawts_(neq, &info[2], &rtol[1], &atol[1], &y[1], &rwork[lwt], &rpar[1], &
+    _daskr_ddawts_(neq, &info[2], &rtol[1], &atol[1], &y[1], &rwork[lwt], &rpar[1], &
 	    ipar[1]);
-    dinvwt_(neq, &rwork[lwt], &ier);
+    _daskr_dinvwt_(neq, &rwork[lwt], &ier);
     if (ier != 0) {
 	goto L713;
     }
@@ -2263,12 +2263,12 @@ L355:
     }
 
     h0 = tdist * .001;
-    ypnorm = ddwnrm_(neq, &yprime[1], &rwork[lvt], &rpar[1], &ipar[1]);
+    ypnorm = _daskr_ddwnrm_(neq, &yprime[1], &rwork[lvt], &rpar[1], &ipar[1]);
     if (ypnorm > .5 / h0) {
 	h0 = .5 / ypnorm;
     }
     d__1 = *tout - *t;
-    h0 = real_sign(&h0, &d__1);
+    h0 = _daskr_real_sign(&h0, &d__1);
 
 L360:
     if (info[7] != 0) {
@@ -2313,7 +2313,7 @@ L370:
     if (*nrt == 0) {
 	goto L390;
     }
-    drchek_(&c__1, (Unknown_fp)rt, nrt, neq, t, tout, &y[1], &yprime[1], &rwork[
+    _daskr_drchek_(&c__1, (Unknown_fp)rt, nrt, neq, t, tout, &y[1], &yprime[1], &rwork[
 	    lphi], &rwork[39], &iwork[8], &rwork[lr0], &rwork[lr1], &rwork[
 	    lrx], jroot, &irt, &rwork[9], &info[3], &rwork[1], &iwork[1], &
 	    rpar[1], &ipar[1]);
@@ -2341,7 +2341,7 @@ L400:
 
 /*     Check for a zero of R near TN. */
 
-    drchek_(&c__2, (Unknown_fp)rt, nrt, neq, &tn, tout, &y[1], &yprime[1], &rwork[
+    _daskr_drchek_(&c__2, (Unknown_fp)rt, nrt, neq, &tn, tout, &y[1], &yprime[1], &rwork[
 	    lphi], &rwork[39], &iwork[8], &rwork[lr0], &rwork[lr1], &rwork[
 	    lrx], jroot, &irt, &rwork[9], &info[3], &rwork[1], &iwork[1], &
 	    rpar[1], &ipar[1]);
@@ -2381,7 +2381,7 @@ L410:
     if ((tn - *tout) * h__ < 0.) {
 	goto L490;
     }
-    ddatrp_(&tn, tout, &y[1], &yprime[1], neq, &iwork[8], &rwork[lphi], &
+    _daskr_ddatrp_(&tn, tout, &y[1], &yprime[1], neq, &iwork[8], &rwork[lphi], &
 	    rwork[39]);
     *t = *tout;
     *idid = 3;
@@ -2394,14 +2394,14 @@ L420:
     if ((tn - *tout) * h__ >= 0.) {
 	goto L425;
     }
-    ddatrp_(&tn, &tn, &y[1], &yprime[1], neq, &iwork[8], &rwork[lphi], &rwork[
+    _daskr_ddatrp_(&tn, &tn, &y[1], &yprime[1], neq, &iwork[8], &rwork[lphi], &rwork[
 	    39]);
     *t = tn;
     *idid = 1;
     done = _TRUE_;
     goto L490;
 L425:
-    ddatrp_(&tn, tout, &y[1], &yprime[1], neq, &iwork[8], &rwork[lphi], &
+    _daskr_ddatrp_(&tn, tout, &y[1], &yprime[1], neq, &iwork[8], &rwork[lphi], &
 	    rwork[39]);
     *t = *tout;
     *idid = 3;
@@ -2421,7 +2421,7 @@ L430:
     if ((tn - *tout) * h__ < 0.) {
 	goto L450;
     }
-    ddatrp_(&tn, tout, &y[1], &yprime[1], neq, &iwork[8], &rwork[lphi], &
+    _daskr_ddatrp_(&tn, tout, &y[1], &yprime[1], neq, &iwork[8], &rwork[lphi], &
 	    rwork[39]);
     *t = *tout;
     *idid = 3;
@@ -2441,14 +2441,14 @@ L440:
     if ((tn - *tout) * h__ >= 0.) {
 	goto L445;
     }
-    ddatrp_(&tn, &tn, &y[1], &yprime[1], neq, &iwork[8], &rwork[lphi], &rwork[
+    _daskr_ddatrp_(&tn, &tn, &y[1], &yprime[1], neq, &iwork[8], &rwork[lphi], &rwork[
 	    39]);
     *t = tn;
     *idid = 1;
     done = _TRUE_;
     goto L490;
 L445:
-    ddatrp_(&tn, tout, &y[1], &yprime[1], neq, &iwork[8], &rwork[lphi], &
+    _daskr_ddatrp_(&tn, tout, &y[1], &yprime[1], neq, &iwork[8], &rwork[lphi], &
 	    rwork[39]);
     *t = *tout;
     *idid = 3;
@@ -2462,7 +2462,7 @@ L450:
 	     {
 	goto L460;
     }
-    ddatrp_(&tn, &tstop, &y[1], &yprime[1], neq, &iwork[8], &rwork[lphi], &
+    _daskr_ddatrp_(&tn, &tstop, &y[1], &yprime[1], neq, &iwork[8], &rwork[lphi], &
 	    rwork[39]);
     *idid = 2;
     *t = tstop;
@@ -2527,42 +2527,42 @@ L505:
 	goto L510;
     }
     if (lavl) {
-	str_copy(msg, "DASKR-- Warning. Poor iterative algorithm performance   "
+	_daskr_str_copy(msg, "DASKR-- Warning. Poor iterative algorithm performance   "
 		, (integer)80, (integer)56);
-	xerrwd_(msg, &c__56, &c__501, &c__0, &c__0, &c__0, &c__0, &c__0, &
+	_daskr_xerrwd_(msg, &c__56, &c__501, &c__0, &c__0, &c__0, &c__0, &c__0, &
 		c_b38, &c_b38, (integer)80);
-	str_copy(msg, "      at T = R1. Average no. of linear iterations = R2  "
+	_daskr_str_copy(msg, "      at T = R1. Average no. of linear iterations = R2  "
 		, (integer)80, (integer)56);
-	xerrwd_(msg, &c__56, &c__501, &c__0, &c__0, &c__0, &c__0, &c__2, &tn, 
+	_daskr_xerrwd_(msg, &c__56, &c__501, &c__0, &c__0, &c__0, &c__0, &c__2, &tn,
 		&avlin, (integer)80);
     }
     if (lcfn) {
-	str_copy(msg, "DASKR-- Warning. Poor iterative algorithm performance   "
+	_daskr_str_copy(msg, "DASKR-- Warning. Poor iterative algorithm performance   "
 		, (integer)80, (integer)56);
-	xerrwd_(msg, &c__56, &c__502, &c__0, &c__0, &c__0, &c__0, &c__0, &
+	_daskr_xerrwd_(msg, &c__56, &c__502, &c__0, &c__0, &c__0, &c__0, &c__0, &
 		c_b38, &c_b38, (integer)80);
-	str_copy(msg, "      at T = R1. Nonlinear convergence failure rate = R2"
+	_daskr_str_copy(msg, "      at T = R1. Nonlinear convergence failure rate = R2"
 		, (integer)80, (integer)56);
-	xerrwd_(msg, &c__56, &c__502, &c__0, &c__0, &c__0, &c__0, &c__2, &tn, 
+	_daskr_xerrwd_(msg, &c__56, &c__502, &c__0, &c__0, &c__0, &c__0, &c__2, &tn,
 		&rcfn, (integer)80);
     }
     if (lcfl) {
-	str_copy(msg, "DASKR-- Warning. Poor iterative algorithm performance   "
+	_daskr_str_copy(msg, "DASKR-- Warning. Poor iterative algorithm performance   "
 		, (integer)80, (integer)56);
-	xerrwd_(msg, &c__56, &c__503, &c__0, &c__0, &c__0, &c__0, &c__0, &
+	_daskr_xerrwd_(msg, &c__56, &c__503, &c__0, &c__0, &c__0, &c__0, &c__0, &
 		c_b38, &c_b38, (integer)80);
-	str_copy(msg, "      at T = R1. Linear convergence failure rate = R2   "
+	_daskr_str_copy(msg, "      at T = R1. Linear convergence failure rate = R2   "
 		, (integer)80, (integer)56);
-	xerrwd_(msg, &c__56, &c__503, &c__0, &c__0, &c__0, &c__0, &c__2, &tn, 
+	_daskr_xerrwd_(msg, &c__56, &c__503, &c__0, &c__0, &c__0, &c__0, &c__2, &tn,
 		&rcfl, (integer)80);
     }
 
 /*     Update WT and VT, if this is not the first call. */
 
 L510:
-    ddawts_(neq, &info[2], &rtol[1], &atol[1], &rwork[lphi], &rwork[lwt], &
+    _daskr_ddawts_(neq, &info[2], &rtol[1], &atol[1], &rwork[lphi], &rwork[lwt], &
 	    rpar[1], &ipar[1]);
-    dinvwt_(neq, &rwork[lwt], &ier);
+    _daskr_dinvwt_(neq, &rwork[lwt], &ier);
     if (ier != 0) {
 	*idid = -3;
 	goto L527;
@@ -2579,7 +2579,7 @@ L510:
 
 /*     Test for too much accuracy requested. */
 
-    r__ = ddwnrm_(neq, &rwork[lphi], &rwork[lwt], &rpar[1], &ipar[1]) * 100. *
+    r__ = _daskr_ddwnrm_(neq, &rwork[lphi], &rwork[lwt], &rpar[1], &ipar[1]) * 100. *
 	     uround;
     if (r__ <= 1.) {
 	goto L525;
@@ -2624,23 +2624,23 @@ L525:
 /*     Pass the required nonlinear solver, depending upon INFO(12). */
 
     if (info[12] == 0) {
-	ddstp_(&tn, &y[1], &yprime[1], neq, (Unknown_fp)res, (Unknown_fp)jac, (Unknown_fp)psol,
+	_daskr_ddstp_(&tn, &y[1], &yprime[1], neq, (Unknown_fp)res, (Unknown_fp)jac, (Unknown_fp)psol,
 		&h__, &rwork[lwt], &rwork[lvt], &info[1], idid, &rpar[1], &
 		ipar[1], &rwork[lphi], &rwork[lsavr], &rwork[61], &rwork[le], 
 		&rwork[lwm], &iwork[1], &rwork[21], &rwork[27], &rwork[33], &
 		rwork[39], &rwork[45], &rwork[5], &rwork[6], &rwork[7], &
 		rwork[8], &hmin, &rwork[9], &rwork[10], &rwork[11], &rwork[12]
 		, &rwork[13], &iwork[6], &iwork[5], &info[15], &iwork[7], &
-		iwork[8], &iwork[9], &nonneg, &info[12], (Unknown_fp)dnedd_);
+		iwork[8], &iwork[9], &nonneg, &info[12], (Unknown_fp)_daskr_dnedd_);
     } else if (info[12] == 1) {
-	ddstp_(&tn, &y[1], &yprime[1], neq, (Unknown_fp)res, (Unknown_fp)jac, (Unknown_fp)psol,
+	_daskr_ddstp_(&tn, &y[1], &yprime[1], neq, (Unknown_fp)res, (Unknown_fp)jac, (Unknown_fp)psol,
 		&h__, &rwork[lwt], &rwork[lvt], &info[1], idid, &rpar[1], &
 		ipar[1], &rwork[lphi], &rwork[lsavr], &rwork[61], &rwork[le], 
 		&rwork[lwm], &iwork[1], &rwork[21], &rwork[27], &rwork[33], &
 		rwork[39], &rwork[45], &rwork[5], &rwork[6], &rwork[7], &
 		rwork[8], &hmin, &rwork[9], &rwork[10], &rwork[11], &rwork[12]
 		, &rwork[13], &iwork[6], &iwork[5], &info[15], &iwork[7], &
-		iwork[8], &iwork[9], &nonneg, &info[12], (Unknown_fp)dnedk_);
+		iwork[8], &iwork[9], &nonneg, &info[12], (Unknown_fp)_daskr_dnedk_);
     }
 
 L527:
@@ -2659,7 +2659,7 @@ L527:
 
 /*     Check for a zero of R near TN. */
 
-    drchek_(&c__3, (Unknown_fp)rt, nrt, neq, &tn, tout, &y[1], &yprime[1], &rwork[
+    _daskr_drchek_(&c__3, (Unknown_fp)rt, nrt, neq, &tn, tout, &y[1], &yprime[1], &rwork[
 	    lphi], &rwork[39], &iwork[8], &rwork[lr0], &rwork[lr1], &rwork[
 	    lrx], jroot, &irt, &rwork[9], &info[3], &rwork[1], &iwork[1], &
 	    rpar[1], &ipar[1]);
@@ -2675,7 +2675,7 @@ L530:
     if (info[4] == 0) {
 /*        Stopping tests for the case of no TSTOP. ---------------------- */
 	if ((tn - *tout) * h__ >= 0.) {
-	    ddatrp_(&tn, tout, &y[1], &yprime[1], neq, &iwork[8], &rwork[lphi]
+	    _daskr_ddatrp_(&tn, tout, &y[1], &yprime[1], neq, &iwork[8], &rwork[lphi]
 		    , &rwork[39]);
 	    *t = *tout;
 	    *idid = 3;
@@ -2696,14 +2696,14 @@ L530:
 /*     Stopping tests for the TSTOP case, interval-output mode. --------- */
     if ((d__1 = tn - tstop, fabs(d__1)) <= uround * 100. * (fabs(tn) + fabs(h__))
 	    ) {
-	ddatrp_(&tn, &tstop, &y[1], &yprime[1], neq, &iwork[8], &rwork[lphi], 
+	_daskr_ddatrp_(&tn, &tstop, &y[1], &yprime[1], neq, &iwork[8], &rwork[lphi],
 		&rwork[39]);
 	*t = tstop;
 	*idid = 2;
 	goto L580;
     }
     if ((tn - *tout) * h__ >= 0.) {
-	ddatrp_(&tn, tout, &y[1], &yprime[1], neq, &iwork[8], &rwork[lphi], &
+	_daskr_ddatrp_(&tn, tout, &y[1], &yprime[1], neq, &iwork[8], &rwork[lphi], &
 		rwork[39]);
 	*t = *tout;
 	*idid = 3;
@@ -2720,14 +2720,14 @@ L550:
 /*     Stopping tests for the TSTOP case, intermediate-output mode. ----- */
     if ((d__1 = tn - tstop, fabs(d__1)) <= uround * 100. * (fabs(tn) + fabs(h__))
 	    ) {
-	ddatrp_(&tn, &tstop, &y[1], &yprime[1], neq, &iwork[8], &rwork[lphi], 
+	_daskr_ddatrp_(&tn, &tstop, &y[1], &yprime[1], neq, &iwork[8], &rwork[lphi],
 		&rwork[39]);
 	*t = tstop;
 	*idid = 2;
 	goto L580;
     }
     if ((tn - *tout) * h__ >= 0.) {
-	ddatrp_(&tn, tout, &y[1], &yprime[1], neq, &iwork[8], &rwork[lphi], &
+	_daskr_ddatrp_(&tn, tout, &y[1], &yprime[1], neq, &iwork[8], &rwork[lphi], &
 		rwork[39]);
 	*t = *tout;
 	*idid = 3;
@@ -2776,184 +2776,184 @@ L600:
 /*     reaching tout. */
 
 L610:
-    str_copy(msg, "DASKR--  AT CURRENT T (=R1)  500 STEPS", (integer)80, (integer)
+    _daskr_str_copy(msg, "DASKR--  AT CURRENT T (=R1)  500 STEPS", (integer)80, (integer)
 	    38);
-    xerrwd_(msg, &c__38, &c__610, &c__0, &c__0, &c__0, &c__0, &c__1, &tn, &
+    _daskr_xerrwd_(msg, &c__38, &c__610, &c__0, &c__0, &c__0, &c__0, &c__1, &tn, &
 	    c_b38, (integer)80);
-    str_copy(msg, "DASKR--  TAKEN ON THIS CALL BEFORE REACHING TOUT", (integer)
+    _daskr_str_copy(msg, "DASKR--  TAKEN ON THIS CALL BEFORE REACHING TOUT", (integer)
 	    80, (integer)48);
-    xerrwd_(msg, &c__48, &c__611, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
+    _daskr_xerrwd_(msg, &c__48, &c__611, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
 	    c_b38, (integer)80);
     goto L700;
 
 /*     Too much accuracy for machine precision. */
 
 L620:
-    str_copy(msg, "DASKR--  AT T (=R1) TOO MUCH ACCURACY REQUESTED", (integer)80,
+    _daskr_str_copy(msg, "DASKR--  AT T (=R1) TOO MUCH ACCURACY REQUESTED", (integer)80,
 	     (integer)47);
-    xerrwd_(msg, &c__47, &c__620, &c__0, &c__0, &c__0, &c__0, &c__1, &tn, &
+    _daskr_xerrwd_(msg, &c__47, &c__620, &c__0, &c__0, &c__0, &c__0, &c__1, &tn, &
 	    c_b38, (integer)80);
-    str_copy(msg, "DASKR--  FOR PRECISION OF MACHINE. RTOL AND ATOL", (integer)
+    _daskr_str_copy(msg, "DASKR--  FOR PRECISION OF MACHINE. RTOL AND ATOL", (integer)
 	    80, (integer)48);
-    xerrwd_(msg, &c__48, &c__621, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
+    _daskr_xerrwd_(msg, &c__48, &c__621, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
 	    c_b38, (integer)80);
-    str_copy(msg, "DASKR--  WERE INCREASED BY A FACTOR R (=R1)", (integer)80, (
+    _daskr_str_copy(msg, "DASKR--  WERE INCREASED BY A FACTOR R (=R1)", (integer)80, (
 	    integer)43);
-    xerrwd_(msg, &c__43, &c__622, &c__0, &c__0, &c__0, &c__0, &c__1, &r__, &
+    _daskr_xerrwd_(msg, &c__43, &c__622, &c__0, &c__0, &c__0, &c__0, &c__1, &r__, &
 	    c_b38, (integer)80);
     goto L700;
 
 /*     WT(I) .LE. 0.0D0 for some I (not at start of problem). */
 
 L630:
-    str_copy(msg, "DASKR--  AT T (=R1) SOME ELEMENT OF WT", (integer)80, (integer)
+    _daskr_str_copy(msg, "DASKR--  AT T (=R1) SOME ELEMENT OF WT", (integer)80, (integer)
 	    38);
-    xerrwd_(msg, &c__38, &c__630, &c__0, &c__0, &c__0, &c__0, &c__1, &tn, &
+    _daskr_xerrwd_(msg, &c__38, &c__630, &c__0, &c__0, &c__0, &c__0, &c__1, &tn, &
 	    c_b38, (integer)80);
-    str_copy(msg, "DASKR--  HAS BECOME .LE. 0.0", (integer)80, (integer)28);
-    xerrwd_(msg, &c__28, &c__631, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
+    _daskr_str_copy(msg, "DASKR--  HAS BECOME .LE. 0.0", (integer)80, (integer)28);
+    _daskr_xerrwd_(msg, &c__28, &c__631, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
 	    c_b38, (integer)80);
     goto L700;
 
 /*     Error test failed repeatedly or with H=HMIN. */
 
 L640:
-    str_copy(msg, "DASKR--  AT T (=R1) AND STEPSIZE H (=R2) THE", (integer)80, (
+    _daskr_str_copy(msg, "DASKR--  AT T (=R1) AND STEPSIZE H (=R2) THE", (integer)80, (
 	    integer)44);
-    xerrwd_(msg, &c__44, &c__640, &c__0, &c__0, &c__0, &c__0, &c__2, &tn, &
+    _daskr_xerrwd_(msg, &c__44, &c__640, &c__0, &c__0, &c__0, &c__0, &c__2, &tn, &
 	    h__, (integer)80);
-    str_copy(msg, "DASKR--  ERROR TEST FAILED REPEATEDLY OR WITH ABS(H)=HMIN", (
+    _daskr_str_copy(msg, "DASKR--  ERROR TEST FAILED REPEATEDLY OR WITH ABS(H)=HMIN", (
 	    integer)80, (integer)57);
-    xerrwd_(msg, &c__57, &c__641, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
+    _daskr_xerrwd_(msg, &c__57, &c__641, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
 	    c_b38, (integer)80);
     goto L700;
 
 /*     Nonlinear solver failed to converge repeatedly or with H=HMIN. */
 
 L650:
-    str_copy(msg, "DASKR--  AT T (=R1) AND STEPSIZE H (=R2) THE", (integer)80, (
+    _daskr_str_copy(msg, "DASKR--  AT T (=R1) AND STEPSIZE H (=R2) THE", (integer)80, (
 	    integer)44);
-    xerrwd_(msg, &c__44, &c__650, &c__0, &c__0, &c__0, &c__0, &c__2, &tn, &
+    _daskr_xerrwd_(msg, &c__44, &c__650, &c__0, &c__0, &c__0, &c__0, &c__2, &tn, &
 	    h__, (integer)80);
-    str_copy(msg, "DASKR--  NONLINEAR SOLVER FAILED TO CONVERGE", (integer)80, (
+    _daskr_str_copy(msg, "DASKR--  NONLINEAR SOLVER FAILED TO CONVERGE", (integer)80, (
 	    integer)44);
-    xerrwd_(msg, &c__44, &c__651, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
+    _daskr_xerrwd_(msg, &c__44, &c__651, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
 	    c_b38, (integer)80);
-    str_copy(msg, "DASKR--  REPEATEDLY OR WITH ABS(H)=HMIN", (integer)80, (
+    _daskr_str_copy(msg, "DASKR--  REPEATEDLY OR WITH ABS(H)=HMIN", (integer)80, (
 	    integer)39);
-    xerrwd_(msg, &c__40, &c__652, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
+    _daskr_xerrwd_(msg, &c__40, &c__652, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
 	    c_b38, (integer)80);
     goto L700;
 
 /*     The preconditioner had repeated failures. */
 
 L655:
-    str_copy(msg, "DASKR--  AT T (=R1) AND STEPSIZE H (=R2) THE", (integer)80, (
+    _daskr_str_copy(msg, "DASKR--  AT T (=R1) AND STEPSIZE H (=R2) THE", (integer)80, (
 	    integer)44);
-    xerrwd_(msg, &c__44, &c__655, &c__0, &c__0, &c__0, &c__0, &c__2, &tn, &
+    _daskr_xerrwd_(msg, &c__44, &c__655, &c__0, &c__0, &c__0, &c__0, &c__2, &tn, &
 	    h__, (integer)80);
-    str_copy(msg, "DASKR--  PRECONDITIONER HAD REPEATED FAILURES.", (integer)80,
+    _daskr_str_copy(msg, "DASKR--  PRECONDITIONER HAD REPEATED FAILURES.", (integer)80,
 	    (integer)46);
-    xerrwd_(msg, &c__46, &c__656, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
+    _daskr_xerrwd_(msg, &c__46, &c__656, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
 	    c_b38, (integer)80);
     goto L700;
 
 /*     The iteration matrix is singular. */
 
 L660:
-    str_copy(msg, "DASKR--  AT T (=R1) AND STEPSIZE H (=R2) THE", (integer)80, (
+    _daskr_str_copy(msg, "DASKR--  AT T (=R1) AND STEPSIZE H (=R2) THE", (integer)80, (
 	    integer)44);
-    xerrwd_(msg, &c__44, &c__660, &c__0, &c__0, &c__0, &c__0, &c__2, &tn, &
+    _daskr_xerrwd_(msg, &c__44, &c__660, &c__0, &c__0, &c__0, &c__0, &c__2, &tn, &
 	    h__, (integer)80);
-    str_copy(msg, "DASKR--  ITERATION MATRIX IS SINGULAR.", (integer)80, (integer)
+    _daskr_str_copy(msg, "DASKR--  ITERATION MATRIX IS SINGULAR.", (integer)80, (integer)
 	    38);
-    xerrwd_(msg, &c__38, &c__661, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
+    _daskr_xerrwd_(msg, &c__38, &c__661, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
 	    c_b38, (integer)80);
     goto L700;
 
 /*     Nonlinear system failure preceded by error test failures. */
 
 L670:
-    str_copy(msg, "DASKR--  AT T (=R1) AND STEPSIZE H (=R2) THE", (integer)80, (
+    _daskr_str_copy(msg, "DASKR--  AT T (=R1) AND STEPSIZE H (=R2) THE", (integer)80, (
 	    integer)44);
-    xerrwd_(msg, &c__44, &c__670, &c__0, &c__0, &c__0, &c__0, &c__2, &tn, &
+    _daskr_xerrwd_(msg, &c__44, &c__670, &c__0, &c__0, &c__0, &c__0, &c__2, &tn, &
 	    h__, (integer)80);
-    str_copy(msg, "DASKR--  NONLINEAR SOLVER COULD NOT CONVERGE.", (integer)80, (
+    _daskr_str_copy(msg, "DASKR--  NONLINEAR SOLVER COULD NOT CONVERGE.", (integer)80, (
 	    integer)45);
-    xerrwd_(msg, &c__45, &c__671, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
+    _daskr_xerrwd_(msg, &c__45, &c__671, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
 	    c_b38, (integer)80);
-    str_copy(msg, "DASKR--  ALSO, THE ERROR TEST FAILED REPEATEDLY.", (integer)
+    _daskr_str_copy(msg, "DASKR--  ALSO, THE ERROR TEST FAILED REPEATEDLY.", (integer)
 	    80, (integer)48);
-    xerrwd_(msg, &c__49, &c__672, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
+    _daskr_xerrwd_(msg, &c__49, &c__672, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
 	    c_b38, (integer)80);
     goto L700;
 
 /*     Nonlinear system failure because IRES = -1. */
 
 L675:
-    str_copy(msg, "DASKR--  AT T (=R1) AND STEPSIZE H (=R2) THE", (integer)80, (
+    _daskr_str_copy(msg, "DASKR--  AT T (=R1) AND STEPSIZE H (=R2) THE", (integer)80, (
 	    integer)44);
-    xerrwd_(msg, &c__44, &c__675, &c__0, &c__0, &c__0, &c__0, &c__2, &tn, &
+    _daskr_xerrwd_(msg, &c__44, &c__675, &c__0, &c__0, &c__0, &c__0, &c__2, &tn, &
 	    h__, (integer)80);
-    str_copy(msg, "DASKR--  NONLINEAR SYSTEM SOLVER COULD NOT CONVERGE", (
+    _daskr_str_copy(msg, "DASKR--  NONLINEAR SYSTEM SOLVER COULD NOT CONVERGE", (
 	    integer)80, (integer)51);
-    xerrwd_(msg, &c__51, &c__676, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
+    _daskr_xerrwd_(msg, &c__51, &c__676, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
 	    c_b38, (integer)80);
-    str_copy(msg, "DASKR--  BECAUSE IRES WAS EQUAL TO MINUS ONE", (integer)80, (
+    _daskr_str_copy(msg, "DASKR--  BECAUSE IRES WAS EQUAL TO MINUS ONE", (integer)80, (
 	    integer)44);
-    xerrwd_(msg, &c__44, &c__677, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
+    _daskr_xerrwd_(msg, &c__44, &c__677, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
 	    c_b38, (integer)80);
     goto L700;
 
 /*     Failure because IRES = -2. */
 
 L680:
-    str_copy(msg, "DASKR--  AT T (=R1) AND STEPSIZE H (=R2)", (integer)80, (
+    _daskr_str_copy(msg, "DASKR--  AT T (=R1) AND STEPSIZE H (=R2)", (integer)80, (
 	    integer)40);
-    xerrwd_(msg, &c__40, &c__680, &c__0, &c__0, &c__0, &c__0, &c__2, &tn, &
+    _daskr_xerrwd_(msg, &c__40, &c__680, &c__0, &c__0, &c__0, &c__0, &c__2, &tn, &
 	    h__, (integer)80);
-    str_copy(msg, "DASKR--  IRES WAS EQUAL TO MINUS TWO", (integer)80, (integer)
+    _daskr_str_copy(msg, "DASKR--  IRES WAS EQUAL TO MINUS TWO", (integer)80, (integer)
 	    36);
-    xerrwd_(msg, &c__36, &c__681, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
+    _daskr_xerrwd_(msg, &c__36, &c__681, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
 	    c_b38, (integer)80);
     goto L700;
 
 /*     Failed to compute initial YPRIME. */
 
 L685:
-    str_copy(msg, "DASKR--  AT T (=R1) AND STEPSIZE H (=R2) THE", (integer)80, (
+    _daskr_str_copy(msg, "DASKR--  AT T (=R1) AND STEPSIZE H (=R2) THE", (integer)80, (
 	    integer)44);
-    xerrwd_(msg, &c__44, &c__685, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
+    _daskr_xerrwd_(msg, &c__44, &c__685, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
 	    c_b38, (integer)80);
-    str_copy(msg, "DASKR--  INITIAL (Y,YPRIME) COULD NOT BE COMPUTED", (integer)
+    _daskr_str_copy(msg, "DASKR--  INITIAL (Y,YPRIME) COULD NOT BE COMPUTED", (integer)
 	    80, (integer)49);
-    xerrwd_(msg, &c__49, &c__686, &c__0, &c__0, &c__0, &c__0, &c__2, &tn, &h0,
+    _daskr_xerrwd_(msg, &c__49, &c__686, &c__0, &c__0, &c__0, &c__0, &c__2, &tn, &h0,
 	     (integer)80);
     goto L700;
 
 /*     Failure because IER was negative from PSOL. */
 
 L690:
-    str_copy(msg, "DASKR--  AT T (=R1) AND STEPSIZE H (=R2)", (integer)80, (
+    _daskr_str_copy(msg, "DASKR--  AT T (=R1) AND STEPSIZE H (=R2)", (integer)80, (
 	    integer)40);
-    xerrwd_(msg, &c__40, &c__690, &c__0, &c__0, &c__0, &c__0, &c__2, &tn, &
+    _daskr_xerrwd_(msg, &c__40, &c__690, &c__0, &c__0, &c__0, &c__0, &c__2, &tn, &
 	    h__, (integer)80);
-    str_copy(msg, "DASKR--  IER WAS NEGATIVE FROM PSOL", (integer)80, (integer)35)
+    _daskr_str_copy(msg, "DASKR--  IER WAS NEGATIVE FROM PSOL", (integer)80, (integer)35)
 	    ;
-    xerrwd_(msg, &c__35, &c__691, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
+    _daskr_xerrwd_(msg, &c__35, &c__691, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
 	    c_b38, (integer)80);
     goto L700;
 
 /*     Failure because the linear system solver could not converge. */
 
 L695:
-    str_copy(msg, "DASKR--  AT T (=R1) AND STEPSIZE H (=R2) THE", (integer)80, (
+    _daskr_str_copy(msg, "DASKR--  AT T (=R1) AND STEPSIZE H (=R2) THE", (integer)80, (
 	    integer)44);
-    xerrwd_(msg, &c__44, &c__695, &c__0, &c__0, &c__0, &c__0, &c__2, &tn, &
+    _daskr_xerrwd_(msg, &c__44, &c__695, &c__0, &c__0, &c__0, &c__0, &c__2, &tn, &
 	    h__, (integer)80);
-    str_copy(msg, "DASKR--  LINEAR SYSTEM SOLVER COULD NOT CONVERGE.", (integer)
+    _daskr_str_copy(msg, "DASKR--  LINEAR SYSTEM SOLVER COULD NOT CONVERGE.", (integer)
 	    80, (integer)49);
-    xerrwd_(msg, &c__50, &c__696, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
+    _daskr_xerrwd_(msg, &c__50, &c__696, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
 	    c_b38, (integer)80);
     goto L700;
 
@@ -2973,169 +2973,169 @@ L700:
 /* ----------------------------------------------------------------------- */
 
 L701:
-    str_copy(msg, "DASKR--  ELEMENT (=I1) OF INFO VECTOR IS NOT VALID", (integer)
+    _daskr_str_copy(msg, "DASKR--  ELEMENT (=I1) OF INFO VECTOR IS NOT VALID", (integer)
 	    80, (integer)50);
-    xerrwd_(msg, &c__50, &c__1, &c__0, &c__1, &itemp, &c__0, &c__0, &c_b38, &
+    _daskr_xerrwd_(msg, &c__50, &c__1, &c__0, &c__1, &itemp, &c__0, &c__0, &c_b38, &
 	    c_b38, (integer)80);
     goto L750;
 L702:
-    str_copy(msg, "DASKR--  NEQ (=I1) .LE. 0", (integer)80, (integer)25);
-    xerrwd_(msg, &c__25, &c__2, &c__0, &c__1, neq, &c__0, &c__0, &c_b38, &
+    _daskr_str_copy(msg, "DASKR--  NEQ (=I1) .LE. 0", (integer)80, (integer)25);
+    _daskr_xerrwd_(msg, &c__25, &c__2, &c__0, &c__1, neq, &c__0, &c__0, &c_b38, &
 	    c_b38, (integer)80);
     goto L750;
 L703:
-    str_copy(msg, "DASKR--  MAXORD (=I1) NOT IN RANGE", (integer)80, (integer)34);
-    xerrwd_(msg, &c__34, &c__3, &c__0, &c__1, &mxord, &c__0, &c__0, &c_b38, &
+    _daskr_str_copy(msg, "DASKR--  MAXORD (=I1) NOT IN RANGE", (integer)80, (integer)34);
+    _daskr_xerrwd_(msg, &c__34, &c__3, &c__0, &c__1, &mxord, &c__0, &c__0, &c_b38, &
 	    c_b38, (integer)80);
     goto L750;
 L704:
-    str_copy(msg, "DASKR--  RWORK LENGTH NEEDED, LENRW (=I1), EXCEEDS LRW (=I2)"
+    _daskr_str_copy(msg, "DASKR--  RWORK LENGTH NEEDED, LENRW (=I1), EXCEEDS LRW (=I2)"
 	    , (integer)80, (integer)60);
-    xerrwd_(msg, &c__60, &c__4, &c__0, &c__2, &lenrw, lrw, &c__0, &c_b38, &
+    _daskr_xerrwd_(msg, &c__60, &c__4, &c__0, &c__2, &lenrw, lrw, &c__0, &c_b38, &
 	    c_b38, (integer)80);
     goto L750;
 L705:
-    str_copy(msg, "DASKR--  IWORK LENGTH NEEDED, LENIW (=I1), EXCEEDS LIW (=I2)"
+    _daskr_str_copy(msg, "DASKR--  IWORK LENGTH NEEDED, LENIW (=I1), EXCEEDS LIW (=I2)"
 	    , (integer)80, (integer)60);
-    xerrwd_(msg, &c__60, &c__5, &c__0, &c__2, &leniw, liw, &c__0, &c_b38, &
+    _daskr_xerrwd_(msg, &c__60, &c__5, &c__0, &c__2, &leniw, liw, &c__0, &c_b38, &
 	    c_b38, (integer)80);
     goto L750;
 L706:
-    str_copy(msg, "DASKR--  SOME ELEMENT OF RTOL IS .LT. 0", (integer)80, (
+    _daskr_str_copy(msg, "DASKR--  SOME ELEMENT OF RTOL IS .LT. 0", (integer)80, (
 	    integer)39);
-    xerrwd_(msg, &c__39, &c__6, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
+    _daskr_xerrwd_(msg, &c__39, &c__6, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
 	    c_b38, (integer)80);
     goto L750;
 L707:
-    str_copy(msg, "DASKR--  SOME ELEMENT OF ATOL IS .LT. 0", (integer)80, (
+    _daskr_str_copy(msg, "DASKR--  SOME ELEMENT OF ATOL IS .LT. 0", (integer)80, (
 	    integer)39);
-    xerrwd_(msg, &c__39, &c__7, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
+    _daskr_xerrwd_(msg, &c__39, &c__7, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
 	    c_b38, (integer)80);
     goto L750;
 L708:
-    str_copy(msg, "DASKR--  ALL ELEMENTS OF RTOL AND ATOL ARE ZERO", (integer)80,
+    _daskr_str_copy(msg, "DASKR--  ALL ELEMENTS OF RTOL AND ATOL ARE ZERO", (integer)80,
 	     (integer)47);
-    xerrwd_(msg, &c__47, &c__8, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
+    _daskr_xerrwd_(msg, &c__47, &c__8, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
 	    c_b38, (integer)80);
     goto L750;
 L709:
-    str_copy(msg, "DASKR--  INFO(4) = 1 AND TSTOP (=R1) BEHIND TOUT (=R2)", (
+    _daskr_str_copy(msg, "DASKR--  INFO(4) = 1 AND TSTOP (=R1) BEHIND TOUT (=R2)", (
 	    integer)80, (integer)54);
-    xerrwd_(msg, &c__54, &c__9, &c__0, &c__0, &c__0, &c__0, &c__2, &tstop, 
+    _daskr_xerrwd_(msg, &c__54, &c__9, &c__0, &c__0, &c__0, &c__0, &c__2, &tstop,
 	    tout, (integer)80);
     goto L750;
 L710:
-    str_copy(msg, "DASKR--  HMAX (=R1) .LT. 0.0", (integer)80, (integer)28);
-    xerrwd_(msg, &c__28, &c__10, &c__0, &c__0, &c__0, &c__0, &c__1, &hmax, &
+    _daskr_str_copy(msg, "DASKR--  HMAX (=R1) .LT. 0.0", (integer)80, (integer)28);
+    _daskr_xerrwd_(msg, &c__28, &c__10, &c__0, &c__0, &c__0, &c__0, &c__1, &hmax, &
 	    c_b38, (integer)80);
     goto L750;
 L711:
-    str_copy(msg, "DASKR--  TOUT (=R1) BEHIND T (=R2)", (integer)80, (integer)34);
-    xerrwd_(msg, &c__34, &c__11, &c__0, &c__0, &c__0, &c__0, &c__2, tout, t, (
+    _daskr_str_copy(msg, "DASKR--  TOUT (=R1) BEHIND T (=R2)", (integer)80, (integer)34);
+    _daskr_xerrwd_(msg, &c__34, &c__11, &c__0, &c__0, &c__0, &c__0, &c__2, tout, t, (
 	    integer)80);
     goto L750;
 L712:
-    str_copy(msg, "DASKR--  INFO(8)=1 AND H0=0.0", (integer)80, (integer)29);
-    xerrwd_(msg, &c__29, &c__12, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
+    _daskr_str_copy(msg, "DASKR--  INFO(8)=1 AND H0=0.0", (integer)80, (integer)29);
+    _daskr_xerrwd_(msg, &c__29, &c__12, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
 	    c_b38, (integer)80);
     goto L750;
 L713:
-    str_copy(msg, "DASKR--  SOME ELEMENT OF WT IS .LE. 0.0", (integer)80, (
+    _daskr_str_copy(msg, "DASKR--  SOME ELEMENT OF WT IS .LE. 0.0", (integer)80, (
 	    integer)39);
-    xerrwd_(msg, &c__39, &c__13, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
+    _daskr_xerrwd_(msg, &c__39, &c__13, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
 	    c_b38, (integer)80);
     goto L750;
 L714:
-    str_copy(msg, "DASKR-- TOUT (=R1) TOO CLOSE TO T (=R2) TO START INTEGRATION"
+    _daskr_str_copy(msg, "DASKR-- TOUT (=R1) TOO CLOSE TO T (=R2) TO START INTEGRATION"
 	    , (integer)80, (integer)60);
-    xerrwd_(msg, &c__60, &c__14, &c__0, &c__0, &c__0, &c__0, &c__2, tout, t, (
+    _daskr_xerrwd_(msg, &c__60, &c__14, &c__0, &c__0, &c__0, &c__0, &c__2, tout, t, (
 	    integer)80);
     goto L750;
 L715:
-    str_copy(msg, "DASKR--  INFO(4)=1 AND TSTOP (=R1) BEHIND T (=R2)", (integer)
+    _daskr_str_copy(msg, "DASKR--  INFO(4)=1 AND TSTOP (=R1) BEHIND T (=R2)", (integer)
 	    80, (integer)49);
-    xerrwd_(msg, &c__49, &c__15, &c__0, &c__0, &c__0, &c__0, &c__2, &tstop, t,
+    _daskr_xerrwd_(msg, &c__49, &c__15, &c__0, &c__0, &c__0, &c__0, &c__2, &tstop, t,
 	     (integer)80);
     goto L750;
 L717:
-    str_copy(msg, "DASKR--  ML (=I1) ILLEGAL. EITHER .LT. 0 OR .GT. NEQ", (
+    _daskr_str_copy(msg, "DASKR--  ML (=I1) ILLEGAL. EITHER .LT. 0 OR .GT. NEQ", (
 	    integer)80, (integer)52);
-    xerrwd_(msg, &c__52, &c__17, &c__0, &c__1, &iwork[1], &c__0, &c__0, &
+    _daskr_xerrwd_(msg, &c__52, &c__17, &c__0, &c__1, &iwork[1], &c__0, &c__0, &
 	    c_b38, &c_b38, (integer)80);
     goto L750;
 L718:
-    str_copy(msg, "DASKR--  MU (=I1) ILLEGAL. EITHER .LT. 0 OR .GT. NEQ", (
+    _daskr_str_copy(msg, "DASKR--  MU (=I1) ILLEGAL. EITHER .LT. 0 OR .GT. NEQ", (
 	    integer)80, (integer)52);
-    xerrwd_(msg, &c__52, &c__18, &c__0, &c__1, &iwork[2], &c__0, &c__0, &
+    _daskr_xerrwd_(msg, &c__52, &c__18, &c__0, &c__1, &iwork[2], &c__0, &c__0, &
 	    c_b38, &c_b38, (integer)80);
     goto L750;
 L719:
-    str_copy(msg, "DASKR--  TOUT (=R1) IS EQUAL TO T (=R2)", (integer)80, (
+    _daskr_str_copy(msg, "DASKR--  TOUT (=R1) IS EQUAL TO T (=R2)", (integer)80, (
 	    integer)39);
-    xerrwd_(msg, &c__39, &c__19, &c__0, &c__0, &c__0, &c__0, &c__2, tout, t, (
+    _daskr_xerrwd_(msg, &c__39, &c__19, &c__0, &c__0, &c__0, &c__0, &c__2, tout, t, (
 	    integer)80);
     goto L750;
 L720:
-    str_copy(msg, "DASKR--  MAXL (=I1) ILLEGAL. EITHER .LT. 1 OR .GT. NEQ", (
+    _daskr_str_copy(msg, "DASKR--  MAXL (=I1) ILLEGAL. EITHER .LT. 1 OR .GT. NEQ", (
 	    integer)80, (integer)54);
-    xerrwd_(msg, &c__54, &c__20, &c__0, &c__1, &iwork[24], &c__0, &c__0, &
+    _daskr_xerrwd_(msg, &c__54, &c__20, &c__0, &c__1, &iwork[24], &c__0, &c__0, &
 	    c_b38, &c_b38, (integer)80);
     goto L750;
 L721:
-    str_copy(msg, "DASKR--  KMP (=I1) ILLEGAL. EITHER .LT. 1 OR .GT. MAXL", (
+    _daskr_str_copy(msg, "DASKR--  KMP (=I1) ILLEGAL. EITHER .LT. 1 OR .GT. MAXL", (
 	    integer)80, (integer)54);
-    xerrwd_(msg, &c__54, &c__21, &c__0, &c__1, &iwork[25], &c__0, &c__0, &
+    _daskr_xerrwd_(msg, &c__54, &c__21, &c__0, &c__1, &iwork[25], &c__0, &c__0, &
 	    c_b38, &c_b38, (integer)80);
     goto L750;
 L722:
-    str_copy(msg, "DASKR--  NRMAX (=I1) ILLEGAL. .LT. 0", (integer)80, (integer)
+    _daskr_str_copy(msg, "DASKR--  NRMAX (=I1) ILLEGAL. .LT. 0", (integer)80, (integer)
 	    36);
-    xerrwd_(msg, &c__36, &c__22, &c__0, &c__1, &iwork[26], &c__0, &c__0, &
+    _daskr_xerrwd_(msg, &c__36, &c__22, &c__0, &c__1, &iwork[26], &c__0, &c__0, &
 	    c_b38, &c_b38, (integer)80);
     goto L750;
 L723:
-    str_copy(msg, "DASKR--  EPLI (=R1) ILLEGAL. EITHER .LE. 0.D0 OR .GE. 1.D0",
+    _daskr_str_copy(msg, "DASKR--  EPLI (=R1) ILLEGAL. EITHER .LE. 0.D0 OR .GE. 1.D0",
 	    (integer)80, (integer)58);
-    xerrwd_(msg, &c__58, &c__23, &c__0, &c__0, &c__0, &c__0, &c__1, &rwork[10]
+    _daskr_xerrwd_(msg, &c__58, &c__23, &c__0, &c__0, &c__0, &c__0, &c__1, &rwork[10]
 	    , &c_b38, (integer)80);
     goto L750;
 L724:
-    str_copy(msg, "DASKR--  ILLEGAL IWORK VALUE FOR INFO(11) .NE. 0", (integer)
+    _daskr_str_copy(msg, "DASKR--  ILLEGAL IWORK VALUE FOR INFO(11) .NE. 0", (integer)
 	    80, (integer)48);
-    xerrwd_(msg, &c__48, &c__24, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
+    _daskr_xerrwd_(msg, &c__48, &c__24, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
 	    c_b38, (integer)80);
     goto L750;
 L725:
-    str_copy(msg, "DASKR--  ONE OF THE INPUTS FOR INFO(17) = 1 IS ILLEGAL", (
+    _daskr_str_copy(msg, "DASKR--  ONE OF THE INPUTS FOR INFO(17) = 1 IS ILLEGAL", (
 	    integer)80, (integer)54);
-    xerrwd_(msg, &c__54, &c__25, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
+    _daskr_xerrwd_(msg, &c__54, &c__25, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
 	    c_b38, (integer)80);
     goto L750;
 L726:
-    str_copy(msg, "DASKR--  ILLEGAL IWORK VALUE FOR INFO(10) .NE. 0", (integer)
+    _daskr_str_copy(msg, "DASKR--  ILLEGAL IWORK VALUE FOR INFO(10) .NE. 0", (integer)
 	    80, (integer)48);
-    xerrwd_(msg, &c__48, &c__26, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
+    _daskr_xerrwd_(msg, &c__48, &c__26, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
 	    c_b38, (integer)80);
     goto L750;
 L727:
-    str_copy(msg, "DASKR--  Y(I) AND IWORK(40+I) (I=I1) INCONSISTENT", (integer)
+    _daskr_str_copy(msg, "DASKR--  Y(I) AND IWORK(40+I) (I=I1) INCONSISTENT", (integer)
 	    80, (integer)49);
-    xerrwd_(msg, &c__49, &c__27, &c__0, &c__1, &iret, &c__0, &c__0, &c_b38, &
+    _daskr_xerrwd_(msg, &c__49, &c__27, &c__0, &c__1, &iret, &c__0, &c__0, &c_b38, &
 	    c_b38, (integer)80);
     goto L750;
 L730:
-    str_copy(msg, "DASKR--  NRT (=I1) .LT. 0", (integer)80, (integer)25);
-    xerrwd_(msg, &c__25, &c__30, &c__1, &c__1, nrt, &c__0, &c__0, &c_b38, &
+    _daskr_str_copy(msg, "DASKR--  NRT (=I1) .LT. 0", (integer)80, (integer)25);
+    _daskr_xerrwd_(msg, &c__25, &c__30, &c__1, &c__1, nrt, &c__0, &c__0, &c_b38, &
 	    c_b38, (integer)80);
     goto L750;
 L731:
-    str_copy(msg, "DASKR--  R IS ILL-DEFINED.  ZERO VALUES WERE FOUND AT TWO", (
+    _daskr_str_copy(msg, "DASKR--  R IS ILL-DEFINED.  ZERO VALUES WERE FOUND AT TWO", (
 	    integer)80, (integer)57);
-    xerrwd_(msg, &c__57, &c__31, &c__1, &c__0, &c__0, &c__0, &c__0, &c_b38, &
+    _daskr_xerrwd_(msg, &c__57, &c__31, &c__1, &c__0, &c__0, &c__0, &c__0, &c_b38, &
 	    c_b38, (integer)80);
-    str_copy(msg, "         VERY CLOSE T VALUES, AT T = R1", (integer)80, (
+    _daskr_str_copy(msg, "         VERY CLOSE T VALUES, AT T = R1", (integer)80, (
 	    integer)39);
-    xerrwd_(msg, &c__39, &c__31, &c__1, &c__0, &c__0, &c__0, &c__1, &rwork[51]
+    _daskr_xerrwd_(msg, &c__39, &c__31, &c__1, &c__0, &c__0, &c__0, &c__1, &rwork[51]
 	    , &c_b38, (integer)80);
 
 L750:
@@ -3146,21 +3146,21 @@ L750:
     *idid = -33;
     return 0;
 L760:
-    str_copy(msg, "DASKR--  REPEATED OCCURRENCES OF ILLEGAL INPUT", (integer)80,
+    _daskr_str_copy(msg, "DASKR--  REPEATED OCCURRENCES OF ILLEGAL INPUT", (integer)80,
 	    (integer)46);
-    xerrwd_(msg, &c__46, &c__701, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
+    _daskr_xerrwd_(msg, &c__46, &c__701, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b38, &
 	    c_b38, (integer)80);
 /* L770: */
-    str_copy(msg, "DASKR--  RUN TERMINATED. APPARENT INFINITE LOOP", (integer)80,
+    _daskr_str_copy(msg, "DASKR--  RUN TERMINATED. APPARENT INFINITE LOOP", (integer)80,
 	     (integer)47);
-    xerrwd_(msg, &c__47, &c__702, &c__1, &c__0, &c__0, &c__0, &c__0, &c_b38, &
+    _daskr_xerrwd_(msg, &c__47, &c__702, &c__1, &c__0, &c__0, &c__0, &c__0, &c_b38, &
 	    c_b38, (integer)80);
     return 0;
 
 /* ------END OF SUBROUTINE DDASKR----------------------------------------- */
 } /* ddaskr_ */
 
-/* Subroutine */ int drchek_(integer *job, Unknown_fp rt, integer *nrt, integer *
+/* Subroutine */ int _daskr_drchek_(integer *job, Unknown_fp rt, integer *nrt, integer *
 	neq, real_number *tn, real_number *tout, real_number *y, real_number *yp,
 	real_number *phi, real_number *psi, integer *kold, real_number *r0,
 	real_number *r1, real_number *rx, integer *jroot, integer *irt,
@@ -3176,7 +3176,7 @@ L760:
     real_number d__1;
 
     /* Builtin functions */
-    real_number real_sign(real_number *, real_number *);
+    double _daskr_real_sign(real_number *, real_number *);
 
     /* Local variables */
     static real_number h__;
@@ -3184,12 +3184,12 @@ L760:
     static real_number x, t1, temp1, temp2;
     static integer jflag;
     static real_number hminr;
-    extern /* Subroutine */ int dcopy_(integer *, real_number *, integer *,
+    extern /* Subroutine */ int _daskr_dcopy_(integer *, real_number *, integer *,
 	    real_number *, integer *);
     static integer zroot;
-    extern /* Subroutine */ int ddatrp_(real_number *, real_number *,
+    extern /* Subroutine */ int _daskr_ddatrp_(real_number *, real_number *,
 	    real_number *, real_number *, integer *, integer *, real_number *,
-	    real_number *), droots_(integer *, real_number *, integer *,
+	    real_number *), _daskr_droots_(integer *, real_number *, integer *,
 	    real_number *, real_number *, real_number *, real_number *,
 	    real_number *, real_number *, integer *);
 
@@ -3281,7 +3281,7 @@ L760:
 
 /* Evaluate R at initial T (= RWORK(LT0)); check for zero values.-------- */
 L100:
-    ddatrp_(tn, &rwork[51], &y[1], &yp[1], neq, kold, &phi[phi_offset], &psi[
+    _daskr_ddatrp_(tn, &rwork[51], &y[1], &yp[1], neq, kold, &phi[phi_offset], &psi[
 	    1]);
     (*rt)(neq, &rwork[51], &y[1], &yp[1], nrt, &r0[1], rpar, ipar);
     iwork[36] = 1;
@@ -3332,7 +3332,7 @@ L200:
 	goto L260;
     }
 /* If a root was found on the previous step, evaluate R0 = R(T0). ------- */
-    ddatrp_(tn, &rwork[51], &y[1], &yp[1], neq, kold, &phi[phi_offset], &psi[
+    _daskr_ddatrp_(tn, &rwork[51], &y[1], &yp[1], neq, kold, &phi[phi_offset], &psi[
 	    1]);
     (*rt)(neq, &rwork[51], &y[1], &yp[1], nrt, &r0[1], rpar, ipar);
     ++iwork[36];
@@ -3349,7 +3349,7 @@ L200:
 	goto L260;
     }
 /* R has a zero at T0.  Look at R at T0+ = T0 + (small increment). ------ */
-    temp1 = real_sign(&hminr, &h__);
+    temp1 = _daskr_real_sign(&hminr, &h__);
     rwork[51] += temp1;
     if ((rwork[51] - *tn) * h__ < zero) {
 	goto L230;
@@ -3362,7 +3362,7 @@ L200:
     }
     goto L240;
 L230:
-    ddatrp_(tn, &rwork[51], &y[1], &yp[1], neq, kold, &phi[phi_offset], &psi[
+    _daskr_ddatrp_(tn, &rwork[51], &y[1], &yp[1], neq, kold, &phi[phi_offset], &psi[
 	    1]);
 L240:
     (*rt)(neq, &rwork[51], &y[1], &yp[1], nrt, &r0[1], rpar, ipar);
@@ -3378,7 +3378,7 @@ L240:
 	    return 0;
 	} else {
 /* If Ri has a zero at T0+, but not at T0, return valid root. ----------- */
-	    jroot[i__] = (integer) (-real_sign(&c_b758, &r0[i__]));
+	    jroot[i__] = (integer) (-_daskr_real_sign(&c_b758, &r0[i__]));
 	    *irt = 1;
 	}
 L250:
@@ -3404,29 +3404,29 @@ L300:
 	goto L390;
     }
 L330:
-    ddatrp_(tn, &t1, &y[1], &yp[1], neq, kold, &phi[phi_offset], &psi[1]);
+    _daskr_ddatrp_(tn, &t1, &y[1], &yp[1], neq, kold, &phi[phi_offset], &psi[1]);
     (*rt)(neq, &t1, &y[1], &yp[1], nrt, &r1[1], rpar, ipar);
     ++iwork[36];
 /* Call DROOTS to search for root in interval from T0 to T1. ------------ */
     jflag = 0;
 L350:
-    droots_(nrt, &hminr, &jflag, &rwork[51], &t1, &r0[1], &r1[1], &rx[1], &x, 
+    _daskr_droots_(nrt, &hminr, &jflag, &rwork[51], &t1, &r0[1], &r1[1], &rx[1], &x,
 	    &jroot[1]);
     if (jflag > 1) {
 	goto L360;
     }
-    ddatrp_(tn, &x, &y[1], &yp[1], neq, kold, &phi[phi_offset], &psi[1]);
+    _daskr_ddatrp_(tn, &x, &y[1], &yp[1], neq, kold, &phi[phi_offset], &psi[1]);
     (*rt)(neq, &x, &y[1], &yp[1], nrt, &rx[1], rpar, ipar);
     ++iwork[36];
     goto L350;
 L360:
     rwork[51] = x;
-    dcopy_(nrt, &rx[1], &c__1, &r0[1], &c__1);
+    _daskr_dcopy_(nrt, &rx[1], &c__1, &r0[1], &c__1);
     if (jflag == 4) {
 	goto L390;
     }
 /* Found a root.  Interpolate to X and return. -------------------------- */
-    ddatrp_(tn, &x, &y[1], &yp[1], neq, kold, &phi[phi_offset], &psi[1]);
+    _daskr_ddatrp_(tn, &x, &y[1], &yp[1], neq, kold, &phi[phi_offset], &psi[1]);
     *irt = 1;
     return 0;
 
@@ -3435,7 +3435,7 @@ L390:
 /* ---------------------- END OF SUBROUTINE DRCHEK ----------------------- */
 } /* drchek_ */
 
-/* Subroutine */ int droots_(integer *nrt, real_number *hmin, integer *jflag,
+/* Subroutine */ int _daskr_droots_(integer *nrt, real_number *hmin, integer *jflag,
 	real_number *x0, real_number *x1, real_number *r0, real_number *r1,
 	real_number *rx, real_number *x, integer *jroot)
 {
@@ -3451,14 +3451,14 @@ L390:
     real_number d__1;
 
     /* Builtin functions */
-    real_number real_sign(real_number *, real_number *);
+    double _daskr_real_sign(real_number *, real_number *);
 
     /* Local variables */
     static integer i__;
     static real_number t2, x2;
     static integer imax, last;
     static real_number tmax, alpha;
-    extern /* Subroutine */ int dcopy_(integer *, real_number *, integer *,
+    extern /* Subroutine */ int _daskr_dcopy_(integer *, real_number *, integer *,
 	    real_number *, integer *);
     static integer xroot, zroot, sgnchg;
     static integer imxold, nxlast;
@@ -3574,7 +3574,7 @@ L390:
 	goto L120;
 /* At this point, R0(i) has been checked and cannot be zero. ------------ */
 L110:
-	if (real_sign(&c_b758, &r0[i__]) == real_sign(&c_b758, &r1[i__])) {
+	if (_daskr_real_sign(&c_b758, &r0[i__]) == _daskr_real_sign(&c_b758, &r1[i__])) {
 	    goto L120;
 	}
 	t2 = (d__1 = r1[i__] / (r1[i__] - r0[i__]), fabs(d__1));
@@ -3659,7 +3659,7 @@ L200:
 	goto L220;
 /* Neither R0(i) nor RX(i) can be zero at this point. ------------------- */
 L210:
-	if (real_sign(&c_b758, &r0[i__]) == real_sign(&c_b758, &rx[i__])) {
+	if (_daskr_real_sign(&c_b758, &r0[i__]) == _daskr_real_sign(&c_b758, &rx[i__])) {
 	    goto L220;
 	}
 	t2 = (d__1 = rx[i__] / (rx[i__] - r0[i__]), fabs(d__1));
@@ -3686,7 +3686,7 @@ L240:
     }
 /* Sign change between X0 and X2, so replace X1 with X2. ---------------- */
     *x1 = x2;
-    dcopy_(nrt, &rx[1], &c__1, &r1[1], &c__1);
+    _daskr_dcopy_(nrt, &rx[1], &c__1, &r1[1], &c__1);
     last = 1;
     xroot = _FALSE_;
     goto L270;
@@ -3696,12 +3696,12 @@ L250:
     }
 /* Zero value at X2 and no sign change in (X0,X2), so X2 is a root. ----- */
     *x1 = x2;
-    dcopy_(nrt, &rx[1], &c__1, &r1[1], &c__1);
+    _daskr_dcopy_(nrt, &rx[1], &c__1, &r1[1], &c__1);
     xroot = _TRUE_;
     goto L270;
 /* No sign change between X0 and X2.  Replace X0 with X2. --------------- */
 L260:
-    dcopy_(nrt, &rx[1], &c__1, &r0[1], &c__1);
+    _daskr_dcopy_(nrt, &rx[1], &c__1, &r0[1], &c__1);
     *x0 = x2;
     last = 0;
     xroot = _FALSE_;
@@ -3715,17 +3715,17 @@ L270:
 L300:
     *jflag = 2;
     *x = *x1;
-    dcopy_(nrt, &r1[1], &c__1, &rx[1], &c__1);
+    _daskr_dcopy_(nrt, &r1[1], &c__1, &rx[1], &c__1);
     i__1 = *nrt;
     for (i__ = 1; i__ <= i__1; ++i__) {
 	jroot[i__] = 0;
 	if ((d__1 = r1[i__], fabs(d__1)) == zero) {
-	    jroot[i__] = (integer) (-real_sign(&c_b758, &r0[i__]));
+	    jroot[i__] = (integer) (-_daskr_real_sign(&c_b758, &r0[i__]));
 	    goto L320;
 	}
-	if (real_sign(&c_b758, &r0[i__]) != real_sign(&c_b758, &r1[i__])) {
+	if (_daskr_real_sign(&c_b758, &r0[i__]) != _daskr_real_sign(&c_b758, &r1[i__])) {
 	    d__1 = r1[i__] - r0[i__];
-	    jroot[i__] = (integer) real_sign(&c_b758, &d__1);
+	    jroot[i__] = (integer) _daskr_real_sign(&c_b758, &d__1);
 	}
 L320:
 	;
@@ -3740,12 +3740,12 @@ L400:
 
 /* Zero value at X1 and no sign change in (X0,X1).  Return JFLAG = 3. --- */
     *x = *x1;
-    dcopy_(nrt, &r1[1], &c__1, &rx[1], &c__1);
+    _daskr_dcopy_(nrt, &r1[1], &c__1, &rx[1], &c__1);
     i__1 = *nrt;
     for (i__ = 1; i__ <= i__1; ++i__) {
 	jroot[i__] = 0;
 	if ((d__1 = r1[i__], fabs(d__1)) == zero) {
-	    jroot[i__] = (integer) (-real_sign(&c_b758, &r0[i__]));
+	    jroot[i__] = (integer) (-_daskr_real_sign(&c_b758, &r0[i__]));
 	}
 /* L410: */
     }
@@ -3754,14 +3754,14 @@ L400:
 
 /* No sign changes in this interval.  Set X = X1, return JFLAG = 4. ----- */
 L420:
-    dcopy_(nrt, &r1[1], &c__1, &rx[1], &c__1);
+    _daskr_dcopy_(nrt, &r1[1], &c__1, &rx[1], &c__1);
     *x = *x1;
     *jflag = 4;
     return 0;
 /* ----------------------- END OF SUBROUTINE DROOTS ---------------------- */
 } /* droots_ */
 
-/* Subroutine */ int ddasic_(real_number *x, real_number *y, real_number *yprime,
+/* Subroutine */ int _daskr_ddasic_(real_number *x, real_number *y, real_number *yprime,
 	 integer *neq, integer *icopt, integer *id, Unknown_fp res, Unknown_fp jac, Unknown_fp
 	psol, real_number *h__, real_number *tscale, real_number *wt, integer *
 	nic, integer *idid, real_number *rpar, integer *ipar, real_number *phi,
@@ -3782,7 +3782,7 @@ L420:
     /* Local variables */
     static real_number cj;
     static integer nh, mxnh;
-    extern /* Subroutine */ int dcopy_(integer *, real_number *, integer *,
+    extern /* Subroutine */ int _daskr_dcopy_(integer *, real_number *, integer *,
 	    real_number *, integer *);
     static integer jskip, iernls;
 
@@ -3907,8 +3907,8 @@ L420:
     if (*nic == 2) {
 	jskip = 1;
     }
-    dcopy_(neq, &y[1], &c__1, &phi[phi_dim1 + 1], &c__1);
-    dcopy_(neq, &yprime[1], &c__1, &phi[(phi_dim1 << 1) + 1], &c__1);
+    _daskr_dcopy_(neq, &y[1], &c__1, &phi[phi_dim1 + 1], &c__1);
+    _daskr_dcopy_(neq, &yprime[1], &c__1, &phi[(phi_dim1 << 1) + 1], &c__1);
 
     if (*icopt == 2) {
 	cj = 0.;
@@ -3965,8 +3965,8 @@ L200:
 	goto L200;
     }
 
-    dcopy_(neq, &phi[phi_dim1 + 1], &c__1, &y[1], &c__1);
-    dcopy_(neq, &phi[(phi_dim1 << 1) + 1], &c__1, &yprime[1], &c__1);
+    _daskr_dcopy_(neq, &phi[phi_dim1 + 1], &c__1, &y[1], &c__1);
+    _daskr_dcopy_(neq, &phi[(phi_dim1 << 1) + 1], &c__1, &yprime[1], &c__1);
     goto L200;
 
 L350:
@@ -3976,7 +3976,7 @@ L350:
 /* ------END OF SUBROUTINE DDASIC----------------------------------------- */
 } /* ddasic_ */
 
-/* Subroutine */ int dyypnw_(integer *neq, real_number *y, real_number *yprime,
+/* Subroutine */ int _daskr_dyypnw_(integer *neq, real_number *y, real_number *yprime,
 	real_number *cj, real_number *rl, real_number *p, integer *icopt,
 	integer *id, real_number *ynew, real_number *ypnew)
 {
@@ -4050,7 +4050,7 @@ L350:
 /* ----------------------- END OF SUBROUTINE DYYPNW ---------------------- */
 } /* dyypnw_ */
 
-/* Subroutine */ int ddstp_(real_number *x, real_number *y, real_number *yprime,
+/* Subroutine */ int _daskr_ddstp_(real_number *x, real_number *y, real_number *yprime,
 	integer *neq, Unknown_fp res, Unknown_fp jac, Unknown_fp psol, real_number *h__,
 	real_number *wt, real_number *vt, integer *jstart, integer *idid,
 	real_number *rpar, integer *ipar, real_number *phi, real_number *savr,
@@ -4067,7 +4067,7 @@ L350:
     real_number d__1, d__2;
 
     /* Builtin functions */
-    real_number real_pow(real_number *, real_number *);
+    double _daskr_real_pow(real_number *, real_number *);
 
     /* Local variables */
     static integer i__, j;
@@ -4082,11 +4082,11 @@ L350:
     static real_number erkm1, erkm2, erkp1, temp1, temp2;
     static integer kdiff;
     static real_number enorm, alpha0, terkm1, terkm2, terkp1, alphas;
-    extern /* Subroutine */ int ddatrp_(real_number *, real_number *,
+    extern /* Subroutine */ int _daskr_ddatrp_(real_number *, real_number *,
 	    real_number *, real_number *, integer *, integer *, real_number *,
 	    real_number *);
     static real_number cjlast;
-    extern real_number ddwnrm_(integer *, real_number *, real_number *,
+    extern real_number _daskr_ddwnrm_(integer *, real_number *, real_number *,
 	    real_number *, integer *);
     static integer iernls;
 
@@ -4334,7 +4334,7 @@ L280:
 
 /*     Estimate errors at orders K,K-1,K-2 */
 
-    enorm = ddwnrm_(neq, &e[1], &vt[1], &rpar[1], &ipar[1]);
+    enorm = _daskr_ddwnrm_(neq, &e[1], &vt[1], &rpar[1], &ipar[1]);
     erk = sigma[*k + 1] * enorm;
     terk = (*k + 1) * erk;
     est = erk;
@@ -4347,7 +4347,7 @@ L280:
 /* L405: */
 	delta[i__] = phi[i__ + kp1 * phi_dim1] + e[i__];
     }
-    erkm1 = sigma[*k] * ddwnrm_(neq, &delta[1], &vt[1], &rpar[1], &ipar[1]);
+    erkm1 = sigma[*k] * _daskr_ddwnrm_(neq, &delta[1], &vt[1], &rpar[1], &ipar[1]);
     terkm1 = *k * erkm1;
     if (*k > 2) {
 	goto L410;
@@ -4362,7 +4362,7 @@ L410:
 /* L415: */
 	delta[i__] = phi[i__ + *k * phi_dim1] + delta[i__];
     }
-    erkm2 = sigma[*k - 1] * ddwnrm_(neq, &delta[1], &vt[1], &rpar[1], &ipar[1]
+    erkm2 = sigma[*k - 1] * _daskr_ddwnrm_(neq, &delta[1], &vt[1], &rpar[1], &ipar[1]
 	    );
     terkm2 = (*k - 1) * erkm2;
     if (MAX(terkm1,terkm2) > terk) {
@@ -4429,7 +4429,7 @@ L430:
 /* L510: */
 	delta[i__] = e[i__] - phi[i__ + kp2 * phi_dim1];
     }
-    erkp1 = 1. / (*k + 2) * ddwnrm_(neq, &delta[1], &vt[1], &rpar[1], &ipar[1]
+    erkp1 = 1. / (*k + 2) * _daskr_ddwnrm_(neq, &delta[1], &vt[1], &rpar[1], &ipar[1]
 	    );
     terkp1 = (*k + 2) * erkp1;
     if (*k > 1) {
@@ -4479,7 +4479,7 @@ L550:
     temp2 = (real_number) (*k + 1);
     d__1 = est * 2. + 1e-4;
     d__2 = -1. / temp2;
-    r__ = real_pow(&d__1, &d__2);
+    r__ = _daskr_real_pow(&d__1, &d__2);
     if (r__ < 2.) {
 	goto L555;
     }
@@ -4616,7 +4616,7 @@ L660:
     temp2 = (real_number) (*k + 1);
     d__1 = est * 2. + 1e-4;
     d__2 = -1. / temp2;
-    r__ = real_pow(&d__1, &d__2) * .9;
+    r__ = _daskr_real_pow(&d__1, &d__2) * .9;
 /* Computing MAX */
     d__1 = .25, d__2 = MIN(.9,r__);
     r__ = MAX(d__1,d__2);
@@ -4669,7 +4669,7 @@ L670:
 /*     a failure in the nonlinear system solver. */
 
 L675:
-    ddatrp_(x, x, &y[1], &yprime[1], neq, k, &phi[phi_offset], &psi[1]);
+    _daskr_ddatrp_(x, x, &y[1], &yprime[1], neq, k, &phi[phi_offset], &psi[1]);
     *jstart = 1;
     if (*idid >= 0) {
 	*idid = -7;
@@ -4691,12 +4691,10 @@ L690:
     }
     goto L200;
 
-/* final return to avoid warning should never used */
-	return 0;
 /* ------END OF SUBROUTINE DDSTP------------------------------------------ */
 } /* ddstp_ */
 
-/* Subroutine */ int dcnstr_(integer *neq, real_number *y, real_number *ynew,
+/* Subroutine */ int _daskr_dcnstr_(integer *neq, real_number *y, real_number *ynew,
 	integer *icnstr, real_number *tau, real_number *rlx, integer *iret,
 	integer *ivar)
 {
@@ -4837,7 +4835,7 @@ L690:
 /* ----------------------- END OF SUBROUTINE DCNSTR ---------------------- */
 } /* dcnstr_ */
 
-/* Subroutine */ int dcnst0_(integer *neq, real_number *y, integer *icnstr,
+/* Subroutine */ int _daskr_dcnst0_(integer *neq, real_number *y, integer *icnstr,
 	integer *iret)
 {
     /* Initialized data */
@@ -4924,7 +4922,7 @@ L690:
 /* ----------------------- END OF SUBROUTINE DCNST0 ---------------------- */
 } /* dcnst0_ */
 
-/* Subroutine */ int ddawts_(integer *neq, integer *iwt, real_number *rtol,
+/* Subroutine */ int _daskr_ddawts_(integer *neq, integer *iwt, real_number *rtol,
 	real_number *atol, real_number *y, real_number *wt, real_number *rpar,
 	integer *ipar)
 {
@@ -4978,7 +4976,7 @@ L10:
 /* ------END OF SUBROUTINE DDAWTS----------------------------------------- */
 } /* ddawts_ */
 
-/* Subroutine */ int dinvwt_(integer *neq, real_number *wt, integer *ier)
+/* Subroutine */ int _daskr_dinvwt_(integer *neq, real_number *wt, integer *ier)
 {
     /* System generated locals */
     integer i__1;
@@ -5028,7 +5026,7 @@ L30:
 /* ------END OF SUBROUTINE DINVWT----------------------------------------- */
 } /* dinvwt_ */
 
-/* Subroutine */ int ddatrp_(real_number *x, real_number *xout, real_number *
+/* Subroutine */ int _daskr_ddatrp_(real_number *x, real_number *xout, real_number *
 	yout, real_number *ypout, integer *neq, integer *kold, real_number *phi,
 	 real_number *psi)
 {
@@ -5109,7 +5107,7 @@ L30:
 /* ------END OF SUBROUTINE DDATRP----------------------------------------- */
 } /* ddatrp_ */
 
-real_number ddwnrm_(integer *neq, real_number *v, real_number *rwt, real_number *
+real_number _daskr_ddwnrm_(integer *neq, real_number *v, real_number *rwt, real_number *
 	rpar, integer *ipar)
 {
     /* System generated locals */
@@ -5168,7 +5166,7 @@ L30:
 /* ------END OF FUNCTION DDWNRM------------------------------------------- */
 } /* ddwnrm_ */
 
-/* Subroutine */ int ddasid_(real_number *x, real_number *y, real_number *yprime,
+/* Subroutine */ int _daskr_ddasid_(real_number *x, real_number *y, real_number *yprime,
 	 integer *neq, integer *icopt, integer *id, Unknown_fp res, Unknown_fp jacd,
 	real_number *pdum, real_number *h__, real_number *tscale, real_number *wt,
 	 integer *jsdum, real_number *rpar, integer *ipar, real_number *dumsvr,
@@ -5179,10 +5177,10 @@ L30:
 	integer *jfdum, integer *icnflg, integer *icnstr, integer *iernls)
 {
     static integer nj, ierj, ires, mxnj;
-    extern /* Subroutine */ int dmatd_(integer *, real_number *, real_number *,
+    extern /* Subroutine */ int _daskr_dmatd_(integer *, real_number *, real_number *,
 	    real_number *, real_number *, real_number *, real_number *, integer *,
 	     real_number *, real_number *, real_number *, integer *, Unknown_fp,
-	    integer *, real_number *, Unknown_fp, real_number *, integer *), dnsid_(
+	    integer *, real_number *, Unknown_fp, real_number *, integer *), _daskr_dnsid_(
 	    real_number *, real_number *, real_number *, integer *, integer *,
 	    integer *, Unknown_fp, real_number *, real_number *, integer *,
 	    real_number *, real_number *, real_number *, real_number *,
@@ -5326,7 +5324,7 @@ L300:
 
     ++nj;
     ++iwm[13];
-    dmatd_(neq, x, &y[1], &yprime[1], &delta[1], cj, h__, &ierj, &wt[1], &r__[
+    _daskr_dmatd_(neq, x, &y[1], &yprime[1], &delta[1], cj, h__, &ierj, &wt[1], &r__[
 	    1], &wm[1], &iwm[1], (Unknown_fp)res, &ires, uround, (Unknown_fp)jacd, &rpar[
 	    1], &ipar[1]);
     if (ires < 0 || ierj != 0) {
@@ -5335,7 +5333,7 @@ L300:
 
 /*     Call the nonlinear Newton solver for up to MXNIT iterations. */
 
-    dnsid_(x, &y[1], &yprime[1], neq, icopt, &id[1], (Unknown_fp)res, &wt[1], &rpar[
+    _daskr_dnsid_(x, &y[1], &yprime[1], neq, icopt, &id[1], (Unknown_fp)res, &wt[1], &rpar[
 	    1], &ipar[1], &delta[1], &r__[1], &yic[1], &ypic[1], &wm[1], &iwm[
 	    1], cj, tscale, epcon, ratemx, &mxnit, stptol, icnflg, &icnstr[1],
 	     &iernew);
@@ -5378,7 +5376,7 @@ L380:
 /* ------END OF SUBROUTINE DDASID----------------------------------------- */
 } /* ddasid_ */
 
-/* Subroutine */ int dnsid_(real_number *x, real_number *y, real_number *yprime,
+/* Subroutine */ int _daskr_dnsid_(real_number *x, real_number *y, real_number *yprime,
 	integer *neq, integer *icopt, integer *id, Unknown_fp res, real_number *wt,
 	real_number *rpar, integer *ipar, real_number *delta, real_number *r__,
 	real_number *yic, real_number *ypic, real_number *wm, integer *iwm,
@@ -5389,16 +5387,16 @@ L380:
     static integer m;
     static real_number rlx, rate, fnrm;
     static integer iret, ires, lsoff;
-    extern /* Subroutine */ int dslvd_(integer *, real_number *, real_number *,
-	    integer *), dcopy_(integer *, real_number *, integer *, real_number
-	    *, integer *), dlinsd_(integer *, real_number *, real_number *,
+    extern /* Subroutine */ int _daskr_dslvd_(integer *, real_number *, real_number *,
+	    integer *), _daskr_dcopy_(integer *, real_number *, integer *, real_number
+	    *, integer *), _daskr_dlinsd_(integer *, real_number *, real_number *,
 	    real_number *, real_number *, real_number *, real_number *,
 	    real_number *, real_number *, integer *, real_number *, integer *,
 	    Unknown_fp, integer *, real_number *, integer *, real_number *, integer *,
 	     integer *, real_number *, real_number *, real_number *, integer *,
 	    integer *, real_number *, real_number *, integer *);
     static real_number oldfnm, delnrm;
-    extern real_number ddwnrm_(integer *, real_number *, real_number *,
+    extern real_number _daskr_ddwnrm_(integer *, real_number *, real_number *,
 	    real_number *, integer *);
 
 
@@ -5500,11 +5498,11 @@ L380:
 
 /*     Compute a new step vector DELTA by back-substitution. */
 
-    dslvd_(neq, &delta[1], &wm[1], &iwm[1]);
+    _daskr_dslvd_(neq, &delta[1], &wm[1], &iwm[1]);
 
 /*     Get norm of DELTA.  Return now if norm(DELTA) .le. EPCON. */
 
-    delnrm = ddwnrm_(neq, &delta[1], &wt[1], &rpar[1], &ipar[1]);
+    delnrm = _daskr_ddwnrm_(neq, &delta[1], &wt[1], &rpar[1], &ipar[1]);
     fnrm = delnrm;
     if (*tscale > 0.) {
 	fnrm = fnrm * *tscale * fabs(*cj);
@@ -5522,7 +5520,7 @@ L300:
 
     oldfnm = fnrm;
 
-    dlinsd_(neq, &y[1], x, &yprime[1], cj, tscale, &delta[1], &delnrm, &wt[1],
+    _daskr_dlinsd_(neq, &y[1], x, &yprime[1], cj, tscale, &delta[1], &delnrm, &wt[1],
 	     &lsoff, stptol, &iret, (Unknown_fp)res, &ires, &wm[1], &iwm[1], &fnrm,
 	    icopt, &id[1], &r__[1], &yic[1], &ypic[1], icnflg, &icnstr[1], &
 	    rlx, &rpar[1], &ipar[1]);
@@ -5551,7 +5549,7 @@ L300:
 /*     Copy the residual to DELTA and its norm to DELNRM, and loop for */
 /*     another iteration. */
 
-    dcopy_(neq, &r__[1], &c__1, &delta[1], &c__1);
+    _daskr_dcopy_(neq, &r__[1], &c__1, &delta[1], &c__1);
     delnrm = fnrm;
     goto L300;
 
@@ -5577,7 +5575,7 @@ L390:
 /* ------END OF SUBROUTINE DNSID------------------------------------------ */
 } /* dnsid_ */
 
-/* Subroutine */ int dlinsd_(integer *neq, real_number *y, real_number *t,
+/* Subroutine */ int _daskr_dlinsd_(integer *neq, real_number *y, real_number *t,
 	real_number *yprime, real_number *cj, real_number *tscale, real_number *p,
 	 real_number *pnrm, real_number *wt, integer *lsoff, real_number *stptol,
 	 integer *iret, Unknown_fp res, integer *ires, real_number *wm, integer *iwm,
@@ -5595,7 +5593,7 @@ L390:
     integer i__1;
 
     /* Builtin functions */
-    /* Subroutine */ int str_copy(char *, char *, integer, integer);
+    /* Subroutine */ int _daskr_str_copy(char *, char *, integer, integer);
 
     /* Local variables */
     static integer i__;
@@ -5604,19 +5602,19 @@ L390:
     static real_number tau;
     static integer ivar;
     static real_number slpi, f1nrm, ratio;
-    extern /* Subroutine */ int dcopy_(integer *, real_number *, integer *,
+    extern /* Subroutine */ int _daskr_dcopy_(integer *, real_number *, integer *,
 	    real_number *, integer *);
     static real_number rlmin, fnrmp;
     static integer kprin;
     static real_number ratio1, f1nrmp;
-    extern /* Subroutine */ int dfnrmd_(integer *, real_number *, real_number *,
+    extern /* Subroutine */ int _daskr_dfnrmd_(integer *, real_number *, real_number *,
 	     real_number *, real_number *, real_number *, real_number *,
 	    real_number *, Unknown_fp, integer *, real_number *, real_number *,
-	    integer *, real_number *, integer *), dcnstr_(integer *,
+	    integer *, real_number *, integer *), _daskr_dcnstr_(integer *,
 	    real_number *, real_number *, integer *, real_number *, real_number *,
-	     integer *, integer *), xerrwd_(char *, integer *, integer *, 
+	     integer *, integer *), _daskr_xerrwd_(char *, integer *, integer *,
 	    integer *, integer *, integer *, integer *, integer *, real_number
-	    *, real_number *, integer), dyypnw_(integer *, real_number *,
+	    *, real_number *, integer), _daskr_dyypnw_(integer *, real_number *,
 	    real_number *, real_number *, real_number *, real_number *, integer *,
 	     integer *, real_number *, real_number *);
 
@@ -5710,9 +5708,9 @@ L390:
     f1nrm = *fnrm * *fnrm / two;
     ratio = one;
     if (kprin >= 2) {
-	str_copy(msg, "------ IN ROUTINE DLINSD-- PNRM = (R1)", (integer)80, (
+	_daskr_str_copy(msg, "------ IN ROUTINE DLINSD-- PNRM = (R1)", (integer)80, (
 		integer)38);
-	xerrwd_(msg, &c__38, &c__901, &c__0, &c__0, &c__0, &c__0, &c__1, pnrm,
+	_daskr_xerrwd_(msg, &c__38, &c__901, &c__0, &c__0, &c__0, &c__0, &c__1, pnrm,
 		 &c_b38, (integer)80);
     }
     tau = *pnrm;
@@ -5724,9 +5722,9 @@ L390:
 /* ----------------------------------------------------------------------- */
     if (*icnflg != 0) {
 L10:
-	dyypnw_(neq, &y[1], &yprime[1], cj, &rl, &p[1], icopt, &id[1], &ynew[
+	_daskr_dyypnw_(neq, &y[1], &yprime[1], cj, &rl, &p[1], icopt, &id[1], &ynew[
 		1], &ypnew[1]);
-	dcnstr_(neq, &y[1], &ynew[1], &icnstr[1], &tau, rlx, iret, &ivar);
+	_daskr_dcnstr_(neq, &y[1], &ynew[1], &icnstr[1], &tau, rlx, iret, &ivar);
 	if (*iret == 1) {
 	    ratio1 = tau / *pnrm;
 	    ratio *= ratio1;
@@ -5737,9 +5735,9 @@ L10:
 	    }
 	    *pnrm = tau;
 	    if (kprin >= 2) {
-		str_copy(msg, "------ CONSTRAINT VIOL., PNRM = (R1), INDEX = ("
+		_daskr_str_copy(msg, "------ CONSTRAINT VIOL., PNRM = (R1), INDEX = ("
 			"I1)", (integer)80, (integer)50);
-		xerrwd_(msg, &c__50, &c__902, &c__0, &c__1, &ivar, &c__0, &
+		_daskr_xerrwd_(msg, &c__50, &c__902, &c__0, &c__1, &ivar, &c__0, &
 			c__1, pnrm, &c_b38, (integer)80);
 	    }
 	    if (*pnrm <= *stptol) {
@@ -5753,8 +5751,8 @@ L10:
     slpi = -two * f1nrm * ratio;
     rlmin = *stptol / *pnrm;
     if (*lsoff == 0 && kprin >= 2) {
-	str_copy(msg, "------ MIN. LAMBDA = (R1)", (integer)80, (integer)25);
-	xerrwd_(msg, &c__25, &c__903, &c__0, &c__0, &c__0, &c__0, &c__1, &
+	_daskr_str_copy(msg, "------ MIN. LAMBDA = (R1)", (integer)80, (integer)25);
+	_daskr_xerrwd_(msg, &c__25, &c__903, &c__0, &c__0, &c__0, &c__0, &c__1, &
 		rlmin, &c_b38, (integer)80);
     }
 /* ----------------------------------------------------------------------- */
@@ -5762,9 +5760,9 @@ L10:
 /* If RL becomes less than RLMIN, then terminate with IRET = 1. */
 /* ----------------------------------------------------------------------- */
 L100:
-    dyypnw_(neq, &y[1], &yprime[1], cj, &rl, &p[1], icopt, &id[1], &ynew[1], &
+    _daskr_dyypnw_(neq, &y[1], &yprime[1], cj, &rl, &p[1], icopt, &id[1], &ynew[1], &
 	    ypnew[1]);
-    dfnrmd_(neq, &ynew[1], t, &ypnew[1], &r__[1], cj, tscale, &wt[1], (Unknown_fp)
+    _daskr_dfnrmd_(neq, &ynew[1], t, &ypnew[1], &r__[1], cj, tscale, &wt[1], (Unknown_fp)
 	    res, ires, &fnrmp, &wm[1], &iwm[1], &rpar[1], &ipar[1]);
     ++iwm[12];
     if (*ires != 0) {
@@ -5777,12 +5775,12 @@ L100:
 
     f1nrmp = fnrmp * fnrmp / two;
     if (kprin >= 2) {
-	str_copy(msg, "------ LAMBDA = (R1)", (integer)80, (integer)20);
-	xerrwd_(msg, &c__20, &c__904, &c__0, &c__0, &c__0, &c__0, &c__1, &rl, 
+	_daskr_str_copy(msg, "------ LAMBDA = (R1)", (integer)80, (integer)20);
+	_daskr_xerrwd_(msg, &c__20, &c__904, &c__0, &c__0, &c__0, &c__0, &c__1, &rl,
 		&c_b38, (integer)80);
-	str_copy(msg, "------ NORM(F1) = (R1),  NORM(F1NEW) = (R2)", (integer)80,
+	_daskr_str_copy(msg, "------ NORM(F1) = (R1),  NORM(F1NEW) = (R2)", (integer)80,
 		 (integer)43);
-	xerrwd_(msg, &c__43, &c__905, &c__0, &c__0, &c__0, &c__0, &c__2, &
+	_daskr_xerrwd_(msg, &c__43, &c__905, &c__0, &c__0, &c__0, &c__0, &c__2, &
 		f1nrm, &f1nrmp, (integer)80);
     }
     if (f1nrmp > f1nrm + alpha * slpi * rl) {
@@ -5794,13 +5792,13 @@ L100:
 /* ----------------------------------------------------------------------- */
 L150:
     *iret = 0;
-    dcopy_(neq, &ynew[1], &c__1, &y[1], &c__1);
-    dcopy_(neq, &ypnew[1], &c__1, &yprime[1], &c__1);
+    _daskr_dcopy_(neq, &ynew[1], &c__1, &y[1], &c__1);
+    _daskr_dcopy_(neq, &ypnew[1], &c__1, &yprime[1], &c__1);
     *fnrm = fnrmp;
     if (kprin >= 1) {
-	str_copy(msg, "------ LEAVING ROUTINE DLINSD, FNRM = (R1)", (integer)80,
+	_daskr_str_copy(msg, "------ LEAVING ROUTINE DLINSD, FNRM = (R1)", (integer)80,
 		(integer)42);
-	xerrwd_(msg, &c__42, &c__906, &c__0, &c__0, &c__0, &c__0, &c__1, fnrm,
+	_daskr_xerrwd_(msg, &c__42, &c__906, &c__0, &c__0, &c__0, &c__0, &c__1, fnrm,
 		 &c_b38, (integer)80);
     }
     return 0;
@@ -5818,19 +5816,17 @@ L200:
     rl /= two;
     goto L100;
 
-/* final return to avoid warning should never used */
-	return 0;
 /* ----------------------- END OF SUBROUTINE DLINSD ---------------------- */
 } /* dlinsd_ */
 
-/* Subroutine */ int dfnrmd_(integer *neq, real_number *y, real_number *t,
+/* Subroutine */ int _daskr_dfnrmd_(integer *neq, real_number *y, real_number *t,
 	real_number *yprime, real_number *r__, real_number *cj, real_number *
 	tscale, real_number *wt, Unknown_fp res, integer *ires, real_number *fnorm,
 	real_number *wm, integer *iwm, real_number *rpar, integer *ipar)
 {
-    extern /* Subroutine */ int dslvd_(integer *, real_number *, real_number *,
+    extern /* Subroutine */ int _daskr_dslvd_(integer *, real_number *, real_number *,
 	    integer *);
-    extern real_number ddwnrm_(integer *, real_number *, real_number *,
+    extern real_number _daskr_ddwnrm_(integer *, real_number *, real_number *,
 	    real_number *, integer *);
 
 
@@ -5886,11 +5882,11 @@ L200:
 /* ----------------------------------------------------------------------- */
 /*     Apply inverse of Jacobian to vector R. */
 /* ----------------------------------------------------------------------- */
-    dslvd_(neq, &r__[1], &wm[1], &iwm[1]);
+    _daskr_dslvd_(neq, &r__[1], &wm[1], &iwm[1]);
 /* ----------------------------------------------------------------------- */
 /*     Calculate norm of R. */
 /* ----------------------------------------------------------------------- */
-    *fnorm = ddwnrm_(neq, &r__[1], &wt[1], &rpar[1], &ipar[1]);
+    *fnorm = _daskr_ddwnrm_(neq, &r__[1], &wt[1], &rpar[1], &ipar[1]);
     if (*tscale > 0.) {
 	*fnorm = *fnorm * *tscale * fabs(*cj);
     }
@@ -5899,7 +5895,7 @@ L200:
 /* ----------------------- END OF SUBROUTINE DFNRMD ---------------------- */
 } /* dfnrmd_ */
 
-/* Subroutine */ int dnedd_(real_number *x, real_number *y, real_number *yprime,
+/* Subroutine */ int _daskr_dnedd_(real_number *x, real_number *y, real_number *yprime,
 	integer *neq, Unknown_fp res, Unknown_fp jacd, real_number *pdum, real_number *h__,
 	real_number *wt, integer *jstart, integer *idid, real_number *rpar,
 	integer *ipar, real_number *phi, real_number *gamma, real_number *dumsvr,
@@ -5921,7 +5917,7 @@ L200:
 
     /* Local variables */
     static integer i__, j, ierj;
-    extern /* Subroutine */ int dnsd_(real_number *, real_number *, real_number *
+    extern /* Subroutine */ int _daskr_dnsd_(real_number *, real_number *, real_number *
 	    , integer *, Unknown_fp, real_number *, real_number *, real_number *,
 	    integer *, real_number *, real_number *, real_number *, real_number *,
 	     integer *, real_number *, real_number *, real_number *, real_number *
@@ -5929,13 +5925,13 @@ L200:
 	    *, integer *, integer *, integer *, integer *);
     static integer idum, ires;
     static real_number temp1, temp2;
-    extern /* Subroutine */ int dmatd_(integer *, real_number *, real_number *,
+    extern /* Subroutine */ int _daskr_dmatd_(integer *, real_number *, real_number *,
 	    real_number *, real_number *, real_number *, real_number *, integer *,
 	     real_number *, real_number *, real_number *, integer *, Unknown_fp,
 	    integer *, real_number *, Unknown_fp, real_number *, integer *);
     static real_number pnorm, delnrm;
     static integer iernew;
-    extern real_number ddwnrm_(integer *, real_number *, real_number *,
+    extern real_number _daskr_ddwnrm_(integer *, real_number *, real_number *,
 	    real_number *, integer *);
     static real_number tolnew;
     static integer iertyp;
@@ -6143,7 +6139,7 @@ L300:
 	}
 /* L330: */
     }
-    pnorm = ddwnrm_(neq, &y[1], &wt[1], &rpar[1], &ipar[1]);
+    pnorm = _daskr_ddwnrm_(neq, &y[1], &wt[1], &rpar[1], &ipar[1]);
     tolnew = *uround * 100. * pnorm;
 
 /*     Call RES to initialize DELTA. */
@@ -6161,7 +6157,7 @@ L300:
     if (*jcalc == -1) {
 	++iwm[13];
 	*jcalc = 0;
-	dmatd_(neq, x, &y[1], &yprime[1], &delta[1], cj, h__, &ierj, &wt[1], &
+	_daskr_dmatd_(neq, x, &y[1], &yprime[1], &delta[1], cj, h__, &ierj, &wt[1], &
 		e[1], &wm[1], &iwm[1], (Unknown_fp)res, &ires, uround, (Unknown_fp)jacd, &
 		rpar[1], &ipar[1]);
 	*cjold = *cj;
@@ -6177,7 +6173,7 @@ L300:
 /*     Call the nonlinear Newton solver. */
 
     temp1 = 2. / (*cj / *cjold + 1.);
-    dnsd_(x, &y[1], &yprime[1], neq, (Unknown_fp)res, pdum, &wt[1], &rpar[1], &ipar[
+    _daskr_dnsd_(x, &y[1], &yprime[1], neq, (Unknown_fp)res, pdum, &wt[1], &rpar[1], &ipar[
 	    1], dumsvr, &delta[1], &e[1], &wm[1], &iwm[1], cj, dums, dumr, 
 	    dume, epcon, s, &temp1, &tolnew, &muldel, &maxit, &ires, &idum, &
 	    iernew);
@@ -6211,7 +6207,7 @@ L300:
 	d__1 = y[i__];
 	delta[i__] = MIN(d__1,0.);
     }
-    delnrm = ddwnrm_(neq, &delta[1], &wt[1], &rpar[1], &ipar[1]);
+    delnrm = _daskr_ddwnrm_(neq, &delta[1], &wt[1], &rpar[1], &ipar[1]);
     if (delnrm > *epcon) {
 	goto L380;
     }
@@ -6254,7 +6250,7 @@ L390:
 /* ------END OF SUBROUTINE DNEDD------------------------------------------ */
 } /* dnedd_ */
 
-/* Subroutine */ int dnsd_(real_number *x, real_number *y, real_number *yprime,
+/* Subroutine */ int _daskr_dnsd_(real_number *x, real_number *y, real_number *yprime,
 	integer *neq, Unknown_fp res, real_number *pdum, real_number *wt, real_number *
 	rpar, integer *ipar, real_number *dumsvr, real_number *delta,
 	real_number *e, real_number *wm, integer *iwm, real_number *cj,
@@ -6268,15 +6264,15 @@ L390:
     real_number d__1, d__2;
 
     /* Builtin functions */
-    real_number real_pow(real_number *, real_number *);
+    double _daskr_real_pow(real_number *, real_number *);
 
     /* Local variables */
     static integer i__, m;
     static real_number rate;
-    extern /* Subroutine */ int dslvd_(integer *, real_number *, real_number *,
+    extern /* Subroutine */ int _daskr_dslvd_(integer *, real_number *, real_number *,
 	    integer *);
     static real_number delnrm;
-    extern real_number ddwnrm_(integer *, real_number *, real_number *,
+    extern real_number _daskr_ddwnrm_(integer *, real_number *, real_number *,
 	    real_number *, integer *);
     static real_number oldnrm;
 
@@ -6400,7 +6396,7 @@ L300:
 /*     Compute a new iterate (back-substitution). */
 /*     Store the correction in DELTA. */
 
-    dslvd_(neq, &delta[1], &wm[1], &iwm[1]);
+    _daskr_dslvd_(neq, &delta[1], &wm[1], &iwm[1]);
 
 /*     Update Y, E, and YPRIME. */
 
@@ -6414,7 +6410,7 @@ L300:
 
 /*     Test for convergence of the iteration. */
 
-    delnrm = ddwnrm_(neq, &delta[1], &wt[1], &rpar[1], &ipar[1]);
+    delnrm = _daskr_ddwnrm_(neq, &delta[1], &wt[1], &rpar[1], &ipar[1]);
     if (m == 0) {
 	oldnrm = delnrm;
 	if (delnrm <= *tolnew) {
@@ -6423,7 +6419,7 @@ L300:
     } else {
 	d__1 = delnrm / oldnrm;
 	d__2 = 1. / m;
-	rate = real_pow(&d__1, &d__2);
+	rate = _daskr_real_pow(&d__1, &d__2);
 	if (rate > .9) {
 	    goto L380;
 	}
@@ -6472,7 +6468,7 @@ L380:
 /* ------END OF SUBROUTINE DNSD------------------------------------------- */
 } /* dnsd_ */
 
-/* Subroutine */ int dmatd_(integer *neq, real_number *x, real_number *y,
+/* Subroutine */ int _daskr_dmatd_(integer *neq, real_number *x, real_number *y,
 	real_number *yprime, real_number *delta, real_number *cj, real_number *
 	h__, integer *ier, real_number *ewt, real_number *e, real_number *wm,
 	integer *iwm, Unknown_fp res, integer *ires, real_number *uround, Unknown_fp jacd,
@@ -6483,15 +6479,15 @@ L380:
     real_number d__1, d__2, d__3, d__4, d__5, d__6;
 
     /* Builtin functions */
-    real_number real_sign(real_number *, real_number *);
+    double sqrt(real_number), _daskr_real_sign(real_number *, real_number *);
 
     /* Local variables */
     static integer i__, j, k, l, n, i1, i2, ii, mba;
     static real_number del;
     static integer meb1, nrow;
     static real_number squr;
-    extern /* Subroutine */ int dgbfa_(real_number *, integer *, integer *,
-	    integer *, integer *, integer *, integer *), dgefa_(real_number *,
+    extern /* Subroutine */ int _daskr_dgbfa_(real_number *, integer *, integer *,
+	    integer *, integer *, integer *, integer *), _daskr_dgefa_(real_number *,
 	    integer *, integer *, integer *, integer *);
     static integer mband, lenpd, isave, msave;
     static real_number ysave;
@@ -6612,7 +6608,7 @@ L200:
 	d__3 = squr * MAX(d__5,d__6), d__4 = 1. / ewt[i__];
 	del = MAX(d__3,d__4);
 	d__1 = *h__ * yprime[i__];
-	del = real_sign(&del, &d__1);
+	del = _daskr_real_sign(&del, &d__1);
 	del = y[i__] + del - y[i__];
 	ysave = y[i__];
 	ypsave = yprime[i__];
@@ -6639,7 +6635,7 @@ L200:
 /*     Do dense-matrix LU decomposition on J. */
 
 L230:
-    dgefa_(&wm[1], neq, neq, &iwm[lipvt], ier);
+    _daskr_dgefa_(&wm[1], neq, neq, &iwm[lipvt], ier);
     return 0;
 
 
@@ -6690,7 +6686,7 @@ L500:
 	    d__3 = squr * MAX(d__5,d__6), d__4 = 1. / ewt[n];
 	    del = MAX(d__3,d__4);
 	    d__1 = *h__ * yprime[n];
-	    del = real_sign(&del, &d__1);
+	    del = _daskr_real_sign(&del, &d__1);
 	    del = y[n] + del - y[n];
 	    y[n] += del;
 /* L510: */
@@ -6714,7 +6710,7 @@ L500:
 	    d__3 = squr * MAX(d__5,d__6), d__4 = 1. / ewt[n];
 	    del = MAX(d__3,d__4);
 	    d__1 = *h__ * yprime[n];
-	    del = real_sign(&del, &d__1);
+	    del = _daskr_real_sign(&del, &d__1);
 	    del = y[n] + del - y[n];
 	    delinv = 1. / del;
 /* Computing MAX */
@@ -6738,17 +6734,17 @@ L500:
 /*     Do LU decomposition of banded J. */
 
 L550:
-    dgbfa_(&wm[1], &meband, neq, &iwm[1], &iwm[2], &iwm[lipvt], ier);
+    _daskr_dgbfa_(&wm[1], &meband, neq, &iwm[1], &iwm[2], &iwm[lipvt], ier);
     return 0;
 
 /* ------END OF SUBROUTINE DMATD------------------------------------------ */
 } /* dmatd_ */
 
-/* Subroutine */ int dslvd_(integer *neq, real_number *delta, real_number *wm,
+/* Subroutine */ int _daskr_dslvd_(integer *neq, real_number *delta, real_number *wm,
 	integer *iwm)
 {
-    extern /* Subroutine */ int dgbsl_(real_number *, integer *, integer *,
-	    integer *, integer *, integer *, real_number *, integer *), dgesl_(
+    extern /* Subroutine */ int _daskr_dgbsl_(real_number *, integer *, integer *,
+	    integer *, integer *, integer *, real_number *, integer *), _daskr_dgesl_(
 	    real_number *, integer *, integer *, integer *, real_number *,
 	    integer *);
     static integer lipvt, mtype, meband;
@@ -6798,7 +6794,7 @@ L550:
 /*     Dense matrix. */
 
 L100:
-    dgesl_(&wm[1], neq, neq, &iwm[lipvt], &delta[1], &c__0);
+    _daskr_dgesl_(&wm[1], neq, neq, &iwm[lipvt], &delta[1], &c__0);
     return 0;
 
 /*     Dummy section for MTYPE=3. */
@@ -6810,14 +6806,14 @@ L300:
 
 L400:
     meband = (iwm[1] << 1) + iwm[2] + 1;
-    dgbsl_(&wm[1], &meband, neq, &iwm[1], &iwm[2], &iwm[lipvt], &delta[1], &
+    _daskr_dgbsl_(&wm[1], &meband, neq, &iwm[1], &iwm[2], &iwm[lipvt], &delta[1], &
 	    c__0);
     return 0;
 
 /* ------END OF SUBROUTINE DSLVD------------------------------------------ */
 } /* dslvd_ */
 
-/* Subroutine */ int ddasik_(real_number *x, real_number *y, real_number *yprime,
+/* Subroutine */ int _daskr_ddasik_(real_number *x, real_number *y, real_number *yprime,
 	 integer *neq, integer *icopt, integer *id, Unknown_fp res, Unknown_fp jack, Unknown_fp
 	psol, real_number *h__, real_number *tscale, real_number *wt, integer *
 	jskip, real_number *rpar, integer *ipar, real_number *savr, real_number *
@@ -6829,7 +6825,7 @@ L400:
 {
     static integer nj, lwp, ires, liwp, mxnj;
     static real_number eplin;
-    extern /* Subroutine */ int dnsik_(real_number *, real_number *, real_number
+    extern /* Subroutine */ int _daskr_dnsik_(real_number *, real_number *, real_number
 	    *, integer *, integer *, integer *, Unknown_fp, Unknown_fp, real_number *,
 	    real_number *, integer *, real_number *, real_number *, real_number *,
 	     real_number *, real_number *, real_number *, real_number *, integer *
@@ -6837,7 +6833,7 @@ L400:
 	    real_number *, real_number *, real_number *, integer *, real_number *,
 	     integer *, integer *, integer *);
     static integer ierpj;
-    extern /* Subroutine */ int dcopy_(integer *, real_number *, integer *,
+    extern /* Subroutine */ int _daskr_dcopy_(integer *, real_number *, integer *,
 	    real_number *, integer *);
     static integer mxnit, iernew;
 
@@ -6996,7 +6992,7 @@ L300:
 
 /*     Call the nonlinear Newton solver for up to MXNIT iterations. */
 
-    dnsik_(x, &y[1], &yprime[1], neq, icopt, &id[1], (Unknown_fp)res, (Unknown_fp)psol, &
+    _daskr_dnsik_(x, &y[1], &yprime[1], neq, icopt, &id[1], (Unknown_fp)res, (Unknown_fp)psol, &
 	    wt[1], &rpar[1], &ipar[1], &savr[1], &delta[1], &r__[1], &yic[1], 
 	    &ypic[1], &pwk[1], &wm[1], &iwm[1], cj, tscale, sqrtn, rsqrtn, &
 	    eplin, epcon, ratemx, &mxnit, stptol, icnflg, &icnstr[1], &iernew)
@@ -7009,7 +7005,7 @@ L300:
 /*       is less than MXNJ. */
 /*       Copy the residual SAVR to DELTA, call JACK, and try again. */
 
-	dcopy_(neq, &savr[1], &c__1, &delta[1], &c__1);
+	_daskr_dcopy_(neq, &savr[1], &c__1, &delta[1], &c__1);
 	goto L300;
     }
 
@@ -7036,7 +7032,7 @@ L380:
 /* ----------------------- END OF SUBROUTINE DDASIK----------------------- */
 } /* ddasik_ */
 
-/* Subroutine */ int dnsik_(real_number *x, real_number *y, real_number *yprime,
+/* Subroutine */ int _daskr_dnsik_(real_number *x, real_number *y, real_number *yprime,
 	integer *neq, integer *icopt, integer *id, Unknown_fp res, Unknown_fp psol,
 	real_number *wt, real_number *rpar, integer *ipar, real_number *savr,
 	real_number *delta, real_number *r__, real_number *yic, real_number *ypic,
@@ -7052,22 +7048,22 @@ L380:
     static integer iret, liwp;
     static real_number fnrm0;
     static integer lsoff;
-    extern /* Subroutine */ int dcopy_(integer *, real_number *, integer *,
+    extern /* Subroutine */ int _daskr_dcopy_(integer *, real_number *, integer *,
 	    real_number *, integer *);
     static integer iersl;
-    extern /* Subroutine */ int dslvk_(integer *, real_number *, real_number *,
+    extern /* Subroutine */ int _daskr_dslvk_(integer *, real_number *, real_number *,
 	    real_number *, real_number *, real_number *, real_number *,
 	    real_number *, integer *, Unknown_fp, integer *, Unknown_fp, integer *,
 	    real_number *, real_number *, real_number *, real_number *,
 	    real_number *, real_number *, integer *);
     static real_number oldfnm;
-    extern /* Subroutine */ int dfnrmk_(integer *, real_number *, real_number *,
+    extern /* Subroutine */ int _daskr_dfnrmk_(integer *, real_number *, real_number *,
 	     real_number *, real_number *, real_number *, real_number *,
 	    real_number *, real_number *, real_number *, real_number *, Unknown_fp,
 	    integer *, Unknown_fp, integer *, integer *, real_number *, real_number *,
 	     real_number *, integer *, real_number *, real_number *, integer *);
     static real_number delnrm;
-    extern /* Subroutine */ int dlinsk_(integer *, real_number *, real_number *,
+    extern /* Subroutine */ int _daskr_dlinsk_(integer *, real_number *, real_number *,
 	     real_number *, real_number *, real_number *, real_number *,
 	    real_number *, real_number *, real_number *, real_number *,
 	    real_number *, integer *, real_number *, integer *, Unknown_fp, integer *,
@@ -7075,7 +7071,7 @@ L380:
 	    integer *, integer *, real_number *, integer *, real_number *,
 	    real_number *, real_number *, real_number *, real_number *, integer *,
 	     integer *, real_number *, real_number *, integer *);
-    extern real_number ddwnrm_(integer *, real_number *, real_number *,
+    extern real_number _daskr_ddwnrm_(integer *, real_number *, real_number *,
 	    real_number *, integer *);
 
 
@@ -7191,11 +7187,11 @@ L380:
 
 /*     Save residual in SAVR. */
 
-    dcopy_(neq, &delta[1], &c__1, &savr[1], &c__1);
+    _daskr_dcopy_(neq, &delta[1], &c__1, &savr[1], &c__1);
 
 /*     Compute norm of (P-inverse)*(residual). */
 
-    dfnrmk_(neq, &y[1], x, &yprime[1], &savr[1], &r__[1], cj, tscale, &wt[1], 
+    _daskr_dfnrmk_(neq, &y[1], x, &yprime[1], &savr[1], &r__[1], cj, tscale, &wt[1],
 	    sqrtn, rsqrtn, (Unknown_fp)res, &ires, (Unknown_fp)psol, &c__1, &ier, &fnrm,
 	    eplin, &wm[lwp], &iwm[liwp], &pwk[1], &rpar[1], &ipar[1]);
     ++iwm[21];
@@ -7218,7 +7214,7 @@ L300:
 
 /*     Compute a new step vector DELTA. */
 
-    dslvk_(neq, &y[1], x, &yprime[1], &savr[1], &delta[1], &wt[1], &wm[1], &
+    _daskr_dslvk_(neq, &y[1], x, &yprime[1], &savr[1], &delta[1], &wt[1], &wm[1], &
 	    iwm[1], (Unknown_fp)res, &ires, (Unknown_fp)psol, &iersl, cj, eplin, sqrtn,
 	    rsqrtn, &rhok, &rpar[1], &ipar[1]);
     if (ires != 0 || iersl != 0) {
@@ -7227,7 +7223,7 @@ L300:
 
 /*     Get norm of DELTA.  Return now if DELTA is zero. */
 
-    delnrm = ddwnrm_(neq, &delta[1], &wt[1], &rpar[1], &ipar[1]);
+    delnrm = _daskr_ddwnrm_(neq, &delta[1], &wt[1], &rpar[1], &ipar[1]);
     if (delnrm == 0.) {
 	return 0;
     }
@@ -7236,7 +7232,7 @@ L300:
 
     oldfnm = fnrm;
 
-    dlinsk_(neq, &y[1], x, &yprime[1], &savr[1], cj, tscale, &delta[1], &
+    _daskr_dlinsk_(neq, &y[1], x, &yprime[1], &savr[1], cj, tscale, &delta[1], &
 	    delnrm, &wt[1], sqrtn, rsqrtn, &lsoff, stptol, &iret, (Unknown_fp)res, &
 	    ires, (Unknown_fp)psol, &wm[1], &iwm[1], &rhok, &fnrm, icopt, &id[1], &
 	    wm[lwp], &iwm[liwp], &r__[1], eplin, &yic[1], &ypic[1], &pwk[1], 
@@ -7265,7 +7261,7 @@ L300:
 
 /*     Copy the residual SAVR to DELTA and loop for another iteration. */
 
-    dcopy_(neq, &savr[1], &c__1, &delta[1], &c__1);
+    _daskr_dcopy_(neq, &savr[1], &c__1, &delta[1], &c__1);
     goto L300;
 
 /*     The maximum number of iterations was done.  Set IERNEW and return. */
@@ -7293,7 +7289,7 @@ L390:
 /* ----------------------- END OF SUBROUTINE DNSIK------------------------ */
 } /* dnsik_ */
 
-/* Subroutine */ int dlinsk_(integer *neq, real_number *y, real_number *t,
+/* Subroutine */ int _daskr_dlinsk_(integer *neq, real_number *y, real_number *t,
 	real_number *yprime, real_number *savr, real_number *cj, real_number *
 	tscale, real_number *p, real_number *pnrm, real_number *wt, real_number *
 	sqrtn, real_number *rsqrtn, integer *lsoff, real_number *stptol,
@@ -7314,7 +7310,7 @@ L390:
     integer i__1;
 
     /* Builtin functions */
-    /* Subroutine */ int str_copy(char *, char *, integer, integer);
+    /* Subroutine */ int _daskr_str_copy(char *, char *, integer, integer);
 
     /* Local variables */
     static integer i__;
@@ -7324,20 +7320,20 @@ L390:
     static real_number tau;
     static integer ivar;
     static real_number slpi, f1nrm, ratio;
-    extern /* Subroutine */ int dcopy_(integer *, real_number *, integer *,
+    extern /* Subroutine */ int _daskr_dcopy_(integer *, real_number *, integer *,
 	    real_number *, integer *);
     static real_number rlmin, fnrmp;
     static integer kprin;
     static real_number ratio1, f1nrmp;
-    extern /* Subroutine */ int dfnrmk_(integer *, real_number *, real_number *,
+    extern /* Subroutine */ int _daskr_dfnrmk_(integer *, real_number *, real_number *,
 	     real_number *, real_number *, real_number *, real_number *,
 	    real_number *, real_number *, real_number *, real_number *, Unknown_fp,
 	    integer *, Unknown_fp, integer *, integer *, real_number *, real_number *,
 	     real_number *, integer *, real_number *, real_number *, integer *),
-	    dcnstr_(integer *, real_number *, real_number *, integer *,
-	    real_number *, real_number *, integer *, integer *), xerrwd_(char *,
+	    _daskr_dcnstr_(integer *, real_number *, real_number *, integer *,
+	    real_number *, real_number *, integer *, integer *), _daskr_xerrwd_(char *,
 	     integer *, integer *, integer *, integer *, integer *, integer *,
-	     integer *, real_number *, real_number *, integer), dyypnw_(integer *
+	     integer *, real_number *, real_number *, integer), _daskr_dyypnw_(integer *
 	    , real_number *, real_number *, real_number *, real_number *,
 	    real_number *, integer *, integer *, real_number *, real_number *);
 
@@ -7441,9 +7437,9 @@ L390:
     ratio = one;
 
     if (kprin >= 2) {
-	str_copy(msg, "------ IN ROUTINE DLINSK-- PNRM = (R1)", (integer)80, (
+	_daskr_str_copy(msg, "------ IN ROUTINE DLINSK-- PNRM = (R1)", (integer)80, (
 		integer)38);
-	xerrwd_(msg, &c__38, &c__921, &c__0, &c__0, &c__0, &c__0, &c__1, pnrm,
+	_daskr_xerrwd_(msg, &c__38, &c__921, &c__0, &c__0, &c__0, &c__0, &c__1, pnrm,
 		 &c_b38, (integer)80);
     }
     tau = *pnrm;
@@ -7455,9 +7451,9 @@ L390:
 /* ----------------------------------------------------------------------- */
     if (*icnflg != 0) {
 L10:
-	dyypnw_(neq, &y[1], &yprime[1], cj, &rl, &p[1], icopt, &id[1], &ynew[
+	_daskr_dyypnw_(neq, &y[1], &yprime[1], cj, &rl, &p[1], icopt, &id[1], &ynew[
 		1], &ypnew[1]);
-	dcnstr_(neq, &y[1], &ynew[1], &icnstr[1], &tau, rlx, iret, &ivar);
+	_daskr_dcnstr_(neq, &y[1], &ynew[1], &icnstr[1], &tau, rlx, iret, &ivar);
 	if (*iret == 1) {
 	    ratio1 = tau / *pnrm;
 	    ratio *= ratio1;
@@ -7468,9 +7464,9 @@ L10:
 	    }
 	    *pnrm = tau;
 	    if (kprin >= 2) {
-		str_copy(msg, "------ CONSTRAINT VIOL., PNRM = (R1), INDEX = ("
+		_daskr_str_copy(msg, "------ CONSTRAINT VIOL., PNRM = (R1), INDEX = ("
 			"I1)", (integer)80, (integer)50);
-		xerrwd_(msg, &c__50, &c__922, &c__0, &c__1, &ivar, &c__0, &
+		_daskr_xerrwd_(msg, &c__50, &c__922, &c__0, &c__1, &ivar, &c__0, &
 			c__1, pnrm, &c_b38, (integer)80);
 	    }
 	    if (*pnrm <= *stptol) {
@@ -7484,8 +7480,8 @@ L10:
     slpi = -two * f1nrm * ratio;
     rlmin = *stptol / *pnrm;
     if (*lsoff == 0 && kprin >= 2) {
-	str_copy(msg, "------ MIN. LAMBDA = (R1)", (integer)80, (integer)25);
-	xerrwd_(msg, &c__25, &c__923, &c__0, &c__0, &c__0, &c__0, &c__1, &
+	_daskr_str_copy(msg, "------ MIN. LAMBDA = (R1)", (integer)80, (integer)25);
+	_daskr_xerrwd_(msg, &c__25, &c__923, &c__0, &c__0, &c__0, &c__0, &c__1, &
 		rlmin, &c_b38, (integer)80);
     }
 /* ----------------------------------------------------------------------- */
@@ -7494,9 +7490,9 @@ L10:
 /* perform alpha condition test. */
 /* ----------------------------------------------------------------------- */
 L100:
-    dyypnw_(neq, &y[1], &yprime[1], cj, &rl, &p[1], icopt, &id[1], &ynew[1], &
+    _daskr_dyypnw_(neq, &y[1], &yprime[1], cj, &rl, &p[1], icopt, &id[1], &ynew[1], &
 	    ypnew[1]);
-    dfnrmk_(neq, &ynew[1], t, &ypnew[1], &savr[1], &r__[1], cj, tscale, &wt[1]
+    _daskr_dfnrmk_(neq, &ynew[1], t, &ypnew[1], &savr[1], &r__[1], cj, tscale, &wt[1]
 	    , sqrtn, rsqrtn, (Unknown_fp)res, ires, (Unknown_fp)psol, &c__0, &ier, &fnrmp,
 	     eplin, &wp[1], &iwp[1], &pwk[1], &rpar[1], &ipar[1]);
     ++iwm[12];
@@ -7513,12 +7509,12 @@ L100:
 
     f1nrmp = fnrmp * fnrmp / two;
     if (kprin >= 2) {
-	str_copy(msg, "------ LAMBDA = (R1)", (integer)80, (integer)20);
-	xerrwd_(msg, &c__20, &c__924, &c__0, &c__0, &c__0, &c__0, &c__1, &rl, 
+	_daskr_str_copy(msg, "------ LAMBDA = (R1)", (integer)80, (integer)20);
+	_daskr_xerrwd_(msg, &c__20, &c__924, &c__0, &c__0, &c__0, &c__0, &c__1, &rl,
 		&c_b38, (integer)80);
-	str_copy(msg, "------ NORM(F1) = (R1),  NORM(F1NEW) = (R2)", (integer)80,
+	_daskr_str_copy(msg, "------ NORM(F1) = (R1),  NORM(F1NEW) = (R2)", (integer)80,
 		 (integer)43);
-	xerrwd_(msg, &c__43, &c__925, &c__0, &c__0, &c__0, &c__0, &c__2, &
+	_daskr_xerrwd_(msg, &c__43, &c__925, &c__0, &c__0, &c__0, &c__0, &c__2, &
 		f1nrm, &f1nrmp, (integer)80);
     }
     if (f1nrmp > f1nrm + alpha * slpi * rl) {
@@ -7530,13 +7526,13 @@ L100:
 /* ----------------------------------------------------------------------- */
 L150:
     *iret = 0;
-    dcopy_(neq, &ynew[1], &c__1, &y[1], &c__1);
-    dcopy_(neq, &ypnew[1], &c__1, &yprime[1], &c__1);
+    _daskr_dcopy_(neq, &ynew[1], &c__1, &y[1], &c__1);
+    _daskr_dcopy_(neq, &ypnew[1], &c__1, &yprime[1], &c__1);
     *fnrm = fnrmp;
     if (kprin >= 1) {
-	str_copy(msg, "------ LEAVING ROUTINE DLINSK, FNRM = (R1)", (integer)80,
+	_daskr_str_copy(msg, "------ LEAVING ROUTINE DLINSK, FNRM = (R1)", (integer)80,
 		(integer)42);
-	xerrwd_(msg, &c__42, &c__926, &c__0, &c__0, &c__0, &c__0, &c__1, fnrm,
+	_daskr_xerrwd_(msg, &c__42, &c__926, &c__0, &c__0, &c__0, &c__0, &c__1, fnrm,
 		 &c_b38, (integer)80);
     }
     return 0;
@@ -7554,22 +7550,20 @@ L200:
     rl /= two;
     goto L100;
 
-/* final return to avoid warning should never used */
-    return 0;
 /* ----------------------- END OF SUBROUTINE DLINSK ---------------------- */
 } /* dlinsk_ */
 
-/* Subroutine */ int dfnrmk_(integer *neq, real_number *y, real_number *t,
+/* Subroutine */ int _daskr_dfnrmk_(integer *neq, real_number *y, real_number *t,
 	real_number *yprime, real_number *savr, real_number *r__, real_number *cj,
 	 real_number *tscale, real_number *wt, real_number *sqrtn, real_number *
 	rsqrtn, Unknown_fp res, integer *ires, Unknown_fp psol, integer *irin, integer *
 	ier, real_number *fnorm, real_number *eplin, real_number *wp, integer *
 	iwp, real_number *pwk, real_number *rpar, integer *ipar)
 {
-    extern /* Subroutine */ int dscal_(integer *, real_number *, real_number *,
-	    integer *), dcopy_(integer *, real_number *, integer *, real_number
+    extern /* Subroutine */ int _daskr_dscal_(integer *, real_number *, real_number *,
+	    integer *), _daskr_dcopy_(integer *, real_number *, integer *, real_number
 	    *, integer *);
-    extern real_number ddwnrm_(integer *, real_number *, real_number *,
+    extern real_number _daskr_ddwnrm_(integer *, real_number *, real_number *,
 	    real_number *, integer *);
 
 
@@ -7633,19 +7627,19 @@ L200:
 /*     Apply inverse of left preconditioner to vector R. */
 /*     First scale WT array by 1/sqrt(N), and undo scaling afterward. */
 /* ----------------------------------------------------------------------- */
-    dcopy_(neq, &savr[1], &c__1, &r__[1], &c__1);
-    dscal_(neq, rsqrtn, &wt[1], &c__1);
+    _daskr_dcopy_(neq, &savr[1], &c__1, &r__[1], &c__1);
+    _daskr_dscal_(neq, rsqrtn, &wt[1], &c__1);
     *ier = 0;
     (*psol)(neq, t, &y[1], &yprime[1], &savr[1], &pwk[1], cj, &wt[1], &wp[1], 
 	    &iwp[1], &r__[1], eplin, ier, &rpar[1], &ipar[1]);
-    dscal_(neq, sqrtn, &wt[1], &c__1);
+    _daskr_dscal_(neq, sqrtn, &wt[1], &c__1);
     if (*ier != 0) {
 	return 0;
     }
 /* ----------------------------------------------------------------------- */
 /*     Calculate norm of R. */
 /* ----------------------------------------------------------------------- */
-    *fnorm = ddwnrm_(neq, &r__[1], &wt[1], &rpar[1], &ipar[1]);
+    *fnorm = _daskr_ddwnrm_(neq, &r__[1], &wt[1], &rpar[1], &ipar[1]);
     if (*tscale > 0.) {
 	*fnorm = *fnorm * *tscale * fabs(*cj);
     }
@@ -7654,7 +7648,7 @@ L200:
 /* ----------------------- END OF SUBROUTINE DFNRMK ---------------------- */
 } /* dfnrmk_ */
 
-/* Subroutine */ int dnedk_(real_number *x, real_number *y, real_number *yprime,
+/* Subroutine */ int _daskr_dnedk_(real_number *x, real_number *y, real_number *yprime,
 	integer *neq, Unknown_fp res, Unknown_fp jack, Unknown_fp psol, real_number *h__,
 	real_number *wt, integer *jstart, integer *idid, real_number *rpar,
 	integer *ipar, real_number *phi, real_number *gamma, real_number *savr,
@@ -7676,7 +7670,7 @@ L200:
 
     /* Local variables */
     static integer i__, j, lwp;
-    extern /* Subroutine */ int dnsk_(real_number *, real_number *, real_number *
+    extern /* Subroutine */ int _daskr_dnsk_(real_number *, real_number *, real_number *
 	    , integer *, Unknown_fp, Unknown_fp, real_number *, real_number *, integer *,
 	    real_number *, real_number *, real_number *, real_number *, integer *,
 	     real_number *, real_number *, real_number *, real_number *,
@@ -7687,7 +7681,7 @@ L200:
     static integer ierpj, iersl;
     static real_number delnrm;
     static integer iernew;
-    extern real_number ddwnrm_(integer *, real_number *, real_number *,
+    extern real_number _daskr_ddwnrm_(integer *, real_number *, real_number *,
 	    real_number *, integer *);
     static real_number tolnew;
     static integer iertyp;
@@ -7933,7 +7927,7 @@ L300:
 
 /*     Call the nonlinear Newton solver. */
 
-    dnsk_(x, &y[1], &yprime[1], neq, (Unknown_fp)res, (Unknown_fp)psol, &wt[1], &rpar[1],
+    _daskr_dnsk_(x, &y[1], &yprime[1], neq, (Unknown_fp)res, (Unknown_fp)psol, &wt[1], &rpar[1],
 	    &ipar[1], &savr[1], &delta[1], &e[1], &wm[1], &iwm[1], cj, sqrtn, 
 	    rsqrtn, &eplin, epcon, s, &temp1, &tolnew, &muldel, &maxit, &ires,
 	     &iersl, &iernew);
@@ -7966,7 +7960,7 @@ L300:
 	d__1 = y[i__];
 	delta[i__] = MIN(d__1,0.);
     }
-    delnrm = ddwnrm_(neq, &delta[1], &wt[1], &rpar[1], &ipar[1]);
+    delnrm = _daskr_ddwnrm_(neq, &delta[1], &wt[1], &rpar[1], &ipar[1]);
     if (delnrm > *epcon) {
 	goto L380;
     }
@@ -8015,7 +8009,7 @@ L390:
 /* ------END OF SUBROUTINE DNEDK------------------------------------------ */
 } /* dnedk_ */
 
-/* Subroutine */ int dnsk_(real_number *x, real_number *y, real_number *yprime,
+/* Subroutine */ int _daskr_dnsk_(real_number *x, real_number *y, real_number *yprime,
 	integer *neq, Unknown_fp res, Unknown_fp psol, real_number *wt, real_number *rpar,
 	integer *ipar, real_number *savr, real_number *delta, real_number *e,
 	real_number *wm, integer *iwm, real_number *cj, real_number *sqrtn,
@@ -8028,18 +8022,18 @@ L390:
     real_number d__1, d__2;
 
     /* Builtin functions */
-    real_number real_pow(real_number *, real_number *);
+    double _daskr_real_pow(real_number *, real_number *);
 
     /* Local variables */
     static integer i__, m;
     static real_number rate, rhok;
-    extern /* Subroutine */ int dslvk_(integer *, real_number *, real_number *,
+    extern /* Subroutine */ int _daskr_dslvk_(integer *, real_number *, real_number *,
 	    real_number *, real_number *, real_number *, real_number *,
 	    real_number *, integer *, Unknown_fp, integer *, Unknown_fp, integer *,
 	    real_number *, real_number *, real_number *, real_number *,
 	    real_number *, real_number *, integer *);
     static real_number delnrm;
-    extern real_number ddwnrm_(integer *, real_number *, real_number *,
+    extern real_number _daskr_ddwnrm_(integer *, real_number *, real_number *,
 	    real_number *, integer *);
     static real_number oldnrm;
 
@@ -8178,7 +8172,7 @@ L300:
 
 /*     Compute a new iterate.  Store the correction in DELTA. */
 
-    dslvk_(neq, &y[1], x, &yprime[1], &savr[1], &delta[1], &wt[1], &wm[1], &
+    _daskr_dslvk_(neq, &y[1], x, &yprime[1], &savr[1], &delta[1], &wt[1], &wm[1], &
 	    iwm[1], (Unknown_fp)res, ires, (Unknown_fp)psol, iersl, cj, eplin, sqrtn,
 	    rsqrtn, &rhok, &rpar[1], &ipar[1]);
     if (*ires != 0 || *iersl != 0) {
@@ -8197,7 +8191,7 @@ L300:
 
 /*     Test for convergence of the iteration. */
 
-    delnrm = ddwnrm_(neq, &delta[1], &wt[1], &rpar[1], &ipar[1]);
+    delnrm = _daskr_ddwnrm_(neq, &delta[1], &wt[1], &rpar[1], &ipar[1]);
     if (m == 0) {
 	oldnrm = delnrm;
 	if (delnrm <= *tolnew) {
@@ -8206,7 +8200,7 @@ L300:
     } else {
 	d__1 = delnrm / oldnrm;
 	d__2 = 1. / m;
-	rate = real_pow(&d__1, &d__2);
+	rate = _daskr_real_pow(&d__1, &d__2);
 	if (rate > .9) {
 	    goto L380;
 	}
@@ -8252,7 +8246,7 @@ L380:
 /* ------END OF SUBROUTINE DNSK------------------------------------------- */
 } /* dnsk_ */
 
-/* Subroutine */ int dslvk_(integer *neq, real_number *y, real_number *tn,
+/* Subroutine */ int _daskr_dslvk_(integer *neq, real_number *y, real_number *tn,
 	real_number *yprime, real_number *savr, real_number *x, real_number *ewt,
 	real_number *wm, integer *iwm, Unknown_fp res, integer *ires, Unknown_fp psol,
 	integer *iersl, real_number *cj, real_number *eplin, real_number *sqrtn,
@@ -8268,11 +8262,11 @@ L380:
     /* Local variables */
     static integer i__, lq, lr, lv, lz, ldl, nli, nre, kmp, lwk, nps, lwp, 
 	    ncfl, lhes, lgmr, maxl, nres, npsl, liwp, iflag;
-    extern /* Subroutine */ int dscal_(integer *, real_number *, real_number *,
-	    integer *), dcopy_(integer *, real_number *, integer *, real_number
+    extern /* Subroutine */ int _daskr_dscal_(integer *, real_number *, real_number *,
+	    integer *), _daskr_dcopy_(integer *, real_number *, integer *, real_number
 	    *, integer *);
     static integer miter, nrmax, nrsts, maxlp1;
-    extern /* Subroutine */ int dspigm_(integer *, real_number *, real_number *,
+    extern /* Subroutine */ int _daskr_dspigm_(integer *, real_number *, real_number *,
 	     real_number *, real_number *, real_number *, real_number *, integer *
 	    , integer *, integer *, real_number *, real_number *, Unknown_fp, integer
 	    *, integer *, Unknown_fp, integer *, real_number *, real_number *,
@@ -8362,8 +8356,8 @@ L380:
     i__1 = 1, i__2 = maxl - kmp;
     ldl = lwk + MIN(i__1,i__2) * *neq;
     lz = ldl + *neq;
-    dscal_(neq, rsqrtn, &ewt[1], &c__1);
-    dcopy_(neq, &x[1], &c__1, &wm[lr], &c__1);
+    _daskr_dscal_(neq, rsqrtn, &ewt[1], &c__1);
+    _daskr_dcopy_(neq, &x[1], &c__1, &wm[lr], &c__1);
     i__1 = *neq;
     for (i__ = 1; i__ <= i__1; ++i__) {
 /* L110: */
@@ -8384,9 +8378,9 @@ L380:
 L115:
     ++nrsts;
     if (nrsts > 0) {
-	dcopy_(neq, &wm[ldl], &c__1, &wm[lr], &c__1);
+	_daskr_dcopy_(neq, &wm[ldl], &c__1, &wm[lr], &c__1);
     }
-    dspigm_(neq, tn, &y[1], &yprime[1], &savr[1], &wm[lr], &ewt[1], &maxl, &
+    _daskr_dspigm_(neq, tn, &y[1], &yprime[1], &savr[1], &wm[lr], &ewt[1], &maxl, &
 	    maxlp1, &kmp, eplin, cj, (Unknown_fp)res, ires, &nres, (Unknown_fp)psol, &
 	    npsl, &wm[lz], &wm[lv], &wm[lhes], &wm[lq], &lgmr, &wm[lwp], &iwm[
 	    liwp], &wm[lwk], &wm[ldl], rhok, &iflag, &irst, &nrsts, &rpar[1], 
@@ -8424,13 +8418,13 @@ L115:
     iwm[21] = nps;
     iwm[16] = ncfl;
     iwm[12] = nre;
-    dscal_(neq, sqrtn, &ewt[1], &c__1);
+    _daskr_dscal_(neq, sqrtn, &ewt[1], &c__1);
     return 0;
 
 /* ------END OF SUBROUTINE DSLVK------------------------------------------ */
 } /* dslvk_ */
 
-/* Subroutine */ int dspigm_(integer *neq, real_number *tn, real_number *y,
+/* Subroutine */ int _daskr_dspigm_(integer *neq, real_number *tn, real_number *y,
 	real_number *yprime, real_number *savr, real_number *r__, real_number *
 	wght, integer *maxl, integer *maxlp1, integer *kmp, real_number *eplin,
 	 real_number *cj, Unknown_fp res, integer *ires, integer *nre, Unknown_fp psol,
@@ -8450,22 +8444,22 @@ L115:
     static integer i2, ll, ip1, ier;
     static real_number tem, rho;
     static integer llp1, info;
-    extern /* Subroutine */ int datv_(integer *, real_number *, real_number *,
+    extern /* Subroutine */ int _daskr_datv_(integer *, real_number *, real_number *,
 	    real_number *, real_number *, real_number *, real_number *,
 	    real_number *, Unknown_fp, integer *, Unknown_fp, real_number *, real_number *,
 	    real_number *, integer *, real_number *, real_number *, integer *,
 	    integer *, integer *, real_number *, integer *);
     static real_number prod, rnrm;
-    extern real_number dnrm2_(integer *, real_number *, integer *);
-    extern /* Subroutine */ int dscal_(integer *, real_number *, real_number *,
-	    integer *), dhels_(real_number *, integer *, integer *, real_number
-	    *, real_number *), dheqr_(real_number *, integer *, integer *,
+    extern real_number _daskr_dnrm2_(integer *, real_number *, integer *);
+    extern /* Subroutine */ int _daskr_dscal_(integer *, real_number *, real_number *,
+	    integer *), _daskr_dhels_(real_number *, integer *, integer *, real_number
+	    *, real_number *), _daskr_dheqr_(real_number *, integer *, integer *,
 	    real_number *, integer *, integer *);
     static real_number dlnrm;
-    extern /* Subroutine */ int dcopy_(integer *, real_number *, integer *,
-	    real_number *, integer *), dorth_(real_number *, real_number *,
+    extern /* Subroutine */ int _daskr_dcopy_(integer *, real_number *, integer *,
+	    real_number *, integer *), _daskr_dorth_(real_number *, real_number *,
 	    real_number *, integer *, integer *, integer *, integer *,
-	    real_number *), daxpy_(integer *, real_number *, real_number *,
+	    real_number *), _daskr_daxpy_(integer *, real_number *, real_number *,
 	    integer *, real_number *, integer *);
     static integer maxlm1;
     static real_number snormw;
@@ -8655,13 +8649,13 @@ L115:
 /* If, however, the norm of V(*,1) (i.e. the norm of the preconditioned */
 /* residual) is .le. EPLIN, then return with Z=0. */
 /* ----------------------------------------------------------------------- */
-    rnrm = dnrm2_(neq, &v[v_offset], &c__1);
+    rnrm = _daskr_dnrm2_(neq, &v[v_offset], &c__1);
     if (rnrm <= *eplin) {
 	*rhok = rnrm;
 	return 0;
     }
     tem = 1. / rnrm;
-    dscal_(neq, &tem, &v[v_dim1 + 1], &c__1);
+    _daskr_dscal_(neq, &tem, &v[v_dim1 + 1], &c__1);
 /* ----------------------------------------------------------------------- */
 /* Zero out the HES array. */
 /* ----------------------------------------------------------------------- */
@@ -8688,7 +8682,7 @@ L115:
 /* Call routine DORTH to orthogonalize the new vector VNEW = V(*,LL+1). */
 /* call routine DHEQR to update the factors of HES. */
 /* ----------------------------------------------------------------------- */
-	datv_(neq, &y[1], tn, &yprime[1], &savr[1], &v[ll * v_dim1 + 1], &
+	_daskr_datv_(neq, &y[1], tn, &yprime[1], &savr[1], &v[ll * v_dim1 + 1], &
 		wght[1], &z__[1], (Unknown_fp)res, ires, (Unknown_fp)psol, &v[(ll + 1) *
 		v_dim1 + 1], &wk[1], &wp[1], &iwp[1], cj, eplin, &ier, nre, 
 		npsl, &rpar[1], &ipar[1]);
@@ -8698,10 +8692,10 @@ L115:
 	if (ier != 0) {
 	    goto L300;
 	}
-	dorth_(&v[(ll + 1) * v_dim1 + 1], &v[v_offset], &hes[hes_offset], neq,
+	_daskr_dorth_(&v[(ll + 1) * v_dim1 + 1], &v[v_offset], &hes[hes_offset], neq,
 		 &ll, maxlp1, kmp, &snormw);
 	hes[ll + 1 + ll * hes_dim1] = snormw;
-	dheqr_(&hes[hes_offset], maxlp1, &ll, &q[1], &info, &ll);
+	_daskr_dheqr_(&hes[hes_offset], maxlp1, &ll, &q[1], &info, &ll);
 	if (info == ll) {
 	    goto L120;
 	}
@@ -8715,7 +8709,7 @@ L115:
 	rho = (d__1 = prod * rnrm, fabs(d__1));
 	if (ll > *kmp && *kmp < *maxl) {
 	    if (ll == *kmp + 1) {
-		dcopy_(neq, &v[v_dim1 + 1], &c__1, &dl[1], &c__1);
+		_daskr_dcopy_(neq, &v[v_dim1 + 1], &c__1, &dl[1], &c__1);
 		i__2 = *kmp;
 		for (i__ = 1; i__ <= i__2; ++i__) {
 		    ip1 = i__ + 1;
@@ -8738,7 +8732,7 @@ L115:
 /* L80: */
 		dl[k] = s * dl[k] + c__ * v[k + llp1 * v_dim1];
 	    }
-	    dlnrm = dnrm2_(neq, &dl[1], &c__1);
+	    dlnrm = _daskr_dnrm2_(neq, &dl[1], &c__1);
 	    rho *= dlnrm;
 	}
 /* ----------------------------------------------------------------------- */
@@ -8755,7 +8749,7 @@ L115:
 /* Rescale so that the norm of V(1,LL+1) is one. */
 /* ----------------------------------------------------------------------- */
 	tem = 1. / snormw;
-	dscal_(neq, &tem, &v[(ll + 1) * v_dim1 + 1], &c__1);
+	_daskr_dscal_(neq, &tem, &v[(ll + 1) * v_dim1 + 1], &c__1);
 /* L90: */
     }
 L100:
@@ -8783,7 +8777,7 @@ L150:
 
 /*           Calculate DL from the V(I)'s. */
 
-	    dcopy_(neq, &v[v_dim1 + 1], &c__1, &dl[1], &c__1);
+	    _daskr_dcopy_(neq, &v[v_dim1 + 1], &c__1, &dl[1], &c__1);
 	    maxlm1 = *maxl - 1;
 	    i__1 = maxlm1;
 	    for (i__ = 1; i__ <= i__1; ++i__) {
@@ -8810,7 +8804,7 @@ L150:
 /*        Scale DL by RNRM*PROD to obtain the residual RL. */
 
 	tem = rnrm * prod;
-	dscal_(neq, &tem, &dl[1], &c__1);
+	_daskr_dscal_(neq, &tem, &dl[1], &c__1);
     }
 /* ----------------------------------------------------------------------- */
 /* Compute the approximation ZL to the solution. */
@@ -8826,7 +8820,7 @@ L200:
 	r__[k] = 0.;
     }
     r__[1] = rnrm;
-    dhels_(&hes[hes_offset], maxlp1, &ll, &q[1], &r__[1]);
+    _daskr_dhels_(&hes[hes_offset], maxlp1, &ll, &q[1], &r__[1]);
     i__1 = *neq;
     for (k = 1; k <= i__1; ++k) {
 /* L220: */
@@ -8834,7 +8828,7 @@ L200:
     }
     i__1 = ll;
     for (i__ = 1; i__ <= i__1; ++i__) {
-	daxpy_(neq, &r__[i__], &v[i__ * v_dim1 + 1], &c__1, &z__[1], &c__1);
+	_daskr_daxpy_(neq, &r__[i__], &v[i__ * v_dim1 + 1], &c__1, &z__[1], &c__1);
 /* L230: */
     }
     i__1 = *neq;
@@ -8861,7 +8855,7 @@ L300:
 /* ------END OF SUBROUTINE DSPIGM----------------------------------------- */
 } /* dspigm_ */
 
-/* Subroutine */ int datv_(integer *neq, real_number *y, real_number *tn,
+/* Subroutine */ int _daskr_datv_(integer *neq, real_number *y, real_number *tn,
 	real_number *yprime, real_number *savr, real_number *v, real_number *wght,
 	 real_number *yptem, Unknown_fp res, integer *ires, Unknown_fp psol, real_number *
 	z__, real_number *vtem, real_number *wp, integer *iwp, real_number *cj,
@@ -9020,7 +9014,7 @@ L300:
 /* ------END OF SUBROUTINE DATV------------------------------------------- */
 } /* datv_ */
 
-/* Subroutine */ int dorth_(real_number *vnew, real_number *v, real_number *hes,
+/* Subroutine */ int _daskr_dorth_(real_number *vnew, real_number *v, real_number *hes,
 	integer *n, integer *ll, integer *ldhes, integer *kmp, real_number *
 	snormw)
 {
@@ -9028,14 +9022,17 @@ L300:
     integer v_dim1, v_offset, hes_dim1, hes_offset, i__1, i__2;
     real_number d__1, d__2, d__3;
 
+    /* Builtin functions */
+    double sqrt(real_number);
+
     /* Local variables */
     static integer i__, i0;
     static real_number arg, tem;
-    extern real_number ddot_(integer *, real_number *, integer *, real_number *,
+    extern real_number _daskr_ddot_(integer *, real_number *, integer *, real_number *,
 	    integer *);
     static real_number vnrm;
-    extern real_number dnrm2_(integer *, real_number *, integer *);
-    extern /* Subroutine */ int daxpy_(integer *, real_number *, real_number *,
+    extern real_number _daskr_dnrm2_(integer *, real_number *, integer *);
+    extern /* Subroutine */ int _daskr_daxpy_(integer *, real_number *, real_number *,
 	    integer *, real_number *, integer *);
     static real_number sumdsq;
 
@@ -9104,7 +9101,7 @@ L300:
     hes -= hes_offset;
 
     /* Function Body */
-    vnrm = dnrm2_(n, &vnew[1], &c__1);
+    vnrm = _daskr_dnrm2_(n, &vnew[1], &c__1);
 /* ----------------------------------------------------------------------- */
 /* Do Modified Gram-Schmidt on VNEW = A*V(LL). */
 /* Scaled inner products give new column of HES. */
@@ -9115,10 +9112,10 @@ L300:
     i0 = MAX(i__1,i__2);
     i__1 = *ll;
     for (i__ = i0; i__ <= i__1; ++i__) {
-	hes[i__ + *ll * hes_dim1] = ddot_(n, &v[i__ * v_dim1 + 1], &c__1, &
+	hes[i__ + *ll * hes_dim1] = _daskr_ddot_(n, &v[i__ * v_dim1 + 1], &c__1, &
 		vnew[1], &c__1);
 	tem = -hes[i__ + *ll * hes_dim1];
-	daxpy_(n, &tem, &v[i__ * v_dim1 + 1], &c__1, &vnew[1], &c__1);
+	_daskr_daxpy_(n, &tem, &v[i__ * v_dim1 + 1], &c__1, &vnew[1], &c__1);
 /* L10: */
     }
 /* ----------------------------------------------------------------------- */
@@ -9128,20 +9125,20 @@ L300:
 /* Correct if relative correction exceeds 1000*(unit roundoff). */
 /* Finally, correct SNORMW using the dot products involved. */
 /* ----------------------------------------------------------------------- */
-    *snormw = dnrm2_(n, &vnew[1], &c__1);
+    *snormw = _daskr_dnrm2_(n, &vnew[1], &c__1);
     if (vnrm + *snormw * .001 != vnrm) {
 	return 0;
     }
     sumdsq = 0.;
     i__1 = *ll;
     for (i__ = i0; i__ <= i__1; ++i__) {
-	tem = -ddot_(n, &v[i__ * v_dim1 + 1], &c__1, &vnew[1], &c__1);
+	tem = -_daskr_ddot_(n, &v[i__ * v_dim1 + 1], &c__1, &vnew[1], &c__1);
 	if (hes[i__ + *ll * hes_dim1] + tem * .001 == hes[i__ + *ll * 
 		hes_dim1]) {
 	    goto L30;
 	}
 	hes[i__ + *ll * hes_dim1] -= tem;
-	daxpy_(n, &tem, &v[i__ * v_dim1 + 1], &c__1, &vnew[1], &c__1);
+	_daskr_daxpy_(n, &tem, &v[i__ * v_dim1 + 1], &c__1, &vnew[1], &c__1);
 /* Computing 2nd power */
 	d__1 = tem;
 	sumdsq += d__1 * d__1;
@@ -9162,11 +9159,14 @@ L30:
 /* ------END OF SUBROUTINE DORTH------------------------------------------ */
 } /* dorth_ */
 
-/* Subroutine */ int dheqr_(real_number *a, integer *lda, integer *n,
+/* Subroutine */ int _daskr_dheqr_(real_number *a, integer *lda, integer *n,
 	real_number *q, integer *info, integer *ijob)
 {
     /* System generated locals */
     integer a_dim1, a_offset, i__1, i__2;
+
+    /* Builtin functions */
+    double sqrt(real_number);
 
     /* Local variables */
     static real_number c__;
@@ -9370,7 +9370,7 @@ L130:
 /* ------END OF SUBROUTINE DHEQR------------------------------------------ */
 } /* dheqr_ */
 
-/* Subroutine */ int dhels_(real_number *a, integer *lda, integer *n,
+/* Subroutine */ int _daskr_dhels_(real_number *a, integer *lda, integer *n,
 	real_number *q, real_number *b)
 {
     /* System generated locals */
@@ -9381,7 +9381,7 @@ L130:
     static integer k;
     static real_number s, t, t1, t2;
     static integer kb, iq, kp1;
-    extern /* Subroutine */ int daxpy_(integer *, real_number *, real_number *,
+    extern /* Subroutine */ int _daskr_daxpy_(integer *, real_number *, real_number *,
 	    integer *, real_number *, integer *);
 
 
@@ -9469,7 +9469,7 @@ L130:
 	b[k] /= a[k + k * a_dim1];
 	t = -b[k];
 	i__2 = k - 1;
-	daxpy_(&i__2, &t, &a[k * a_dim1 + 1], &c__1, &b[1], &c__1);
+	_daskr_daxpy_(&i__2, &t, &a[k * a_dim1 + 1], &c__1, &b[1], &c__1);
 /* L40: */
     }
     return 0;

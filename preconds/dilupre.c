@@ -203,7 +203,7 @@ static integer c__1 = 1;
 /* periodically during the integration, and the factors are used to */
 /* solve systems Px = b as needed. */
 /* ----------------------------------------------------------------------- */
-/* Subroutine */ int dspsetup_(integer *neq, integer *lwp, integer *liwp, 
+/* Subroutine */ int _daskr_dspsetup_(integer *neq, integer *lwp, integer *liwp,
 	real_number *rpar, integer *ipar, integer *ierr, integer *lwp_min__,
 	integer *liwp_min__)
 {
@@ -391,7 +391,7 @@ static integer c__1 = 1;
 /* ------------  End of Subroutine DSPSETUP  ----------------------------- */
 } /* dspsetup_ */
 
-/* Subroutine */ int djacilu_(Unknown_fp res, integer *ires, integer *neq,
+/* Subroutine */ int _daskr_djacilu_(Unknown_fp res, integer *ires, integer *neq,
 	real_number *t, real_number *y, real_number *yprime, real_number *rewt,
 	real_number *savr, real_number *wk, real_number *h__, real_number *cj,
 	real_number *wp, integer *iwp, integer *ierr, real_number *rpar,
@@ -408,8 +408,8 @@ static integer c__1 = 1;
     integer i__1;
 
     /* Builtin functions */
-    /* Subroutine */ int str_copy(char *, char *, integer, integer);
-    integer str_cmp(char *, char *, integer, integer);
+    /* Subroutine */ int _daskr_str_copy(char *, char *, integer, integer);
+    integer _daskr_str_cmp(char *, char *, integer, integer);
 
     /* Local variables */
     static integer jscalcol, ireorder, ipremeth, lfililut, lenplumx, normtype,
@@ -417,37 +417,37 @@ static integer c__1 = 1;
     static char msg[80];
     static integer lju, ubw, ljac, ifmt, ljlu, lplu, neqp1, liwk1, lrwk1, 
 	    ljaci, ljacj, lmask;
-    extern /* Subroutine */ int djilu_(integer *, integer *, integer *, 
+    extern /* Subroutine */ int _daskr_djilu_(integer *, integer *, integer *,
 	    real_number *, integer *, integer *, integer *, real_number *,
 	    integer *, real_number *, integer *, integer *, real_number *,
 	    integer *, real_number *, char *, integer *, integer *, integer);
     static integer lperm;
     static char title[72];
     static integer iunit;
-    extern /* Subroutine */ int prtmt_(integer *, integer *, real_number *,
+    extern /* Subroutine */ int _daskr_prtmt_(integer *, integer *, real_number *,
 	    integer *, integer *, real_number *, char *, char *, char *, char *
 	    , integer *, integer *, integer *, integer, integer, integer, integer)
 	    ;
     static real_number sqrtn;
     static integer nnzmx;
-    extern /* Subroutine */ int djcalc_(integer *, real_number *, real_number *,
+    extern /* Subroutine */ int _daskr_djcalc_(integer *, real_number *, real_number *,
 	     real_number *, real_number *, integer *, integer *, real_number *,
 	    real_number *, Unknown_fp, real_number *, real_number *, integer *,
 	    real_number *, integer *, integer *, real_number *, integer *,
 	    integer *, integer *, real_number *, integer *, integer *, integer
-	    *), amudia_(integer *, integer *, real_number *, integer *,
+	    *), _daskr_amudia_(integer *, integer *, real_number *, integer *,
 	    integer *, real_number *, real_number *, integer *, integer *),
-	    roscal_(integer *, integer *, integer *, real_number *, integer *,
+	    _daskr_roscal_(integer *, integer *, integer *, real_number *, integer *,
 	    integer *, real_number *, real_number *, integer *, integer *,
 	    integer *);
     static integer jacout, liperm;
-    extern /* Subroutine */ int dvperm_(integer *, real_number *, integer *);
+    extern /* Subroutine */ int _daskr_dvperm_(integer *, real_number *, integer *);
     static integer lqperm;
-    extern /* Subroutine */ int xerrwd_(char *, integer *, integer *, integer 
+    extern /* Subroutine */ int _daskr_xerrwd_(char *, integer *, integer *, integer
 	    *, integer *, integer *, integer *, integer *, real_number *, real_number *,
 	    integer);
     static integer lenpfac;
-    extern /* Subroutine */ int djreord_(integer *, integer *, integer *, 
+    extern /* Subroutine */ int _daskr_djreord_(integer *, integer *, integer *,
 	    char *, real_number *, integer *, integer *, real_number *, integer
 	    *, integer *, integer *, integer *, integer *, integer *, integer 
 	    *, integer);
@@ -519,7 +519,7 @@ static integer c__1 = 1;
     jscalcol = ipar[11];
     tolilut = rpar[1];
     permtol = rpar[2];
-    str_copy(premeth, pmeth + (ipremeth - 1 << 3), (integer)8, (integer)8);
+    _daskr_str_copy(premeth, pmeth + (ipremeth - 1 << 3), (integer)8, (integer)8);
 /* ... Set pointers into the WP and IWP arrays. */
     neqp1 = *neq + 1;
     nnzmx = lenpfac * *neq;
@@ -540,7 +540,7 @@ static integer c__1 = 1;
     ljlu = lju + lenplumx;
 /* ... Calculate Jacobian matrix. */
     *ierr = 0;
-    djcalc_(neq, t, &y[1], &yprime[1], &savr[1], &lbw, &ubw, &wk[1], &rewt[1],
+    _daskr_djcalc_(neq, t, &y[1], &yprime[1], &savr[1], &lbw, &ubw, &wk[1], &rewt[1],
 	     (Unknown_fp)res, h__, cj, &nnzmx, &wp[ljac], &iwp[ljacj], &iwp[ljaci],
 	    &wp[lplu], &iwp[ljlu], &iwp[lju], &ipar[1], &rpar[1], ires, &nre, 
 	    ierr);
@@ -568,7 +568,7 @@ static integer c__1 = 1;
 	lmask = 0;
 	liwk1 = ljlu + lenplumx;
     }
-    if (str_cmp(premeth, "ILUTP", (integer)8, (integer)5) == 0) {
+    if (_daskr_str_cmp(premeth, "ILUTP", (integer)8, (integer)5) == 0) {
 	liperm = liwk1 + (*neq << 1);
     } else {
 	liperm = liwk1;
@@ -583,12 +583,12 @@ static integer c__1 = 1;
 	    wk[i__] = sqrtn / rewt[i__];
 /* L10: */
 	}
-	amudia_(neq, &c__0, &wp[ljac], &iwp[ljacj], &iwp[ljaci], &wk[1], &wp[
+	_daskr_amudia_(neq, &c__0, &wp[ljac], &iwp[ljacj], &iwp[ljaci], &wk[1], &wp[
 		ljac], &iwp[ljacj], &iwp[ljaci]);
     }
 /* ... Normalize Jacobian rows, if desired. */
     if (isrnorm == 1) {
-	roscal_(neq, &c__0, &normtype, &wp[ljac], &iwp[ljacj], &iwp[ljaci], &
+    	_daskr_roscal_(neq, &c__0, &normtype, &wp[ljac], &iwp[ljacj], &iwp[ljaci], &
 		wp[lrownrms], &wp[ljac], &iwp[ljacj], &iwp[ljaci], ierr);
 	if (*ierr != 0) {
 	    return 0;
@@ -596,7 +596,7 @@ static integer c__1 = 1;
     }
 /* ... Reorder Jacobian rows and columns, if desired. */
     if (ireorder != 0) {
-	djreord_(neq, &neqp1, &nnzmx, premeth, &wp[ljac], &iwp[ljacj], &iwp[
+	_daskr_djreord_(neq, &neqp1, &nnzmx, premeth, &wp[ljac], &iwp[ljacj], &iwp[
 		ljaci], &wp[lplu], &iwp[ljlu], &iwp[lju], &iwp[lperm], &iwp[
 		lqperm], &iwp[llevels], &iwp[lmask], &ireorder, (integer)8);
     }
@@ -611,21 +611,21 @@ static integer c__1 = 1;
 	    }
 	}
 	if (ireorder != 0) {
-	    dvperm_(neq, &savr[1], &iwp[lperm]);
+		_daskr_dvperm_(neq, &savr[1], &iwp[lperm]);
 	}
-	str_copy(msg, "DJACILU -- Feature writing Jacobian Matrix to file is"
+	_daskr_str_copy(msg, "DJACILU -- Feature writing Jacobian Matrix to file is"
 			" deactivated.", (integer)80,  (integer)67);
-	xerrwd_(msg, &c__80, &c__0, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b21,
+	_daskr_xerrwd_(msg, &c__80, &c__0, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b21,
 			&c_b21, (integer)80);
 	/*
-	str_copy(title, " DDASPK Test Matrix ", (integer)72, (integer)20);
+	_daskr_str_copy(title, " DDASPK Test Matrix ", (integer)72, (integer)20);
 	ifmt = 15;
 	prtmt_(neq, neq, &wp[ljac], &iwp[ljacj], &iwp[ljaci], &savr[1], "NN", 
 		title, "SPARSKIT", "RUA", &ifmt, &c__3, &iunit, (integer)2, (
 		integer)72, (integer)8, (integer)3);
-	str_copy(msg, "DJACILU -- Jacobian Matrix written to file.", (integer)80,
+	_daskr_str_copy(msg, "DJACILU -- Jacobian Matrix written to file.", (integer)80,
 		 (integer)43);
-	xerrwd_(msg, &c__80, &c__0, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b21,
+	_daskr_xerrwd_(msg, &c__80, &c__0, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b21,
 		 &c_b21, (integer)80);
 	*/
 	*ierr = 1;
@@ -634,7 +634,7 @@ static integer c__1 = 1;
     }
 /* ... Compute ILU decomposition. */
     i__1 = *neq + 1;
-    djilu_(neq, &i__1, &nnzmx, &wp[ljac], &iwp[ljacj], &iwp[ljaci], &iwp[lju],
+    _daskr_djilu_(neq, &i__1, &nnzmx, &wp[ljac], &iwp[ljacj], &iwp[ljaci], &iwp[lju],
 	     &wp[lplu], &iwp[ljlu], &wp[lrwk1], &iwp[liwk1], &lenplumx, &
 	    tolilut, &lfililut, &permtol, premeth, &iwp[liperm], ierr, (
 	    integer)8);
@@ -653,7 +653,7 @@ static integer c__1 = 1;
 /* ------------  End of Subroutine DJACILU  ------------------------------ */
 } /* djacilu_ */
 
-/* Subroutine */ int djcalc_(integer *neq, real_number *t, real_number *y,
+/* Subroutine */ int _daskr_djcalc_(integer *neq, real_number *t, real_number *y,
 	real_number *yprime, real_number *r0, integer *ml, integer *mu,
 	real_number *r1, real_number *rewt, Unknown_fp res, real_number *h__,
 	real_number *cj, integer *nnzmx, real_number *jac, integer *ja, integer
@@ -665,8 +665,8 @@ static integer c__1 = 1;
     real_number d__1, d__2, d__3, d__4, d__5;
 
     /* Builtin functions */
-    real_number real_sign(real_number *, real_number *);
-    /* Subroutine */ int str_copy(char *, char *, integer, integer);
+    real_number _daskr_real_sign(real_number *, real_number *);
+    /* Subroutine */ int _daskr_str_copy(char *, char *, integer, integer);
 
     /* Local variables */
     static integer i__, j, i1, i2, jj, mba;
@@ -675,12 +675,12 @@ static integer c__1 = 1;
     static integer nnz, meb1;
     static real_number squr;
     static integer mband;
-    extern real_number d1mach_(integer *);
+    extern real_number _daskr_d1mach_(integer *);
     static integer meband;
     static real_number delinv;
-    extern /* Subroutine */ int coocsr_(integer *, integer *, real_number *,
+    extern /* Subroutine */ int _daskr_coocsr_(integer *, integer *, real_number *,
 	    integer *, integer *, real_number *, integer *, integer *),
-	    xerrwd_(char *, integer *, integer *, integer *, integer *, 
+	    _daskr_xerrwd_(char *, integer *, integer *, integer *, integer *,
 	    integer *, integer *, integer *, real_number *, real_number *, integer);
     static real_number uround, jacelem;
 
@@ -741,7 +741,7 @@ static integer c__1 = 1;
     meb1 = meband - 1;
 /* ... Set the machine unit roundoff UROUND and SQRT(UROUND), used to */
 /* ... set increments in the difference quotient procedure. */
-    uround = d1mach_(&c__4);
+    uround = _daskr_d1mach_(&c__4);
     squr = sqrt(uround);
 /* ... Initial error flags. */
     *ierr = 0;
@@ -762,7 +762,7 @@ static integer c__1 = 1;
 		    rewt[jj], fabs(d__3));
 	    del = squr * MAX(d__4,d__5);
 	    d__1 = *h__ * yprime[jj];
-	    del = real_sign(&del, &d__1);
+	    del = _daskr_real_sign(&del, &d__1);
 	    del = y[jj] + del - y[jj];
 	    y[jj] += del;
 	    yprime[jj] += *cj * del;
@@ -784,7 +784,7 @@ static integer c__1 = 1;
 		    rewt[jj], fabs(d__3));
 	    del = squr * MAX(d__4,d__5);
 	    d__1 = *h__ * yprime[jj];
-	    del = real_sign(&del, &d__1);
+	    del = _daskr_real_sign(&del, &d__1);
 	    del = y[jj] + del - y[jj];
 	    delinv = 1.f / del;
 /* Computing MAX */
@@ -800,17 +800,17 @@ static integer c__1 = 1;
 		jacelem = (r1[i__] - r0[i__]) * delinv;
 		if (jacelem != 0.f) {
 		    if (nnz > *nnzmx) {
-			str_copy(msg, "DJCALC -- More storage needed for Jacob"
+			_daskr_str_copy(msg, "DJCALC -- More storage needed for Jacob"
 				"ian.", (integer)80, (integer)43);
-			xerrwd_(msg, &c__80, &c__0, &c__0, &c__0, &c__0, &
+			_daskr_xerrwd_(msg, &c__80, &c__0, &c__0, &c__0, &c__0, &
 				c__0, &c__0, &c_b21, &c_b21, (integer)80);
-			str_copy(msg, "DJCALC -- Increase LENPFAC.", (integer)80,
+			_daskr_str_copy(msg, "DJCALC -- Increase LENPFAC.", (integer)80,
 				 (integer)27);
-			xerrwd_(msg, &c__80, &c__0, &c__0, &c__0, &c__0, &
+			_daskr_xerrwd_(msg, &c__80, &c__0, &c__0, &c__0, &c__0, &
 				c__0, &c__0, &c_b21, &c_b21, (integer)80);
-			str_copy(msg, "DJCALC -- Storage exceeded at (I,J) = ("
+			_daskr_str_copy(msg, "DJCALC -- Storage exceeded at (I,J) = ("
 				"I1,I2)", (integer)80, (integer)45);
-			xerrwd_(msg, &c__80, &c__0, &c__0, &c__2, &i__, &jj, &
+			_daskr_xerrwd_(msg, &c__80, &c__0, &c__0, &c__2, &i__, &jj, &
 				c__0, &c_b21, &c_b21, (integer)80);
 			*ierr = 1;
 			*ires = -2;
@@ -830,12 +830,12 @@ static integer c__1 = 1;
     --nnz;
 
 /* ... Convert Jacobian from coordinate to compressed sparse row format. */
-    coocsr_(neq, &nnz, &rcoo[1], &icoo[1], &jcoo[1], &jac[1], &ja[1], &ia[1]);
+    _daskr_coocsr_(neq, &nnz, &rcoo[1], &icoo[1], &jcoo[1], &jac[1], &ja[1], &ia[1]);
     return 0;
 /* ------------  End of Subroutine DJCALC  ------------------------------- */
 } /* djcalc_ */
 
-/* Subroutine */ int dpsolilu_(integer *neq, real_number *t, real_number *y,
+/* Subroutine */ int _daskr_dpsolilu_(integer *neq, real_number *t, real_number *y,
 	real_number *yprime, real_number *r0, real_number *wk, real_number *cj,
 	real_number *wght, real_number *wp, integer *iwp, real_number *bl,
 	real_number *eplin, integer *ierr, real_number *rpar, integer *ipar)
@@ -846,8 +846,8 @@ static integer c__1 = 1;
     /* Local variables */
     static integer jscalcol, ireorder, ipremeth, lrownrms, i__, lju, ljlu, 
 	    lplu, lperm;
-    extern /* Subroutine */ int lusol_(integer *, real_number *, real_number *,
-	    real_number *, integer *, integer *), dvperm_(integer *,
+    extern /* Subroutine */ int _daskr_lusol_(integer *, real_number *, real_number *,
+	    real_number *, integer *, integer *), _daskr_dvperm_(integer *,
 	    real_number *, integer *);
     static integer lqperm, isrnorm;
 
@@ -914,11 +914,11 @@ static integer c__1 = 1;
 /*     then use inverse permutation on x. */
     if (ipremeth == 1 || ipremeth == 2) {
 	if (ireorder == 1) {
-	    dvperm_(neq, &bl[1], &iwp[lperm]);
+		_daskr_dvperm_(neq, &bl[1], &iwp[lperm]);
 	}
-	lusol_(neq, &bl[1], &wk[1], &wp[lplu], &iwp[ljlu], &iwp[lju]);
+	_daskr_lusol_(neq, &bl[1], &wk[1], &wp[lplu], &iwp[ljlu], &iwp[lju]);
 	if (ireorder == 1) {
-	    dvperm_(neq, &wk[1], &iwp[lqperm]);
+		_daskr_dvperm_(neq, &wk[1], &iwp[lqperm]);
 	}
     }
 /* ... Unscale x by dividing by column scaling vector WGHT. */
@@ -940,26 +940,26 @@ static integer c__1 = 1;
 /* ------------  End of Subroutine DPSOLILU  ----------------------------- */
 } /* dpsolilu_ */
 
-/* Subroutine */ int djilu_(integer *neq, integer *neqp1, integer *nnzmx, 
+/* Subroutine */ int _daskr_djilu_(integer *neq, integer *neqp1, integer *nnzmx,
 	real_number *jac, integer *ja, integer *ia, integer *ju, real_number *
 	plu, integer *jlu, real_number *rwk1, integer *iwk1, integer *lenplumx,
 	 real_number *tolilut, integer *lfililut, real_number *permtol, char *
 	premeth, integer *iperm, integer *ierr, integer premeth_len)
 {
     /* Builtin functions */
-    integer str_cmp(char *, char *, integer, integer);
-    /* Subroutine */ int str_copy(char *, char *, integer, integer);
+    integer _daskr_str_cmp(char *, char *, integer, integer);
+    /* Subroutine */ int _daskr_str_copy(char *, char *, integer, integer);
 
     /* Local variables */
     static char msg[80];
-    extern /* Subroutine */ int ilut_(integer *, real_number *, integer *,
+    extern /* Subroutine */ int _daskr_ilut_(integer *, real_number *, integer *,
 	    integer *, integer *, real_number *, real_number *, integer *,
 	    integer *, integer *, real_number *, integer *, integer *);
     static integer error;
-    extern /* Subroutine */ int ilutp_(integer *, real_number *, integer *,
+    extern /* Subroutine */ int _daskr_ilutp_(integer *, real_number *, integer *,
 	    integer *, integer *, real_number *, real_number *, integer *,
 	    real_number *, integer *, integer *, integer *, real_number *,
-	    integer *, integer *, integer *), xerrwd_(char *, integer *, 
+	    integer *, integer *, integer *), _daskr_xerrwd_(char *, integer *,
 	    integer *, integer *, integer *, integer *, integer *, integer *, 
 	    real_number *, real_number *, integer);
 
@@ -993,88 +993,88 @@ static integer c__1 = 1;
 
     /* Function Body */
     error = _FALSE_;
-    if (str_cmp(premeth, "ILUT", (integer)8, (integer)4) == 0) {
+    if (_daskr_str_cmp(premeth, "ILUT", (integer)8, (integer)4) == 0) {
 /* ... Use incomplete factorization routine ILUT from SparsKit. */
-	ilut_(neq, &jac[1], &ja[1], &ia[1], lfililut, tolilut, &plu[1], &jlu[
+    	_daskr_ilut_(neq, &jac[1], &ja[1], &ia[1], lfililut, tolilut, &plu[1], &jlu[
 		1], &ju[1], lenplumx, &rwk1[1], &iwk1[1], ierr);
 	if (*ierr != 0) {
-	    str_copy(msg, "DJILU -- Error return from ILUT: IERR = (I1)", (
+	    _daskr_str_copy(msg, "DJILU -- Error return from ILUT: IERR = (I1)", (
 		    integer)80, (integer)44);
-	    xerrwd_(msg, &c__80, &c__0, &c__0, &c__1, ierr, &c__0, &c__0, &
+	    _daskr_xerrwd_(msg, &c__80, &c__0, &c__0, &c__1, ierr, &c__0, &c__0, &
 		    c_b21, &c_b21, (integer)80);
 	    error = _TRUE_;
 	}
-    } else if (str_cmp(premeth, "ILUTP", (integer)8, (integer)5) == 0) {
+    } else if (_daskr_str_cmp(premeth, "ILUTP", (integer)8, (integer)5) == 0) {
 /* ... Use incomplete factorization routine ILUTP from SparsKit. */
-	ilutp_(neq, &jac[1], &ja[1], &ia[1], lfililut, tolilut, permtol, neq, 
+    	_daskr_ilutp_(neq, &jac[1], &ja[1], &ia[1], lfililut, tolilut, permtol, neq,
 		&plu[1], &jlu[1], &ju[1], lenplumx, &rwk1[1], &iwk1[1], &
 		iperm[1], ierr);
 	if (*ierr != 0) {
-	    str_copy(msg, "DJILU -- Error return from ILUTP: IERR = (I1)", (
+	    _daskr_str_copy(msg, "DJILU -- Error return from ILUTP: IERR = (I1)", (
 		    integer)80, (integer)45);
-	    xerrwd_(msg, &c__80, &c__0, &c__0, &c__1, ierr, &c__0, &c__0, &
+	    _daskr_xerrwd_(msg, &c__80, &c__0, &c__0, &c__1, ierr, &c__0, &c__0, &
 		    c_b21, &c_b21, (integer)80);
 	    error = _TRUE_;
 	}
 /* ... Put in other options here for incomplete factorizations. */
     }
     if (error) {
-	str_copy(msg, "DJILU -- IERR .NE. 0 means one of the following has occ"
+	_daskr_str_copy(msg, "DJILU -- IERR .NE. 0 means one of the following has occ"
 		"urred:", (integer)80, (integer)61);
-	xerrwd_(msg, &c__80, &c__0, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b21,
+	_daskr_xerrwd_(msg, &c__80, &c__0, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b21,
 		 &c_b21, (integer)80);
-	str_copy(msg, "    IERR >  0   --> Zero pivot encountered at step numb"
+	_daskr_str_copy(msg, "    IERR >  0   --> Zero pivot encountered at step numb"
 		"er IERR.", (integer)80, (integer)63);
-	xerrwd_(msg, &c__80, &c__0, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b21,
+	_daskr_xerrwd_(msg, &c__80, &c__0, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b21,
 		 &c_b21, (integer)80);
-	str_copy(msg, "    IERR = -1   --> Error. input matrix may be wrong.", (
+	_daskr_str_copy(msg, "    IERR = -1   --> Error. input matrix may be wrong.", (
 		integer)80, (integer)53);
-	xerrwd_(msg, &c__80, &c__0, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b21,
+	_daskr_xerrwd_(msg, &c__80, &c__0, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b21,
 		 &c_b21, (integer)80);
-	str_copy(msg, "                     (The elimination process has gener"
+	_daskr_str_copy(msg, "                     (The elimination process has gener"
 		"ated a", (integer)80, (integer)61);
-	xerrwd_(msg, &c__80, &c__0, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b21,
+	_daskr_xerrwd_(msg, &c__80, &c__0, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b21,
 		 &c_b21, (integer)80);
-	str_copy(msg, "                     row in L or U with length > NEQ.)",
+	_daskr_str_copy(msg, "                     row in L or U with length > NEQ.)",
 		(integer)80, (integer)54);
-	xerrwd_(msg, &c__80, &c__0, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b21,
+	_daskr_xerrwd_(msg, &c__80, &c__0, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b21,
 		 &c_b21, (integer)80);
-	str_copy(msg, "    IERR = -2   --> Matrix L overflows.", (integer)80, (
+	_daskr_str_copy(msg, "    IERR = -2   --> Matrix L overflows.", (integer)80, (
 		integer)39);
-	xerrwd_(msg, &c__80, &c__0, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b21,
+	_daskr_xerrwd_(msg, &c__80, &c__0, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b21,
 		 &c_b21, (integer)80);
-	str_copy(msg, "    IERR = -3   --> Matrix U overflows.", (integer)80, (
+	_daskr_str_copy(msg, "    IERR = -3   --> Matrix U overflows.", (integer)80, (
 		integer)39);
-	xerrwd_(msg, &c__80, &c__0, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b21,
+	_daskr_xerrwd_(msg, &c__80, &c__0, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b21,
 		 &c_b21, (integer)80);
-	str_copy(msg, "    IERR = -4   --> Illegal value for LFILILUT.", (
+	_daskr_str_copy(msg, "    IERR = -4   --> Illegal value for LFILILUT.", (
 		integer)80, (integer)47);
-	xerrwd_(msg, &c__80, &c__0, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b21,
+	_daskr_xerrwd_(msg, &c__80, &c__0, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b21,
 		 &c_b21, (integer)80);
-	str_copy(msg, "    IERR = -5   --> Zero row encountered.", (integer)80, (
+	_daskr_str_copy(msg, "    IERR = -5   --> Zero row encountered.", (integer)80, (
 		integer)41);
-	xerrwd_(msg, &c__80, &c__0, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b21,
+	_daskr_xerrwd_(msg, &c__80, &c__0, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b21,
 		 &c_b21, (integer)80);
-	str_copy(msg, "    ", (integer)80, (integer)4);
-	xerrwd_(msg, &c__80, &c__0, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b21,
+	_daskr_str_copy(msg, "    ", (integer)80, (integer)4);
+	_daskr_xerrwd_(msg, &c__80, &c__0, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b21,
 		 &c_b21, (integer)80);
-	str_copy(msg, "    For IERR = -2 or -3, increase the value of LENPLUFA"
+	_daskr_str_copy(msg, "    For IERR = -2 or -3, increase the value of LENPLUFA"
 		"C or", (integer)80, (integer)59);
-	xerrwd_(msg, &c__80, &c__0, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b21,
+	_daskr_xerrwd_(msg, &c__80, &c__0, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b21,
 		 &c_b21, (integer)80);
-	str_copy(msg, "    decrease the value of LFILILUT if LENPLUFAC cannot "
+	_daskr_str_copy(msg, "    decrease the value of LFILILUT if LENPLUFAC cannot "
 		"be", (integer)80, (integer)57);
-	xerrwd_(msg, &c__80, &c__0, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b21,
+	_daskr_xerrwd_(msg, &c__80, &c__0, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b21,
 		 &c_b21, (integer)80);
-	str_copy(msg, "    increased.", (integer)80, (integer)14);
-	xerrwd_(msg, &c__80, &c__0, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b21,
+	_daskr_str_copy(msg, "    increased.", (integer)80, (integer)14);
+	_daskr_xerrwd_(msg, &c__80, &c__0, &c__0, &c__0, &c__0, &c__0, &c__0, &c_b21,
 		 &c_b21, (integer)80);
     }
     return 0;
 /* ------------  End of Subroutine DJILU  -------------------------------- */
 } /* djilu_ */
 
-/* Subroutine */ int djreord_(integer *neq, integer *neqp1, integer *nnzmx, 
+/* Subroutine */ int _daskr_djreord_(integer *neq, integer *neqp1, integer *nnzmx,
 	char *premeth, real_number *jac, integer *ja, integer *ia, real_number *
 	awk, integer *jwk, integer *iwk, integer *perm, integer *qperm, 
 	integer *levels, integer *mask, integer *ireorder, integer premeth_len)
@@ -1084,16 +1084,16 @@ static integer c__1 = 1;
 
     /* Local variables */
     static integer i__;
-    extern /* Subroutine */ int bfs_(integer *, integer *, integer *, integer 
+    extern /* Subroutine */ int _daskr_bfs_(integer *, integer *, integer *, integer
 	    *, integer *, integer *, integer *, integer *, integer *, integer 
-	    *), atob_(integer *, real_number *, integer *, integer *,
+	    *), _daskr_atob_(integer *, real_number *, integer *, integer *,
 	    real_number *, integer *, integer *);
     static integer nlev;
-    extern /* Subroutine */ int dperm_(integer *, real_number *, integer *,
+    extern /* Subroutine */ int _daskr_dperm_(integer *, real_number *, integer *,
 	    integer *, real_number *, integer *, integer *, integer *, integer
 	    *, integer *);
     static integer nfirst;
-    extern /* Subroutine */ int rversp_(integer *, integer *);
+    extern /* Subroutine */ int _daskr_rversp_(integer *, integer *);
     static integer maskval;
 
 /* ... Version of 10-6-95 */
@@ -1141,7 +1141,7 @@ static integer c__1 = 1;
     /* Function Body */
     if (*ireorder == 1) {
 /* ... Copy JAC, JA, and IA to AWK, JWK, and IWK. */
-	atob_(neq, &jac[1], &ja[1], &ia[1], &awk[1], &jwk[1], &iwk[1]);
+    	_daskr_atob_(neq, &jac[1], &ja[1], &ia[1], &awk[1], &jwk[1], &iwk[1]);
 /* ... Perform a Cuthill-McKee reordering of the Jacobian. */
 	nfirst = 1;
 	perm[1] = 0;
@@ -1151,18 +1151,18 @@ static integer c__1 = 1;
 	}
 	maskval = 1;
 	qperm[1] = 1;
-	bfs_(neq, &jwk[1], &iwk[1], &nfirst, &perm[1], &mask[1], &maskval, &
+	_daskr_bfs_(neq, &jwk[1], &iwk[1], &nfirst, &perm[1], &mask[1], &maskval, &
 		qperm[1], &levels[1], &nlev);
 /* ... Reverse the permutation to obtain the reverse Cuthill-McKee */
 /*     reordering. */
-	rversp_(neq, &qperm[1]);
+	_daskr_rversp_(neq, &qperm[1]);
 /* ... Calculate the inverse of QPERM and put it in PERM. */
 	i__1 = *neq;
 	for (i__ = 1; i__ <= i__1; ++i__) {
 	    perm[qperm[i__]] = i__;
 	}
 /* ... Permute rows and columns of Jacobian using PERM. */
-	dperm_(neq, &awk[1], &jwk[1], &iwk[1], &jac[1], &ja[1], &ia[1], &perm[
+	_daskr_dperm_(neq, &awk[1], &jwk[1], &iwk[1], &jac[1], &ja[1], &ia[1], &perm[
 		1], &perm[1], &c__1);
 /* ... End of If block */
     }

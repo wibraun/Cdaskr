@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 #include "../solver/ddaskr_types.h"
 
@@ -70,7 +71,7 @@
 /* periodically during the integration, and the factors are used to */
 /* solve systems Px = b as needed. */
 /* ----------------------------------------------------------------------- */
-/* Subroutine */ int dbanja_(Unknown_fp res, integer *ires, integer *neq,
+/* Subroutine */ int _daskr_dbanja_(Unknown_fp res, integer *ires, integer *neq,
 	real_number *t, real_number *y, real_number *yprime, real_number *rewt,
 	real_number *savr, real_number *wk, real_number *h__, real_number *cj,
 	real_number *wp, integer *iwp, integer *ier, real_number *rpar, integer
@@ -81,17 +82,17 @@
     real_number d__1, d__2, d__3, d__4, d__5;
 
     /* Builtin functions */
-    real_number real_sign(real_number *, real_number *);
+    real_number _daskr_real_sign(real_number *, real_number *);
 
     /* Local variables */
     static integer i__, j, k, n, i1, i2, ii, ml, mu, mba;
     static real_number del;
     static integer meb1, lenp;
     static real_number squr;
-    extern /* Subroutine */ int dgbfa_(real_number *, integer *, integer *,
+    extern /* Subroutine */ int _daskr_dgbfa_(real_number *, integer *, integer *,
 	    integer *, integer *, integer *, integer *);
     static integer mband, isave, msave;
-    extern real_number d1mach_(integer *);
+    extern real_number _daskr_d1mach_(integer *);
     static integer meband;
     static real_number delinv;
     static integer ipsave;
@@ -174,7 +175,7 @@
 
 /* Set the machine unit roundoff UROUND and SQRT(UROUND), used to */
 /* set increments in the difference quotient procedure. */
-    uround = d1mach_(&c__4);
+    uround = _daskr_d1mach_(&c__4);
     squr = sqrt(uround);
 
 /* Set pointers into WP.  LENP is the length of the segment for P. */
@@ -206,7 +207,7 @@
 		    rewt[n], fabs(d__3));
 	    del = squr * MAX(d__4,d__5);
 	    d__1 = *h__ * yprime[n];
-	    del = real_sign(&del, &d__1);
+	    del = _daskr_real_sign(&del, &d__1);
 	    del = y[n] + del - y[n];
 	    y[n] += del;
 	    yprime[n] += *cj * del;
@@ -228,7 +229,7 @@
 		    rewt[n], fabs(d__3));
 	    del = squr * MAX(d__4,d__5);
 	    d__1 = *h__ * yprime[n];
-	    del = real_sign(&del, &d__1);
+	    del = _daskr_real_sign(&del, &d__1);
 	    del = y[n] + del - y[n];
 	    delinv = 1. / del;
 /* Computing MAX */
@@ -250,19 +251,19 @@
 
 /* Do LU decomposition of the band matrix P. */
 
-    dgbfa_(&wp[1], &meband, neq, &ml, &mu, &iwp[1], ier);
+    _daskr_dgbfa_(&wp[1], &meband, neq, &ml, &mu, &iwp[1], ier);
     return 0;
 
 /* ------------  End of Subroutine DBANJA  ------------------------------- */
 } /* dbanja_ */
 
-/* Subroutine */ int dbanps_(integer *neq, real_number *t, real_number *y,
+/* Subroutine */ int _daskr_dbanps_(integer *neq, real_number *t, real_number *y,
 	real_number *yprime, real_number *savr, real_number *wk, real_number *cj,
 	real_number *wght, real_number *wp, integer *iwp, real_number *b,
 	real_number *eplin, integer *ier, real_number *rpar, integer *ipar)
 {
     static integer ml, mu;
-    extern /* Subroutine */ int dgbsl_(real_number *, integer *, integer *,
+    extern /* Subroutine */ int _daskr_dgbsl_(real_number *, integer *, integer *,
 	    integer *, integer *, integer *, real_number *, integer *);
     static integer meband;
 
@@ -322,7 +323,7 @@
     ml = ipar[1];
     mu = ipar[2];
     meband = (ml << 1) + mu + 1;
-    dgbsl_(&wp[1], &meband, neq, &ml, &mu, &iwp[1], &b[1], &c__0);
+    _daskr_dgbsl_(&wp[1], &meband, neq, &ml, &mu, &iwp[1], &b[1], &c__0);
     return 0;
 
 /* ------------  End of Subroutine DBANPS  ------------------------------- */

@@ -20,7 +20,7 @@
 /* amudia :   Computes     C = A* Diag                                  c */
 /* aplsca :   Computes     A:= A + s I    (s = scalar)                  c */
 /* ----------------------------------------------------------------------c */
-/* Subroutine */ int aplb_(integer *nrow, integer *ncol, integer *job, 
+/* Subroutine */ int _daskr_aplb_(integer *nrow, integer *ncol, integer *job,
 	real_number *a, integer *ja, integer *ia, real_number *b, integer *jb,
 	integer *ib, real_number *c__, integer *jc, integer *ic, integer *
 	nzmax, integer *iw, integer *ierr)
@@ -151,7 +151,7 @@ L999:
 /* ----------------------------------------------------------------------- */
 } /* aplb_ */
 
-/* Subroutine */ int aplb1_(integer *nrow, integer *ncol, integer *job, 
+/* Subroutine */ int _daskr_aplb1_(integer *nrow, integer *ncol, integer *job,
 	real_number *a, integer *ja, integer *ia, real_number *b, integer *jb,
 	integer *ib, real_number *c__, integer *jc, integer *ic, integer *
 	nzmax, integer *ierr)
@@ -284,7 +284,7 @@ L999:
 /* ----------------------------------------------------------------------- */
 } /* aplb1_ */
 
-/* Subroutine */ int aplsb_(integer *nrow, integer *ncol, real_number *a,
+/* Subroutine */ int _daskr_aplsb_(integer *nrow, integer *ncol, real_number *a,
 	integer *ja, integer *ia, real_number *s, real_number *b, integer *jb,
 	integer *ib, real_number *c__, integer *jc, integer *ic, integer *
 	nzmax, integer *ierr)
@@ -419,7 +419,7 @@ L999:
 /* ----------------------------------------------------------------------- */
 } /* aplsb_ */
 
-/* Subroutine */ int diamua_(integer *nrow, integer *job, real_number *a,
+/* Subroutine */ int _daskr_diamua_(integer *nrow, integer *job, real_number *a,
 	integer *ja, integer *ia, real_number *diag, real_number *b, integer *
 	jb, integer *ib)
 {
@@ -504,7 +504,7 @@ L999:
 /* ----------------------------------------------------------------------- */
 } /* diamua_ */
 
-/* Subroutine */ int amudia_(integer *nrow, integer *job, real_number *a,
+/* Subroutine */ int _daskr_amudia_(integer *nrow, integer *job, real_number *a,
 	integer *ja, integer *ia, real_number *diag, real_number *b, integer *
 	jb, integer *ib)
 {
@@ -586,7 +586,7 @@ L999:
 /* -----------end-of-amudiag---------------------------------------------- */
 } /* amudia_ */
 
-/* Subroutine */ int aplsca_(integer *nrow, real_number *a, integer *ja,
+/* Subroutine */ int _daskr_aplsca_(integer *nrow, real_number *a, integer *ja,
 	integer *ia, real_number *scal, integer *iw)
 {
     /* System generated locals */
@@ -595,7 +595,7 @@ L999:
     /* Local variables */
     static integer j, k, k1, k2, ii, ko;
     static integer test;
-    extern /* Subroutine */ int diapos_(integer *, integer *, integer *, 
+    extern /* Subroutine */ int _daskr_diapos_(integer *, integer *, integer *,
 	    integer *);
     static integer icount;
 
@@ -643,7 +643,7 @@ L999:
     --iw;
 
     /* Function Body */
-    diapos_(nrow, &ja[1], &ia[1], &iw[1]);
+    _daskr_diapos_(nrow, &ja[1], &ia[1], &iw[1]);
     icount = 0;
     i__1 = *nrow;
     for (j = 1; j <= i__1; ++j) {
@@ -713,7 +713,7 @@ L999:
 /* ----------------------------------------------------------------------c */
 /* amux  : A times a vector. Compressed Sparse Row (CSR) format.        c */
 /* ----------------------------------------------------------------------c */
-/* Subroutine */ int amux_(integer *n, real_number *x, real_number *y,
+/* Subroutine */ int _daskr_amux_(integer *n, real_number *x, real_number *y,
 	real_number *a, integer *ja, integer *ia)
 {
     /* System generated locals */
@@ -786,7 +786,7 @@ L999:
 
 /* Feature writing Jacobian Matrix to file is deactivated 				  */
 
-/* Subroutine */ int prtmt_(integer *nrow, integer *ncol, real_number *a,
+/* Subroutine */ int _daskr_prtmt_(integer *nrow, integer *ncol, real_number *a,
 	integer *ja, integer *ia, real_number *rhs, char *guesol, char *title,
 	char *key, char *type__, integer *ifmt, integer *job, integer *iounit,
 	 integer guesol_len, integer title_len, integer key_len, integer type_len)
@@ -1230,7 +1230,7 @@ L20:
 /* csrbnd  : converts a compressed sparse row format into a banded      c */
 /*           format (linpack style).                                    c */
 /* ----------------------------------------------------------------------c */
-/* Subroutine */ int csrdns_(integer *nrow, integer *ncol, real_number *a,
+/* Subroutine */ int _daskr_csrdns_(integer *nrow, integer *ncol, real_number *a,
 	integer *ja, integer *ia, real_number *dns, integer *ndns, integer *
 	ierr)
 {
@@ -1307,7 +1307,7 @@ L20:
 /* ----------------------------------------------------------------------- */
 } /* csrdns_ */
 
-/* Subroutine */ int coocsr_(integer *nrow, integer *nnz, real_number *a,
+/* Subroutine */ int _daskr_coocsr_(integer *nrow, integer *nnz, real_number *a,
 	integer *ir, integer *jc, real_number *ao, integer *jao, integer *iao)
 {
     /* System generated locals */
@@ -1401,7 +1401,7 @@ L20:
 /* ----------------------------------------------------------------------- */
 } /* coocsr_ */
 
-/* Subroutine */ int coicsr_(integer *n, integer *nnz, integer *job, 
+/* Subroutine */ int _daskr_coicsr_(integer *n, integer *nnz, integer *job,
 	real_number *a, integer *ja, integer *ia, integer *iwk)
 {
     /* System generated locals */
@@ -1541,7 +1541,7 @@ L70:
 /* ------------------------------------------------------------------------ */
 } /* coicsr_ */
 
-/* Subroutine */ int csrcoo_(integer *nrow, integer *job, integer *nzmax, 
+/* Subroutine */ int _daskr_csrcoo_(integer *nrow, integer *job, integer *nzmax,
 	real_number *a, integer *ja, integer *ia, integer *nnz, real_number *ao,
 	 integer *ir, integer *jc, integer *ierr)
 {
@@ -1648,11 +1648,11 @@ L3:
 /* ----------------------------------------------------------------------- */
 } /* csrcoo_ */
 
-/* Subroutine */ int csrcsc_(integer *n, integer *job, integer *ipos, 
+/* Subroutine */ int _daskr_csrcsc_(integer *n, integer *job, integer *ipos,
 	real_number *a, integer *ja, integer *ia, real_number *ao, integer *jao,
 	 integer *iao)
 {
-    extern /* Subroutine */ int csrcsc2_(integer *, integer *, integer *, 
+    extern /* Subroutine */ int _daskr_csrcsc2_(integer *, integer *, integer *,
 	    integer *, real_number *, integer *, integer *, real_number *,
 	    integer *, integer *);
 
@@ -1701,12 +1701,12 @@ L3:
     --jao;
 
     /* Function Body */
-    csrcsc2_(n, n, job, ipos, &a[1], &ja[1], &ia[1], &ao[1], &jao[1], &iao[1])
+    _daskr_csrcsc2_(n, n, job, ipos, &a[1], &ja[1], &ia[1], &ao[1], &jao[1], &iao[1])
 	    ;
     return 0;
 } /* csrcsc_ */
 
-/* Subroutine */ int csrcsc2_(integer *n, integer *n2, integer *job, integer *
+/* Subroutine */ int _daskr_csrcsc2_(integer *n, integer *n2, integer *job, integer *
 	ipos, real_number *a, integer *ja, integer *ia, real_number *ao,
 	integer *jao, integer *iao)
 {
@@ -1815,7 +1815,7 @@ L3:
     return 0;
 } /* csrcsc2_ */
 
-/* Subroutine */ int csrdia_(integer *n, integer *idiag, integer *job, 
+/* Subroutine */ int _daskr_csrdia_(integer *n, integer *idiag, integer *job,
 	real_number *a, integer *ja, integer *ia, integer *ndiag, real_number *
 	diag, integer *ioff, real_number *ao, integer *jao, integer *iao,
 	integer *ind)
@@ -1825,7 +1825,7 @@ L3:
 
     /* Local variables */
     static integer i__, j, k, l, n2, ii, ko, job1, job2, idum, jmax;
-    extern /* Subroutine */ int infdia_(integer *, integer *, integer *, 
+    extern /* Subroutine */ int _daskr_infdia_(integer *, integer *, integer *,
 	    integer *, integer *);
 
 /* ----------------------------------------------------------------------- */
@@ -1922,7 +1922,7 @@ L3:
 	goto L50;
     }
     n2 = *n + *n - 1;
-    infdia_(n, &ja[1], &ia[1], &ind[1], &idum);
+    _daskr_infdia_(n, &ja[1], &ia[1], &ind[1], &idum);
 /* ----------- determine diagonals to  accept.---------------------------- */
 /* ----------------------------------------------------------------------- */
     ii = 0;
@@ -2012,7 +2012,7 @@ L51:
 /* ----------------------------------------------------------------------- */
 } /* csrdia_ */
 
-/* Subroutine */ int csrbnd_(integer *n, real_number *a, integer *ja, integer *
+/* Subroutine */ int _daskr_csrbnd_(integer *n, real_number *a, integer *ja, integer *
 	ia, integer *job, real_number *abd, integer *nabd, integer *lowd,
 	integer *ml, integer *mu, integer *ierr)
 {
@@ -2021,7 +2021,7 @@ L51:
 
     /* Local variables */
     static integer i__, j, k, m, ii, mdiag;
-    extern /* Subroutine */ int getbwd_(integer *, real_number *, integer *,
+    extern /* Subroutine */ int _daskr_getbwd_(integer *, real_number *, integer *,
 	    integer *, integer *, integer *);
 
 /* ----------------------------------------------------------------------- */
@@ -2145,7 +2145,7 @@ L51:
     *ierr = 0;
 /* ----------- */
     if (*job == 1) {
-	getbwd_(n, &a[1], &ja[1], &ia[1], ml, mu);
+    	_daskr_getbwd_(n, &a[1], &ja[1], &ia[1], ml, mu);
     }
     m = *ml + *mu + 1;
     if (*lowd == 0) {
@@ -2204,7 +2204,7 @@ L51:
 /* rnrms  : computes the norms of the rows of A                         c */
 /* roscal : scales the rows of a matrix by their norms.                 c */
 /* ----------------------------------------------------------------------c */
-/* Subroutine */ int rperm_(integer *nrow, real_number *a, integer *ja,
+/* Subroutine */ int _daskr_rperm_(integer *nrow, real_number *a, integer *ja,
 	integer *ia, real_number *ao, integer *jao, integer *iao, integer *
 	perm, integer *job)
 {
@@ -2304,7 +2304,7 @@ L51:
 /* ----------------------------------------------------------------------- */
 } /* rperm_ */
 
-/* Subroutine */ int cperm_(integer *nrow, real_number *a, integer *ja,
+/* Subroutine */ int _daskr_cperm_(integer *nrow, real_number *a, integer *ja,
 	integer *ia, real_number *ao, integer *jao, integer *iao, integer *
 	perm, integer *job)
 {
@@ -2396,13 +2396,13 @@ L51:
 /* ----------------------------------------------------------------------- */
 } /* cperm_ */
 
-/* Subroutine */ int dperm_(integer *nrow, real_number *a, integer *ja,
+/* Subroutine */ int _daskr_dperm_(integer *nrow, real_number *a, integer *ja,
 	integer *ia, real_number *ao, integer *jao, integer *iao, integer *
 	perm, integer *qperm, integer *job)
 {
-    extern /* Subroutine */ int cperm_(integer *, real_number *, integer *,
+    extern /* Subroutine */ int _daskr_cperm_(integer *, real_number *, integer *,
 	    integer *, real_number *, integer *, integer *, integer *, integer
-	    *), rperm_(integer *, real_number *, integer *, integer *,
+	    *), _daskr_rperm_(integer *, real_number *, integer *, integer *,
 	    real_number *, integer *, integer *, integer *, integer *);
     static integer locjob;
 
@@ -2471,7 +2471,7 @@ L51:
 
 /* permute rows first */
 
-    rperm_(nrow, &a[1], &ja[1], &ia[1], &ao[1], &jao[1], &iao[1], &perm[1], &
+    _daskr_rperm_(nrow, &a[1], &ja[1], &ia[1], &ao[1], &jao[1], &iao[1], &perm[1], &
 	    locjob);
 
 /* then permute columns */
@@ -2479,10 +2479,10 @@ L51:
     locjob = 0;
 
     if (*job <= 2) {
-	cperm_(nrow, &ao[1], &jao[1], &iao[1], &ao[1], &jao[1], &iao[1], &
+    	_daskr_cperm_(nrow, &ao[1], &jao[1], &iao[1], &ao[1], &jao[1], &iao[1], &
 		perm[1], &locjob);
     } else {
-	cperm_(nrow, &ao[1], &jao[1], &iao[1], &ao[1], &jao[1], &iao[1], &
+    	_daskr_cperm_(nrow, &ao[1], &jao[1], &iao[1], &ao[1], &jao[1], &iao[1], &
 		qperm[1], &locjob);
     }
 
@@ -2491,7 +2491,7 @@ L51:
 /* ----------------------------------------------------------------------- */
 } /* dperm_ */
 
-/* Subroutine */ int dvperm_(integer *n, real_number *x, integer *perm)
+/* Subroutine */ int _daskr_dvperm_(integer *n, real_number *x, integer *perm)
 {
     /* System generated locals */
     integer i__1;
@@ -2589,7 +2589,7 @@ L101:
 /* ----------------------------------------------------------------------- */
 } /* dvperm_ */
 
-/* Subroutine */ int ivperm_(integer *n, integer *ix, integer *perm)
+/* Subroutine */ int _daskr_ivperm_(integer *n, integer *ix, integer *perm)
 {
     /* System generated locals */
     integer i__1;
@@ -2685,7 +2685,7 @@ L101:
 /* ----------------------------------------------------------------------- */
 } /* ivperm_ */
 
-/* Subroutine */ int diapos_(integer *n, integer *ja, integer *ia, integer *
+/* Subroutine */ int _daskr_diapos_(integer *n, integer *ja, integer *ia, integer *
 	idiag)
 {
     /* System generated locals */
@@ -2744,7 +2744,7 @@ L101:
     return 0;
 } /* diapos_ */
 
-/* Subroutine */ int getbwd_(integer *n, real_number *a, integer *ja, integer *
+/* Subroutine */ int _daskr_getbwd_(integer *n, real_number *a, integer *ja, integer *
 	ia, integer *ml, integer *mu)
 {
     /* System generated locals */
@@ -2805,7 +2805,7 @@ L101:
 /* ----------------------------------------------------------------------- */
 } /* getbwd_ */
 
-/* Subroutine */ int infdia_(integer *n, integer *ja, integer *ia, integer *
+/* Subroutine */ int _daskr_infdia_(integer *n, integer *ja, integer *ia, integer *
 	ind, integer *idiag)
 {
     /* System generated locals */
@@ -2878,15 +2878,12 @@ L101:
 /* ----------------------------------------------------------------------- */
 } /* infdia_ */
 
-/* Subroutine */ int rnrms_(integer *nrow, integer *nrm, real_number *a,
+/* Subroutine */ int _daskr_rnrms_(integer *nrow, integer *nrm, real_number *a,
 	integer *ja, integer *ia, real_number *diag)
 {
     /* System generated locals */
     integer i__1, i__2;
     real_number d__1, d__2, d__3;
-
-    /* Builtin functions */
-    double sqrt(real_number);
 
     /* Local variables */
     static integer k, k1, k2, ii;
@@ -2961,7 +2958,7 @@ L101:
 /* -------------end-of-rnrms---------------------------------------------- */
 } /* rnrms_ */
 
-/* Subroutine */ int roscal_(integer *nrow, integer *job, integer *nrm, 
+/* Subroutine */ int _daskr_roscal_(integer *nrow, integer *job, integer *nrm,
 	real_number *a, integer *ja, integer *ia, real_number *diag, real_number
 	*b, integer *jb, integer *ib, integer *ierr)
 {
@@ -2970,8 +2967,8 @@ L101:
 
     /* Local variables */
     static integer j;
-    extern /* Subroutine */ int rnrms_(integer *, integer *, real_number *,
-	    integer *, integer *, real_number *), diamua_(integer *, integer *,
+    extern /* Subroutine */ int _daskr_rnrms_(integer *, integer *, real_number *,
+	    integer *, integer *, real_number *), _daskr_diamua_(integer *, integer *,
 	     real_number *, integer *, integer *, real_number *, real_number *,
 	    integer *, integer *);
 
@@ -3021,7 +3018,7 @@ L101:
     --jb;
 
     /* Function Body */
-    rnrms_(nrow, nrm, &a[1], &ja[1], &ia[1], &diag[1]);
+    _daskr_rnrms_(nrow, nrm, &a[1], &ja[1], &ia[1], &diag[1]);
     *ierr = 0;
     i__1 = *nrow;
     for (j = 1; j <= i__1; ++j) {
@@ -3033,7 +3030,7 @@ L101:
 	}
 /* L1: */
     }
-    diamua_(nrow, job, &a[1], &ja[1], &ia[1], &diag[1], &b[1], &jb[1], &ib[1])
+    _daskr_diamua_(nrow, job, &a[1], &ja[1], &ia[1], &diag[1], &b[1], &jb[1], &ib[1])
 	    ;
     return 0;
 /* -------end-of-roscal--------------------------------------------------- */
@@ -3051,7 +3048,7 @@ L101:
 /* QSPLIT  : quick split routine used by ilut to sort out the k largest c */
 /*           elements in absolute value                                 c */
 /* ----------------------------------------------------------------------c */
-/* Subroutine */ int ilut_(integer *n, real_number *a, integer *ja, integer *
+/* Subroutine */ int _daskr_ilut_(integer *n, real_number *a, integer *ja, integer *
 	ia, integer *lfil, real_number *droptol, real_number *alu, integer *jlu,
 	 integer *ju, integer *iwk, real_number *w, integer *jw, integer *ierr)
 {
@@ -3066,7 +3063,7 @@ L101:
     static real_number fact;
     static integer lenl, lenu, jpos, jrow;
     static real_number tnorm;
-    extern /* Subroutine */ int qsplit_(real_number *, integer *, integer *,
+    extern /* Subroutine */ int _daskr_qsplit_(real_number *, integer *, integer *,
 	    integer *);
 
 /* ----------------------------------------------------------------------- */
@@ -3358,7 +3355,7 @@ L160:
 
 /*     sort by quick-split */
 
-	qsplit_(&w[1], &jw[1], &lenl, &len);
+	_daskr_qsplit_(&w[1], &jw[1], &lenl, &len);
 
 /*     store L-part */
 
@@ -3393,7 +3390,7 @@ L160:
 
 	if (lenu > 1) {
 	    i__2 = lenu - 1;
-	    qsplit_(&w[ii + 1], &jw[ii + 1], &i__2, &len);
+	    _daskr_qsplit_(&w[ii + 1], &jw[ii + 1], &i__2, &len);
 	}
 
 /*     copy */
@@ -3463,7 +3460,7 @@ L999:
 /* ----------------------------------------------------------------------- */
 } /* ilut_ */
 
-/* Subroutine */ int ilutp_(integer *n, real_number *a, integer *ja, integer *
+/* Subroutine */ int _daskr_ilutp_(integer *n, real_number *a, integer *ja, integer *
 	ia, integer *lfil, real_number *droptol, real_number *permtol, integer *
 	mbloc, real_number *alu, integer *jlu, integer *ju, integer *iwk,
 	real_number *w, integer *jw, integer *iperm, integer *ierr)
@@ -3481,7 +3478,7 @@ L999:
     static real_number xmax;
     static integer jrow;
     static real_number xmax0, tnorm;
-    extern /* Subroutine */ int qsplit_(real_number *, integer *, integer *,
+    extern /* Subroutine */ int _daskr_qsplit_(real_number *, integer *, integer *,
 	    integer *);
 
 /* ----------------------------------------------------------------------- */
@@ -3788,7 +3785,7 @@ L160:
 
 /*     sort by quick-split */
 
-	qsplit_(&w[1], &jw[1], &lenl, &len);
+	_daskr_qsplit_(&w[1], &jw[1], &lenl, &len);
 
 /*     store L-part -- in original coordinates .. */
 
@@ -3822,7 +3819,7 @@ L160:
 	len = MIN(lenu,*lfil);
 	if (lenu > 1) {
 	    i__2 = lenu - 1;
-	    qsplit_(&w[ii + 1], &jw[ii + 1], &i__2, &len);
+	    _daskr_qsplit_(&w[ii + 1], &jw[ii + 1], &i__2, &len);
 	}
 
 /*     determine next pivot -- */
@@ -3939,7 +3936,7 @@ L999:
 /* ----------------------------------------------------------------------- */
 } /* ilutp_ */
 
-/* Subroutine */ int qsplit_(real_number *a, integer *ind, integer *n, integer
+/* Subroutine */ int _daskr_qsplit_(real_number *a, integer *ind, integer *n, integer
 	*ncut)
 {
     /* System generated locals */
@@ -4020,7 +4017,7 @@ L1:
 /* ----------------------------------------------------------------------- */
 } /* qsplit_ */
 
-/* Subroutine */ int lusol_(integer *n, real_number *y, real_number *x,
+/* Subroutine */ int _daskr_lusol_(integer *n, real_number *y, real_number *x,
 	real_number *alu, integer *jlu, integer *ju)
 {
     /* System generated locals */
@@ -4104,7 +4101,7 @@ L1:
 /* rversp   : routine to reverse a given permutation (e.g., for RCMK) */
 /* maskdeg  : integer function to compute the `masked' of a node */
 /* ----------------------------------------------------------------------- */
-/* Subroutine */ int dblstr_(integer *n, integer *ja, integer *ia, integer *
+/* Subroutine */ int _daskr_dblstr_(integer *n, integer *ja, integer *ia, integer *
 	ip1, integer *ip2, integer *nfirst, integer *riord, integer *ndom, 
 	integer *map, integer *mapptr, integer *mask, integer *levels, 
 	integer *iwk)
@@ -4114,14 +4111,14 @@ L1:
 
     /* Local variables */
     static integer j, k;
-    extern /* Subroutine */ int bfs_(integer *, integer *, integer *, integer 
+    extern /* Subroutine */ int _daskr_bfs_(integer *, integer *, integer *, integer
 	    *, integer *, integer *, integer *, integer *, integer *, integer 
 	    *);
     static integer ndp1, idom, jdom, kdom, init, nlev;
-    extern /* Subroutine */ int perphn_(integer *, integer *, integer *, 
+    extern /* Subroutine */ int _daskr_perphn_(integer *, integer *, integer *,
 	    integer *, integer *, integer *, integer *, integer *, integer *);
     static integer numnod, maskval, nextdom;
-    extern /* Subroutine */ int stripes_(integer *, integer *, integer *, 
+    extern /* Subroutine */ int _daskr_stripes_(integer *, integer *, integer *,
 	    integer *, integer *, integer *, integer *);
 
 /* ----------------------------------------------------------------------- */
@@ -4179,12 +4176,12 @@ L1:
 	mask[j] = maskval;
     }
     iwk[1] = 0;
-    bfs_(n, &ja[1], &ia[1], nfirst, &iwk[1], &mask[1], &maskval, &riord[1], &
+    _daskr_bfs_(n, &ja[1], &ia[1], nfirst, &iwk[1], &mask[1], &maskval, &riord[1], &
 	    levels[1], &nlev);
 
 /*     init = riord(1) */
 /*     call perphn (ja,ia,mask,maskval,init,nlev,riord,levels) */
-    stripes_(&nlev, &riord[1], &levels[1], ip1, &map[1], &mapptr[1], ndom);
+    _daskr_stripes_(&nlev, &riord[1], &levels[1], ip1, &map[1], &mapptr[1], ndom);
 /* ----------------------------------------------------------------------- */
     if (*ip2 == 1) {
 	return 0;
@@ -4233,10 +4230,10 @@ L1:
 	init = iwk[j];
 	nextdom = mapptr[jdom];
 /*  note:    old version uses iperm array */
-	perphn_(&numnod, &ja[1], &ia[1], &init, &mask[1], &maskval, &nlev, &
+	_daskr_perphn_(&numnod, &ja[1], &ia[1], &init, &mask[1], &maskval, &nlev, &
 		riord[1], &levels[1]);
 
-	stripes_(&nlev, &riord[1], &levels[1], ip2, &map[nextdom], &mapptr[
+	_daskr_stripes_(&nlev, &riord[1], &levels[1], ip2, &map[nextdom], &mapptr[
 		jdom], &kdom);
 
 	mapptr[jdom] = nextdom;
@@ -4251,7 +4248,7 @@ L1:
     return 0;
 } /* dblstr_ */
 
-/* Subroutine */ int bfs_(integer *n, integer *ja, integer *ia, integer *
+/* Subroutine */ int _daskr_bfs_(integer *n, integer *ja, integer *ia, integer *
 	nfirst, integer *iperm, integer *mask, integer *maskval, integer *
 	riord, integer *levels, integer *nlev)
 {
@@ -4259,7 +4256,7 @@ L1:
     integer i__1;
 
     /* Local variables */
-    extern /* Subroutine */ int add_lvst__(integer *, integer *, integer *, 
+    extern /* Subroutine */ int _daskr_add_lvst__(integer *, integer *, integer *,
 	    integer *, integer *, integer *, integer *, integer *);
     static integer j, ii, nod, iend, istart;
     static integer permut;
@@ -4342,7 +4339,7 @@ L1:
 L1:
     ++(*nlev);
     levels[*nlev] = istart + 1;
-    add_lvst__(&istart, &iend, nlev, &riord[1], &ja[1], &ia[1], &mask[1], 
+    _daskr_add_lvst__(&istart, &iend, nlev, &riord[1], &ja[1], &ia[1], &mask[1],
 	    maskval);
     if (istart < iend) {
 	goto L1;
@@ -4378,7 +4375,7 @@ L2:
     return 0;
 } /* bfs_ */
 
-/* Subroutine */ int add_lvst__(integer *istart, integer *iend, integer *nlev,
+/* Subroutine */ int _daskr_add_lvst__(integer *istart, integer *iend, integer *nlev,
 	 integer *riord, integer *ja, integer *ia, integer *mask, integer *
 	maskval)
 {
@@ -4420,7 +4417,7 @@ L2:
     return 0;
 } /* add_lvst__ */
 
-/* Subroutine */ int stripes_(integer *nlev, integer *riord, integer *levels, 
+/* Subroutine */ int _daskr_stripes_(integer *nlev, integer *riord, integer *levels,
 	integer *ip, integer *map, integer *mapptr, integer *ndom)
 {
     /* System generated locals */
@@ -4498,7 +4495,7 @@ L2:
     return 0;
 } /* stripes_ */
 
-integer maskdeg_(integer *ja, integer *ia, integer *nod, integer *mask, 
+integer _daskr_maskdeg_(integer *ja, integer *ia, integer *nod, integer *mask,
 	integer *maskval)
 {
     /* System generated locals */
@@ -4525,7 +4522,7 @@ integer maskdeg_(integer *ja, integer *ia, integer *nod, integer *mask,
     return ret_val;
 } /* maskdeg_ */
 
-/* Subroutine */ int perphn_(integer *n, integer *ja, integer *ia, integer *
+/* Subroutine */ int _daskr_perphn_(integer *n, integer *ja, integer *ia, integer *
 	init, integer *mask, integer *maskval, integer *nlev, integer *riord, 
 	integer *levels)
 {
@@ -4534,11 +4531,11 @@ integer maskdeg_(integer *ja, integer *ia, integer *nod, integer *mask,
 
     /* Local variables */
     static integer j, deg;
-    extern /* Subroutine */ int bfs_(integer *, integer *, integer *, integer 
+    extern /* Subroutine */ int _daskr_bfs_(integer *, integer *, integer *, integer
 	    *, integer *, integer *, integer *, integer *, integer *, integer 
 	    *);
     static integer nod, iperm[1], nlevp, mindeg, nfirst;
-    extern integer maskdeg_(integer *, integer *, integer *, integer *, 
+    extern integer _daskr_maskdeg_(integer *, integer *, integer *, integer *,
 	    integer *);
 
 /* ----------------------------------------------------------------------- */
@@ -4575,14 +4572,14 @@ L1:
     nfirst = 1;
     iperm[0] = 0;
 
-    bfs_(n, &ja[1], &ia[1], &nfirst, iperm, &mask[1], maskval, &riord[1], &
+    _daskr_bfs_(n, &ja[1], &ia[1], &nfirst, iperm, &mask[1], maskval, &riord[1], &
 	    levels[1], nlev);
     if (*nlev > nlevp) {
 	mindeg = *n + 1;
 	i__1 = levels[*nlev + 1] - 1;
 	for (j = levels[*nlev]; j <= i__1; ++j) {
 	    nod = riord[j];
-	    deg = maskdeg_(&ja[1], &ia[1], &nod, &mask[1], maskval);
+	    deg = _daskr_maskdeg_(&ja[1], &ia[1], &nod, &mask[1], maskval);
 	    if (deg < mindeg) {
 		*init = nod;
 		mindeg = deg;
@@ -4594,7 +4591,7 @@ L1:
     return 0;
 } /* perphn_ */
 
-/* Subroutine */ int rversp_(integer *n, integer *riord)
+/* Subroutine */ int _daskr_rversp_(integer *n, integer *riord)
 {
     /* System generated locals */
     integer i__1;
@@ -4623,7 +4620,7 @@ L1:
 /* ----------------------------------------------------------------------c */
 /*     Non-SPARSKIT utility routine */
 /* ----------------------------------------------------------------------c */
-/* Subroutine */ int atob_(integer *n, real_number *a, integer *ja, integer *
+/* Subroutine */ int _daskr_atob_(integer *n, real_number *a, integer *ja, integer *
 	ia, real_number *b, integer *jb, integer *ib)
 {
     /* System generated locals */

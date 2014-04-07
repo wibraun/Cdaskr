@@ -15,7 +15,7 @@ static integer c__2 = 2;
 static integer c_true = _TRUE_;
 
 /* DECK D1MACH */
-real_number d1mach_(integer *idummy)
+real_number _daskr_d1mach_(integer *idummy)
 {
     /* System generated locals */
     real_number ret_val;
@@ -64,7 +64,7 @@ L10:
 } /* d1mach_ */
 
 /* DECK XERRWD */
-/* Subroutine */ int xerrwd_(char *msg, integer *nmes, integer *nerr, integer
+/* Subroutine */ int _daskr_xerrwd_(char *msg, integer *nmes, integer *nerr, integer
 	*level, integer *ni, integer *i1, integer *i2, integer *nr,
 	real_number *r1, real_number *r2, integer msg_len)
 {
@@ -74,7 +74,7 @@ L10:
     static char fmt_40[] = "      In above message,  R1 = %21.13E\n";
     static char fmt_50[] = "      In above,  R1 = %21.13E   R2 = %21.13E\n";
     /* Local variables */
-    extern integer ixsav_(integer *, integer *, integer *);
+    extern integer _daskr_ixsav_(integer *, integer *, integer *);
     static integer lunit, mesflg;
 
 
@@ -145,8 +145,8 @@ L10:
 /*  Get logical unit number and message print flag. */
 
 /* ***FIRST EXECUTABLE STATEMENT  XERRWD */
-    lunit = ixsav_(&c__1, &c__0, &c_false);
-    mesflg = ixsav_(&c__2, &c__0, &c_false);
+    lunit = _daskr_ixsav_(&c__1, &c__0, &c_false);
+    mesflg = _daskr_ixsav_(&c__2, &c__0, &c_false);
     if (mesflg == 0) {
   goto L100;
     }
@@ -181,10 +181,10 @@ L100:
 } /* xerrwd_ */
 
 /* DECK XSETF */
-/* Subroutine */ int xsetf_(integer *mflag)
+/* Subroutine */ int _daskr_xsetf_(integer *mflag)
 {
     static integer junk;
-    extern integer ixsav_(integer *, integer *, integer *);
+    extern integer _daskr_ixsav_(integer *, integer *, integer *);
 
 /* ***BEGIN PROLOGUE  XSETF */
 /* ***PURPOSE  Reset the error print control flag. */
@@ -216,17 +216,17 @@ L100:
 
 /* ***FIRST EXECUTABLE STATEMENT  XSETF */
     if (*mflag == 0 || *mflag == 1) {
-	junk = ixsav_(&c__2, mflag, &c_true);
+	junk = _daskr_ixsav_(&c__2, mflag, &c_true);
     }
     return 0;
 /* ----------------------- End of Subroutine XSETF ----------------------- */
 } /* xsetf_ */
 
 /* DECK XSETUN */
-/* Subroutine */ int xsetun_(integer *lun)
+/* Subroutine */ int _daskr_xsetun_(integer *lun)
 {
     static integer junk;
-    extern integer ixsav_(integer *, integer *, integer *);
+    extern integer _daskr_ixsav_(integer *, integer *, integer *);
 
 /* ***BEGIN PROLOGUE  XSETUN */
 /* ***PURPOSE  Reset the logical unit number for error messages. */
@@ -256,14 +256,14 @@ L100:
 
 /* ***FIRST EXECUTABLE STATEMENT  XSETUN */
     if (*lun > 0) {
-	junk = ixsav_(&c__1, lun, &c_true);
+	junk = _daskr_ixsav_(&c__1, lun, &c_true);
     }
     return 0;
 /* ----------------------- End of Subroutine XSETUN ---------------------- */
 } /* xsetun_ */
 
 /* DECK IXSAV */
-integer ixsav_(integer *ipar, integer *ivalue, integer *iset)
+integer _daskr_ixsav_(integer *ipar, integer *ivalue, integer *iset)
 {
     /* Initialized data */
 
@@ -350,7 +350,7 @@ integer ixsav_(integer *ipar, integer *ivalue, integer *iset)
  * Following function are taken from libf2c implementation
  */
 
-void str_copy(char *a, char *b, integer la, integer lb)
+void _daskr_str_copy(char *a, char *b, integer la, integer lb)
 {
 	char *aend, *bend;
 
@@ -386,7 +386,7 @@ void str_copy(char *a, char *b, integer la, integer lb)
 /* ----------------------- End of Function str_copy ------------------------- */
 } /* str_copy */
 
-integer str_cmp(char *a0, char *b0, integer la, integer lb)
+integer _daskr_str_cmp(char *a0, char *b0, integer la, integer lb)
 {
 	unsigned char *a, *aend, *b, *bend;
 	a = (unsigned char *)a0;
@@ -443,7 +443,7 @@ integer str_cmp(char *a0, char *b0, integer la, integer lb)
 /* ----------------------- End of Function str_cmp ------------------------- */
 } /* str_cmp */
 
-real_number real_sign(real_number *a, real_number *b)
+real_number _daskr_real_sign(real_number *a, real_number *b)
 {
 	real_number x;
 	x = (*a >= 0 ? *a : - *a);
@@ -451,7 +451,7 @@ real_number real_sign(real_number *a, real_number *b)
 /* ----------------------- End of Function real_sign ------------------------- */
 }
 
-real_number real_pow(real_number *a, real_number *b)
+real_number _daskr_real_pow(real_number *a, real_number *b)
 {
 	return pow(*a, *b);
 /* ----------------------- End of Function real_sign ------------------------- */

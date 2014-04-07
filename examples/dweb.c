@@ -220,13 +220,13 @@ static integer c__1640 = 1640;
     extern /* Subroutine */ int rtweb_();
     static integer lenrw, iwork[1640], jroot;
     static real_number rwork[104883];
-    extern /* Subroutine */ int dgset2_(integer *, integer *, integer *, 
-	    integer *, integer *, integer *, integer *, integer *), dmset2_(
+    extern /* Subroutine */ int _daskr_dgset2_(integer *, integer *, integer *,
+	    integer *, integer *, integer *, integer *, integer *), _daskr_dmset2_(
 	    integer *, integer *, integer *, integer *, integer *, integer *);
     static integer nlidif;
     static real_number predic;
     static integer nnidif;
-    extern /* Subroutine */ int ddaskr_(Unknown_fp, integer *, real_number *,
+    extern /* Subroutine */ int _daskr_ddaskr_(Unknown_fp, integer *, real_number *,
 	    real_number *, real_number *, real_number *, integer *, real_number *,
 	     real_number *, integer *, real_number *, integer *, integer *,
 	    integer *, real_number *, integer *, Unknown_fp, Unknown_fp, Unknown_fp, integer *,
@@ -385,7 +385,7 @@ static integer c__1640 = 1640;
 /* mesh parameters and block-grouping data, and the IWORK segment ID */
 /* indicating the differential and algebraic components. */
 			if (jbg == 0) {
-				dmset2_(&ppar2_1.mx, &ppar2_1.my, &ppar2_1.ns, &ppar2_1.np, &
+				_daskr_dmset2_(&ppar2_1.mx, &ppar2_1.my, &ppar2_1.ns, &ppar2_1.np, &
 						c__40, iwork);
 				fputs(fmt_110, outFilewd);
 			}
@@ -393,7 +393,7 @@ static integer c__1640 = 1640;
 				nxg = 5;
 				nyg = 5;
 				ng = nxg * nyg;
-				dgset2_(&ppar2_1.mx, &ppar2_1.my, &ppar2_1.ns, &ppar2_1.np, &
+				_daskr_dgset2_(&ppar2_1.mx, &ppar2_1.my, &ppar2_1.ns, &ppar2_1.np, &
 					nxg, &nyg, &c__40, iwork);
 				fprintf(outFilewd, fmt_120, ng, nxg, nyg);
 			}
@@ -419,7 +419,7 @@ static integer c__1640 = 1640;
 		for (iout = 0; iout <= i__1; ++iout) {
 
 	L150:
-			ddaskr_((Unknown_fp)resweb_, &neq, &t, cc, ccprime, &tout, info, &rtol,
+			_daskr_ddaskr_((Unknown_fp)resweb_, &neq, &t, cc, ccprime, &tout, info, &rtol,
 				&atol, &idid, rwork, &c_b58, iwork, &c__1640, rpar, ipar,
 				(Unknown_fp)jacrs_, (Unknown_fp)psolrs_, (Unknown_fp)rtweb_, &nrt, &jroot);
 
@@ -868,7 +868,7 @@ L210:
     /* Local variables */
     static integer i__, j;
     static real_number x, y, fac;
-    extern /* Subroutine */ int daxpy_(integer *, real_number *, real_number *,
+    extern /* Subroutine */ int _daskr_daxpy_(integer *, real_number *, real_number *,
 	    integer *, real_number *, integer *);
 
 /* ----------------------------------------------------------------------- */
@@ -890,7 +890,7 @@ L210:
     }
     i__1 = ppar2_1.ns;
     for (j = 1; j <= i__1; ++j) {
-	daxpy_(&ppar2_1.ns, &c__[j], &ppar2_1.acoef[(j << 1) - 2], &c__1, &
+    	_daskr_daxpy_(&ppar2_1.ns, &c__[j], &ppar2_1.acoef[(j << 1) - 2], &c__1, &
 		crate[1], &c__1);
 /* L15: */
     }
@@ -913,9 +913,9 @@ L210:
 {
     static integer jbg;
     extern /* Subroutine */ int webr_(real_number *, integer *, integer *,
-	    real_number *, real_number *), drbdja_(real_number *, real_number *,
+	    real_number *, real_number *), _daskr_drbdja_(real_number *, real_number *,
 	    real_number *, Unknown_fp, real_number *, real_number *, real_number *,
-	    real_number *, integer *, integer *), drbgja_(real_number *,
+	    real_number *, integer *, integer *), _daskr_drbgja_(real_number *,
 	    real_number *, real_number *, Unknown_fp, real_number *, real_number *,
 	    real_number *, real_number *, integer *, integer *);
 
@@ -945,10 +945,10 @@ L210:
     /* Function Body */
     jbg = ipar[2];
     if (jbg == 0) {
-	drbdja_(t, &cc[1], &rpar[1], (Unknown_fp)webr_, &wk[1], &rewt[1], cj, &wp[1]
+    	_daskr_drbdja_(t, &cc[1], &rpar[1], (Unknown_fp)webr_, &wk[1], &rewt[1], cj, &wp[1]
 		, &iwp[1], ier);
     } else {
-	drbgja_(t, &cc[1], &rpar[1], (Unknown_fp)webr_, &wk[1], &rewt[1], cj, &wp[1]
+    	_daskr_drbgja_(t, &cc[1], &rpar[1], (Unknown_fp)webr_, &wk[1], &rewt[1], cj, &wp[1]
 		, &iwp[1], ier);
     }
 
@@ -965,8 +965,8 @@ L210:
 	    real_number *);
     static real_number hl0;
     static integer jbg, jpre;
-    extern /* Subroutine */ int drbdps_(real_number *, real_number *, integer *)
-	    , drbgps_(real_number *, real_number *, integer *);
+    extern /* Subroutine */ int _daskr_drbdps_(real_number *, real_number *, integer *)
+	    , _daskr_drbgps_(real_number *, real_number *, integer *);
 
 /* ----------------------------------------------------------------------- */
 /* This routine applies the inverse of a product preconditioner matrix */
@@ -1003,10 +1003,10 @@ L210:
 
     if (jpre != 2) {
 	if (jbg == 0) {
-	    drbdps_(&b[1], &wp[1], &iwp[1]);
+		_daskr_drbdps_(&b[1], &wp[1], &iwp[1]);
 	}
 	if (jbg == 1) {
-	    drbgps_(&b[1], &wp[1], &iwp[1]);
+		_daskr_drbgps_(&b[1], &wp[1], &iwp[1]);
 	}
     }
 

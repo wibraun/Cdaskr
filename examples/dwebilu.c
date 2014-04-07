@@ -181,8 +181,8 @@ static integer c__35244 = 35244;
     real_number d__1;
 
     /* Local variables */
-    extern /* Subroutine */ int dpsolilu_();
-    extern /* Subroutine */ int dspsetup_(integer *, integer *, integer *, 
+    extern /* Subroutine */ int _daskr_dpsolilu_();
+    extern /* Subroutine */ int _daskr_dspsetup_(integer *, integer *, integer *,
 	    real_number *, integer *, integer *, integer *, integer *);
     static integer i__;
     static real_number t, cc[800];
@@ -209,7 +209,7 @@ static integer c__35244 = 35244;
     static integer nlidif;
     static real_number predic;
     static integer nnidif;
-    extern /* Subroutine */ int ddaskr_(Unknown_fp, integer *, real_number *,
+    extern /* Subroutine */ int _daskr_ddaskr_(Unknown_fp, integer *, real_number *,
 	    real_number *, real_number *, real_number *, integer *, real_number *,
 	     real_number *, integer *, real_number *, integer *, integer *,
 	    integer *, real_number *, integer *, Unknown_fp, Unknown_fp, Unknown_fp, integer *,
@@ -218,8 +218,8 @@ static integer c__35244 = 35244;
     extern /* Subroutine */ int setpar_(void), outweb_(real_number *,
 	    real_number *, integer *, integer *, integer *, integer *, FILE *);
     static integer lwpmin;
-    extern /* Subroutine */ int xsetun_(integer *);
-    extern /* Subroutine */ int djacilu_();
+    extern /* Subroutine */ int _daskr_xsetun_(integer *);
+    extern /* Subroutine */ int _daskr_djacilu_();
     static real_number ccprime[800];
     static integer liwpmin;
 
@@ -258,7 +258,7 @@ static integer c__35244 = 35244;
 /* Set output unit numbers for main output and tabulated solution. */
 
 /* Set unit number for DDASKR error message output. */
-    xsetun_(&lout);
+    _daskr_xsetun_(&lout);
 
 /* Open output files. */
     outFilewc = fopen("wccout", "w");
@@ -317,7 +317,7 @@ static integer c__35244 = 35244;
     rpar[1] = .01;
 /* Check IPAR, RPAR, LENWP and LENIWP for illegal entries and long */
 /* enough work array lengths. */
-    dspsetup_(&neq, &c__20002, &c__33604, rpar, ipar, &ierr, &lwpmin, &
+    _daskr_dspsetup_(&neq, &c__20002, &c__33604, rpar, ipar, &ierr, &lwpmin, &
 	    liwpmin);
     if (ierr != 0) {
     	printf(fmt_45, ierr);
@@ -391,9 +391,9 @@ static integer c__35244 = 35244;
     for (iout = 0; iout <= i__1; ++iout) {
 
 L150:
-	ddaskr_((Unknown_fp)resweb_, &neq, &t, cc, ccprime, &tout, info, &rtol, &
+    _daskr_ddaskr_((Unknown_fp)resweb_, &neq, &t, cc, ccprime, &tout, info, &rtol, &
 		atol, &idid, rwork, &c__35306, iwork, &c__35244, rpar, ipar, (
-		Unknown_fp)djacilu_, (Unknown_fp)dpsolilu_, (Unknown_fp)rtweb_, &nrt, &jroot);
+		Unknown_fp)_daskr_djacilu_, (Unknown_fp)_daskr_dpsolilu_, (Unknown_fp)rtweb_, &nrt, &jroot);
 
 	nst = iwork[10];
 	nre = iwork[11];
@@ -841,7 +841,7 @@ L210:
     /* Local variables */
     static integer i__, j;
     static real_number x, y, fac;
-    extern /* Subroutine */ int daxpy_(integer *, real_number *, real_number *,
+    extern /* Subroutine */ int _daskr_daxpy_(integer *, real_number *, real_number *,
 	    integer *, real_number *, integer *);
 
 /* ----------------------------------------------------------------------- */
@@ -863,7 +863,7 @@ L210:
     }
     i__1 = ppar2_1.ns;
     for (j = 1; j <= i__1; ++j) {
-	daxpy_(&ppar2_1.ns, &c__[j], &ppar2_1.acoef[(j << 1) - 2], &c__1, &
+    	_daskr_daxpy_(&ppar2_1.ns, &c__[j], &ppar2_1.acoef[(j << 1) - 2], &c__1, &
 		crate[1], &c__1);
 /* L15: */
     }

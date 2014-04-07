@@ -174,7 +174,7 @@ static integer c__0 = 0;
 /*     Algebraic Systems, LLNL Report UCRL-JC-122175, August 1995; */
 /*     submitted to SIAM J. Sci. Comp. */
 /* ----------------------------------------------------------------------- */
-/* Subroutine */ int dmset2_(integer *mx, integer *my, integer *ns, integer *
+/* Subroutine */ int _daskr_dmset2_(integer *mx, integer *my, integer *ns, integer *
 	nsd, integer *lid, integer *iwork)
 {
     /* System generated locals */
@@ -185,7 +185,7 @@ static integer c__0 = 0;
 
     /* Local variables */
     static integer i__, i0, jx, jy;
-    extern real_number d1mach_(integer *);
+    extern real_number _daskr_d1mach_(integer *);
     static real_number uround;
 
 /* ***BEGIN PROLOGUE  DMSET2 */
@@ -229,7 +229,7 @@ static integer c__0 = 0;
     --iwork;
 
     /* Function Body */
-    uround = d1mach_(&c__4);
+    uround = _daskr_d1mach_(&c__4);
     drpre1_1.srur = sqrt(uround);
     drpre1_1.mp = *ns;
     drpre1_1.mpd = *nsd;
@@ -272,7 +272,7 @@ static integer c__0 = 0;
 /* ------------  End of Subroutine DMSET2  ------------------------------- */
 } /* dmset2_ */
 
-/* Subroutine */ int drbdja_(real_number *t, real_number *u, real_number *r0,
+/* Subroutine */ int _daskr_drbdja_(real_number *t, real_number *u, real_number *r0,
 	Unknown_fp rblock, real_number *r1, real_number *rewt, real_number *cj,
 	real_number *bd, integer *ipbd, integer *ier)
 {
@@ -289,7 +289,7 @@ static integer c__0 = 0;
     static real_number del;
     static integer iip;
     static real_number dfac;
-    extern /* Subroutine */ int dgefa_(real_number *, integer *, integer *,
+    extern /* Subroutine */ int _daskr_dgefa_(real_number *, integer *, integer *,
 	    integer *, integer *);
     static integer idiag;
 
@@ -402,7 +402,7 @@ static integer c__0 = 0;
 /* L70: */
 	    idiag += drpre1_1.mp + 1;
 	}
-	dgefa_(&bd[ibd], &drpre1_1.mp, &drpre1_1.mp, &ipbd[iip], ier);
+	_daskr_dgefa_(&bd[ibd], &drpre1_1.mp, &drpre1_1.mp, &ipbd[iip], ier);
 	if (*ier != 0) {
 	    goto L90;
 	}
@@ -415,14 +415,14 @@ L90:
 /* ------------  End of Subroutine DRBDJA  ------------------------------- */
 } /* drbdja_ */
 
-/* Subroutine */ int drbdps_(real_number *b, real_number *bd, integer *ipbd)
+/* Subroutine */ int _daskr_drbdps_(real_number *b, real_number *bd, integer *ipbd)
 {
     /* System generated locals */
     integer i__1, i__2;
 
     /* Local variables */
     static integer ib, jx, jy, ibd, ier;
-    extern /* Subroutine */ int dgesl_(real_number *, integer *, integer *,
+    extern /* Subroutine */ int _daskr_dgesl_(real_number *, integer *, integer *,
 	    integer *, real_number *, integer *);
 
 /* ***BEGIN PROLOGUE  DRBDPS */
@@ -463,7 +463,7 @@ L90:
     for (jy = 1; jy <= i__1; ++jy) {
 	i__2 = drpre1_1.meshx;
 	for (jx = 1; jx <= i__2; ++jx) {
-	    dgesl_(&bd[ibd], &drpre1_1.mp, &drpre1_1.mp, &ipbd[ib], &b[ib], &
+	    _daskr_dgesl_(&bd[ibd], &drpre1_1.mp, &drpre1_1.mp, &ipbd[ib], &b[ib], &
 		    c__0);
 	    ib += drpre1_1.mp;
 	    ibd += drpre1_1.mpsq;

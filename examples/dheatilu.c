@@ -107,8 +107,8 @@ static integer c__1 = 1;
     real_number d__1, d__2, d__3;
 
     /* Local variables */
-    extern /* Subroutine */ int dpsolilu_();
-    extern /* Subroutine */ int dspsetup_(integer *, integer *, integer *, 
+    extern /* Subroutine */ int _daskr_dpsolilu_();
+    extern /* Subroutine */ int _daskr_dspsetup_(integer *, integer *, integer *,
 	    real_number *, integer *, integer *, integer *, integer *);
     static integer i__, m;
     static real_number t, u[144];
@@ -130,7 +130,7 @@ static integer c__1 = 1;
 	    *, integer *);
     static integer iwork[4508], jroot[2];
     static real_number rwork[5293];
-    extern /* Subroutine */ int ddaskr_(Unknown_fp, integer *, real_number *,
+    extern /* Subroutine */ int _daskr_ddaskr_(Unknown_fp, integer *, real_number *,
 	    real_number *, real_number *, real_number *, integer *, real_number *,
 	     real_number *, integer *, real_number *, integer *, integer *,
 	    integer *, real_number *, integer *, Unknown_fp, Unknown_fp, Unknown_fp, integer *,
@@ -138,7 +138,7 @@ static integer c__1 = 1;
     extern /* Subroutine */ int rtheat_();
     static real_number uprime[144];
     static integer lwpmin;
-    extern /* Subroutine */ int djacilu_();
+    extern /* Subroutine */ int _daskr_djacilu_();
     static integer liwpmin;
 
 
@@ -185,7 +185,7 @@ static integer c__1 = 1;
     rpar[1] = .01;
 /* Check IPAR, RPAR, LENWP and LENIWP for illegal entries and long */
 /* enough work array lengths. */
-    dspsetup_(&neq, &c__2594, &c__4468, rpar, ipar, &ierr, &lwpmin, &liwpmin);
+    _daskr_dspsetup_(&neq, &c__2594, &c__4468, rpar, ipar, &ierr, &lwpmin, &liwpmin);
     if (ierr != 0) {
     	printf(fmt_15, ierr);
 		if (lwpmin > 2594) {
@@ -269,9 +269,9 @@ static integer c__1 = 1;
     for (iout = 1; iout <= i__1; ++iout) {
 
 L45:
-	ddaskr_((Unknown_fp)resh_, &neq, &t, u, uprime, &tout, info, &rtol, &atol, &
-		idid, rwork, &lrw, iwork, &liw, rpar, ipar, (Unknown_fp)djacilu_, (
-		Unknown_fp)dpsolilu_, (Unknown_fp)rtheat_, &nrt, jroot);
+	_daskr_ddaskr_((Unknown_fp)resh_, &neq, &t, u, uprime, &tout, info, &rtol, &atol, &
+		idid, rwork, &lrw, iwork, &liw, rpar, ipar, (Unknown_fp)_daskr_djacilu_, (
+		Unknown_fp)_daskr_dpsolilu_, (Unknown_fp)rtheat_, &nrt, jroot);
 
 	umax = 0.;
 	i__2 = neq;

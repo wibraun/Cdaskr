@@ -117,8 +117,8 @@
 	    *, integer *);
     static integer iwork[184], jroot[2];
     static real_number rwork[3373];
-    extern /* Subroutine */ int dbanja_(), dbanps_();
-    extern /* Subroutine */ int ddaskr_(Unknown_fp, integer *, real_number *,
+    extern /* Subroutine */ int _daskr_dbanja_(), _daskr_dbanps_();
+    extern /* Subroutine */ int _daskr_ddaskr_(Unknown_fp, integer *, real_number *,
 	    real_number *, real_number *, real_number *, integer *, real_number *,
 	     real_number *, integer *, real_number *, integer *, integer *,
 	    integer *, real_number *, integer *, Unknown_fp, Unknown_fp, Unknown_fp, integer *,
@@ -234,9 +234,9 @@
     i__1 = nout;
     for (iout = 1; iout <= i__1; ++iout) {
 L45:
-	ddaskr_((Unknown_fp)resh_, &neq, &t, u, uprime, &tout, info, &rtol, &atol, &
-		idid, rwork, &lrw, iwork, &liw, rpar, ipar, (Unknown_fp)dbanja_,
-		    (Unknown_fp)dbanps_, (Unknown_fp)rtheat_, &nrt, jroot);
+	_daskr_ddaskr_((Unknown_fp)resh_, &neq, &t, u, uprime, &tout, info, &rtol, &atol, &
+		idid, rwork, &lrw, iwork, &liw, rpar, ipar, (Unknown_fp)_daskr_dbanja_,
+		    (Unknown_fp)_daskr_dbanps_, (Unknown_fp)rtheat_, &nrt, jroot);
 
 	umax = 0.;
 	i__2 = neq;

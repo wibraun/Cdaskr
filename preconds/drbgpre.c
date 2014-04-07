@@ -198,7 +198,7 @@ static integer c__0 = 0;
 /*     Algebraic Systems, LLNL Report UCRL-JC-122175, August 1995; */
 /*     submitted to SIAM J. Sci. Comp. */
 /* ----------------------------------------------------------------------- */
-/* Subroutine */ int dgset2_(integer *mx, integer *my, integer *ns, integer *
+/* Subroutine */ int _daskr_dgset2_(integer *mx, integer *my, integer *ns, integer *
 	nsd, integer *nxg, integer *nyg, integer *lid, integer *iwork)
 {
     /* System generated locals */
@@ -206,9 +206,9 @@ static integer c__0 = 0;
 
     /* Local variables */
     static integer i__, i0, jx, jy;
-    extern /* Subroutine */ int gset1_(integer *, integer *, integer *, 
+    extern /* Subroutine */ int _daskr_gset1_(integer *, integer *, integer *,
 	    integer *, integer *);
-    extern real_number d1mach_(integer *);
+    extern real_number _daskr_d1mach_(integer *);
     static real_number uround;
 
 /* ***BEGIN PROLOGUE  DGSET2 */
@@ -269,7 +269,7 @@ static integer c__0 = 0;
     --iwork;
 
     /* Function Body */
-    uround = d1mach_(&c__4);
+    uround = _daskr_d1mach_(&c__4);
     drpre1_1.srur = sqrt(uround);
     drpre1_1.mp = *ns;
     drpre1_1.mpd = *nsd;
@@ -282,9 +282,9 @@ static integer c__0 = 0;
     rpre2_1.ngrp = rpre2_1.ngx * rpre2_1.ngy;
 
 /* Call GSET1 for each mesh direction to load grouping arrays. */
-    gset1_(&drpre1_1.meshx, &rpre2_1.ngx, rpre2_1.jgx, rpre2_1.jigx, 
+    _daskr_gset1_(&drpre1_1.meshx, &rpre2_1.ngx, rpre2_1.jgx, rpre2_1.jigx,
 	    rpre2_1.jxr);
-    gset1_(&drpre1_1.meshy, &rpre2_1.ngy, rpre2_1.jgy, rpre2_1.jigy, 
+    _daskr_gset1_(&drpre1_1.meshy, &rpre2_1.ngy, rpre2_1.jgy, rpre2_1.jigy,
 	    rpre2_1.jyr);
 
 /* Here set the sizes of the preconditioning storage space segments */
@@ -321,7 +321,7 @@ static integer c__0 = 0;
 /* ------------  End of Subroutine DGSET2  ------------------------------- */
 } /* dgset2_ */
 
-/* Subroutine */ int gset1_(integer *m, integer *ng, integer *jg, integer *
+/* Subroutine */ int _daskr_gset1_(integer *m, integer *ng, integer *jg, integer *
 	jig, integer *jr)
 {
     /* System generated locals */
@@ -389,7 +389,7 @@ static integer c__0 = 0;
 /* ------------  End of Subroutine GSET1  -------------------------------- */
 } /* gset1_ */
 
-/* Subroutine */ int drbgja_(real_number *t, real_number *u, real_number *r0,
+/* Subroutine */ int _daskr_drbgja_(real_number *t, real_number *u, real_number *r0,
 	Unknown_fp rblock, real_number *r1, real_number *rewt, real_number *cj,
 	real_number *bd, integer *ipbd, integer *ier)
 {
@@ -406,7 +406,7 @@ static integer c__0 = 0;
     static real_number del;
     static integer iip, igx, igy;
     static real_number dfac;
-    extern /* Subroutine */ int dgefa_(real_number *, integer *, integer *,
+    extern /* Subroutine */ int _daskr_dgefa_(real_number *, integer *, integer *,
 	    integer *, integer *);
     static integer idiag;
 
@@ -523,7 +523,7 @@ static integer c__0 = 0;
 /* L70: */
 	    idiag += drpre1_1.mp + 1;
 	}
-	dgefa_(&bd[ibd], &drpre1_1.mp, &drpre1_1.mp, &ipbd[iip], ier);
+	_daskr_dgefa_(&bd[ibd], &drpre1_1.mp, &drpre1_1.mp, &ipbd[iip], ier);
 	if (*ier != 0) {
 	    goto L90;
 	}
@@ -536,14 +536,14 @@ L90:
 /* ------------  End of Subroutine DRBGJA  ------------------------------- */
 } /* drbgja_ */
 
-/* Subroutine */ int drbgps_(real_number *b, real_number *bd, integer *ipbd)
+/* Subroutine */ int _daskr_drbgps_(real_number *b, real_number *bd, integer *ipbd)
 {
     /* System generated locals */
     integer i__1, i__2;
 
     /* Local variables */
     static integer ib, jx, jy, ig0, ibd, ier, iip, igx, igy, igm1;
-    extern /* Subroutine */ int dgesl_(real_number *, integer *, integer *,
+    extern /* Subroutine */ int _daskr_dgesl_(real_number *, integer *, integer *,
 	    integer *, real_number *, integer *);
 
 /* ***BEGIN PROLOGUE  DRBGPS */
@@ -590,7 +590,7 @@ L90:
 	    igm1 = igx - 1 + ig0;
 	    ibd = igm1 * drpre1_1.mpsq + 1;
 	    iip = igm1 * drpre1_1.mp + 1;
-	    dgesl_(&bd[ibd], &drpre1_1.mp, &drpre1_1.mp, &ipbd[iip], &b[ib], &
+	    _daskr_dgesl_(&bd[ibd], &drpre1_1.mp, &drpre1_1.mp, &ipbd[iip], &b[ib], &
 		    c__0);
 	    ib += drpre1_1.mp;
 /* L10: */

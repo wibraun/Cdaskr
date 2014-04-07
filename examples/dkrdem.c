@@ -94,7 +94,7 @@ static integer global_neq;
     static real_number psdum;
     static integer iwork[100], jtype, jroot[2], kroot;
     static real_number tzero, rwork[100];
-    extern /* Subroutine */ int ddaskr_();
+    extern /* Subroutine */ int _daskr_ddaskr_();
     static real_number yprime[2];
     static integer kprint;
 
@@ -151,7 +151,7 @@ static integer global_neq;
     for (iout = 1; iout <= 5; ++iout) {
 
 L120:
-	ddaskr_((Unknown_fp)res1_, &global_neq, &t, y, yprime, &tout, info, rtol,
+	_daskr_ddaskr_((Unknown_fp)res1_, &global_neq, &t, y, yprime, &tout, info, rtol,
 		atol, &idid, rwork, &lrw, iwork, &liw, &rpar, &ipar, &jdum, &
 		psdum, (Unknown_fp)rt1_, &nrt, jroot);
 
@@ -292,7 +292,7 @@ L185:
 	for (iout = 1; iout <= 10; ++iout) {
 
 L220:
-	    ddaskr_((Unknown_fp)res2_, &global_neq, &t, y, yprime, &tout, info,
+	    _daskr_ddaskr_((Unknown_fp)res2_, &global_neq, &t, y, yprime, &tout, info,
 		    rtol, atol, &idid, rwork, &lrw, iwork, &liw, &rpar, &ipar,
 		     (Unknown_fp)jac2_, &psdum, (Unknown_fp)rt2_, &nrt, jroot);
 
