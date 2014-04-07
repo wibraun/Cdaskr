@@ -4,7 +4,7 @@
 # compiler to be used.
 
 CC = gcc
-CFLAGS = -O3 -Wall -std=c90
+CFLAGS = -O3 -Wall -ansi
 
 SOLVR = ../solver
 
